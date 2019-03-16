@@ -30,9 +30,7 @@ Currency rates can be imported using the existing services once your currency co
 Product features:
 -----
 <ul>
- - Price Precision
------
- Now the user can define the desired price precision (accuracy) for each display currency - the number of decimal positions after decimal separator to display the prices in frontend and backend. 
+ - Price Precision: Now the user can define the desired price precision (accuracy) for each display currency - the number of decimal positions after decimal separator to display the prices in frontend and backend. 
 
 
 The default price precision is 2. The precision can vary from 0 to 8. Please take into account that prices saved into Magento database always have the precision 4 as defined in Magento database schema. So the precision higher than 4 will be meaningful only for display purpose. Practically the highest precision of 6 will be required if you display prices in Bitcoin. For such cryptocurrency as Ethereum or Bitcoin cash price precision of 4 is quite sufficient.
@@ -40,7 +38,14 @@ The default price precision is 2. The precision can vary from 0 to 8. Please tak
 
 The precision of 0 can be used for such currencies as Indian Rupee, Russian Ruble, etc.</span></li>
 
-<p><span style="font-weight: 400;">The user can setup the price precision in website scope using Configuration -&gt; Catalog menu. </span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">There are three options to choose from: </span><span style="font-weight: 400;"><br></span> 1. Leave the default Magento price precision - 2.<span style="font-weight: 400;"><br></span> <span style="font-weight: 400;">2. Set a fixed price precision: 0, 2, 4, 6 or 8.</span><span style="font-weight: 400;"><br></span> 3. Automatically use price precision assigned for displayed currency.<span style="font-weight: 400;"><br></span>So, using the last option you can easily switch display currencies between Indian Rupee and Bitcoin within the same store.</p>
+
+The user can setup the price precision in website scope using Configuration -&gt; Catalog menu. 
+There are three options to choose from: 
+ -- 1. Leave the default Magento price precision (2)
+ -- 2. Set a fixed price precision: 0, 2, 4, 6 or 8.
+ -- 3. Automatically use price precision assigned for displayed currency.
+ 
+ So, using the last option you can easily switch display currencies between Indian Rupee and Bitcoin within the same store.</p>
 
 <li style="font-weight: 400;"><strong>Currency rate import services added</strong>. <em>Frankfurter</em> and <em>Coinapi</em> services were added. <span style="font-weight: 400;"><br></span><a href="https://frankfurter.app/">Frankfurter</a><span style="font-weight: 400;"> (alternative to Fixer.io) is completely free service. No API key or signup required. Frankfurter provides the rates of the most &nbsp;popular fiat currencies. Currency rates are being updated every working day around 4PM CET.</span><span style="font-weight: 400;"><br></span><a href="https://www.coinapi.io">Coinapi</a><span style="font-weight: 400;"> provides a few thousand currencies including all popular cryptocurrencies. Coinapi claims that all cryptocurrency exchanges are integrated under a single API. One needs to signup and get API key to import the rates. The service is provided for free for up to 100 requests per day. 100 requests per day is approximately 1 request every 15 minutes - that suffices for the majority of internet shop. If however someone needs more frequent updates Coinapi provides different packages from $80/mo to $600/mo for up to 100k requests per day.</span></li>
 <li style="font-weight: 400;"><strong>Minute-wice rates import scheduling</strong>. You sure will need to update the rates of currencies at least a few times per hour in order to keep the prices current If cryptocurrencies are used in your shop due to cryptocurrencies volatility.<span style="font-weight: 400;"><br></span><span style="font-weight: 400;">Now it’s possible to schedule the import rates starting from once per minute using new minute-wice scheduler with crontab syntax.</span><span style="font-weight: 400;"><br></span>New Cron Configuration Options were added as well for currency rates import.</li>
@@ -72,7 +77,7 @@ It was not tested with Magento 2.0.x
 <ul>
 <li style="font-weight: 400;"><strong>Price Precision</strong><span style="font-weight: 400;">. Now the user can define the desired price precision (accuracy) for each display currency - the number of decimal positions after decimal separator to display the prices in frontend and backend. </span><span style="font-weight: 400;"><br></span>The default price precision is 2. The precision can vary from 0 to 8. Please take into account that prices saved into Magento database always have the precision 4 as defined in Magento database schema. So the precision higher than 4 will be meaningful only for display purpose. Practically the highest precision of 6 will be required if you display prices in Bitcoin. For such cryptocurrency as Ethereum or Bitcoin cash price precision of 4 is quite sufficient.<span style="font-weight: 400;"><br></span>The precision of 0 can be used for such currencies as Indian Rupee, Russian Ruble, etc.</li>
 </ul>
-<p><span style="font-weight: 400;">The user can setup the price precision in website scope using Configuration -&gt; Catalog menu. </span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">There are three options to choose from: </span><span style="font-weight: 400;"><br></span> 1. Leave the default Magento price precision - 2.<span style="font-weight: 400;"><br></span> <span style="font-weight: 400;">2. Set a fixed price precision: 0, 2, 4, 6 or 8.</span><span style="font-weight: 400;"><br></span> 3. Automatically use price precision assigned for displayed currency.<span style="font-weight: 400;"><br></span>So, using the last option you can easily switch display currencies between Indian Rupee and Bitcoin within the same store.</p>
+<p>The user can setup the price precision in website scope using Configuration -&gt; Catalog menu. <span style="font-weight: 400;"><br></span><span style="font-weight: 400;">There are three options to choose from: </span><span style="font-weight: 400;"><br></span> 1. Leave the default Magento price precision - 2.<span style="font-weight: 400;"><br></span> <span style="font-weight: 400;">2. Set a fixed price precision: 0, 2, 4, 6 or 8.</span><span style="font-weight: 400;"><br></span> 3. Automatically use price precision assigned for displayed currency.<span style="font-weight: 400;"><br></span>So, using the last option you can easily switch display currencies between Indian Rupee and Bitcoin within the same store.</p>
 <ul>
 <li style="font-weight: 400;"><strong>Currency rate import services added</strong>. <em>Frankfurter</em> and <em>Coinapi</em> services were added. <span style="font-weight: 400;"><br></span><a href="https://frankfurter.app/">Frankfurter</a><span style="font-weight: 400;"> (alternative to Fixer.io) is completely free service. No API key or signup required. Frankfurter provides the rates of the most &nbsp;popular fiat currencies. Currency rates are being updated every working day around 4PM CET.</span><span style="font-weight: 400;"><br></span><a href="https://www.coinapi.io">Coinapi</a><span style="font-weight: 400;"> provides a few thousand currencies including all popular cryptocurrencies. Coinapi claims that all cryptocurrency exchanges are integrated under a single API. One needs to signup and get API key to import the rates. The service is provided for free for up to 100 requests per day. 100 requests per day is approximately 1 request every 15 minutes - that suffices for the majority of internet shop. If however someone needs more frequent updates Coinapi provides different packages from $80/mo to $600/mo for up to 100k requests per day.</span></li>
 <li style="font-weight: 400;"><strong>Minute-wice rates import scheduling</strong>. You sure will need to update the rates of currencies at least a few times per hour in order to keep the prices current If cryptocurrencies are used in your shop due to cryptocurrencies volatility.<span style="font-weight: 400;"><br></span><span style="font-weight: 400;">Now it’s possible to schedule the import rates starting from once per minute using new minute-wice scheduler with crontab syntax.</span><span style="font-weight: 400;"><br></span>New Cron Configuration Options were added as well for currency rates import.</li>
@@ -131,7 +136,7 @@ Settings
 Once the modules are installed all the existing currencies will disappear from the lists of installed and allowed currencies. So the first thing you need to do is to install currencies you need in your shop.
 
 <h3>Currency installation</h3>
-<p><span style="font-weight: 400;">To install and manage your currencies please proceed to Store -&gt; Manage currencies menu.</span></p>
+<p>To install and manage your currencies please proceed to Store -&gt; Manage currencies menu.</p>
 <p><span style="font-weight: 400;"><img src="https://shop.kozeta.lt/pub/media/wysiwyg/2019-02-11_01-56-14.png" alt="Setup currencies menu interface" width="454" height="454"></span></p>
 <p>&nbsp;</p>
 <p><span style="font-weight: 400;">Then click “</span><strong>Add new currency</strong><span style="font-weight: 400;">” button and fill the form. The required fields are only Currency name and Code. All other fields are optional.</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">If you set the currency as Inactive it won’t be shown up in Magento’s lists of installed and allowed currencies.</span><span style="font-weight: 400;"><br></span>If you switch <strong>RSS</strong> on this currency will appear in your RSS channel on frontend.</p>
@@ -168,7 +173,7 @@ IMPORTANT
 <h3>Setup Allowed currencies</h3>
 <p>&nbsp;</p>
 <p><span style="font-weight: 400;">The same way as you do it in standard Magento configuration, &nbsp;you will need to choose Allowed currencies, Base currency and Default display currency in Configuration menu:</span></p>
-<p><span style="font-weight: 400;">Configuration -&gt; Default -&gt; Currency setup</span></p>
+<p>Configuration -&gt; Default -&gt; Currency setup</p>
 <p><span style="font-weight: 400;"><img src="https://shop.kozeta.lt/pub/media/wysiwyg/2019-02-07_02-01-40.png" alt="Allowed currencies setup" width="710" height="296"></span></p>
 <p>&nbsp;</p>
 <p><strong>Note</strong><span style="font-weight: 400;">: If cryptocurrencies are among the currencies in your shop you are discouraged to use them as default due to their high volatility nowadays.</span></p>
@@ -189,8 +194,8 @@ IMPORTANT
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p><strong>Enable currency description pages</strong><span style="font-weight: 400;"> - if set to Yes then description page for each currency will be enabled and shown like on the screenshot:</span></p>
-<p style="clear: both;"><span style="font-weight: 400;">&nbsp;</span></p>
-<p><span style="font-weight: 400;">&nbsp;</span></p>
+<p style="clear: both;">&nbsp;</p>
+<p>&nbsp;</p>
 <p><br><br><br></p>
 <h3>&nbsp;</h3>
 <h3>Currency Rate Settings</h3>
