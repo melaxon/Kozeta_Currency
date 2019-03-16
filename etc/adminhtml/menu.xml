@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kozeta Team
+ * @copyright Copyright (c) 2019 Kozeta (https://www.kozeta.lt)
+ * @package Kozeta_Curency
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>    
+        <remove id="Magento_CurrencySymbol::system_currency_symbols" />
+        <add id="Kozeta_Currency::currency_manage" title="Manage Currencies" translate="title" module="Kozeta_Currency" sortOrder="1" parent="Magento_CurrencySymbol::system_currency" action="kozeta_currency/coin" resource="Kozeta_Currency::currency_manage"/>
+    </menu>
+</config>

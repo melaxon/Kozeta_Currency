@@ -1,0 +1,123 @@
+"Bitcoin","Bitcoin"
+"CDE Coin","CDE Coin"
+"Litecoin","Litecoin"
+"Bitcoin Cash","Bitcoin Cash"
+"Dash","Dash"
+"Ethereum","Ethereum"
+"Monero","Monero"
+"Ripple","Ripple"
+"Zcash","Zcash"
+"Euro","Euro"
+"A total of %1 coins have been disabled.","A total of %1 coins have been disabled."
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"A total of %1 coins have been enabled.","A total of %1 coins have been enabled."
+"Pound Sterling","Pound Sterling"
+"British Pound","British Pound"
+"Russian Ruble","Russian Ruble"
+"US Dollar","US Dollar"
+"Add New Currency","Add New Currency"
+"All Store Views","All Store Views"
+"An error occurred while deleting record(s).","An error occurred while deleting record(s)."
+"An error occurred while disabling coins.","An error occurred while disabling coins."
+"An error occurred while enabling coins.","An error occurred while enabling coins."
+"Are you sure you want to delete selected items?","Are you sure you want to delete selected items?"
+"Are you sure you want to delete the Coin ""${ $.$data.name }"" ?","Are you sure you want to delete the Coin ""${ $.$data.name }"" ?"
+"Are you sure you want to do this?","Are you sure you want to do this?"
+"Coin in Store views","Coin in Store views"
+"Currency Information","Coin Information"
+Coins,Coins
+Avatar,Avatar
+Back,Back
+Description,Description
+"Could not save the coin: %1","Could not save the coin: %1"
+Delete,Delete
+"Delete Coin","Delete Coin"
+"Delete items","Delete items"
+"Delete ""${ $.$data.name }""","Delete ""${ $.$data.name }"""
+Disable,Disable
+Edit,Edit
+"Edit Coin","Edit Coin"
+Enable,Enable
+"Enter currency name here","Enter currency name here"
+"Enter currency code","Enter currency code"
+"File can not be saved to the destination folder.","File can not be saved to the destination folder."
+Home,Home
+ID,ID
+"In RSS","In RSS"
+"Is Active","Is Active"
+label,label
+"Meta Description","Meta Description"
+"Meta Keywords","Meta Keywords"
+"Meta Title","Meta Title"
+Name,Name
+"New Coin","New Coin"
+Currency,Currency
+No,No
+"Please correct the data sent.","Please correct the data sent."
+"Requested coin doesn\'t exist","Requested coin doesn\'t exist"
+Reset,Reset
+"Save Currency","Save Currency"
+"Save and Continue Edit","Save and Continue Edit"
+"Show In RSS","Show In RSS"
+"Something went wrong while getting the avatar url.","Something went wrong while getting the avatar url."
+"Something went wrong while saving the coin.","Something went wrong while saving the coin."
+"Something went wrong while saving the file(s).","Something went wrong while saving the file(s)."
+"Store View","Store View"
+"Subscribe to RSS Feed","Subscribe to RSS Feed"
+"There are no coins at this moment","There are no coins at this moment"
+"The coin has been deleted.","The coin has been deleted."
+"The coin no longer exists.","The coin no longer exists."
+"There was a problem deleting the coin","There was a problem deleting the coin"
+"There was a problem saving the coin","There was a problem saving the coin"
+Type,Type
+"Unable to remove coin %1","Unable to remove coin %1"
+"Updated at","Updated at"
+"URL Key","URL Key"
+"Url Key","Url Key"
+"We can\'t find a coin to delete.","We can\'t find a coin to delete."
+Yes,Yes
+"The currency was saved successfully.","The currency was saved successfully."
+"Currency code must be unique for given Store View.","Currency code must be unique for given Store View."
+"Supported currency",Supported currency"
+"Exchange rate","Exchange rate"
+"Current exchange rate to Bitcoin","Current exchange rate to Bitcoin"
+"Min. number of confirmations","Min. number of confirmations"
+"Enter minimum number of required network confirmations. Default: 2","Enter minimum number of required network confirmations. Default: 2"
+"Transactioin fee","Transactioin fee"
+"Included into RSS feed","Included into RSS feed"
+"Rate to %1","Rate to %1"
+"Rate %1","Rate %1"
+"Current exchange rate to %1","Current exchange rate to %1"
+"Symbol","Symbol"
+"Is Fiat","Is Fiat"
+"Logo","Logo"
+"Display Currency Settings","Display Currency Settings"
+"Supported currencies","Supported currencies"
+"There are no active currencies at this moment","There are no active currencies at this moment"
+"Last updated","Last updated"
+"We can\'t retrieve the rates from url %1.","We can\'t retrieve the rates from url %1."
+"Api Key","Api Key"
+"Connection Timeout (sec)","Connection Timeout (sec)"
+"Currency list meta title","Currency list meta title"
+"Currency list meta description","Currency list meta description"
+"Currency list meta keywords","Currency list meta keywords"
+"Currency list url","Currency list url"
+"Currency url prefix","Currency url prefix"
+"Currency url suffix","Currency url suffix"
+"Enable RSS","Enable RSS"
+"RSS Cache Lifetime","RSS Cache Lifetime"
+"in seconds","in seconds"
+"Number of currencies per row","Number of currencies per row"
+"Currency Rates setup page","Currency Rates setup page"
+"Top menu title","Top menu title"
+"Enable top menu","Enable top menu"
+"Display Currency Settings","Display Currency Settings"
+"Enter the number of decimal places. Default: 2","Enter the number of decimal places. Default: 2"
+"Decimal Length","Decimal Length"
+"Price Precision,"Price Precision"
+
+
+
+
+
+

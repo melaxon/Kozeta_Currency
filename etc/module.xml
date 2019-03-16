@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kozeta Team
+ * @copyright Copyright (c) 2019 Kozeta (https://www.kozeta.lt)
+ * @package Kozeta_Curency
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Kozeta_Currency" setup_version="1.0.1">
+        <sequence>
+            <module name="Magento_Backend"/>
+            <module name="Magento_Ui" />
+            <module name="Magento_Store" />
+            <module name="Magento_Theme" />
+            <module name="Magento_Rss" />
+            <module name="Magento_CurrencySymbol" />
+            <module name="Magento_Directory"/>
+        	<module name="Magento_Catalog"/>
+        </sequence>
+    </module>
+</config>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kozeta Team
+ * @copyright Copyright (c) 2019 Kozeta (https://www.kozeta.lt)
+ * @package Kozeta_Curency
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="currency" frontName="currency">
+            <module name="Kozeta_Currency" />
+        </route>
+    </router>
+</config>

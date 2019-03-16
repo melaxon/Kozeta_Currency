@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kozeta Team
+ * @copyright Copyright (c) 2019 Kozeta (https://www.kozeta.lt)
+ * @package Kozeta_Curency
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Directory\Model\Currency" type="Kozeta\Currency\Model\Currency" />
+    <preference for="Magento\Directory\Model\ResourceModel\Currency" type="Kozeta\Currency\Model\ResourceModel\Currency" />
+    <preference for="Kozeta\Currency\Api\CoinRepositoryInterface" type="Kozeta\Currency\Model\CoinRepository" />
+    <preference for="Kozeta\Currency\Api\Data\CoinInterface" type="Kozeta\Currency\Model\Coin" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="kozeta_currency_coin_listing_data_source" xsi:type="string">Kozeta\Currency\Model\ResourceModel\Coin\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Kozeta\Currency\Model\ResourceModel\Coin\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">kozeta_currency_coin</argument>
+            <argument name="eventPrefix" xsi:type="string">kozeta_currency_coin_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">coin_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Kozeta\Currency\Model\ResourceModel\Coin</argument>
+        </arguments>
+    </type>
+    <virtualType name="KozetaCurrencyCoinImageUploader" type="Kozeta\Currency\Model\Uploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="const">Kozeta\Currency\Model\Uploader::IMAGE_TMP_PATH</argument>
+            <argument name="basePath" xsi:type="const">Kozeta\Currency\Model\Uploader::IMAGE_PATH</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Kozeta\Currency\Controller\Adminhtml\Coin\Image\Upload">
+        <arguments>
+            <argument name="uploader" xsi:type="object">KozetaCurrencyCoinImageUploader</argument>
+        </arguments>
+    </type>
+    <virtualType name="KozetaCurrencyCoinFileUploader" type="Kozeta\Currency\Model\Uploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="const">Kozeta\Currency\Model\Uploader::FILE_TMP_PATH</argument>
+            <argument name="basePath" xsi:type="const">Kozeta\Currency\Model\Uploader::FILE_PATH</argument>
+            <argument name="allowedExtensions" xsi:type="array" />
+        </arguments>
+    </virtualType>
+    <type name="Kozeta\Currency\Controller\Adminhtml\Coin\File\Upload">
+        <arguments>
+            <argument name="uploader" xsi:type="object">KozetaCurrencyCoinFileUploader</argument>
+        </arguments>
+    </type>
+    <type name="Kozeta\Currency\Model\UploaderPool">
+        <arguments>
+            <argument name="uploaders" xsi:type="array">
+                <item name="image" xsi:type="string">KozetaCurrencyCoinImageUploader</item>
+                <item name="file" xsi:type="string">KozetaCurrencyCoinFileUploader</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Kozeta\Currency\Controller\Adminhtml\Coin\Save">
+        <arguments>
+            <argument name="uploaderPool" xsi:type="object">Kozeta\Currency\Model\UploaderPool</argument>
+        </arguments>
+    </type>
+    <type name="Kozeta\Currency\Model\Coin">
+        <arguments>
+            <argument name="uploaderPool" xsi:type="object">Kozeta\Currency\Model\UploaderPool</argument>
+            <argument name="optionProviders" xsi:type="array">
+                <item name="type" xsi:type="object">KozetaCurrencyModelCoinSourceType</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Kozeta\Currency\Ui\Component\Listing\Column\Avatar">
+        <arguments>
+            <argument name="imageModel" xsi:type="object">KozetaCurrencyCoinImageUploader</argument>
+        </arguments>
+    </type>
+    <type name="Kozeta\Currency\Model\Output">
+        <arguments>
+            <argument name="templateProcessor" xsi:type="object">Magento\Widget\Model\Template\Filter</argument>
+        </arguments>
+    </type>
+    <virtualType name="KozetaCurrencyModelCoinSourceType" type="Kozeta\Currency\Model\Source\Options">
+        <arguments>
+            <argument name="options" xsi:type="array">
+                <item name="1" xsi:type="array">
+                    <item name="value" xsi:type="number">1</item>
+                    <item name="label" xsi:type="string" translate="true">Standard</item>
+                </item>
+                <item name="2" xsi:type="array">
+                    <item name="value" xsi:type="number">2</item>
+                    <item name="label" xsi:type="string" translate="true">Ripple</item>
+                </item>
+                <item name="3" xsi:type="array">
+                    <item name="value" xsi:type="number">3</item>
+                    <item name="label" xsi:type="string" translate="true">Ether token</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="KozetaCurrencyModelCoinSourceIsActive" type="Kozeta\Currency\Model\Source\Options">
+        <arguments>
+            <argument name="options" xsi:type="array">
+                <item name="1" xsi:type="array">
+                    <item name="value" xsi:type="const">Kozeta\Currency\Model\Coin::STATUS_ENABLED</item>
+                    <item name="label" xsi:type="string" translate="true">Yes</item>
+                </item>
+                <item name="2" xsi:type="array">
+                    <item name="value" xsi:type="const">Kozeta\Currency\Model\Coin::STATUS_DISABLED</item>
+                    <item name="label" xsi:type="string" translate="true">No</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\App\Rss\RssManagerInterface">
+        <arguments>
+            <argument name="dataProviders" xsi:type="array">
+                <item name="coins" xsi:type="string">Kozeta\Currency\Block\Coin\ListCoin\Rss</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Kozeta\Currency\Model\Image">
+        <arguments>
+            <argument name="uploader" xsi:type="object">KozetaCurrencyCoinImageUploader</argument>
+        </arguments>
+    </type>
+    <virtualType name="KozetaCurrencyBlockCoinImageBuilder" type="Kozeta\Currency\Block\ImageBuilder">
+        <arguments>
+            <argument name="entityCode" xsi:type="string">coin</argument>
+        </arguments>
+    </virtualType>
+    <type name="Kozeta\Currency\Block\Coin\ViewCoin">
+        <arguments>
+            <argument name="imageBuilder" xsi:type="object">KozetaCurrencyBlockCoinImageBuilder</argument>
+        </arguments>
+    </type>
+    <type name="Kozeta\Currency\Block\Coin\ListCoin">
+        <arguments>
+            <argument name="imageBuilder" xsi:type="object">KozetaCurrencyBlockCoinImageBuilder</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Directory\Model\Currency\Import\Config">
+        <arguments>
+            <argument name="servicesConfig" xsi:type="array">
+                <item name="frankfurter" xsi:type="array">
+                    <item name="label" xsi:type="string">Frankfurter (Fiat)</item>
+                    <item name="class" xsi:type="string">Kozeta\Currency\Model\Currency\Import\Frankfurter</item>
+                </item>
+                <item name="coinapi" xsi:type="array">
+                    <item name="label" xsi:type="string">Coinapi.io (Crypto and Fiat)</item>
+                    <item name="class" xsi:type="string">Kozeta\Currency\Model\Currency\Import\Coinapi</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+	<type name="Magento\Directory\Block\Currency">
+		<plugin name="kozeta_currency_directory_block_currency" type="Kozeta\Currency\Plugin\Block\Currency" disabled="false" sortOrder="2000" />
+  	</type>
+	<type name="Magento\Framework\Locale\ListsInterface">
+		<plugin name="kozeta_currency_translated_lists" type="Kozeta\Currency\Plugin\Config\AddCurrencies" disabled="false" sortOrder="2000" />
+  	</type>
+    <type name="Magento\Framework\Pricing\PriceCurrencyInterface">
+        <plugin name="kozeta_currency_precision_price_currency" type="Kozeta\Currency\Plugin\Precision\Framework\Pricing\PriceCurrency" sortOrder="2000" disabled="false"/>
+    </type>
+
+	<type name="Magento\Framework\Locale\Format">
+		<plugin name="kozeta_currency_precision_framework_locale_format" type="Kozeta\Currency\Plugin\Precision\Framework\Locale\Format" disabled="false" sortOrder="2000" />
+	</type>
+    <type name="Magento\Sales\Api\Data\OrderInterface">
+        <plugin name="kozeta_currency_precision_sales_api_data_order_plugin" type="Kozeta\Currency\Plugin\Precision\Sales\Api\Data\OrderPlugin" sortOrder="2000" disabled="false"/>
+    </type>
+<!-- remove magento currency symbols from ACL -->    
+    <type name="Magento\Integration\Helper\Data">
+        <plugin name="acl-intergration-data" type="Kozeta\Currency\Plugin\Integration\Data" sortOrder="100" />
+    </type>	
+</config>
+
+
+

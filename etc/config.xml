@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kozeta Team
+ * @copyright Copyright (c) 2019 Kozeta (https://www.kozeta.lt)
+ * @package Kozeta_Curency
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <currency>
+            <coin>
+            	<!-- <number_of_coins_before_scroll>10</number_of_coins_before_scroll> -->
+                <!-- <breadcrumbs>1</breadcrumbs> -->
+                <top_menu_title>Supported currencies</top_menu_title>
+                <top_links_title>Supported currencies</top_links_title>
+                <coin_pages>1</coin_pages>
+                <meta_title>Supported currencies</meta_title>
+                <meta_description>The list of supported currencies</meta_description>
+                <meta_keywords></meta_keywords>
+                <list_url>coins.html</list_url>
+                <url_prefix>coin</url_prefix>
+                <url_suffix>html</url_suffix>
+                <rss>1</rss>
+                <rss_cache>600</rss_cache>
+            </coin>
+            <currency_rate_settings>
+            	<coins_in_row>6</coins_in_row>
+			</currency_rate_settings>
+            <import>
+            	<enabled_minutewice_schedule>0</enabled_minutewice_schedule>
+                <!-- Every day at midnight -->
+                <schedule>0 0 * * *</schedule>
+            </import>
+            <frankfurter>
+                <timeout>100</timeout>
+            </frankfurter>
+            <coinapi>
+                <timeout>100</timeout>
+            </coinapi>
+        </currency>
+        <catalog_price_precision>
+            <general>
+                <price_precision>default</price_precision>
+            </general>
+        </catalog_price_precision>
+    </default>
+</config>
+
+

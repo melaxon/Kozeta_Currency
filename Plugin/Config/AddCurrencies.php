@@ -1,0 +1,113 @@
+<?php
+/**
+ * @author Kozeta Team
+ * @copyright Copyright (c) 2019 Kozeta (https://www.kozeta.lt)
+ * @package Kozeta_Curency
+ */
+
+namespace Kozeta\Currency\Plugin\Config;
+
+use Magento\Framework\Locale\Bundle\CurrencyBundle;
+use Magento\Framework\App\Config\Value;
+use Kozeta\Currency\Model\Coin;
+
+class AddCurrencies
+{
+
+	protected $collectionFactory;
+	
+	const XML_PATH_CURRENCY_INSTALLED = 'system/currency/installed';
+	
+	protected $scopeConfig;
+	
+	protected $_coins;
+	
+	protected $_request;
+	
+    public function __construct(
+        \Magento\Framework\Locale\ConfigInterface $config,
+        \Kozeta\Currency\Model\ResourceModel\Coin\CollectionFactory $collectionFactory,        
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        \Magento\Framework\App\Request\Http $request
+    )
+    {        
+		$this->collectionFactory = $collectionFactory;        
+        $this->scopeConfig = $scopeConfig;
+        $this->_request = $request;
+    }
+
+	
+	public function getNewCurrencies() 
+	{
+        
+        if ($this->_coins) {return $this->_coins;}
+        $store_id = (int) $this->_request->getParam('store', 0);
+        $currencies = [];        
+        $collection = $this->collectionFactory->create();
+        $collection->addFieldToSelect('*');
+        $collection->addFieldToFilter('is_active', Coin::STATUS_ENABLED);
+        $collection->setOrder('name', 'ASC');
+        $collection->addStoreFilter($store_id);
+        foreach ($collection as $_coin) {
+        	$_coin->getIsActive() == false ?: $currencies[] = [
+        		'value' => $_coin->getCode(),
+        		'label' => __($_coin->getName())
+        	];
+        }
+        $this->_coins = $this->_sortOptionArray($currencies);
+        
+		return $this->_coins;
+	}
+
+    protected function _sortOptionArray($option)
+    {
+        $data = [];
+        foreach ($option as $item) {
+            $data[$item['value']] = $item['label'];
+        }
+        asort($data);
+        $option = [];
+        foreach ($data as $key => $label) {
+            $option[] = ['value' => $key, 'label' => $label];
+        }
+        return $option;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function aroundGetOptionCurrencies(
+    	$subject,
+		\Closure $proceed,
+		...$args
+    )
+    {
+        $installedCurrencies = $this->getNewCurrencies();
+        
+        $selectedCurrencies = explode(
+            ',', $this->scopeConfig->getValue(
+                'system/currency/installed',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            )
+        );
+        foreach ($installedCurrencies as $k=>$c) {
+        	if(!in_array($c['value'], $selectedCurrencies)) {
+        		unset($installedCurrencies[$k]);
+        	}
+        }
+        return $installedCurrencies;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function aroundGetOptionAllCurrencies(
+    	$subject,
+		\Closure $proceed,
+		...$args
+    )
+    {
+        return $this->getNewCurrencies();
+    }
+    
+}

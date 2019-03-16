@@ -1,0 +1,4 @@
+ul.dropdown.switcher-dropdown {
+    max-height: 250px;
+    overflow-y: scroll;
+}

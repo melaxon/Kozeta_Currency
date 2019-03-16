@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kozeta Team
+ * @copyright Copyright (c) 2019 Kozeta (https://www.kozeta.lt)
+ * @package Kozeta_Curency
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rate\Matrix" type="Kozeta\Currency\Block\Adminhtml\System\Currency\Rate\Matrix" />
+
+    <virtualType name="KozetaCurrencyUiDataProviderCoinFormModifierPool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="coin_data" xsi:type="array">
+                    <item name="class" xsi:type="string">Kozeta\Currency\Ui\DataProvider\Coin\Form\Modifier\CoinData</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType> 
+    <type name="Kozeta\Currency\Model\Coin\DataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">KozetaCurrencyUiDataProviderCoinFormModifierPool</argument>
+        </arguments>
+    </type>
+    <type name="Kozeta\Currency\Controller\Adminhtml\Coin\MassDelete">
+        <arguments>
+            <argument name="successMessage" xsi:type="string" translate="true">A total of %1 record(s) have been deleted.</argument>
+            <argument name="errorMessage" xsi:type="string" translate="true">An error occurred while deleting record(s).</argument>
+        </arguments>
+    </type>
+    <type name="Kozeta\Currency\Controller\Adminhtml\Coin\MassDisable">
+        <arguments>
+            <argument name="successMessage" xsi:type="string" translate="true">A total of %1 coins have been disabled.</argument>
+            <argument name="errorMessage" xsi:type="string" translate="true">An error occurred while disabling coins.</argument>
+        </arguments>
+    </type>
+    <type name="Kozeta\Currency\Controller\Adminhtml\Coin\MassEnable">
+        <arguments>
+            <argument name="successMessage" xsi:type="string" translate="true">A total of %1 coins have been enabled.</argument>
+            <argument name="errorMessage" xsi:type="string" translate="true">An error occurred while enabling coins.</argument>
+        </arguments>
+    </type>
+<!-- fix total due -->
+	<type name="Magento\Sales\Model\Order">
+		<plugin name="kozeta_currency_order_total_due" type="Kozeta\Currency\Plugin\Sales\Model\Order" disabled="false" sortOrder="2000" />
+	</type>
+
+
+</config>

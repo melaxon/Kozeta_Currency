@@ -1,0 +1,67 @@
+<?php
+/**
+ * @author Kozeta Team
+ * @copyright Copyright (c) 2019 Kozeta (https://www.kozeta.lt)
+ * @package Kozeta_Curency
+ */
+?>
+<?php /** @var Kozeta\Currency\Block\Coin\ListCoin $block */ ?>
+
+
+<?php 
+	$_coins = $block->getCoins();
+	$_rates = $block->_getRates();
+?>
+
+<div class="coins">
+	<div class="list-base-currency"><strong><?= __('Base currency') ?>:</strong>&nbsp;<span><?= $block->getBaseCurrencyCode(); ?></span></div>
+	<div class="list-default-currency"><span>&nbsp;</span></div>
+	
+    <?php if ($_coins->getSize() > 0) :?>
+    	<?php if ($_coins->getSize() > 10) :?>
+        <div class="kozeta-currency-coins-toolbar toolbar top"><?php echo $block->getPagerHtml(); ?></div>
+        <?php endif; ?>
+        <div class="kozeta-currency-coins-list-container">
+        	<table class="currency-coins-list-table">
+        	<tr>
+        		<th>&nbsp;</th>
+        		<th><?php echo __('Name') ?> / <?php echo __('Code') ?></th>
+        		
+        		<th><?php echo __('Rate %1', $block->getBaseCurrencyCode()) ?></th> 
+        		<th><?php echo __('Rate to %1', $block->getBaseCurrencyCode()) ?></th>
+        		<th><?php echo __('Updated at') ?><br>(<a href="https://www.timeanddate.com/worldclock/timezone/utc" rel="nofollow" target="_blank">UTC</a>)</th> 
+        		</tr>
+            <?php foreach ($_coins as $_coin) : 
+            		$a_tag 	= '';
+            		$_a_tag = '';
+            		if ($block->enableCoinPages) {
+            			$a_tag 	= '<a href="' .  $_coin->getCoinUrl() . '">';
+            			$_a_tag = '</a>';
+            		}
+            ?>
+            
+                <?php /** @var Kozeta\Currency\Model\Coin $_coin */ ?>
+                <?php /* <div class="kozeta-currency-coin-list-item"> */ ?>
+                <tr>
+                	<td><?php echo $a_tag . $block->getImage($_coin, 'coin_view', ['width' => 40, 'height' => 40, 'type' => 'avatar'])->toHtml() . $_a_tag ; ?>
+                	</td>
+                	<td><?php 
+                		echo $a_tag . __($_coin->getName()) . $_a_tag;
+                		if($_coin->getSymbol()) echo ' (' . $_coin->getSymbol() . ')' ; ?><br /><?php echo $_coin->getCode();
+                		?>
+                		</td>
+                
+                	<td><?php echo !empty($_rates[$_coin->getCode()]['rate']) ? (float) $_rates[$_coin->getCode()]['rate'] : __('N/A'); ?></td>
+            		<td><?php echo !empty($_rates[$_coin->getCode()]['rate']) ? (float) (1 / $_rates[$_coin->getCode()]['rate']) : __('N/A'); ?></td>
+            		<td><?php if ($_coin->getCode() == $block->getBaseCurrencyCode()) { echo __('N/A');} elseif (!empty($_rates[$_coin->getCode()])) {if (!empty($_rates[$_coin->getCode()]['updated_at'])) echo $_rates[$_coin->getCode()]['updated_at'];} else {echo __('N/A');} ?></td>
+                <?php /* </div> */ ?>
+            <?php endforeach;?>
+            </table>
+        </div>
+        <?php if ($_coins->getSize() > 10) :?>
+        <div class="kozeta-currency-coins-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+        <?php endif; ?>
+    <?php else : ?>
+        <?php /* @escapeNotVerified */ echo __('There are no active currencies at this moment');?>
+    <?php endif;?>
+</div>

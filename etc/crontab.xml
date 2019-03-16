@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kozeta Team
+ * @copyright Copyright (c) 2019 Kozeta (https://www.kozeta.lt)
+ * @package Kozeta_Curency
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="kozeta_currency">
+        <!-- <job name="kozeta_currency_sync" instance="Magento\Directory\Model\Observer" method="scheduledUpdateCurrencyRates"> -->
+        <job name="kozeta_currency_sync" instance="\Kozeta\Currency\Model\Schedule" method="updateCurrencyRates">
+            <config_path>currency/import/schedule</config_path>
+            <!--<schedule>*/2 * * * *</schedule>-->
+        </job>
+    </group>
+</config>

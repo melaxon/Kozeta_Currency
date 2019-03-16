@@ -1,0 +1,104 @@
+<?php
+/**
+ * @author Kozeta Team
+ * @copyright Copyright (c) 2019 Kozeta (https://www.kozeta.lt)
+ * @package Kozeta_Curency
+ */
+?>
+<?php /** @var \Kozeta\Currency\Block\Coin\ViewCoin $block */ ?>
+<?php 
+	$_coin = $block->getCurrentCoin();
+	$rate = $this->_getRate($_coin->getCode());
+	if (empty($rate)) {
+		$rate = [
+				'rate' => __('N/A'), 
+				'_rate' => __('N/A'), 
+				'updated_at' => __('N/A'), 
+			];
+	}
+	else {
+		$rate = $rate[$_coin->getCode()];
+		$rate['rate'] = (float)$rate['rate'];
+		$rate['_rate'] = 1 / $rate['rate'];
+		$rate['updated_at'] = $rate['updated_at'] . '(<a href="https://www.timeanddate.com/worldclock/timezone/utc" rel="nofollow" target="_blank">UTC</a>)';
+	}
+?>
+<div class="coin-view">
+    <div class="coin-avatar coin-details">
+        <?php  echo $block->getImage($_coin, 'coin_view', ['width' => 60, 'height' => 60, 'type' => 'avatar'])->toHtml(); ?>
+    </div>
+
+    <div class="coin-name coin-details">
+        <strong><?php echo __('Name') ?></strong>: <?php echo $_coin->getName() ;?>
+    </div>
+
+    <div class="coin-code coin-details">
+        <strong><?php echo __('Code') ?></strong>: <?php echo $_coin->getCode();?>
+    </div>
+
+    <div class="coin-symbol coin-details">
+        <strong><?php echo __('Symbol') ?></strong>: <?php echo ($_coin->getSymbol()) ?: 'N/A' ;?>
+    </div>
+
+    <?php
+    	$isFiat = $_coin->getIsFiat();
+    	$iconNameFiat = $isFiat === true ? 'yes16x16.png' : 'no16x16.png';
+    	$iconPath = $this->getViewFileUrl('Kozeta_Currency::icons/'. $iconNameFiat);
+    	
+    ?>
+    <?php //$YesNo = ''; $isFiat = $_coin->getIsFiat(); if ($isFiat == true) {$YesNo = 'Yes';} else {$YesNo = 'No';}?>
+    <div class="coin-isFiat coin-details">
+        <strong><?php echo __('Is Fiat') ?></strong>: <img src="<?php echo $iconPath; ?>" />
+    </div>
+    
+	<?php if($isFiat !== true): ?>
+    <div class="coin-type coin-details">
+        <strong><?php echo __('Type') ?></strong>: <?php echo $type = $_coin->getAttributeText('type');?>
+    </div>
+	<?php endif;?>
+	
+	<?php if($_coin->getCode() != $block->_getBaseCurrencyCode()): ?>
+    <div class="coin-rate coin-details">
+        <strong><?php echo __('Current exchange rate to %1', $block->_getBaseCurrencyCode()) ?></strong>: <?php echo $rate['_rate']; ?>
+    </div>
+    
+    <div class="coin-rate coin-details">
+        <strong><?php echo __('Last updated') ?></strong>: <?= $rate['updated_at']; ?>
+    </div>
+    <?php endif;?>
+
+	
+    <div class="coin-txfee coin-details">
+        <strong><?php echo __('Precision') ?></strong>: <?php echo $_coin->getPrecision();?>
+    </div>
+
+    <div class="coin-isActive coin-details">
+        <strong><?php echo __('Status') ?></strong>: <?php echo ($_coin->getIsActive())? __('Active'): __('Inactive');?>
+    </div>
+	
+	<?php if($isFiat !== true): ?>
+    <div class="coin-txfee coin-details">
+        <strong><?php echo __('Transactioin fee') ?></strong>: <?php echo $_coin->getTxfee();?>
+    </div>
+
+    <div class="coin-rate coin-details">
+        <strong><?php echo __('Min. number of confirmations') ?></strong>: <?php echo $_coin->getMinconf();?>
+    </div>
+    <?php endif;?>
+    
+    
+    <?php 
+    	$iconNameRss = $_coin->getInRss() ? 'yes16x16.png' : 'no16x16.png';
+    	$iconPath = $this->getViewFileUrl('Kozeta_Currency::icons/'. $iconNameRss);
+    ?>
+    <div class="coin-inRss coin-details">
+        <strong><?php echo __('Included into RSS feed') ?></strong>: <img src="<?php echo $iconPath; ?>" />
+    </div>
+	<?php if($_coin->getProcessedDescription()): ?>
+    <div class="coin-description coin-details">
+        <strong><?php echo __('Description') ?></strong>: 
+        <div class="coin__description-content"><?php echo $_coin->getProcessedDescription();?></div>
+    </div>
+	<?php endif; ?>
+
+</div>

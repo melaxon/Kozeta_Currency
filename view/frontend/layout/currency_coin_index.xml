@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kozeta Team
+ * @copyright Copyright (c) 2019 Kozeta (https://www.kozeta.lt)
+ * @package Kozeta_Curency
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  layout="2columns-right" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+    	<css src="Kozeta_Currency::css/coin_list.css" />
+    	<!--
+        <script src="js/coin_list.js"/>
+        -->
+    </head> 
+    <body>
+        <referenceContainer name="content">
+            <block class="Kozeta\Currency\Block\Coin\ListCoin" template="Kozeta_Currency::coin/list.phtml" cacheable="false"/>
+            <block class="Kozeta\Currency\Block\Coin\ListCoin\Rss\Link" name="coin.rss.link" template="Kozeta_Currency::rss/link.phtml"  cacheable="false" />
+        </referenceContainer>
+
+        <referenceBlock name="page.main.title">
+            <block class="Kozeta\Currency\Block\Coin\ListCoin\Rss\Link" name="coin.rss.link" template="Kozeta_Currency::rss/link.phtml"/>
+        </referenceBlock>
+
+    </body>
+
+</page>

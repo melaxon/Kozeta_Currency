@@ -1,0 +1,72 @@
+
+.currency-coins-list-table td,
+.currency-coins-list-table th {
+	vertical-align: middle;
+	border: solid #d1d1d1 1px;
+	white-space: nowrap;
+}
+.currency-coins-list-table tr td:first-child,
+.currency-coins-list-table tr th:first-child {
+	width:50px;
+	border-right:none;
+	padding: 5px;
+}
+.currency-coins-list-table tr td:nth-child(2),
+.currency-coins-list-table tr th:nth-child(2) {
+	border-left:none;
+}
+.currency-coins-list-table th {
+	padding: 10px 20px;
+}
+.currency-coins-list-table {
+	margin: 15px 0px
+}
+.pager .toolbar-amount {
+    display: inline;
+}
+.pager .pages {
+    display: inline;
+    margin-left: 10px;
+}
+
+li.item.pages-item-next,
+li.item.pages-item-previous {
+    margin: 0 5px;
+}
+table.currency-coins-list-table .image-photo {
+	min-width: 20px;
+	/*max-width: 40px;*/
+	max-height: 40px;
+}
+@media (max-width: 805px) and (min-width: 767px) {
+	.currency-coins-list-table {
+		font-size:12px;
+	}
+}
+@media (max-width: 455px) {
+	.limiter {
+		margin: 10px 0px;
+	}
+	.currency-coins-list-table tr td:first-child, .currency-coins-list-table tr th:first-child {
+    	display: none;
+	}
+	.currency-coins-list-table tr td:nth-child(2), .currency-coins-list-table tr th:nth-child(2) {
+    	border-left: solid #d1d1d1 1px;
+	}
+	.currency-coins-list-table th:nth-child(3), .currency-coins-list-table td:nth-child(3) {
+    	display: none;
+	}
+}
+.coins.rss {
+	float:right;
+}
+.page-products .toolbar .limiter {
+	display:block !important;
+}
+@media (max-width: 635px) {
+	table.currency-coins-list-table th,
+	table.currency-coins-list-table td {
+		font-size: 11px;
+		padding: 8px 3px;
+	}
+}

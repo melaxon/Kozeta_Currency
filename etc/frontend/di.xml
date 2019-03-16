@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kozeta Team
+ * @copyright Copyright (c) 2019 Kozeta (https://www.kozeta.lt)
+ * @package Kozeta_Curency
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\App\RouterList">
+        <arguments>
+            <argument name="routerList" xsi:type="array">
+                <item name="kozeta_currency" xsi:type="array">
+                    <item name="class" xsi:type="string">Kozeta\Currency\Controller\Router</item>
+                    <item name="disable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="string">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="KozetaCurrencyRoutingEntityCoin" type="Kozeta\Currency\Model\Routing\Entity">
+        <arguments>
+            <argument name="prefixConfigPath" xsi:type="const">Kozeta\Currency\Model\Coin\Url::URL_PREFIX_CONFIG_PATH</argument>
+            <argument name="suffixConfigPath" xsi:type="const">Kozeta\Currency\Model\Coin\Url::URL_SUFFIX_CONFIG_PATH</argument>
+            <argument name="listKeyConfigPath" xsi:type="const">Kozeta\Currency\Model\Coin\Url::LIST_URL_CONFIG_PATH</argument>
+            <argument name="factory" xsi:type="object">Kozeta\Currency\Model\CoinFactory</argument>
+            <argument name="controller" xsi:type="string">coin</argument>
+        </arguments>
+    </virtualType>
+    <type name="Kozeta\Currency\Controller\Router">
+        <arguments>
+            <argument name="routingEntities" xsi:type="array">
+                <item name="coin" xsi:type="object">KozetaCurrencyRoutingEntityCoin</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Theme\Block\Html\Topmenu">
+        <plugin name="coinTopmenu" type="Kozeta\Currency\Plugin\Block\Topmenu" sortOrder="-1" />
+    </type>
+</config>

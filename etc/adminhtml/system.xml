@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Kozeta Team
+ * @copyright Copyright (c) 2019 Kozeta (https://www.kozeta.lt)
+ * @package Kozeta_Curency
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+		<section id="currency">
+            <group id="coin" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Display Currency Settings</label>
+<!--
+                <field id="number_of_currencies_before_scroll" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Number of currencies before scroll</label>
+                    <comment>Maximum number of displayed currencies without scrolling (in frontend switcher)</comment>
+                </field>
+-->
+                <field id="top_menu_title" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Top menu title</label>
+                    <comment>Disabled if empty</comment>
+                </field>
+                <field id="top_links_title" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Top links title</label>
+                    <comment>Disabled if empty</comment>
+                </field>
+                <field id="coin_pages" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable currency description pages</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            <!--
+                <field id="breadcrumbs" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Breadcrumbs</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            -->
+                <field id="meta_title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Currency list title</label>
+                </field>
+                <field id="meta_description" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Currency list meta description</label>
+                </field>
+                <field id="meta_keywords" translate="label" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Currency list meta keywords</label>
+                </field>
+                <field id="list_url" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Currency list url</label>
+                </field>
+                <field id="url_prefix" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Currency url prefix</label>
+                </field>
+                <field id="url_suffix" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Currency url suffix</label>
+                </field>
+                <field id="rss" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable RSS</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="rss_cache" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>RSS Cache Lifetime</label>
+                    <comment>in seconds</comment>
+                    <depends>
+                        <field id="rss">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="currency_rate_settings" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Currency Rates Display</label>
+                <field id="coins_in_row" translate="label" type="text" sortOrder="95" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <validate>validate-zero-or-greater validate-digits</validate>
+                    <label>Number of currencies per row</label>
+                </field>
+            </group>
+            <group id="frankfurter" translate="label" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Frankfurter</label>
+                <field id="timeout" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Connection Timeout (sec)</label>
+                    <comment>More information is available here https://frankfurter.app/</comment>
+                </field>
+            </group>
+            <group id="coinapi" translate="label" sortOrder="41" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Coinapi</label>
+                <field id="timeout" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Connection Timeout (sec)</label>
+                </field>
+                <field id="apikey" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Api Key</label>
+                    <comment>Sign up to get free api key https://www.coinapi.io</comment>
+                </field>
+            </group>
+
+            <group id="import" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Scheduled Import Settings</label>
+           		
+           		<field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                </field>
+                     
+                
+                <field id="enabled_minutewice_schedule" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <label>Enabled minute-wice scheduling</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="service" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+           		<field id="time" showInDefault="1" showInWebsite="0" showInStore="0" >
+                    <depends>
+                        <field id="enabled_minutewice_schedule">0</field>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                           
+                <field id="schedule" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Schedule</label>
+                    <depends>
+                        <field id="enabled_minutewice_schedule">1</field>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <comment><![CDATA[
+<pre>
+* * * * *
+| | | | |
+| | | | +- Day of the Week   (range: 1-7)
+| | | |              1 stands for Monday
+| | | +--- Month of the Year (range: 1-12)
+| | +----- Day of the Month  (range: 1-31)
+| +------- Hour              (range: 0-23)
++--------- Minute            (range: 0-59)
+Example: 0 0 * * * Daily at midnight
+Example: */5 * * * * Every 5 minutes
+</pre>
+                            ]]></comment>
+                </field>
+                
+                <field id="frequency" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <depends>
+                        <field id="enabled_minutewice_schedule">0</field>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="error_email">
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="error_email_identity">
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="error_email_template">
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+			</group>
+        </section>
+        <section id="catalog_price_precision" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+            <tab>catalog</tab>
+            <resource>Kozeta_Currency::price_precision</resource>
+            <label>Price Precision</label>
+            <group id="general" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>General</label>
+                <field id="price_precision" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Decimal Length</label>
+                    <comment>
+                    <![CDATA[<p>You can set up the precision as follows:</p><ol>
+                    <li> Give it an explicit value,</li>
+                    <li> Automatically as per individual currency settings,</li>
+                    <li> Leave it default (normally the default precision is 2).</li></ol>]]>
+                    </comment>
+                    <source_model>Kozeta\Currency\Block\Precision\Config\Precision</source_model>
+                </field>
+       		</group>
+        </section>
+    </system>
+</config>
