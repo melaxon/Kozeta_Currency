@@ -92,14 +92,12 @@ Install
 -----
 
 Manually:
-To install this module copy the code from this repo to `app/code` folder of your Magento 2 instance,
-If you do this after installing Magento 2 you need to run `php bin/magento setup:upgrade`
+To install this module copy the code from this repo to `app/code/Kozeta/Currency` folder of your Magento 2 instance.
 
 Via composer
 
- - composer config repositories.kozeta-module-currency git git@github.com:tzyganu/Magento2SampleModule.git
- - sudo composer require sample/kozeta-currency:dev-master
- - php bin/magento setup:upgrade
+ - composer config repositories.kozeta-module-currency git git@github.com:melaxon/Kozeta_Currency.git
+ - composer require melaxon/kozeta-currency:dev-master
 
 Run the following commands one by one:
 
