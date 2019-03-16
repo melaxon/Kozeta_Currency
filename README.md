@@ -40,7 +40,7 @@ Uninstall
 
  - remove the folder `app/code/Kozeta/Currency`
  - drop the tables `kozeta_currency_coin_store` and `kozeta_currency_coin` (in this order)
- - remove the config settings.  `DELETE FROM core_config_data WHERE path LIKE 'kozeta_currency/%'`
+ - remove the config settings.  `DELETE FROM core_config_data WHERE path LIKE '%kozeta_currency%'`
  - remove the module `Kozeta_Currency` from `app/etc/config.php`
  - remove the module `Kozeta_Currency` from table `setup_module`: `DELETE FROM setup_module WHERE module='Kozeta_Currency'`
 
