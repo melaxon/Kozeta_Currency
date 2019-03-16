@@ -1,12 +1,12 @@
 Magento 2.0 Module "Any Currency"
 ====================
 
-<div class="value"><h1><strong>Overview</strong></h1>
+<div class="value"><h2><strong>Overview</strong></h2>
 <p><span style="font-weight: 400;">The module is intended to fully replace the entire list of currencies and install custom currency list.</span></p>
-<h1><strong>Objectives</strong></h1>
+<h2><strong>Objectives</strong></h2>
 <p><span style="font-weight: 400;">The main objective of the module is to give the ability to manage any currency regardless of whether it is available in Magento or not. </span></p>
 <p><span style="font-weight: 400;">It will be especially useful for those who accept cryptocurrencies in their Magento 2 shops</span></p>
-<h1><strong>Specifications</strong></h1>
+<h2><strong>Specifications</strong></h2>
 <p><span style="font-weight: 400;">The module will replace the currencies offered by Magento with your own currencies. The currencies can be managed the same way as usually. Some features are improved and extended. A few new features were added.</span></p>
 <p><span style="font-weight: 400;">The existing currencies will be hidden once the module is installed and enabled. New currencies can be added and managed via Magento backend interface. </span></p>
 <p><span style="font-weight: 400;">The common parameters management is improved and is available in Configuration menu.</span></p>
@@ -28,12 +28,37 @@ Magento 2.0 Module "Any Currency"
 <p><span style="font-weight: 400;">The module was tested with the following Magento versions: 2.1.x, 2.2.x, 2.3.x</span></p>
 <p><span style="font-weight: 400;">It was not tested with Magento 2.0.x</span></p>
 <p><br><br></p>
-<h1><strong>Instructions</strong></h1>
-<ol>
-<li style="font-weight: 400;">
-<h2><span style="font-weight: 400;">Installation </span></h2>
-</li>
-</ol>
+<h2><strong>Instructions</strong></h2>
+
+ 
+Install
+-----
+
+Manually:
+To install this module copy the code from this repo to `app/code` folder of your Magento 2 instance,
+If you do this after installing Magento 2 you need to run `php bin/magento setup:upgrade`
+
+Via composer
+
+ - composer config repositories.kozeta-module-currency git git@github.com:tzyganu/Magento2SampleModule.git
+ - sudo composer require sample/kozeta-currency:dev-master
+ - php bin/magento setup:upgrade
+
+
+Uninstall
+--------
+
+If you installed it manually:
+ - remove the folder `app/code/Kozeta/Currency`
+ - drop the tables `kozeta_currency_coin_store` and `kozeta_currency_coin` (in this order)
+ - remove the config settings.  `DELETE FROM core_config_data WHERE path LIKE 'kozeta_currency/%'`
+ - remove the module `Kozeta_Currency` from `app/etc/config.php`
+ - remove the module `Kozeta_Currency` from table `setup_module`: `DELETE FROM setup_module WHERE module='Kozeta_Currency'`
+
+If you installed it via composer:
+ - run this in console  `bin/magento module:uninstall -r Kozeta_Currency`. You might have some problems while uninstalling. See more [details here](http://magento.stackexchange.com/q/123544/146):
+ 
+ 
 <p>&nbsp;</p>
 <ol>
 <li style="font-weight: 400;"><span style="font-weight: 400;">Unpack the package ZIP file on your local computer</span></li>
@@ -134,29 +159,3 @@ Magento 2.0 Module "Any Currency"
 <p><span style="font-weight: 400;">For example, as it is shown on the screenshot the import will run every 15 minutes.</span></p>
 <p><span style="font-weight: 400;">All Scheduled Import Settings parameters now are shown in Global scope only, except for Error Email Recipient that remains in Store scope and Error Email Sender and Error Email Template remain in Website scope. </span></p></div>
 
-Install
------
-
-Manually:
-To install this module copy the code from this repo to `app/code` folder of your Magento 2 instance,
-If you do this after installing Magento 2 you need to run `php bin/magento setup:upgrade`
-
-Via composer
-
- - composer config repositories.kozeta-module-currency git git@github.com:tzyganu/Magento2SampleModule.git
- - sudo composer require sample/kozeta-currency:dev-master
- - php bin/magento setup:upgrade
-
-
-Uninstall
---------
-
-If you installed it manually:
- - remove the folder `app/code/Kozeta/Currency`
- - drop the tables `kozeta_currency_coin_store` and `kozeta_currency_coin` (in this order)
- - remove the config settings.  `DELETE FROM core_config_data WHERE path LIKE 'kozeta_currency/%'`
- - remove the module `Kozeta_Currency` from `app/etc/config.php`
- - remove the module `Kozeta_Currency` from table `setup_module`: `DELETE FROM setup_module WHERE module='Kozeta_Currency'`
-
-If you installed it via composer:
- - run this in console  `bin/magento module:uninstall -r Kozeta_Currency`. You might have some problems while uninstalling. See more [details here](http://magento.stackexchange.com/q/123544/146):
