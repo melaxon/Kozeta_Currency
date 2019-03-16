@@ -22,13 +22,15 @@ Magento 2.0 Module "Any Currency"
 <li style="font-weight: 400;"><strong>Currency Rates setup page</strong><span style="font-weight: 400;"> was re-designed so that any number of currencies can be displayed in multiple rows. Number of currencies per row can be set in Configuration menu.</span></li>
 <li style="font-weight: 400;"><strong>Display currency list on frontend</strong><span style="font-weight: 400;">. Optionally the user can display the list of currencies or brief info of any installed currency on frontend. The list can be linked from main menu and/or top menu. The user can assign an URL for the list. The content of the list can be inserted into CMS page or block, or into category description as a block.</span></li>
 </ul>
-<p>&nbsp;</p>
-<h2><span style="font-weight: 400;">Compatibility</span></h2>
-<p>&nbsp;</p>
-<p><span style="font-weight: 400;">The module was tested with the following Magento versions: 2.1.x, 2.2.x, 2.3.x</span></p>
-<p><span style="font-weight: 400;">It was not tested with Magento 2.0.x</span></p>
-<p><br><br></p>
-<h2><strong>Instructions</strong></h2>
+ 
+Compatibility
+-----
+The module was tested with the following Magento versions: 2.1.x, 2.2.x, 2.3.x
+
+It was not tested with Magento 2.0.x
+
+
+<h2>Instructions</h2>
 
  
 Install
@@ -44,6 +46,12 @@ Via composer
  - sudo composer require sample/kozeta-currency:dev-master
  - php bin/magento setup:upgrade
 
+Run the following commands one by one:
+
+- `$ php bin/magento setup:upgrade`
+- `$ php bin/magento setup:di:compile`
+- `$ php bin/magento setup:static-content:deploy`
+
 
 Uninstall
 --------
@@ -56,33 +64,26 @@ If you installed it manually:
  - remove the module `Kozeta_Currency` from table `setup_module`: `DELETE FROM setup_module WHERE module='Kozeta_Currency'`
 
 If you installed it via composer:
- - run this in console  `bin/magento module:uninstall -r Kozeta_Currency`. You might have some problems while uninstalling. See more [details here](http://magento.stackexchange.com/q/123544/146):
- 
- 
-<p>&nbsp;</p>
-<ol>
-<li style="font-weight: 400;"><span style="font-weight: 400;">Unpack the package ZIP file on your local computer</span></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">Using FTP/SFTP/SSH client upload the unpacked extension to Magento root directory. Make sure you use “Merge” mode when uploading data to your server, so that the uploaded directories will not replace the content of the existing ones. Almost all FTP clients use Merge mode by default.<br><img src="https://shop.kozeta.lt/pub/media/wysiwyg/2019-02-11_01-53-27.png" alt="Installation" width="503" height="282"><br></span></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">Connect your Magento root directory with SSH. Make sure you act as file owner.</span></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">Run the following commands one by one:</span><span style="font-weight: 400;"><br></span><em><span style="font-weight: 400;">$ php bin/magento setup:upgrade</span></em><em><span style="font-weight: 400;"><br></span></em><em><span style="font-weight: 400;">$ php bin/magento setup:di:compile</span></em><em><span style="font-weight: 400;"><br></span></em><em><span style="font-weight: 400;">$ php bin/magento setup:static-content:deploy</span></em></li>
-</ol>
-<p><span style="font-weight: 400;">In case you are not quite sure how to manage this or you have complicated configuration you can order professional installation service </span></p>
-<p><span style="font-weight: 400;"></span></p>
-<p>&nbsp;</p>
-<ol>
-<li style="font-weight: 400;">
-<h2><span style="font-weight: 400;">Settings </span></h2>
-</li>
-</ol>
-<p>&nbsp;</p>
-<p><span style="font-weight: 400;">Once the modules are installed all the existing currencies will disappear from the lists of installed and allowed currencies. So the first thing you need to do </span><span style="font-weight: 400;">is to install currencies you need</span><span style="font-weight: 400;"> in your shop.</span></p>
-<h3><span style="font-weight: 400;">Currency installation</span></h3>
+ - run this in console  `bin/magento module:uninstall -r Kozeta_Currency`. You might have some problems while uninstalling. See more [details here](http://magento.stackexchange.com/q/123544/146)
+
+
+In case you are not quite sure how to manage this or you have complicated configuration you can order professional installation service 
+
+
+Settings
+--------
+
+Once the modules are installed all the existing currencies will disappear from the lists of installed and allowed currencies. So the first thing you need to do is to install currencies you need in your shop.
+
+<h3>Currency installation</h3>
 <p><span style="font-weight: 400;">To install and manage your currencies please proceed to Store -&gt; Manage currencies menu.</span></p>
 <p><span style="font-weight: 400;"><img src="https://shop.kozeta.lt/pub/media/wysiwyg/2019-02-11_01-56-14.png" alt="Setup currencies menu interface" width="454" height="454"></span></p>
 <p>&nbsp;</p>
 <p><span style="font-weight: 400;">Then click “</span><strong>Add new currency</strong><span style="font-weight: 400;">” button and fill the form. The required fields are only Currency name and Code. All other fields are optional.</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">If you set the currency as Inactive it won’t be shown up in Magento’s lists of installed and allowed currencies.</span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">If you switch </span><strong>RSS</strong><span style="font-weight: 400;"> on this currency will appear in your RSS channel on frontend.</span></p>
 <p><strong>Frontend</strong><span style="font-weight: 400;"> section is used if you plan to display the currency list and currency info pages on frontend. You can setup meta data and URL key for currency info page. </span><span style="font-weight: 400;"><br></span><span style="font-weight: 400;">The </span><strong>avatar</strong><span style="font-weight: 400;"> is also used in backend currency list.</span></p>
-<p><span style="font-weight: 400;">IMPORTANT</span></p>
+
+IMPORTANT
+
 <table>
 <tbody>
 <tr>
