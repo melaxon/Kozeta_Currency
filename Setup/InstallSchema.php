@@ -1941,8 +1941,6 @@ class InstallSchema implements InstallSchemaInterface
 			[
 				'type' => Table::TYPE_DECIMAL,
 				'length' => '18,10',
-//				'nullable' => false,
-//				'default' => '0',
 				'comment' => 'Shipping Incl Tax',
 			]
 		);
@@ -1952,8 +1950,6 @@ class InstallSchema implements InstallSchemaInterface
 			[
 				'type' => Table::TYPE_DECIMAL,
 				'length' => '18,10',
-//				'nullable' => false,
-//				'default' => '0',
 				'comment' => 'Base Shipping Incl Tax',
 			]
 		);
@@ -1963,8 +1959,6 @@ class InstallSchema implements InstallSchemaInterface
 			[
 				'type' => Table::TYPE_DECIMAL,
 				'length' => '18,10',
-//				'nullable' => false,
-//				'default' => '0',
 				'comment' => 'Base Total Refunded',
 			]
 		);
@@ -2022,8 +2016,6 @@ class InstallSchema implements InstallSchemaInterface
 			[
 				'type' => Table::TYPE_DECIMAL,
 				'length' => '18,10',
-//				'nullable' => false,
-//				'default' => '0',
 				'comment' => 'Subtotal',
 			]
 		);
@@ -2033,30 +2025,45 @@ class InstallSchema implements InstallSchemaInterface
 			[
 				'type' => Table::TYPE_DECIMAL,
 				'length' => '18,10',
-//				'nullable' => false,
-//				'default' => '0',
 				'comment' => 'Shipping and handling amount',
 			]
 		);
-		$setup->getConnection()->modifyColumn(
-			$tableName,
-			'base_grand_total',
-			[
-				'type' => Table::TYPE_DECIMAL,
-				'length' => '18,10',
-//				'nullable' => false,
-//				'default' => '0',
-				'comment' => 'Base Grand Total',
-			]
-		);
+// ref https://github.com/magento/magento2/issues/5546
+// check if column exists. Add it otherwise.
+    	$_fields = $setup->getConnection()->describeTable('sales_invoice_grid');
+    	$fields = array_keys($_fields);
+		if (in_array('base_grand_total', $fields)) {
+			$setup->getConnection()->modifyColumn(
+				$tableName,
+				'base_grand_total',
+				[
+					'type' => Table::TYPE_DECIMAL,
+					'length' => '18,10',
+					'comment' => 'Base Grand Total',
+				]
+			);
+		}
+		else {
+
+            $setup->getConnection()->addColumn(
+                $tableName,
+                'base_grand_total',
+                [
+                    'type' => Table::TYPE_DECIMAL,
+                    'nullable' => true,
+                    'comment' => 'Base Grand Total',
+                    'after' => 'grand_total'
+                ]
+            );            
+            
+            
+		}
 		$setup->getConnection()->modifyColumn(
 			$tableName,
 			'grand_total',
 			[
 				'type' => Table::TYPE_DECIMAL,
 				'length' => '18,10',
-//				'nullable' => false,
-//				'default' => '0',
 				'comment' => 'Grand Total',
 			]
 		);
