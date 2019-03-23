@@ -10,6 +10,7 @@ namespace Kozeta\Currency\Model\Coin;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 use Magento\Ui\DataProvider\Modifier\ModifierInterface;
 use Magento\Ui\DataProvider\Modifier\PoolInterface;
+use Magento\Framework\App\Request\Http;
 use Kozeta\Currency\Model\ResourceModel\Coin\CollectionFactory;
 
 class DataProvider extends AbstractDataProvider
@@ -32,6 +33,7 @@ class DataProvider extends AbstractDataProvider
      * @param string $requestFieldName
      * @param CollectionFactory $coinCollectionFactory
      * @param PoolInterface $pool
+     * @param Http $request
      * @param array $meta
      * @param array $data
      */
@@ -41,8 +43,7 @@ class DataProvider extends AbstractDataProvider
         $requestFieldName,
         CollectionFactory $coinCollectionFactory,
         PoolInterface $pool,
-        //\Magento\Framework\App\RequestInterface $request,
-        \Magento\Framework\App\Request\Http  $request,
+        Http  $request,
         array $meta = [],
         array $data = []
     ) {

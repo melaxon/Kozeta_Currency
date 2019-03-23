@@ -13,7 +13,7 @@ use Magento\Framework\App\Helper\Context;
 use Magento\Framework\View\Asset\Repository;
 use Magento\Framework\View\ConfigInterface;
 use Magento\Store\Model\ScopeInterface;
-use Kozeta\Currency\Model\ImageFactory;
+use Kozeta\Currency\Model\ImageFactory as HelperImageFactory;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyFields)
@@ -138,14 +138,14 @@ class Image extends AbstractHelper
 
     /**
      * @param Context $context
-     * @param ImageFactory $imageFactory
+     * @param HelperImageFactory $imageFactory
      * @param Repository $assetRepo
      * @param ConfigInterface $viewConfig
      * @param $entityCode
      */
     public function __construct(
         Context $context,
-        ImageFactory $imageFactory,
+        HelperImageFactory $imageFactory,
         Repository $assetRepo,
         ConfigInterface $viewConfig,
         $entityCode
