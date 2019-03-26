@@ -18,21 +18,21 @@ class Format
     /**
      * @var
      */
-	protected $_precision;
-	
-	
-	
+    protected $_precision;
+    
+    
+    
     public function __construct(
-		\Kozeta\Currency\Model\Precision $precisionObject
+        \Kozeta\Currency\Model\Precision $precisionObject
     ) {
-		$this->precisionObject = $precisionObject;
-		$this->_precision = $this->precisionObject->getPrecision();
+        $this->precisionObject = $precisionObject;
+        $this->_precision = $this->precisionObject->getPrecision();
     }
-	
-	public function afterGetPriceFormat($subject, $result) {
-		$result['precision'] = $this->_precision;
-		$result['requiredPrecision'] = $this->_precision;
-		return $result;
-	}
+    
+    public function afterGetPriceFormat($subject, $result)
+    {
+        $result['precision'] = $this->_precision;
+        $result['requiredPrecision'] = $this->_precision;
+        return $result;
+    }
 }
-

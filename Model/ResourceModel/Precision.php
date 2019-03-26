@@ -22,39 +22,36 @@ class Precision extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected function _construct()
     {
         $this->_init('kozeta_currency_coin', 'code');
-	    $this->_coinStoreTable = $this->getTable('kozeta_currency_coin_store');
+        $this->_coinStoreTable = $this->getTable('kozeta_currency_coin_store');
     }
 
     public function getPrecisionByCode($code, $store)
     {
-		if (!isset(self::$_precisionCache[$code][$store])) {
-			$connection = $this->getConnection();
-			$storeCondition = 'coin_store.store_id IN (?)';
-			$select = $connection
-				->select()
-				->from(
-				['coin' => $this->getMainTable()],
-				'precision'
-				)
-				->join(
-					['coin_store' => $this->_coinStoreTable],
-					'coin.coin_id = coin_store.coin_id',
-					[]
-				)
-				->where(
-					'coin.code = ?',
-					$code
-				)
-				->where(
-					$storeCondition,
-					[$store]
-				);
-			
-			self::$_precisionCache[$code][$store] = $connection->fetchOne($select);
-		}
-		return self::$_precisionCache[$code][$store];
+        if (!isset(self::$_precisionCache[$code][$store])) {
+            $connection = $this->getConnection();
+            $storeCondition = 'coin_store.store_id IN (?)';
+            $select = $connection
+                ->select()
+                ->from(
+                    ['coin' => $this->getMainTable()],
+                    'precision'
+                )
+                ->join(
+                    ['coin_store' => $this->_coinStoreTable],
+                    'coin.coin_id = coin_store.coin_id',
+                    []
+                )
+                ->where(
+                    'coin.code = ?',
+                    $code
+                )
+                ->where(
+                    $storeCondition,
+                    [$store]
+                );
+            
+            self::$_precisionCache[$code][$store] = $connection->fetchOne($select);
+        }
+        return self::$_precisionCache[$code][$store];
     }
-
-
-
 }

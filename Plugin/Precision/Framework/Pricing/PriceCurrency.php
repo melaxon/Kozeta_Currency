@@ -23,30 +23,28 @@ class PriceCurrency
     protected $messageManager;
 
     public function __construct(
-    	\Kozeta\Currency\Model\Precision $precisionObject,
-    	\Magento\Framework\App\Action\Context $context,
-    	\Magento\Store\Model\StoreManagerInterface $storeManager
-    )
-  	{
-  		$this->precisionObject = $precisionObject;
-  		$this->_storeManager = $storeManager;
-  		$this->messageManager = $context->getMessageManager();
-  	}
+        \Kozeta\Currency\Model\Precision $precisionObject,
+        \Magento\Framework\App\Action\Context $context,
+        \Magento\Store\Model\StoreManagerInterface $storeManager
+    ) {
+        $this->precisionObject = $precisionObject;
+        $this->_storeManager = $storeManager;
+        $this->messageManager = $context->getMessageManager();
+    }
 
     /**
      * {@inheritdoc}
      */
     public function beforeFormat(
         \Magento\Directory\Model\PriceCurrency $subject,
-        ...$args
+    ...$args
     ) {
-            if (!empty($arg[4])) {
-            	$store = $this->_storeManager->getStore()->getId();
-            	$args[2] = $this->precisionObject->getPrecisionByCode($arg[4], $store);
-            }
-            else {
-            	$args[2] = $this->precisionObject->getPrecision();
-            }
+        if (!empty($arg[4])) {
+            $store = $this->_storeManager->getStore()->getId();
+            $args[2] = $this->precisionObject->getPrecisionByCode($arg[4], $store);
+        } else {
+            $args[2] = $this->precisionObject->getPrecision();
+        }
         return $args;
     }
 
@@ -57,7 +55,7 @@ class PriceCurrency
      * @param $price
      * @param array ...$args
      * @return float
-     * TO DO: 
+     * TO DO:
      * - Consider to separate the precision of base currency and default currency ....
      * - Locate the bug where Magento rounds the price before convertion and then rounds it again (affected: cart and minicart item price)
      * - Replace hardcoded precisions wherever it is possible
@@ -66,13 +64,14 @@ class PriceCurrency
         \Magento\Directory\Model\PriceCurrency $subject,
         callable $proceed,
         $price,
-		...$args
+    ...$args
     ) {
-		$precision = $this->precisionObject->getPrecision();
-		if ($precision < $subject::DEFAULT_PRECISION) return $proceed($price);
-		$roundedPricce = round($price, $this->precisionObject->getPrecision());
-		return $roundedPricce;
-		
+        $precision = $this->precisionObject->getPrecision();
+        if ($precision < $subject::DEFAULT_PRECISION) {
+            return $proceed($price);
+        }
+        $roundedPricce = round($price, $this->precisionObject->getPrecision());
+        return $roundedPricce;
     }
 
     /**
@@ -82,7 +81,7 @@ class PriceCurrency
      */
     public function beforeConvertAndFormat(
         \Magento\Directory\Model\PriceCurrency $subject,
-        ...$args
+    ...$args
     ) {
         $args[1] = isset($args[1])? $args[1] : null;
         $args[2] = $this->precisionObject->getPrecision();
@@ -96,12 +95,11 @@ class PriceCurrency
      */
     public function beforeConvertAndRound(
         \Magento\Directory\Model\PriceCurrency $subject,
-        ...$args
+    ...$args
     ) {
         $args[1] = isset($args[1])? $args[1] : null;
         $args[2] = isset($args[2])? $args[2] : null;
         $args[3] = $this->precisionObject->getPrecision();
         return $args;
     }
-
 }

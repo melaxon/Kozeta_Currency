@@ -36,12 +36,12 @@ class Index extends Action
     /**
      * @var string
      */
-	const TOP_MENU_TITLE_CONFIG_PATH = 'currency/coin/top_menu_title';
+    const TOP_MENU_TITLE_CONFIG_PATH = 'currency/coin/top_menu_title';
 
     /**
      * @var string
      */
-	const TOP_LINKS_TITLE_CONFIG_PATH = 'currency/coin/top_links_title';
+    const TOP_LINKS_TITLE_CONFIG_PATH = 'currency/coin/top_links_title';
     /**
      * @var \Magento\Framework\Controller\Result\ForwardFactory
      */
@@ -78,17 +78,15 @@ class Index extends Action
     {
 
         $title = $this->scopeConfig->getValue(self::TOP_MENU_TITLE_CONFIG_PATH, ScopeInterface::SCOPE_STORE);
-		
-		if (
-			empty($this->scopeConfig->getValue(self::TOP_MENU_TITLE_CONFIG_PATH, ScopeInterface::SCOPE_STORE)) &&
-			empty($this->scopeConfig->getValue(self::TOP_LINKS_TITLE_CONFIG_PATH, ScopeInterface::SCOPE_STORE))
-			//empty(trim($this->scopeConfig->getValue(self::TOP_LINKS_TITLE_CONFIG_PATH,ScopeInterface::SCOPE_STORE)
-		)
-		{
+        
+        if (empty($this->scopeConfig->getValue(self::TOP_MENU_TITLE_CONFIG_PATH, ScopeInterface::SCOPE_STORE)) &&
+            empty($this->scopeConfig->getValue(self::TOP_LINKS_TITLE_CONFIG_PATH, ScopeInterface::SCOPE_STORE))
+            //empty(trim($this->scopeConfig->getValue(self::TOP_LINKS_TITLE_CONFIG_PATH,ScopeInterface::SCOPE_STORE)
+        ) {
             $resultForward = $this->resultForwardFactory->create();
             $resultForward->forward('noroute');
             return $resultForward;
-		}
+        }
 
         $resultPage = $this->resultPageFactory->create();
         $resultPage->getConfig()->getTitle()->set(
@@ -103,21 +101,21 @@ class Index extends Action
 //        if ($this->scopeConfig->isSetFlag(self::BREADCRUMBS_CONFIG_PATH, ScopeInterface::SCOPE_STORE)) {
             /** @var \Magento\Theme\Block\Html\Breadcrumbs $breadcrumbsBlock */
             $breadcrumbsBlock = $resultPage->getLayout()->getBlock('breadcrumbs');
-            if ($breadcrumbsBlock) {
-                $breadcrumbsBlock->addCrumb(
-                    'home',
-                    [
-                        'label'    => __('Home'),
-                        'link'     => $this->_url->getUrl('')
-                    ]
-                );
-                $breadcrumbsBlock->addCrumb(
-                    'coins',
-                    [
-                        'label'    => __('Coins'),
-                    ]
-                );
-            }
+        if ($breadcrumbsBlock) {
+            $breadcrumbsBlock->addCrumb(
+                'home',
+                [
+                    'label'    => __('Home'),
+                    'link'     => $this->_url->getUrl('')
+                ]
+            );
+            $breadcrumbsBlock->addCrumb(
+                'coins',
+                [
+                    'label'    => __('Coins'),
+                ]
+            );
+        }
         //}
         return $resultPage;
     }

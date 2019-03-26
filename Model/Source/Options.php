@@ -26,8 +26,5 @@ class Options extends AbstractSource implements ArrayInterface
             ];
         }
         return $options;
-
     }
-
-
 }

@@ -9,6 +9,7 @@ namespace Kozeta\Currency\Block;
 
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Framework\View\Element\Template;
+
 /**
  * @method string getImageUrl()
  * @method string getWidth()

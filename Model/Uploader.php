@@ -108,7 +108,6 @@ class Uploader
         $allowedExtensions = [],
         $baseTmpPath,
         $basePath
-
     ) {
         $this->coreFileStorageDatabase  = $coreFileStorageDatabase;
         $this->mediaDirectory           = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);

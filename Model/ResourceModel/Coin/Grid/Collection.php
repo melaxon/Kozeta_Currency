@@ -7,7 +7,6 @@
 
 namespace Kozeta\Currency\Model\ResourceModel\Coin\Grid;
 
-
 use Magento\Framework\Api\Search\SearchResultInterface;
 use Magento\Framework\Api\Search\AggregationInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
@@ -19,7 +18,6 @@ use Magento\Framework\View\Element\UiComponent\DataProvider\Document;
 use Magento\Store\Model\StoreManagerInterface;
 use Psr\Log\LoggerInterface;
 use Kozeta\Currency\Model\ResourceModel\Coin\Collection as CoinCollection;
-
 
 class Collection extends CoinCollection implements SearchResultInterface
 {

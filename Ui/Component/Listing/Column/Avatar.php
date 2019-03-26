@@ -14,6 +14,7 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\Ui\Component\Listing\Columns\Column;
 use Kozeta\Currency\Model\Uploader;
 use Kozeta\Currency\Block\Adminhtml\Coin\Img;
+
 /**
  * @method Avatar setName($name)
  */
@@ -30,7 +31,11 @@ class Avatar extends Column
      * @var \Kozeta\Currency\Model\Uploader
      */
     protected $imageModel;
-	protected $img;
+
+    /**
+     * @var Kozeta\Currency\Block\Adminhtml\Coin\Img
+     */
+    protected $img;
     /**
      * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
@@ -38,6 +43,7 @@ class Avatar extends Column
      * @param \Kozeta\Currency\Model\Uploader $imageModel
      * @param array $components
      * @param array $data
+     * @param Img $img
      */
     public function __construct(
         ContextInterface $context,
@@ -62,15 +68,14 @@ class Avatar extends Column
      */
     public function prepareDataSource(array $dataSource)
     {
-        if(isset($dataSource['data']['items'])) {
+        if (isset($dataSource['data']['items'])) {
             $fieldName = $this->getData('name');
-            foreach($dataSource['data']['items'] as & $item) {
+            foreach ($dataSource['data']['items'] as & $item) {
                 $url = '';
-                if($item[$fieldName] != '') {
+                if ($item[$fieldName] != '') {
                     $url = $this->imageModel->getBaseUrl().$this->imageModel->getBasePath().$item[$fieldName];
-                }
-                else {
-                	$url = $this->img->getPlaceholderUrl();
+                } else {
+                    $url = $this->img->getPlaceholderUrl();
                 }
                 $item[$fieldName . '_src'] = $url;
                 $item[$fieldName . '_alt'] = $this->getAlt($item) ?: '';

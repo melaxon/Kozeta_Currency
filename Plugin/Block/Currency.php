@@ -21,29 +21,27 @@ class Currency extends \Magento\Directory\Block\Currency
      * Uncomment this and comment the below function to use created currency names in switcher
      */
     public function aroundGetCurrencies(
-         \Magento\Directory\Block\Currency $subject,
-         callable $proceed
-    )
-    {
+        \Magento\Directory\Block\Currency $subject,
+        callable $proceed
+    ) {
         $currencies = $subject->getData('currencies');
         if ($currencies === null) {
             $currencies = [];
             $codes = $this->_storeManager
-            	->getStore()
-            	->getAvailableCurrencyCodes(true);            
+                ->getStore()
+                ->getAvailableCurrencyCodes(true);
             if (is_array($codes) && count($codes) > 1) {
                 $rates = $this->_currencyFactory->create()->getCurrencyRates(
                     $this->_storeManager->getStore()->getBaseCurrency(),
                     $codes
                 );
-				$names = $this->_currencyFactory->create()->getCurrencyNames($codes);
+                $names = $this->_currencyFactory->create()->getCurrencyNames($codes);
                 foreach ($codes as $code) {
                     if (isset($rates[$code])) {
-                        if(!empty($names[$code])) {
-                        	$currencies[$code] = __($names[$code]);
-                        }
-                        else {
-                        	$currencies[$code] = $code;
+                        if (!empty($names[$code])) {
+                            $currencies[$code] = __($names[$code]);
+                        } else {
+                            $currencies[$code] = $code;
                         }
                     }
                 }
@@ -53,7 +51,7 @@ class Currency extends \Magento\Directory\Block\Currency
 
         return $currencies;
     }
- /*    
+ /*
   * Initial  function utiizing CurrencyBundle
   * Uncomment this and comment the above function to use existing bundled currency names in switcher (if not exist - use created names)
   */
@@ -89,6 +87,4 @@ class Currency extends \Magento\Directory\Block\Currency
 //         }
 //         return $currencies;
 //     }
-    
-
 }

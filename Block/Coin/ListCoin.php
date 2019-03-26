@@ -90,8 +90,8 @@ class ListCoin extends Template
             self::COIN_PAGES_CONFIG_PATH,
             ScopeInterface::SCOPE_STORE
         );
-		$this->imageBuilder = $imageBuilder;
-		$this->storeManager = $storeManager;
+        $this->imageBuilder = $imageBuilder;
+        $this->storeManager = $storeManager;
         parent::__construct($context, $data);
     }
 
@@ -104,8 +104,8 @@ class ListCoin extends Template
             $this->coins = $this->coinCollectionFactory->create()
                 ->addFieldToSelect('*')
                 ->addFieldToFilter(
-                	'is_active', 
-                	Coin::STATUS_ENABLED
+                    'is_active',
+                    Coin::STATUS_ENABLED
                 )
                 //->addFieldToFilter(\Kozeta\Currency\Api\Data\CoinInterface::STORE_ID,['eq' => $this->_storeManager->getStore()->getId()])
                 ->addStoreFilter($this->_storeManager->getStore()->getId())
@@ -119,20 +119,21 @@ class ListCoin extends Template
 
     /**
      * @return all rates
-     */	
-	public function _getRates() {
-		$codes = [];
-    	foreach($this->getCoins() as $coin) {
-    		$codes[] = $coin->getCode();
-    	}
+     */
+    public function _getRates()
+    {
+        $codes = [];
+        foreach ($this->getCoins() as $coin) {
+            $codes[] = $coin->getCode();
+        }
 
-		$rates = $this->currencyFactory->create()->getCurrencyRates(
-			$this->_storeManager->getStore()->getBaseCurrency(), 
-			$codes,
-			true
-		);
-		return $rates;
-	}
+        $rates = $this->currencyFactory->create()->getCurrencyRates(
+            $this->_storeManager->getStore()->getBaseCurrency(),
+            $codes,
+            true
+        );
+        return $rates;
+    }
 
 
     /**
@@ -172,10 +173,9 @@ class ListCoin extends Template
 
     /**
      * @return Base currency
-     */    
+     */
     public function getBaseCurrencyCode()
     {
-    	return $this->storeManager->getStore()->getBaseCurrencyCode();
+        return $this->storeManager->getStore()->getBaseCurrencyCode();
     }
-
 }

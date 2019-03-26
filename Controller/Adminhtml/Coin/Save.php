@@ -60,8 +60,7 @@ class Save extends Coin
         DataObjectProcessor $dataObjectProcessor,
         DataObjectHelper $dataObjectHelper,
         UploaderPool $uploaderPool
-    )
-    {
+    ) {
         $this->coinFactory = $coinFactory;
         $this->dataObjectProcessor = $dataObjectProcessor;
         $this->dataObjectHelper = $dataObjectHelper;
@@ -80,9 +79,9 @@ class Save extends Coin
         $coin = null;
         $data = $this->getRequest()->getPostValue();
 
-		if (!isset($data['store_id'])) {
-			$data['store_id'] = [ \Magento\Cms\Ui\Component\Listing\Column\Cms\Options::ALL_STORE_VIEWS ];
-		}
+        if (!isset($data['store_id'])) {
+            $data['store_id'] = [ \Magento\Cms\Ui\Component\Listing\Column\Cms\Options::ALL_STORE_VIEWS ];
+        }
         $id = !empty($data['coin_id']) ? $data['coin_id'] : null;
         $resultRedirect = $this->resultRedirectFactory->create();
         try {
@@ -115,7 +114,7 @@ class Save extends Coin
             }
             $resultRedirect->setPath('kozeta_currency/coin/edit', ['coin_id' => $id]);
         } catch (\Exception $e) {
-            $this->messageManager->addErrorMessage(__('There was a problem saving the coin'.$e->getMessage() ));
+            $this->messageManager->addErrorMessage(__('There was a problem saving the coin'.$e->getMessage()));
             if ($coin != null) {
                 $this->storeCoinDataToSession(
                     $this->dataObjectProcessor->buildOutputDataArray(
@@ -133,7 +132,7 @@ class Save extends Coin
                 ->setCurrencySymbolsData($symbolsDataArray);
             //$this->messageManager->addSuccess(__('Congratulations!'));
         } catch (\Exception $e) {
-        	//$this->log->logError($e);
+            //$this->log->logError($e);
             $this->messageManager->addError($e->getMessage());
         }
         

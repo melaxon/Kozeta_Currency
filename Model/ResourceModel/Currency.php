@@ -52,12 +52,14 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
     protected function _getRatesByCode($code, $toCurrencies = null, $updated = null)
     {
         $fieldsList = ['currency_to', 'rate'];
-        if ($updated !== null) {$fieldsList[] = 'updated_at';}
+        if ($updated !== null) {
+            $fieldsList[] = 'updated_at';
+        }
         $connection = $this->getConnection();
         $bind = [':currency_from' => $code];
         $select = $connection->select()->from(
             $this->_currencyRateTable,
-                $fieldsList
+            $fieldsList
         )->where(
             'currency_from = :currency_from'
         )->where(
@@ -66,17 +68,16 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
         );
         $rowSet = $connection->fetchAll($select, $bind);
         $result = [];
-		
-		if ($updated !== null) {
-        	foreach ($rowSet as $row) {
-            	$result[$row['currency_to']]['rate'] = $row['rate'];
-            	$result[$row['currency_to']]['updated_at'] = $row['updated_at'];
-        	}
-        }
-        else {
-        	foreach ($rowSet as $row) {
-            	$result[$row['currency_to']] = $row['rate'];
-        	}
+        
+        if ($updated !== null) {
+            foreach ($rowSet as $row) {
+                $result[$row['currency_to']]['rate'] = $row['rate'];
+                $result[$row['currency_to']]['updated_at'] = $row['updated_at'];
+            }
+        } else {
+            foreach ($rowSet as $row) {
+                $result[$row['currency_to']] = $row['rate'];
+            }
         }
 
         return $result;
@@ -88,24 +89,24 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
      * @param string|array $currency
      * @return array
      */
-    public function getCurrencyNames($code) {
+    public function getCurrencyNames($code)
+    {
         $connection = $this->getConnection();
         //$bind = [':code' => $code];
         $select = $connection->select()->from(
             $this->getTable('kozeta_currency_coin'),
-                ['code','name']
+            ['code','name']
         )->where(
             'code IN(?)',
             $code
         );
         $rowSet = $connection->fetchAll($select);
-        $result = []; 
-		
+        $result = [];
+        
         foreach ($rowSet as $row) {
             $result[$row['code']] = $row['name'];
         }
 
         return $result;
     }
-    
 }

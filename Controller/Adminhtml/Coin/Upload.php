@@ -12,7 +12,6 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 use Kozeta\Currency\Model\Uploader;
 
-
 class Upload extends Action
 {
     /**

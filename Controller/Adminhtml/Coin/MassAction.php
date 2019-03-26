@@ -71,7 +71,7 @@ abstract class MassAction extends Coin
      * @param CoinModel $coin
      * @return mixed
      */
-    protected abstract function massAction(CoinModel $coin);
+    abstract protected function massAction(CoinModel $coin);
 
     /**
      * execute action

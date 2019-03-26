@@ -25,7 +25,8 @@ define([
      * @param  {Number} times
      * @return {String}
      */
-    function stringPad(string, times) {
+    function stringPad(string, times)
+    {
         return (new Array(times + 1)).join(string);
     }
 
@@ -36,7 +37,8 @@ define([
      * @param  {Boolean} isShowSign
      * @return {String}              Formatted value
      */
-    function formatPrice(amount, format, isShowSign) {
+    function formatPrice(amount, format, isShowSign)
+    {
         var s = '',
             precision, integerRequired, decimalSymbol, groupSymbol, groupLength, pattern, i, pad, j, re, r, am;
 
@@ -61,9 +63,9 @@ define([
         // we're avoiding the usage of to fixed, and using round instead with the e representation to address
         // numbers like 1.005 = 1.01. Using ToFixed to only provide trailig zeroes in case we have a whole number
         i = parseInt(
-                amount = Number(Math.round(Math.abs(+amount || 0) + 'e+' + precision) + ('e-' + precision)),
-                10
-            ) + '';
+            amount = Number(Math.round(Math.abs(+amount || 0) + 'e+' + precision) + ('e-' + precision)),
+            10
+        ) + '';
         pad = i.length < integerRequired ? integerRequired - i.length : 0;
 
         i = stringPad('0', pad) + i;
@@ -88,7 +90,8 @@ define([
      * @param {Object} obj
      * @return {Object}
      */
-    function objectDeepClone(obj) {
+    function objectDeepClone(obj)
+    {
         return JSON.parse(JSON.stringify(obj));
     }
 
@@ -97,7 +100,8 @@ define([
      * @param   {jQuery} element
      * @returns {undefined|String}
      */
-    function findOptionId(element) {
+    function findOptionId(element)
+    {
         var re, id, name;
 
         if (!element) {

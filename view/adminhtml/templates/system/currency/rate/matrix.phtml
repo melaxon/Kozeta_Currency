@@ -11,43 +11,44 @@
  */
 ?>
 <?php
-	$_oldRates = $block->getOldRates();
-	$_rates = $block->_getDisplayRates();
+    $_oldRates = $block->getOldRates();
+    $_rates = $block->_getDisplayRates();
 ?>
-<?php if (empty($_rates)): ?>
+<?php if (empty($_rates)) : ?>
     <div class="message message-warning warning"><p><?= /* @escapeNotVerified */ __('You must first configure currency options before being able to see currency rates.') ?></p></div>
-<?php else: ?>
+<?php else : ?>
     <form name="rateForm" id="rate-form" method="post" action="<?= /* @escapeNotVerified */ $block->getRatesFormAction() ?>">
         <?= $block->getBlockHtml('formkey') ?>
         
-<?php 
-	$ac = $block->getAllowedCurrencies();
-	$dc = $block->getDefaultCurrencies();
-	$coins = $block->getCoinsInRow();
-	$rows = $block->getRows();
-?>	
-<?php $j = 1; for ($i = 1; $i <= $rows; $i++): ?>
+<?php
+    $ac = $block->getAllowedCurrencies();
+    $dc = $block->getDefaultCurrencies();
+    $coins = $block->getCoinsInRow();
+    $rows = $block->getRows();
+?>  
+<?php $j = 1; for ($i = 1; $i <= $rows; $i++) : ?>
         <div class="admin__control-table-wrapper"><br />
             <table class="admin__control-table">
                 <thead>
                     <tr>
                         <th>&nbsp;</th>
-                        <?php $_i = 0; foreach ($ac as $k => $_currencyCode): ?>
+                        <?php $_i = 0; foreach ($ac as $k => $_currencyCode) : ?>
                             <th><span><?= /* @escapeNotVerified */ $_currencyCode ?></span></th>
-                            <?php 
-                            	$_i++; 
-                            	unset($ac[$k]); 
-                            	if ($_i == $coins) {
-                            		$_i = 0; break;
-                            	}?>
+                            <?php
+                                $_i++;
+                                unset($ac[$k]);
+                            if ($_i == $coins) {
+                                $_i = 0;
+                                break;
+                            }?>
                         <?php endforeach; ?>
                     </tr>
                 </thead>
-                <?php $_j = 0; foreach ($dc as $_currencyCode): ?>
+                <?php $_j = 0; foreach ($dc as $_currencyCode) : ?>
                 <tr>
-                    <?php if (isset($_rates[$_currencyCode]) && is_array($_rates[$_currencyCode])): ?>
-                        <?php foreach ($_rates[$_currencyCode] as $_rate => $_value): ?>
-                            <?php if (++$_j == 1): ?>
+                    <?php if (isset($_rates[$_currencyCode]) && is_array($_rates[$_currencyCode])) : ?>
+                        <?php foreach ($_rates[$_currencyCode] as $_rate => $_value) : ?>
+                            <?php if (++$_j == 1) : ?>
                                 <td><span class="admin__control-support-text"><?= /* @escapeNotVerified */ $_currencyCode ?></span></td>
                                 <td>
                                     <input type="text"
@@ -55,23 +56,29 @@
                                            value="<?= ($_currencyCode == $_rate) ? '1.0000' : ($_value>0 ? $_value : (isset($_oldRates[$_currencyCode][$_rate]) ?: '')) ?>"
                                            class="admin__control-text"
                                             <?= ($_currencyCode == $_rate) ? ' disabled' : '' ?> />
-                                    <?php if (!empty($block->getNewRates()) && $_currencyCode != $_rate && isset($_oldRates[$_currencyCode][$_rate])): ?>
+                                    <?php if (!empty($block->getNewRates()) && $_currencyCode != $_rate && isset($_oldRates[$_currencyCode][$_rate])) : ?>
                                     <div class="admin__field-note"><?= /* @escapeNotVerified */ __('Old rate:') ?> <b><?= /* @escapeNotVerified */ $_oldRates[$_currencyCode][$_rate] ?></b></div>
                                     <?php endif; ?>
                                 </td>
-                            <?php else: ?>
+                            <?php else : ?>
                                 <td>
                                     <input type="text"
                                            name="rate[<?= /* @escapeNotVerified */ $_currencyCode ?>][<?= /* @escapeNotVerified */ $_rate ?>]"
                                            value="<?= ($_currencyCode == $_rate) ? '1.0000' : ($_value>0 ? $_value : (isset($_oldRates[$_currencyCode][$_rate]) ?: '')) ?>"
                                            class="admin__control-text"
-                                           <?= ($_currencyCode == $_rate) ? ' disabled' : '' ?> />
-                                    <?php if (!empty($block->getNewRates())  && $_currencyCode != $_rate && isset($_oldRates[$_currencyCode][$_rate])): ?>
+                                            <?= ($_currencyCode == $_rate) ? ' disabled' : '' ?> />
+                                    <?php if (!empty($block->getNewRates()) && $_currencyCode != $_rate && isset($_oldRates[$_currencyCode][$_rate])) : ?>
                                     <div class="admin__field-note"><?= /* @escapeNotVerified */ __('Old rate:') ?> <b><?= /* @escapeNotVerified */ $_oldRates[$_currencyCode][$_rate] ?></b></div>
                                     <?php endif; ?>
                                 </td>
-                            <?php endif; unset($_rates[$_currencyCode][$_rate]); if ($_j == $coins) {$_j = 0; break;} ?>
-                        <?php endforeach; $_j = 0; ?>                        
+                            <?php endif;
+unset($_rates[$_currencyCode][$_rate]);
+if ($_j == $coins) {
+    $_j = 0;
+    break;
+} ?>
+                        <?php endforeach;
+$_j = 0; ?>                        
                     <?php endif; ?>
                 </tr>
                 <?php endforeach; ?>

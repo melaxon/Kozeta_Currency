@@ -8,7 +8,6 @@
 namespace Kozeta\Currency\Model\Currency\Import\Source;
 
 class Service extends \Magento\Directory\Model\Currency\Import\Source\Service
-
 {
     /**
      * @var array
@@ -19,9 +18,8 @@ class Service extends \Magento\Directory\Model\Currency\Import\Source\Service
      * @param \Magento\Directory\Model\Currency\Import\Source\Service $options
      */
     public function __construct(
-    	\Magento\Directory\Model\Currency\Import\Source\Service $options
-    )
-    {
+        \Magento\Directory\Model\Currency\Import\Source\Service $options
+    ) {
         $this->_options = $options->toOptionArray();
     }
 
@@ -30,10 +28,10 @@ class Service extends \Magento\Directory\Model\Currency\Import\Source\Service
      */
     public function toOptionArray()
     {
-		$this->_options[] = [
-			'label' => __('Use default settings'),
-			'value' => 'default',
-		];
+        $this->_options[] = [
+            'label' => __('Use default settings'),
+            'value' => 'default',
+        ];
 
         return $this->_options;
     }

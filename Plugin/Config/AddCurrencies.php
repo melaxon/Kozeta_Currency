@@ -13,51 +13,76 @@ use Kozeta\Currency\Model\Coin;
 
 class AddCurrencies
 {
-
-	protected $collectionFactory;
-	
-	const XML_PATH_CURRENCY_INSTALLED = 'system/currency/installed';
-	
-	protected $scopeConfig;
-	
-	protected $_coins;
-	
-	protected $_request;
-	
+    /**
+     * @var \Kozeta\Currency\Model\ResourceModel\Coin\CollectionFactory
+     */
+    protected $collectionFactory;
+    
+    /**
+     * Installed currencies
+     */
+    const XML_PATH_CURRENCY_INSTALLED = 'system/currency/installed';
+    
+    /**
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    protected $scopeConfig;
+    
+    /**
+     * New currencies list
+     *
+     * @var array
+     */
+    protected $_coins;
+    
+    /**
+     * HTTP request
+     *
+     * @var \Magento\Framework\App\Request\Http
+     */
+    protected $_request;
+    
+    /**
+     * @param \Magento\Framework\Locale\ConfigInterface $config
+     * @param \Kozeta\Currency\Model\ResourceModel\Coin\CollectionFactory $collectionFactory
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+     * @param \Magento\Framework\App\Request\Http $request
+     */
     public function __construct(
         \Magento\Framework\Locale\ConfigInterface $config,
-        \Kozeta\Currency\Model\ResourceModel\Coin\CollectionFactory $collectionFactory,        
+        \Kozeta\Currency\Model\ResourceModel\Coin\CollectionFactory $collectionFactory,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Framework\App\Request\Http $request
-    )
-    {        
-		$this->collectionFactory = $collectionFactory;        
+    ) {
+        $this->collectionFactory = $collectionFactory;
         $this->scopeConfig = $scopeConfig;
         $this->_request = $request;
     }
 
-	
-	public function getNewCurrencies() 
-	{
+    
+    public function getNewCurrencies()
+    {
         
-        if ($this->_coins) {return $this->_coins;}
+        if ($this->_coins) {
+            return $this->_coins;
+        }
         $store_id = (int) $this->_request->getParam('store', 0);
-        $currencies = [];        
+        $currencies = [];
         $collection = $this->collectionFactory->create();
         $collection->addFieldToSelect('*');
         $collection->addFieldToFilter('is_active', Coin::STATUS_ENABLED);
         $collection->setOrder('name', 'ASC');
         $collection->addStoreFilter($store_id);
         foreach ($collection as $_coin) {
-        	$_coin->getIsActive() == false ?: $currencies[] = [
-        		'value' => $_coin->getCode(),
-        		'label' => __($_coin->getName())
-        	];
+            $_coin->getIsActive() == false ?: $currencies[] = [
+                'value' => $_coin->getCode(),
+                'label' => __($_coin->getName())
+            ];
         }
         $this->_coins = $this->_sortOptionArray($currencies);
         
-		return $this->_coins;
-	}
+        return $this->_coins;
+    }
 
     protected function _sortOptionArray($option)
     {
@@ -77,23 +102,23 @@ class AddCurrencies
      * @inheritdoc
      */
     public function aroundGetOptionCurrencies(
-    	$subject,
-		\Closure $proceed,
-		...$args
-    )
-    {
+        $subject,
+        \Closure $proceed,
+    ...$args
+    ) {
         $installedCurrencies = $this->getNewCurrencies();
         
         $selectedCurrencies = explode(
-            ',', $this->scopeConfig->getValue(
+            ',',
+            $this->scopeConfig->getValue(
                 'system/currency/installed',
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             )
         );
-        foreach ($installedCurrencies as $k=>$c) {
-        	if(!in_array($c['value'], $selectedCurrencies)) {
-        		unset($installedCurrencies[$k]);
-        	}
+        foreach ($installedCurrencies as $k => $c) {
+            if (!in_array($c['value'], $selectedCurrencies)) {
+                unset($installedCurrencies[$k]);
+            }
         }
         return $installedCurrencies;
     }
@@ -102,12 +127,10 @@ class AddCurrencies
      * @inheritdoc
      */
     public function aroundGetOptionAllCurrencies(
-    	$subject,
-		\Closure $proceed,
-		...$args
-    )
-    {
+        $subject,
+        \Closure $proceed,
+    ...$args
+    ) {
         return $this->getNewCurrencies();
     }
-    
 }

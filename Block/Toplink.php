@@ -11,10 +11,12 @@ use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Element\Template\Context;
 
+/**
+ * Add a link to top menu
+ *
+ */
 class Toplink extends \Magento\Framework\View\Element\Html\Link
 {
-
-
     /**
      * @var string
      */
@@ -42,6 +44,7 @@ class Toplink extends \Magento\Framework\View\Element\Html\Link
 
     /**
      * @param scopeConfig $scopeConfig
+     * @param Context $context
      */
     public function __construct(
 
@@ -63,19 +66,15 @@ class Toplink extends \Magento\Framework\View\Element\Html\Link
 		parent::__construct($context, $data);
     }
 
-
-
-/**
-* Render block HTML.
-*
-* @return string
-*/
+	/**
+	* Render block HTML.
+	*
+	* @return string
+	*/
 	protected function _toHtml()
     {
-    	
     	if (empty(trim($this->title)) || empty(trim($this->url))) return '';
     	return parent::_toHtml();
-
     }
     
     /**
@@ -93,6 +92,4 @@ class Toplink extends \Magento\Framework\View\Element\Html\Link
     {
         return $this->title;
     }
-    
-
 }

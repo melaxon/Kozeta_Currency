@@ -24,7 +24,7 @@ class Data
     protected function getRestrictedIds()
     {
         return [
-        	'Magento_CurrencySymbol::symbols',
+            'Magento_CurrencySymbol::symbols',
         ];
     }
 }

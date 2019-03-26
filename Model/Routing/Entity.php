@@ -137,5 +137,4 @@ class Entity
     {
         return $this->param;
     }
-
 }

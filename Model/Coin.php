@@ -21,7 +21,6 @@ use Kozeta\Currency\Model\ResourceModel\Coin as CoinResourceModel;
 use Kozeta\Currency\Model\Routing\RoutableInterface;
 use Kozeta\Currency\Model\Source\AbstractSource;
 
-
 /**
  * @method CoinResourceModel _getResource()
  * @method CoinResourceModel getResource()
@@ -106,8 +105,7 @@ class Coin extends AbstractModel implements CoinInterface, RoutableInterface
         array $data = [],
         AbstractResource $resource = null,
         AbstractDb $resourceCollection = null
-    )
-    {
+    ) {
         $this->outputProcessor = $outputProcessor;
         $this->uploaderPool    = $uploaderPool;
         $this->filter          = $filter;

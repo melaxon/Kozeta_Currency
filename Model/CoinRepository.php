@@ -235,5 +235,4 @@ class CoinRepository implements CoinRepositoryInterface
         }
         return $this;
     }
-
 }

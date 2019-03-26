@@ -8,6 +8,7 @@
 namespace Kozeta\Currency\Model\Currency\Import;
 
 use Kozeta\Currency\Model\Currency\Datafeed;
+
 /**
  * Currency rate import from https://coinapi.io/
  */
@@ -57,15 +58,13 @@ class Coinapi extends \Magento\Directory\Model\Currency\Import\AbstractImport
         \Magento\Framework\HTTP\ZendClientFactory $httpClientFactory,
         \Magento\Framework\Json\Helper\Data $jsonHelper,
         \Kozeta\Currency\Model\Currency\Datafeed $dataFeed
-        
     ) {
         
         parent::__construct($currencyFactory);
         $this->scopeConfig = $scopeConfig;
         $this->httpClientFactory = $httpClientFactory;
         $this->jsonHelper = $jsonHelper;
-		$this->dataFeed = $dataFeed;
-		
+        $this->dataFeed = $dataFeed;
     }
 
     /**
@@ -79,8 +78,8 @@ class Coinapi extends \Magento\Directory\Model\Currency\Import\AbstractImport
       
         //get saved datafeed
         $feed = $this->dataFeed->getDatafeed();
-        if(!empty($feed) && isset($feed[$currencyTo])) {
-			return (float) $feed[$currencyTo]['rate'];	
+        if (!empty($feed) && isset($feed[$currencyTo])) {
+            return (float) $feed[$currencyTo]['rate'];
         }
 
         
@@ -106,21 +105,18 @@ class Coinapi extends \Magento\Directory\Model\Currency\Import\AbstractImport
                 ->getBody();
             $rates = $this->jsonHelper->jsonDecode($response);
 
-			$feed = [];
-			foreach ($rates['rates']  as $data)
-			{
-				$feed[$data['asset_id_quote']] = $data;
-			}
+            $feed = [];
+            foreach ($rates['rates'] as $data) {
+                $feed[$data['asset_id_quote']] = $data;
+            }
 
-            if(isset($feed[$currencyTo])) {
-            	$result = $feed[$currencyTo]['rate'];
-            	$this->dataFeed->setDatafeed($feed);
-            	unset($rates);
+            if (isset($feed[$currencyTo])) {
+                $result = $feed[$currencyTo]['rate'];
+                $this->dataFeed->setDatafeed($feed);
+                unset($rates);
+            } else {
+                $this->_messages[] = __('We can\'t retrieve the rates from url %1.', $url);
             }
-            else {
-            	$this->_messages[] = __('We can\'t retrieve the rates from url %1.', $url);
-            }
-            
         } catch (\Exception $e) {
             if ($retry == 0) {
                 $this->_convert($currencyFrom, $currencyTo, 1);

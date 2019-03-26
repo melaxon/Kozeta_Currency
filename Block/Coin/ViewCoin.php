@@ -61,14 +61,15 @@ class ViewCoin extends Template
         parent::__construct($context, $data);
     }
 
- 	public function _getRate($code = null) {
+    public function _getRate($code = null)
+    {
 
-		return $this->currencyFactory->create()->getCurrencyRates(
-			$this->_storeManager->getStore()->getBaseCurrency()->getCode(), 
-			$code,
-			true
-		);
-	}
+        return $this->currencyFactory->create()->getCurrencyRates(
+            $this->_storeManager->getStore()->getBaseCurrency()->getCode(),
+            $code,
+            true
+        );
+    }
 
 
     /**
@@ -83,10 +84,10 @@ class ViewCoin extends Template
 
     /**
      * @return store default display currency
-     */    
+     */
     public function _getDefaultCurrencyCode()
     {
-    	return $this->_storeManager->getStore()->getDefaultCurrencyCode();  	
+        return $this->_storeManager->getStore()->getDefaultCurrencyCode();
     }
 
     /**
@@ -94,7 +95,7 @@ class ViewCoin extends Template
      */
     public function _getBaseCurrencyCode()
     {
-    	return $this->_storeManager->getStore()->getBaseCurrencyCode();
+        return $this->_storeManager->getStore()->getBaseCurrencyCode();
     }
 
     /**

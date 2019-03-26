@@ -19,12 +19,12 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
-	protected $scopeConfig;
+    protected $scopeConfig;
 
     /**
      * @var integer
      */
-	protected $_coinsInRow;
+    protected $_coinsInRow;
 
     /**
      * @var string
@@ -47,24 +47,26 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
         parent::__construct($context, $dirCurrencyFactory, $data);
     }
     
-    public function getCoinsInRow(){
+    public function getCoinsInRow()
+    {
     
-    	if ($this->_coinsInRow !== null) {
-    		return $this->_coinsInRow;
-    	}
-    	$this->_coinsInRow = (int) trim($this->scopeConfig->getValue(self::COINS_IN_ROW_MENU_CONFIG_PATH, ScopeInterface::SCOPE_STORES));
-    	if (!$this->_coinsInRow) {
-    		$this->_coinsInRow = 6;
-    	}
-    	return $this->_coinsInRow;
+        if ($this->_coinsInRow !== null) {
+            return $this->_coinsInRow;
+        }
+        $this->_coinsInRow = (int) trim($this->scopeConfig->getValue(self::COINS_IN_ROW_MENU_CONFIG_PATH, ScopeInterface::SCOPE_STORES));
+        if (!$this->_coinsInRow) {
+            $this->_coinsInRow = 6;
+        }
+        return $this->_coinsInRow;
     }
     
-    public function getRows() {
-    	return ceil(count($this->getAllowedCurrencies()) / $this->getCoinsInRow());
+    public function getRows()
+    {
+        return ceil(count($this->getAllowedCurrencies()) / $this->getCoinsInRow());
     }
     
-    public function _getDisplayRates() {
-	return $this->getNewRates() ?: $this->getOldRates();
+    public function _getDisplayRates()
+    {
+        return $this->getNewRates() ?: $this->getOldRates();
     }
-
 }

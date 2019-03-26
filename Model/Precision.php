@@ -47,7 +47,6 @@ class Precision extends \Magento\Framework\Model\AbstractModel
         );
         $this->_storeManager = $storeManager;
         $this->scopeConfig = $scopeConfig;
-
     }
 
     protected function _construct()
@@ -98,35 +97,33 @@ class Precision extends \Magento\Framework\Model\AbstractModel
         $configPrecision = $this->getConfigPricePrecision();
         
         if ($configPrecision === 'default') {
-        	return (int) PriceCurrencyInterface::DEFAULT_PRECISION; 
+            return (int) PriceCurrencyInterface::DEFAULT_PRECISION;
         }
         if ($configPrecision != 'auto') {
-        	$result = $configPrecision;
-        	return (int) $result;
+            $result = $configPrecision;
+            return (int) $result;
         }
-		$store = $this->_storeManager->getStore()->getId();
-		if($currencyType == 'base') {
-			$code = $this->_storeManager->getStore()->getBaseCurrency()->getCode();
-		}
-		else {
-			$code = $this->_storeManager->getStore()->getCurrentCurrency()->getCode();
-		}
-		$result = $this->_getResource()->getPrecisionByCode($code, $store);
-		if(empty($result) && $result !== '0') {
-			$defaultStoreId = Store::DEFAULT_STORE_ID;
-			if ($store != $defaultStoreId) {
-				$result = $this->_getResource()->getPrecisionByCode($code, $defaultStoreId);
-			}
-		} 
-		if(empty($result) && $result !== '0') {
-			$result = PriceCurrencyInterface::DEFAULT_PRECISION; 
-		}
-		return (int) $result;
-
+        $store = $this->_storeManager->getStore()->getId();
+        if ($currencyType == 'base') {
+            $code = $this->_storeManager->getStore()->getBaseCurrency()->getCode();
+        } else {
+            $code = $this->_storeManager->getStore()->getCurrentCurrency()->getCode();
+        }
+        $result = $this->_getResource()->getPrecisionByCode($code, $store);
+        if (empty($result) && $result !== '0') {
+            $defaultStoreId = Store::DEFAULT_STORE_ID;
+            if ($store != $defaultStoreId) {
+                $result = $this->_getResource()->getPrecisionByCode($code, $defaultStoreId);
+            }
+        }
+        if (empty($result) && $result !== '0') {
+            $result = PriceCurrencyInterface::DEFAULT_PRECISION;
+        }
+        return (int) $result;
     }
     
-    public function getPrecisionByCode($code, $store = Store::DEFAULT_STORE_ID) {
-    	return $this->_getResource()->getPrecisionByCode($code, $store);
+    public function getPrecisionByCode($code, $store = Store::DEFAULT_STORE_ID)
+    {
+        return $this->_getResource()->getPrecisionByCode($code, $store);
     }
-
 }

@@ -15,7 +15,7 @@ interface CoinInterface
     /**
      * Constants for keys of data array. Identical to the name of the getter in snake case
      */
-    const COIN_ID         	= 'coin_id';
+    const COIN_ID           = 'coin_id';
     const NAME              = 'name';
     const URL_KEY           = 'url_key';
     const IS_ACTIVE         = 'is_active';
@@ -29,12 +29,12 @@ interface CoinInterface
     const IN_RSS            = 'in_rss';
     const DESCRIPTION       = 'description';
     const CODE              = 'code';
-	const IS_FIAT           = 'is_fiat';
-    const SYMBOL           	= 'symbol';
-    const TXFEE        		= 'txfee';
-    const MINCONF			= 'minconf';
-    const PRECISION			= 'precision';
-    const CURRENCY_CONVERTER_ID	= 'currency_converter_id';
+    const IS_FIAT           = 'is_fiat';
+    const SYMBOL            = 'symbol';
+    const TXFEE             = 'txfee';
+    const MINCONF           = 'minconf';
+    const PRECISION         = 'precision';
+    const CURRENCY_CONVERTER_ID = 'currency_converter_id';
 //    const UPDATED_AT        = 'updated_at';
 //    const RATE            	= 'rate';
 

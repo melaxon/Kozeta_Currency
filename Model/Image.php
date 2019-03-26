@@ -227,7 +227,6 @@ class Image extends AbstractModel
 
         $this->mediaDirectory = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
         $this->mediaDirectory->create($this->uploader->getBasePath());
-
     }
 
     /**
@@ -712,8 +711,8 @@ class Image extends AbstractModel
             );
         } else {
             $url = $this->storeManager->getStore()->getBaseUrl(
-                    UrlInterface::URL_TYPE_MEDIA
-                ) . $this->newFile;
+                UrlInterface::URL_TYPE_MEDIA
+            ) . $this->newFile;
         }
 
         return $url;

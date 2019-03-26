@@ -256,7 +256,7 @@ class Coin extends AbstractDb
 //         if ($store[0] != Store::DEFAULT_STORE_ID) {
 //         	$storeCondition = 'coin_store.store_id IN (?) OR coin_store.store_id = ' . Store::DEFAULT_STORE_ID;
 //         }
-		$storeCondition = 'coin_store.store_id IN (?)';
+        $storeCondition = 'coin_store.store_id IN (?)';
         $select = $this->getConnection()
             ->select()
             ->from(['coin' => $this->getMainTable()])
@@ -369,7 +369,6 @@ class Coin extends AbstractDb
     {
         if ($this->storeManager->hasSingleStore()) {
             $stores = [Store::DEFAULT_STORE_ID];
-
         } else {
             $stores = (array)$object->getData('store_id');
         }

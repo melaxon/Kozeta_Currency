@@ -43,7 +43,7 @@ class DataProvider extends AbstractDataProvider
         $requestFieldName,
         CollectionFactory $coinCollectionFactory,
         PoolInterface $pool,
-        Http  $request,
+        Http $request,
         array $meta = [],
         array $data = []
     ) {
@@ -52,7 +52,7 @@ class DataProvider extends AbstractDataProvider
         
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
         $this->meta = $this->prepareMeta($this->meta);
-        $this->request		= $request;
+        $this->request      = $request;
     }
 
     /**
@@ -82,25 +82,24 @@ class DataProvider extends AbstractDataProvider
         /** @var ModifierInterface $modifier */
         foreach ($this->pool->getModifiersInstances() as $modifier) {
             $this->data = $modifier->modifyData($this->data);
-        	$coin_id = $this->request->getParam('coin_id');
-			$data = $this->data;
-			
-        	foreach ($data as $id => $coin) {
-        		if (!isset($coin['is_fiat'])) {
-        			continue;
-        		}
-        		if ($id != $coin_id) {
-        			unset($data[$id]);
-        			continue;
-        		}
-        		if($coin['is_fiat']) {
-        			$data[$id]['checked'] = true;
-        		} else {
-        			$data[$id]['checked'] = false;
-        		}
-        	}
-        	$this->data = $data;
-        
+            $coin_id = $this->request->getParam('coin_id');
+            $data = $this->data;
+            
+            foreach ($data as $id => $coin) {
+                if (!isset($coin['is_fiat'])) {
+                    continue;
+                }
+                if ($id != $coin_id) {
+                    unset($data[$id]);
+                    continue;
+                }
+                if ($coin['is_fiat']) {
+                    $data[$id]['checked'] = true;
+                } else {
+                    $data[$id]['checked'] = false;
+                }
+            }
+            $this->data = $data;
         }
 
         return $this->data;

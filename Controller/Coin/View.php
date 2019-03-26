@@ -72,7 +72,7 @@ class View extends Action
         ScopeConfigInterface $scopeConfig
     ) {
         $this->resultForwardFactory = $resultForwardFactory;
-        $this->coinRepository     	= $coinRepository;
+        $this->coinRepository       = $coinRepository;
         $this->resultPageFactory    = $resultPageFactory;
         $this->coreRegistry         = $coreRegistry;
         $this->urlModel             = $urlModel;
@@ -92,7 +92,7 @@ class View extends Action
             if (!$coin->getIsActive()) {
                 throw new \Exception();
             }
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             $resultForward = $this->resultForwardFactory->create();
             $resultForward->forward('noroute');
             return $resultForward;

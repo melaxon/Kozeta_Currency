@@ -21,21 +21,21 @@ class Schedule
     /**
      * @var \Magento\Directory\Model\Observer
      */
-	protected $_observer;
+    protected $_observer;
 
     /**
      * @var \Psr\Log\LoggerInterface
      */
-	protected $logger;
+    protected $logger;
 
     public function __construct(
-    	\Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Directory\Model\Observer $_observer,
         \Psr\Log\LoggerInterface $logger
     ) {
-		$this->logger = $logger;
-		$this->_observer = $_observer;
-		$this->_scopeConfig = $scopeConfig;
+        $this->logger = $logger;
+        $this->_observer = $_observer;
+        $this->_scopeConfig = $scopeConfig;
     }
 
 
@@ -48,20 +48,16 @@ class Schedule
      */
     public function updateCurrencyRates($schedule)
     {
-    	if (!$this->_scopeConfig->getValue(
+        if (!$this->_scopeConfig->getValue(
             self::IMPORT_ENABLE,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE)
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         )
-    	{
+        ) {
             $this->logger->info('CURRENCY RATES MINUTE-WICE IMPORT DISABLED');
             return;
         }
         
-    	$res = $this->_observer->scheduledUpdateCurrencyRates($schedule);	
-    	$this->logger->info('CURRENCY RATES IMPORTED' . $res);
-    		
+        $res = $this->_observer->scheduledUpdateCurrencyRates($schedule);
+        $this->logger->info('CURRENCY RATES IMPORTED' . $res);
     }
-
 }
-
-

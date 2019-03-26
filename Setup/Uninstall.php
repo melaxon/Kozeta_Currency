@@ -32,8 +32,7 @@ class Uninstall implements UninstallInterface
     public function __construct(
         CollectionFactory $collectionFactory,
         Data $configResource
-    )
-    {
+    ) {
         $this->collectionFactory = $collectionFactory;
         $this->configResource    = $configResource;
     }

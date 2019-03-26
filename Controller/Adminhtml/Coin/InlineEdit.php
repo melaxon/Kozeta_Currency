@@ -63,8 +63,7 @@ class InlineEdit extends CoinController
         DataObjectHelper $dataObjectHelper,
         JsonFactory $jsonFactory,
         CoinResourceModel $coinResourceModel
-    )
-    {
+    ) {
         $this->dataObjectProcessor = $dataObjectProcessor;
         $this->dataObjectHelper    = $dataObjectHelper;
         $this->jsonFactory         = $jsonFactory;
@@ -95,7 +94,7 @@ class InlineEdit extends CoinController
             $coin = $this->coinRepository->getById((int)$coinId);
             try {
                 $coinData = $this->filterData($postItems[$coinId]);
-                $this->dataObjectHelper->populateWithArray($coin, $coinData , CoinInterface::class);
+                $this->dataObjectHelper->populateWithArray($coin, $coinData, CoinInterface::class);
                 $this->coinResourceModel->saveAttribute($coin, array_keys($coinData));
             } catch (LocalizedException $e) {
                 $messages[] = $this->getErrorWithCoinId($coin, $e->getMessage());
@@ -111,22 +110,20 @@ class InlineEdit extends CoinController
                 $error = true;
             }
             
-			$code = $coin->getCode();
-			$symbol = $postItems[$coinId]['symbol'];
-			$symbolsDataArray = [$code => $symbol];
-			try {
-				$this->_objectManager->create(\Magento\CurrencySymbol\Model\System\Currencysymbol::class)
-					->setCurrencySymbolsData($symbolsDataArray);
-				$this->messageManager->addSuccess(__('You applied the custom currency symbols.'));
-			} catch (\Exception $e) {
+            $code = $coin->getCode();
+            $symbol = $postItems[$coinId]['symbol'];
+            $symbolsDataArray = [$code => $symbol];
+            try {
+                $this->_objectManager->create(\Magento\CurrencySymbol\Model\System\Currencysymbol::class)
+                    ->setCurrencySymbolsData($symbolsDataArray);
+                $this->messageManager->addSuccess(__('You applied the custom currency symbols.'));
+            } catch (\Exception $e) {
                 $messages[] = $this->getErrorWithCoinId(
                     $coin,
                     __('Something went wrong while saving the SYMBOL.')
                 );
                 $error = true;
-			}
-            
-            
+            }
         }
 
         return $resultJson->setData([

@@ -66,7 +66,6 @@ abstract class Coin extends Action
         PageFactory $resultPageFactory,
         Date $dateFilter,
         Context $context
-
     ) {
         $this->coreRegistry      = $registry;
         $this->coinRepository  = $coinRepository;
@@ -96,5 +95,4 @@ abstract class Coin extends Action
 //        }
         return $data;
     }
-
 }

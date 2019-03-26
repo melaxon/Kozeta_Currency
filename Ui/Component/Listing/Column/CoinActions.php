@@ -19,21 +19,21 @@ class CoinActions extends Column
 {
     /**
      * Url path  to edit
-     * 
+     *
      * @var string
      */
     const URL_PATH_EDIT = 'kozeta_currency/coin/edit';
 
     /**
      * Url path  to delete
-     * 
+     *
      * @var string
      */
     const URL_PATH_DELETE = 'kozeta_currency/coin/delete';
 
     /**
      * URL builder
-     * 
+     *
      * @var \Magento\Framework\UrlInterface
      */
     protected $_urlBuilder;
@@ -51,8 +51,7 @@ class CoinActions extends Column
         UrlInterface $urlBuilder,
         array $components = [],
         array $data = []
-    )
-    {
+    ) {
         $this->_urlBuilder = $urlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
