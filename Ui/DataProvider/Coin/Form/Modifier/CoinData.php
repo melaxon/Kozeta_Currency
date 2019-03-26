@@ -43,7 +43,7 @@ class CoinData implements ModifierInterface
     public function modifyData(array $data)
     {
         $items = $this->collection->getItems();
-        /** @var $coin \Kozeta\Currency\Model\Coin */
+        /** @var \Kozeta\Currency\Model\Coin $coin */
         foreach ($items as $coin) {
             $_data = $coin->getData();
             if (isset($_data['avatar'])) {

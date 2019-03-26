@@ -275,10 +275,10 @@ class InstallSchema implements InstallSchemaInterface
             )->setComment('Coin To Store Link Table');
             $installer->getConnection()->createTable($table);
         }
-        
+
         $installer->endSetup();
     }
-    
+
     /**
      * @param SchemaSetupInterface $setup
      */
