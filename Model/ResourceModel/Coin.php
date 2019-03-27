@@ -125,7 +125,7 @@ class Coin extends AbstractDb
                 __('Currency code must be unique for given Store View.')
             );
         }
-//https://magento.stackexchange.com/questions/178617/magento2-how-to-save-unique-values-for-my-custom-admin-module        
+//https://magento.stackexchange.com/questions/178617/magento2-how-to-save-unique-values-for-my-custom-admin-module
         return parent::_beforeSave($object);
     }
 
@@ -254,7 +254,7 @@ class Coin extends AbstractDb
     {
 //         $storeCondition = '1';
 //         if ($store[0] != Store::DEFAULT_STORE_ID) {
-//         	$storeCondition = 'coin_store.store_id IN (?) OR coin_store.store_id = ' . Store::DEFAULT_STORE_ID;
+//          $storeCondition = 'coin_store.store_id IN (?) OR coin_store.store_id = ' . Store::DEFAULT_STORE_ID;
 //         }
         $storeCondition = 'coin_store.store_id IN (?)';
         $select = $this->getConnection()

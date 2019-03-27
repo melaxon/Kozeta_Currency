@@ -18,7 +18,7 @@ class Order
     /**
      * @var
      */
-//	protected $_precision;
+//  protected $_precision;
     
     
     
@@ -31,7 +31,7 @@ class Order
     public function aroundGetTotalDue(
         \Magento\Sales\Model\Order $subject,
         callable $proceed,
-    ...$args
+        ...$args
     ) {
 
         $code = $subject->getOrderCurrencyCode();

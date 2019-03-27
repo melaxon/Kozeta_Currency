@@ -9,6 +9,8 @@ namespace Kozeta\Currency\Api\Data;
 
 /**
  * @api
+ *
+ * @SuppressWarnings(PHPMD.AllPurposeAction)
  */
 interface CoinInterface
 {
@@ -36,7 +38,7 @@ interface CoinInterface
     const PRECISION         = 'precision';
     const CURRENCY_CONVERTER_ID = 'currency_converter_id';
 //    const UPDATED_AT        = 'updated_at';
-//    const RATE            	= 'rate';
+//    const RATE                = 'rate';
 
 
     /**

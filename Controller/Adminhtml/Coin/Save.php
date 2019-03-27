@@ -9,6 +9,7 @@ namespace Kozeta\Currency\Controller\Adminhtml\Coin;
 
 use Magento\Backend\Model\Session;
 use Magento\Backend\App\Action\Context;
+use Magento\CurrencySymbol\Model\System\Currencysymbol;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Reflection\DataObjectProcessor;
@@ -22,8 +23,18 @@ use Kozeta\Currency\Controller\Adminhtml\Coin;
 use Kozeta\Currency\Model\Uploader;
 use Kozeta\Currency\Model\UploaderPool;
 
+/**
+ * Save a currency
+ *
+ * @SuppressWarnings(PHPMD.AllPurposeAction)
+ */
 class Save extends Coin
 {
+    /**
+     * @var Currencysymbol
+     */
+    protected $_currencySymbol;
+
     /**
      * @var DataObjectProcessor
      */
@@ -49,6 +60,7 @@ class Save extends Coin
      * @param DataObjectProcessor $dataObjectProcessor
      * @param DataObjectHelper $dataObjectHelper
      * @param UploaderPool $uploaderPool
+     * @param Currencysymbol $currencySymbol
      */
     public function __construct(
         Registry $registry,
@@ -59,12 +71,14 @@ class Save extends Coin
         CoinInterfaceFactory $coinFactory,
         DataObjectProcessor $dataObjectProcessor,
         DataObjectHelper $dataObjectHelper,
-        UploaderPool $uploaderPool
+        UploaderPool $uploaderPool,
+        Currencysymbol $currencySymbol
     ) {
         $this->coinFactory = $coinFactory;
         $this->dataObjectProcessor = $dataObjectProcessor;
         $this->dataObjectHelper = $dataObjectHelper;
         $this->uploaderPool = $uploaderPool;
+        $this->_currencySymbol = $currencySymbol;
         parent::__construct($registry, $coinRepository, $resultPageFactory, $dateFilter, $context);
     }
 
@@ -85,10 +99,10 @@ class Save extends Coin
         $id = !empty($data['coin_id']) ? $data['coin_id'] : null;
         $resultRedirect = $this->resultRedirectFactory->create();
         try {
-// Update existing coin; 
+// Update existing coin;
             if ($id) {
                 $coin = $this->coinRepository->getById((int)$id);
-//Create new coin; 
+//Create new coin;
             } else {
                 unset($data['coin_id']);
                 $coin = $this->coinFactory->create();
@@ -128,8 +142,7 @@ class Save extends Coin
         
         $symbolsDataArray = [$data['code'] => $data['symbol']];
         try {
-            $this->_objectManager->create(\Magento\CurrencySymbol\Model\System\Currencysymbol::class)
-                ->setCurrencySymbolsData($symbolsDataArray);
+            $this->_currencySymbol->setCurrencySymbolsData($symbolsDataArray);
             //$this->messageManager->addSuccess(__('Congratulations!'));
         } catch (\Exception $e) {
             //$this->log->logError($e);

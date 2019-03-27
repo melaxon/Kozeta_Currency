@@ -120,7 +120,7 @@ class Collection extends AbstractCollection
      * @param bool $withAdmin
      * @return $this
      */
-    public function addStoreFilter($store, $withAdmin = true)
+    public function addStoreFilter($store, $addDefaultStore = 1)
     {
         if (!$this->getFlag('store_filter_added')) {
             $default_store = Store::DEFAULT_STORE_ID;
@@ -132,7 +132,7 @@ class Collection extends AbstractCollection
                 $store = [$store];
             }
 
-            if ($withAdmin) {
+            if (!empty($addDefaultStore)) {
                 $store[] = $default_store;
             }
 

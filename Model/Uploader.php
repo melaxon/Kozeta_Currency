@@ -16,6 +16,11 @@ use Magento\MediaStorage\Model\File\UploaderFactory;
 use Magento\Store\Model\StoreManagerInterface;
 use Psr\Log\LoggerInterface;
 
+/**
+ * file uploader
+ *
+ * @SuppressWarnings(PHPMD.AllPurposeAction)
+ */
 class Uploader
 {
     /**
@@ -40,7 +45,7 @@ class Uploader
      *
      * @var \Magento\MediaStorage\Helper\File\Storage\Database
      */
-    protected $coreFileStorageDatabase;
+    protected $_fileStorageDatabase;
 
     /**
      * Media directory object (writable).
@@ -90,7 +95,7 @@ class Uploader
     protected $allowedExtensions;
 
     /**
-     * @param Database $coreFileStorageDatabase
+     * @param Database $fileStorageDatabase
      * @param Filesystem $filesystem
      * @param UploaderFactory $uploaderFactory
      * @param StoreManagerInterface $storeManager
@@ -100,7 +105,7 @@ class Uploader
      * @param $basePath
      */
     public function __construct(
-        Database $coreFileStorageDatabase,
+        Database $fileStorageDatabase,
         Filesystem $filesystem,
         UploaderFactory $uploaderFactory,
         StoreManagerInterface $storeManager,
@@ -109,7 +114,7 @@ class Uploader
         $baseTmpPath,
         $basePath
     ) {
-        $this->coreFileStorageDatabase  = $coreFileStorageDatabase;
+        $this->_fileStorageDatabase     = $fileStorageDatabase;
         $this->mediaDirectory           = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
         $this->uploaderFactory          = $uploaderFactory;
         $this->storeManager             = $storeManager;
@@ -216,7 +221,7 @@ class Uploader
         $baseTmpFilePath = $this->getFilePath($baseTmpPath, $name);
 
         try {
-            $this->coreFileStorageDatabase->copyFile(
+            $this->_fileStorageDatabase->copyFile(
                 $baseTmpFilePath,
                 $baseFilePath
             );
@@ -276,7 +281,7 @@ class Uploader
         if (isset($result['file'])) {
             try {
                 $relativePath = rtrim($baseTmpPath, '/') . '/' . ltrim($result['file'], '/');
-                $this->coreFileStorageDatabase->saveFile($relativePath);
+                $this->_fileStorageDatabase->saveFile($relativePath);
             } catch (\Exception $e) {
                 $this->logger->critical($e);
                 throw new LocalizedException(

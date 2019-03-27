@@ -104,7 +104,7 @@ class AddCurrencies
     public function aroundGetOptionCurrencies(
         $subject,
         \Closure $proceed,
-    ...$args
+        ...$args
     ) {
         $installedCurrencies = $this->getNewCurrencies();
         
@@ -129,7 +129,7 @@ class AddCurrencies
     public function aroundGetOptionAllCurrencies(
         $subject,
         \Closure $proceed,
-    ...$args
+        ...$args
     ) {
         return $this->getNewCurrencies();
     }

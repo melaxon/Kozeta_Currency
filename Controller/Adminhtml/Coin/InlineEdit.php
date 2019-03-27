@@ -9,6 +9,7 @@ namespace Kozeta\Currency\Controller\Adminhtml\Coin;
 
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\Session;
+use Magento\CurrencySymbol\Model\System\Currencysymbol;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Exception\LocalizedException;
@@ -28,7 +29,13 @@ class InlineEdit extends CoinController
     /**
      * @var DataObjectHelper
      */
-    protected $dataObjectHelper;
+    protected $_dataObjectHelper;
+    
+    /**
+     * @var Currencysymbol
+     */
+    protected $_currencySymbol;
+    
     /**
      * @var DataObjectProcessor
      */
@@ -36,11 +43,11 @@ class InlineEdit extends CoinController
     /**
      * @var JsonFactory
      */
-    protected $jsonFactory;
+    protected $_jsonFactory;
     /**
      * @var CoinResourceModel
      */
-    protected $coinResourceModel;
+    protected $_coinResourceModel;
 
     /**
      * @param Registry $registry
@@ -52,6 +59,7 @@ class InlineEdit extends CoinController
      * @param DataObjectHelper $dataObjectHelper
      * @param JsonFactory $jsonFactory
      * @param CoinResourceModel $coinResourceModel
+     * @param Currencysymbol $currencySymbol
      */
     public function __construct(
         Registry $registry,
@@ -62,12 +70,14 @@ class InlineEdit extends CoinController
         DataObjectProcessor $dataObjectProcessor,
         DataObjectHelper $dataObjectHelper,
         JsonFactory $jsonFactory,
-        CoinResourceModel $coinResourceModel
+        CoinResourceModel $coinResourceModel,
+        Currencysymbol $currencySymbol
     ) {
         $this->dataObjectProcessor = $dataObjectProcessor;
-        $this->dataObjectHelper    = $dataObjectHelper;
-        $this->jsonFactory         = $jsonFactory;
-        $this->coinResourceModel = $coinResourceModel;
+        $this->_dataObjectHelper    = $dataObjectHelper;
+        $this->_jsonFactory         = $jsonFactory;
+        $this->_coinResourceModel = $coinResourceModel;
+        $this->_currencySymbol = $currencySymbol;
         parent::__construct($registry, $coinRepository, $resultPageFactory, $dateFilter, $context);
     }
 
@@ -77,12 +87,12 @@ class InlineEdit extends CoinController
     public function execute()
     {
         /** @var \Magento\Framework\Controller\Result\Json $resultJson */
-        $resultJson = $this->jsonFactory->create();
+        $resultJson = $this->_jsonFactory->create();
         $error = false;
         $messages = [];
 
         $postItems = $this->getRequest()->getParam('items', []);
-        if (!($this->getRequest()->getParam('isAjax') && count($postItems))) {
+        if (!($this->getRequest()->getParam('isAjax') && !empty($postItems))) {
             return $resultJson->setData([
                 'messages' => [__('Please correct the data sent.')],
                 'error' => true,
@@ -90,12 +100,12 @@ class InlineEdit extends CoinController
         }
 
         foreach (array_keys($postItems) as $coinId) {
-            /** @var \Kozeta\Currency\Model\Coin|CoinInterface $coin */
+            /** @var \Kozeta\Currency\Model\Coin\CoinInterface $coin */
             $coin = $this->coinRepository->getById((int)$coinId);
             try {
                 $coinData = $this->filterData($postItems[$coinId]);
-                $this->dataObjectHelper->populateWithArray($coin, $coinData, CoinInterface::class);
-                $this->coinResourceModel->saveAttribute($coin, array_keys($coinData));
+                $this->_dataObjectHelper->populateWithArray($coin, $coinData, CoinInterface::class);
+                $this->_coinResourceModel->saveAttribute($coin, array_keys($coinData));
             } catch (LocalizedException $e) {
                 $messages[] = $this->getErrorWithCoinId($coin, $e->getMessage());
                 $error = true;
@@ -114,8 +124,7 @@ class InlineEdit extends CoinController
             $symbol = $postItems[$coinId]['symbol'];
             $symbolsDataArray = [$code => $symbol];
             try {
-                $this->_objectManager->create(\Magento\CurrencySymbol\Model\System\Currencysymbol::class)
-                    ->setCurrencySymbolsData($symbolsDataArray);
+                $this->_currencySymbol->setCurrencySymbolsData($symbolsDataArray);
                 $this->messageManager->addSuccess(__('You applied the custom currency symbols.'));
             } catch (\Exception $e) {
                 $messages[] = $this->getErrorWithCoinId(

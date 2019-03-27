@@ -287,7 +287,7 @@ class InstallSchema implements InstallSchemaInterface
 
         $installer = $setup;
 
-        $installer->startSetup();        
+        $installer->startSetup();
         
         $tableName = $setup->getTable('paypal_settlement_report_row');
 

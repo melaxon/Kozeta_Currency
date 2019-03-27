@@ -19,6 +19,8 @@ use Kozeta\Currency\Api\Data\CoinInterface;
 
 /**
  * Coin collection backed by services
+ *
+ * @SuppressWarnings(PHPMD.AllPurposeAction)
  */
 class ServiceCollection extends AbstractServiceCollection
 {
@@ -30,7 +32,7 @@ class ServiceCollection extends AbstractServiceCollection
     /**
      * @var SimpleDataObjectConverter
      */
-    protected $simpleDataObjectConverter;
+    protected $_simpleDataConverter;
 
     /**
      * @param EntityFactory $entityFactory
@@ -38,7 +40,7 @@ class ServiceCollection extends AbstractServiceCollection
      * @param SearchCriteriaBuilder $searchCriteriaBuilder
      * @param SortOrderBuilder $sortOrderBuilder
      * @param CoinRepositoryInterface $coinRepository
-     * @param SimpleDataObjectConverter $simpleDataObjectConverter
+     * @param SimpleDataObjectConverter $simpleDataConverter
      */
     public function __construct(
         EntityFactory $entityFactory,
@@ -46,10 +48,10 @@ class ServiceCollection extends AbstractServiceCollection
         SearchCriteriaBuilder $searchCriteriaBuilder,
         SortOrderBuilder $sortOrderBuilder,
         CoinRepositoryInterface $coinRepository,
-        SimpleDataObjectConverter $simpleDataObjectConverter
+        SimpleDataObjectConverter $simpleDataConverter
     ) {
         $this->coinRepository          = $coinRepository;
-        $this->simpleDataObjectConverter = $simpleDataObjectConverter;
+        $this->_simpleDataConverter = $simpleDataConverter;
         parent::__construct($entityFactory, $filterBuilder, $searchCriteriaBuilder, $sortOrderBuilder);
     }
 
@@ -70,7 +72,7 @@ class ServiceCollection extends AbstractServiceCollection
             foreach ($coins as $coin) {
                 $coinItem = new DataObject();
                 $coinItem->addData(
-                    $this->simpleDataObjectConverter->toFlatArray($coin, CoinInterface::class)
+                    $this->_simpleDataConverter->toFlatArray($coin, CoinInterface::class)
                 );
                 $this->_addItem($coinItem);
             }

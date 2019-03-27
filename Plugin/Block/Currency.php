@@ -63,26 +63,26 @@ class Currency extends \Magento\Directory\Block\Currency
 //         $currencies = $this->getData('currencies');
 //         if ($currencies === null) {
 //             $currencies = [];
-//             
+//
 //             $codes = $this->_storeManager->getStore()->getAvailableCurrencyCodes(true);
 //             if (is_array($codes) && count($codes) > 1) {
 //                 $rates = $this->_currencyFactory->create()->getCurrencyRates(
 //                     $this->_storeManager->getStore()->getBaseCurrency(),
 //                     $codes
 //              );
-// 				$names = $this->_currencyFactory->create()->getCurrencyNames($codes);
-// 				
+//              $names = $this->_currencyFactory->create()->getCurrencyNames($codes);
+//
 //                 foreach ($codes as $code) {
 //                     if (isset($rates[$code])) {
 //                         $allCurrencies = (new \Magento\Framework\Locale\Bundle\CurrencyBundle())->get(
 //                             $this->localeResolver->getLocale()
 //                         )['Currencies'];
-//                         
+//
 //                         $currencies[$code] = $allCurrencies[$code][1] ?: __($names[$code]) ?: $code;
 //                     }
 //                 }
 //             }
-// 
+//
 //             $this->setData('currencies', $currencies);
 //         }
 //         return $currencies;

@@ -14,13 +14,13 @@ class OrderPlugin
      * @var \Kozeta\Currency\Model\Precision
      */
     protected $precisionObject;
-	
-	
-	
+    
+    
+    
     public function __construct(
-		\Kozeta\Currency\Model\Precision $precisionObject
+        \Kozeta\Currency\Model\Precision $precisionObject
     ) {
-		$this->precisionObject = $precisionObject;
+        $this->precisionObject = $precisionObject;
     }
 
 
@@ -34,10 +34,10 @@ class OrderPlugin
         \Magento\Sales\Model\Order $subject,
         ...$args
     ) {
-		$orderCurrency = $subject->getOrderCurrencyCode();
-		$baseCurrency = $subject->getBaseCurrencyCode();
-		$store = $subject->getStoreId();
-		$precision = $this->precisionObject->getPrecisionByCode($orderCurrency, $store);
+        $orderCurrency = $subject->getOrderCurrencyCode();
+        $baseCurrency = $subject->getBaseCurrencyCode();
+        $store = $subject->getStoreId();
+        $precision = $this->precisionObject->getPrecisionByCode($orderCurrency, $store);
         $args[1] = $precision;
         return $args;
     }
@@ -50,10 +50,10 @@ class OrderPlugin
         \Magento\Sales\Model\Order $subject,
         ...$args
     ) {
-		$orderCurrency = $subject->getOrderCurrencyCode();
-		$baseCurrency = $subject->getBaseCurrencyCode();
-		$store = $subject->getStoreId();
-		$precision = $this->precisionObject->getPrecision('base');
+        $orderCurrency = $subject->getOrderCurrencyCode();
+        $baseCurrency = $subject->getBaseCurrencyCode();
+        $store = $subject->getStoreId();
+        $precision = $this->precisionObject->getPrecision('base');
         $args[1] = $precision;
         return $args;
     }

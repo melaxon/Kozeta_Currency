@@ -37,7 +37,7 @@ class PriceCurrency
      */
     public function beforeFormat(
         \Magento\Directory\Model\PriceCurrency $subject,
-    ...$args
+        ...$args
     ) {
         if (!empty($arg[4])) {
             $store = $this->_storeManager->getStore()->getId();
@@ -64,7 +64,7 @@ class PriceCurrency
         \Magento\Directory\Model\PriceCurrency $subject,
         callable $proceed,
         $price,
-    ...$args
+        ...$args
     ) {
         $precision = $this->precisionObject->getPrecision();
         if ($precision < $subject::DEFAULT_PRECISION) {
@@ -81,7 +81,7 @@ class PriceCurrency
      */
     public function beforeConvertAndFormat(
         \Magento\Directory\Model\PriceCurrency $subject,
-    ...$args
+        ...$args
     ) {
         $args[1] = isset($args[1])? $args[1] : null;
         $args[2] = $this->precisionObject->getPrecision();
@@ -95,7 +95,7 @@ class PriceCurrency
      */
     public function beforeConvertAndRound(
         \Magento\Directory\Model\PriceCurrency $subject,
-    ...$args
+        ...$args
     ) {
         $args[1] = isset($args[1])? $args[1] : null;
         $args[2] = isset($args[2])? $args[2] : null;

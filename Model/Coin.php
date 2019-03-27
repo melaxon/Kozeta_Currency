@@ -237,7 +237,6 @@ class Coin extends AbstractModel implements CoinInterface, RoutableInterface
         return $this->setData(CoinInterface::PRECISION, $precision);
     }
 
-
     /**
      * Get currency_converter_id
      *
@@ -457,7 +456,6 @@ class Coin extends AbstractModel implements CoinInterface, RoutableInterface
         return $this->setData(CoinInterface::AVATAR, $avatar);
     }
 
-
     /**
      * set txfee
      *
@@ -468,7 +466,6 @@ class Coin extends AbstractModel implements CoinInterface, RoutableInterface
     {
         return $this->setData(CoinInterface::TXFEE, $txfee);
     }
-
 
     /**
      * Check if coin url key exists
@@ -564,7 +561,6 @@ class Coin extends AbstractModel implements CoinInterface, RoutableInterface
         $this->setData(CoinInterface::META_KEYWORDS, $metaKeywords);
         return $this;
     }
-
 
     /**
      * sanitize the url key

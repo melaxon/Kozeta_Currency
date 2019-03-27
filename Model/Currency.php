@@ -9,6 +9,11 @@ namespace Kozeta\Currency\Model;
 
 use Magento\Framework\Exception\LocalizedException;
 
+/*
+ * Model Currency
+ *
+ * @SuppressWarnings(PHPMD.AllPurposeAction)
+ */
 class Currency extends \Magento\Directory\Model\Currency
 {
 

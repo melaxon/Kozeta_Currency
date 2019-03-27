@@ -10,20 +10,24 @@ namespace Kozeta\Currency\Ui\DataProvider\Coin\Form\Modifier;
 use Magento\Ui\DataProvider\Modifier\ModifierInterface;
 use Kozeta\Currency\Model\ResourceModel\Coin\CollectionFactory;
 
+/*
+ * UI Data Provider
+ *
+ */
 class CoinData implements ModifierInterface
 {
     /**
      * @var \Kozeta\Currency\Model\ResourceModel\Coin\Collection
      */
-    protected $collection;
+    protected $_collection;
 
     /**
-     * @param CollectionFactory $coinCollectionFactory
+     * @param CollectionFactory $coinFactory
      */
     public function __construct(
-        CollectionFactory $coinCollectionFactory
+        CollectionFactory $coinFactory
     ) {
-        $this->collection = $coinCollectionFactory->create();
+        $this->_collection = $coinFactory->create();
     }
 
     /**
@@ -42,7 +46,7 @@ class CoinData implements ModifierInterface
      */
     public function modifyData(array $data)
     {
-        $items = $this->collection->getItems();
+        $items = $this->_collection->getItems();
         /** @var \Kozeta\Currency\Model\Coin $coin */
         foreach ($items as $coin) {
             $_data = $coin->getData();

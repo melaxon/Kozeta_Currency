@@ -28,6 +28,7 @@ use Kozeta\Currency\Model\ResourceModel\Coin\CollectionFactory as CoinCollection
 /**
  * Class CoinRepository
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings(PHPMD.AllPurposeAction)
  */
 class CoinRepository implements CoinRepositoryInterface
 {
