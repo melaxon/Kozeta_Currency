@@ -365,7 +365,7 @@ class InstallSchema implements InstallSchemaInterface
             'grand_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Grand Total'
             ]
@@ -375,7 +375,7 @@ class InstallSchema implements InstallSchemaInterface
             'subtotal',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
 
                 'default' => '0',
                 'comment' => 'Subtotal'
@@ -386,7 +386,7 @@ class InstallSchema implements InstallSchemaInterface
             'subtotal_with_discount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Subtotal With Discount'
             ]
@@ -397,7 +397,7 @@ class InstallSchema implements InstallSchemaInterface
             'store_to_base_rate',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Store To Base Rate',
             ]
@@ -407,7 +407,7 @@ class InstallSchema implements InstallSchemaInterface
             'store_to_quote_rate',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Store To Quote Rate',
             ]
@@ -417,7 +417,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_grand_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Base Grand Total',
             ]
@@ -427,7 +427,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_to_global_rate',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base To Global Rate',
             ]
         );
@@ -436,7 +436,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_to_quote_rate',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base To Quote Rate',
             ]
         );
@@ -445,7 +445,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_subtotal',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Subtotal',
             ]
         );
@@ -454,7 +454,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_subtotal_with_discount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Subtotal With Discount',
             ]
         );
@@ -466,7 +466,7 @@ class InstallSchema implements InstallSchemaInterface
             'subtotal',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Subtotal'
@@ -477,7 +477,7 @@ class InstallSchema implements InstallSchemaInterface
             'subtotal_with_discount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Subtotal With Discount'
@@ -488,7 +488,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Tax Amount'
@@ -499,7 +499,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Shipping Amount'
@@ -510,7 +510,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Shipping Tax Amount'
@@ -521,7 +521,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Discount Amount'
@@ -532,7 +532,7 @@ class InstallSchema implements InstallSchemaInterface
             'grand_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Grand Total'
@@ -543,7 +543,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Discount Amount'
             ]
         );
@@ -552,7 +552,7 @@ class InstallSchema implements InstallSchemaInterface
             'subtotal_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Subtotal Including Tax'
             ]
         );
@@ -561,7 +561,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Tax Compensation Amount'
             ]
         );
@@ -570,7 +570,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Discount Tax Compensation Amount'
             ]
         );
@@ -579,7 +579,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Including Tax'
             ]
         );
@@ -589,7 +589,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_subtotal',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Base Subtotal',
             ]
@@ -599,7 +599,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_subtotal_with_discount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Base Subtotal With Discount',
             ]
@@ -609,7 +609,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Base Tax Amount',
             ]
@@ -619,7 +619,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Base Shipping Amount',
             ]
@@ -629,7 +629,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Tax Amount',
             ]
         );
@@ -638,7 +638,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Base Discount Amount',
             ]
@@ -648,7 +648,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_grand_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Base Grand Total',
             ]
@@ -658,7 +658,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Discount Amount',
             ]
         );
@@ -667,7 +667,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_subtotal_total_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Subtotal Total Incl Tax',
             ]
         );
@@ -676,7 +676,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Tax Compensation Amount',
             ]
         );
@@ -685,7 +685,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_discount_tax_compensation_amnt',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Discount Tax Compensation Amount',
             ]
         );
@@ -694,7 +694,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Incl Tax',
             ]
         );
@@ -707,7 +707,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Discount Amount'
             ]
@@ -717,7 +717,7 @@ class InstallSchema implements InstallSchemaInterface
             'row_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Row total'
@@ -728,7 +728,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_percent',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Tax Percent'
             ]
@@ -738,7 +738,7 @@ class InstallSchema implements InstallSchemaInterface
             'price_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Price Including Tax'
             ]
@@ -748,7 +748,7 @@ class InstallSchema implements InstallSchemaInterface
             'row_total_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Row Total Including Tax'
             ]
@@ -758,7 +758,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Discount Tax Compensation Amount'
             ]
@@ -769,7 +769,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Tax Amount',
             ]
@@ -779,7 +779,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_row_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Base Row Total',
@@ -790,7 +790,7 @@ class InstallSchema implements InstallSchemaInterface
             'row_total_with_discount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Row Total With Discount',
             ]
@@ -800,7 +800,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Base Discount Amount',
             ]
@@ -810,7 +810,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Base Tax Amount',
             ]
@@ -820,7 +820,7 @@ class InstallSchema implements InstallSchemaInterface
             'price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Price',
             ]
         );
@@ -829,7 +829,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_percent',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Percent',
             ]
         );
@@ -838,7 +838,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Price',
             ]
         );
@@ -847,7 +847,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_cost',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Cost',
             ]
         );
@@ -856,7 +856,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_price_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Price Incl Tax',
             ]
         );
@@ -865,7 +865,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_row_total_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Row Total Incl Tax',
             ]
         );
@@ -874,7 +874,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Base Discount Tax Compensation Amount',
             ]
@@ -888,7 +888,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Amount'
             ]
         );
@@ -897,7 +897,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Tax Amount'
             ]
         );
@@ -906,7 +906,7 @@ class InstallSchema implements InstallSchemaInterface
             'row_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Row total'
@@ -917,7 +917,7 @@ class InstallSchema implements InstallSchemaInterface
             'row_total_with_discount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Row total with discount'
             ]
         );
@@ -926,7 +926,7 @@ class InstallSchema implements InstallSchemaInterface
             'price_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Price Including Tax'
             ]
         );
@@ -935,7 +935,7 @@ class InstallSchema implements InstallSchemaInterface
             'row_total_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Row Total Including Tax'
             ]
         );
@@ -944,7 +944,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Tax Compensation Amount'
             ]
         );
@@ -954,7 +954,7 @@ class InstallSchema implements InstallSchemaInterface
             'price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Price',
@@ -965,7 +965,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Base Price',
@@ -976,7 +976,7 @@ class InstallSchema implements InstallSchemaInterface
             'custom_price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Custom Price',
             ]
         );
@@ -985,7 +985,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_percent',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Discount Percent',
             ]
@@ -995,7 +995,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Base Discount Amount',
             ]
@@ -1005,7 +1005,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_percent',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Tax Percent',
             ]
@@ -1015,7 +1015,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Base Tax Amount',
             ]
@@ -1025,7 +1025,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_row_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Base Row Total',
@@ -1036,7 +1036,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_tax_before_discount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Tax Before Discount',
             ]
         );
@@ -1045,7 +1045,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_before_discount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Tax Before Discount',
             ]
         );
@@ -1054,7 +1054,7 @@ class InstallSchema implements InstallSchemaInterface
             'original_custom_price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Original Custom Price',
             ]
         );
@@ -1063,7 +1063,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_cost',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Cost',
             ]
         );
@@ -1072,7 +1072,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_price_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Price Incl Tax',
             ]
         );
@@ -1081,7 +1081,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_row_total_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Row Total Incl Tax',
             ]
         );
@@ -1090,7 +1090,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Tax Compensation Amount',
             ]
         );
@@ -1102,7 +1102,7 @@ class InstallSchema implements InstallSchemaInterface
             'price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Price',
@@ -1162,7 +1162,7 @@ class InstallSchema implements InstallSchemaInterface
             'adjustment_positive',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Adjustment Positive'
             ]
         );
@@ -1171,7 +1171,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Tax Amount'
             ]
         );
@@ -1180,7 +1180,7 @@ class InstallSchema implements InstallSchemaInterface
             'store_to_order_rate',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Store To Order Rate',
             ]
         );
@@ -1189,7 +1189,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Amount',
             ]
         );
@@ -1198,7 +1198,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_to_order_rate',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base To Order Rate',
             ]
         );
@@ -1207,7 +1207,7 @@ class InstallSchema implements InstallSchemaInterface
             'grand_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Grand Total',
             ]
         );
@@ -1216,7 +1216,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_adjustment_negative',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Adjustment Negative',
             ]
         );
@@ -1225,7 +1225,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_subtotal_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Subtotal Incl Tax',
             ]
         );
@@ -1234,7 +1234,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Amount',
             ]
         );
@@ -1243,7 +1243,7 @@ class InstallSchema implements InstallSchemaInterface
             'subtotal_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Subtotal Incl Tax',
             ]
         );
@@ -1252,7 +1252,7 @@ class InstallSchema implements InstallSchemaInterface
             'adjustment_negative',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Adjustment Negative',
             ]
         );
@@ -1261,7 +1261,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Amount',
             ]
         );
@@ -1270,7 +1270,7 @@ class InstallSchema implements InstallSchemaInterface
             'store_to_base_rate',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Store To Base Rate',
             ]
         );
@@ -1279,7 +1279,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_to_global_rate',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base To Global Rate',
             ]
         );
@@ -1288,7 +1288,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_adjustment',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Adjustment',
             ]
         );
@@ -1297,7 +1297,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_adjustment',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Adjustment',
             ]
         );
@@ -1306,7 +1306,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_subtotal',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Subtotal',
             ]
         );
@@ -1315,7 +1315,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Amount',
             ]
         );
@@ -1324,7 +1324,7 @@ class InstallSchema implements InstallSchemaInterface
             'subtotal',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Subtotal',
             ]
         );
@@ -1333,7 +1333,7 @@ class InstallSchema implements InstallSchemaInterface
             'adjustment',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Adjustment',
             ]
         );
@@ -1342,7 +1342,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_grand_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Grand Total',
             ]
         );
@@ -1351,7 +1351,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_adjustment_positive',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Adjustment Positive',
             ]
         );
@@ -1360,7 +1360,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Tax Amount',
             ]
         );
@@ -1369,7 +1369,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Tax Amount',
             ]
         );
@@ -1378,7 +1378,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Tax Amount',
             ]
         );
@@ -1387,7 +1387,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Tax Compensation Amount',
             ]
         );
@@ -1396,7 +1396,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Tax Compensation Amount',
             ]
         );
@@ -1405,7 +1405,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Discount Tax Compensation Amount',
             ]
         );
@@ -1414,7 +1414,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_discount_tax_compensation_amnt',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Discount Tax Compensation Amount',
             ]
         );
@@ -1423,7 +1423,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Incl Tax',
             ]
         );
@@ -1432,7 +1432,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Incl Tax',
             ]
         );
@@ -1489,7 +1489,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_grand_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Grand Total',
             ]
         );
@@ -1498,7 +1498,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Tax Amount',
             ]
         );
@@ -1507,7 +1507,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Tax Amount',
             ]
         );
@@ -1516,7 +1516,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Tax Amount',
             ]
         );
@@ -1525,7 +1525,7 @@ class InstallSchema implements InstallSchemaInterface
             'store_to_order_rate',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Store To Order Rate',
             ]
         );
@@ -1534,7 +1534,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Tax Amount',
             ]
         );
@@ -1543,7 +1543,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Amount',
             ]
         );
@@ -1552,7 +1552,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_to_order_rate',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base To Order Rate',
             ]
         );
@@ -1561,7 +1561,7 @@ class InstallSchema implements InstallSchemaInterface
             'grand_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Grand Total',
             ]
         );
@@ -1570,7 +1570,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Amount',
             ]
         );
@@ -1579,7 +1579,7 @@ class InstallSchema implements InstallSchemaInterface
             'subtotal_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Subtotal Incl Tax',
             ]
         );
@@ -1588,7 +1588,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_subtotal_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Subtotal Incl Tax',
             ]
         );
@@ -1597,7 +1597,7 @@ class InstallSchema implements InstallSchemaInterface
             'store_to_base_rate',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Store To Base Rate',
             ]
         );
@@ -1606,7 +1606,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Amount',
             ]
         );
@@ -1615,7 +1615,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_to_global_rate',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base To Global Rate',
             ]
         );
@@ -1624,7 +1624,7 @@ class InstallSchema implements InstallSchemaInterface
             'subtotal',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Subtotal',
             ]
         );
@@ -1633,7 +1633,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_subtotal',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Subtotal',
             ]
         );
@@ -1642,7 +1642,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Amount',
             ]
         );
@@ -1651,7 +1651,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Tax Compensation Amount',
             ]
         );
@@ -1660,7 +1660,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Tax Compensation Amount',
             ]
         );
@@ -1669,7 +1669,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Discount Tax Compensation Amount',
             ]
         );
@@ -1678,7 +1678,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_discount_tax_compensation_amnt',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Discount Tax Compensation Amount',
             ]
         );
@@ -1687,7 +1687,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Incl Tax',
             ]
         );
@@ -1696,7 +1696,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Incl Tax',
             ]
         );
@@ -1705,7 +1705,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_total_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Total Refunded',
             ]
         );
@@ -1762,7 +1762,7 @@ class InstallSchema implements InstallSchemaInterface
             'subtotal',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Subtotal',
             ]
         );
@@ -1771,7 +1771,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_and_handling',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping and handling amount',
             ]
         );
@@ -1785,7 +1785,7 @@ class InstallSchema implements InstallSchemaInterface
                 'base_grand_total',
                 [
                     'type' => Table::TYPE_DECIMAL,
-                    'length' => '18,10',
+                    'length' => '26,10',
                     'comment' => 'Base Grand Total',
                 ]
             );
@@ -1806,7 +1806,7 @@ class InstallSchema implements InstallSchemaInterface
             'grand_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Grand Total',
             ]
         );
@@ -1863,7 +1863,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Amount',
             ]
         );
@@ -1872,7 +1872,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_canceled',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Canceled',
             ]
         );
@@ -1881,7 +1881,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Invoiced',
             ]
         );
@@ -1890,7 +1890,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Refunded',
             ]
         );
@@ -1899,7 +1899,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_grand_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Grand Total',
             ]
         );
@@ -1908,7 +1908,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Amount',
             ]
         );
@@ -1917,7 +1917,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_canceled',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Canceled',
             ]
         );
@@ -1926,7 +1926,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Invoiced',
             ]
         );
@@ -1935,7 +1935,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Refunded',
             ]
         );
@@ -1944,7 +1944,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Tax Amount',
             ]
         );
@@ -1953,7 +1953,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_tax_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Tax Refunded',
             ]
         );
@@ -1962,7 +1962,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_subtotal',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Subtotal',
             ]
         );
@@ -1971,7 +1971,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_subtotal_canceled',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Subtotal Canceled',
             ]
         );
@@ -1980,7 +1980,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_subtotal_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Subtotal Invoiced',
             ]
         );
@@ -1989,7 +1989,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_subtotal_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Subtotal Refunded',
             ]
         );
@@ -1998,7 +1998,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Tax Amount',
             ]
         );
@@ -2007,7 +2007,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_tax_canceled',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Tax Canceled',
             ]
         );
@@ -2016,7 +2016,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_tax_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Tax Invoiced',
             ]
         );
@@ -2025,7 +2025,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_tax_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Tax Refunded',
             ]
         );
@@ -2034,7 +2034,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_to_global_rate',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base To Global Rate',
             ]
         );
@@ -2043,7 +2043,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_to_order_rate',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base To Order Rate',
             ]
         );
@@ -2052,7 +2052,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_total_canceled',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Total Canceled',
             ]
         );
@@ -2061,7 +2061,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_total_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Total Invoiced',
             ]
         );
@@ -2070,7 +2070,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_total_invoiced_cost',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Total Invoiced Cost',
             ]
         );
@@ -2079,7 +2079,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_total_offline_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Total Offline Refunded',
             ]
         );
@@ -2088,7 +2088,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_total_online_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Total Online Refunded',
             ]
         );
@@ -2097,7 +2097,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_total_paid',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Total Paid',
             ]
         );
@@ -2106,7 +2106,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_total_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Total Refunded',
             ]
         );
@@ -2115,7 +2115,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Amount',
             ]
         );
@@ -2124,7 +2124,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_canceled',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Canceled',
             ]
         );
@@ -2133,7 +2133,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Invoiced',
             ]
         );
@@ -2142,7 +2142,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Refunded',
             ]
         );
@@ -2151,7 +2151,7 @@ class InstallSchema implements InstallSchemaInterface
             'grand_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Grand Total',
             ]
         );
@@ -2160,7 +2160,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Amount',
             ]
         );
@@ -2169,7 +2169,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_canceled',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Canceled',
             ]
         );
@@ -2178,7 +2178,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Invoiced',
             ]
         );
@@ -2187,7 +2187,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Refunded',
             ]
         );
@@ -2196,7 +2196,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Tax Amount',
             ]
         );
@@ -2205,7 +2205,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_tax_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Tax Refunded',
             ]
         );
@@ -2214,7 +2214,7 @@ class InstallSchema implements InstallSchemaInterface
             'store_to_base_rate',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Store To Base Rate',
             ]
         );
@@ -2223,7 +2223,7 @@ class InstallSchema implements InstallSchemaInterface
             'store_to_order_rate',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Store To Order Rate',
             ]
         );
@@ -2232,7 +2232,7 @@ class InstallSchema implements InstallSchemaInterface
             'subtotal',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Subtotal',
             ]
         );
@@ -2241,7 +2241,7 @@ class InstallSchema implements InstallSchemaInterface
             'subtotal_canceled',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Subtotal Canceled',
             ]
         );
@@ -2250,7 +2250,7 @@ class InstallSchema implements InstallSchemaInterface
             'subtotal_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Subtotal Invoiced',
             ]
         );
@@ -2259,7 +2259,7 @@ class InstallSchema implements InstallSchemaInterface
             'subtotal_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Subtotal Refunded',
             ]
         );
@@ -2268,7 +2268,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Tax Amount',
             ]
         );
@@ -2277,7 +2277,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_canceled',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Tax Canceled',
             ]
         );
@@ -2286,7 +2286,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Tax Invoiced',
             ]
         );
@@ -2295,7 +2295,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Tax Refunded',
             ]
         );
@@ -2304,7 +2304,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_canceled',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Total Canceled',
             ]
         );
@@ -2313,7 +2313,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Total Invoiced',
             ]
         );
@@ -2322,7 +2322,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_offline_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Total Offline Refunded',
             ]
         );
@@ -2331,7 +2331,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_online_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Total Online Refunded',
             ]
         );
@@ -2340,7 +2340,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_paid',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Total Paid',
             ]
         );
@@ -2349,7 +2349,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Total Refunded',
             ]
         );
@@ -2358,7 +2358,7 @@ class InstallSchema implements InstallSchemaInterface
             'adjustment_negative',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Adjustment Negative',
             ]
         );
@@ -2367,7 +2367,7 @@ class InstallSchema implements InstallSchemaInterface
             'adjustment_positive',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Adjustment Positive',
             ]
         );
@@ -2376,7 +2376,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_adjustment_negative',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Adjustment Negative',
             ]
         );
@@ -2385,7 +2385,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_adjustment_positive',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Adjustment Positive',
             ]
         );
@@ -2394,7 +2394,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Discount Amount',
             ]
         );
@@ -2403,7 +2403,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_subtotal_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Subtotal Incl Tax',
             ]
         );
@@ -2412,7 +2412,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_total_due',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Total Due',
             ]
         );
@@ -2421,7 +2421,7 @@ class InstallSchema implements InstallSchemaInterface
             'payment_authorization_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Payment Authorization Amount',
             ]
         );
@@ -2430,7 +2430,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Discount Amount',
             ]
         );
@@ -2439,7 +2439,7 @@ class InstallSchema implements InstallSchemaInterface
             'subtotal_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Subtotal Incl Tax',
             ]
         );
@@ -2448,7 +2448,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_due',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Total Due',
             ]
         );
@@ -2457,7 +2457,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Tax Compensation Amount',
             ]
         );
@@ -2466,7 +2466,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Tax Compensation Amount',
             ]
         );
@@ -2475,7 +2475,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Discount Tax Compensation Amount',
             ]
         );
@@ -2484,7 +2484,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_discount_tax_compensation_amnt',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Discount Tax Compensation Amount',
             ]
         );
@@ -2493,7 +2493,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_tax_compensation_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Tax Compensation Invoiced',
             ]
         );
@@ -2502,7 +2502,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_tax_compensation_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Tax Compensation Invoiced',
             ]
         );
@@ -2511,7 +2511,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_tax_compensation_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Tax Compensation Refunded',
             ]
         );
@@ -2520,7 +2520,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_tax_compensation_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Tax Compensation Refunded',
             ]
         );
@@ -2529,7 +2529,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Incl Tax',
             ]
         );
@@ -2538,7 +2538,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Incl Tax',
             ]
         );
@@ -2575,7 +2575,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_grand_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Grand Total',
             ]
         );
@@ -2584,7 +2584,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_total_paid',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Total Paid',
             ]
         );
@@ -2593,7 +2593,7 @@ class InstallSchema implements InstallSchemaInterface
             'grand_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Grand Total',
             ]
         );
@@ -2602,7 +2602,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_paid',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Total Paid',
             ]
         );
@@ -2611,7 +2611,7 @@ class InstallSchema implements InstallSchemaInterface
             'subtotal',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Subtotal',
             ]
         );
@@ -2620,7 +2620,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_and_handling',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping and handling amount',
             ]
         );
@@ -2629,7 +2629,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Total Refunded',
             ]
         );
@@ -2641,7 +2641,7 @@ class InstallSchema implements InstallSchemaInterface
             'percent',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Percent',
             ]
         );
@@ -2650,7 +2650,7 @@ class InstallSchema implements InstallSchemaInterface
             'amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Amount',
             ]
         );
@@ -2659,7 +2659,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Amount',
             ]
         );
@@ -2668,7 +2668,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_real_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Real Amount',
             ]
         );
@@ -2680,7 +2680,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_grand_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Grand Total',
             ]
         );
@@ -2689,7 +2689,7 @@ class InstallSchema implements InstallSchemaInterface
             'subtotal',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Subtotal',
             ]
         );
@@ -2698,7 +2698,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_and_handling',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping and handling amount',
             ]
         );
@@ -2707,7 +2707,7 @@ class InstallSchema implements InstallSchemaInterface
             'adjustment_positive',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Adjustment Positive',
             ]
         );
@@ -2716,7 +2716,7 @@ class InstallSchema implements InstallSchemaInterface
             'adjustment_negative',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Adjustment Negative',
             ]
         );
@@ -2725,7 +2725,7 @@ class InstallSchema implements InstallSchemaInterface
             'order_base_grand_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Order Grand Total',
             ]
         );
@@ -2737,7 +2737,7 @@ class InstallSchema implements InstallSchemaInterface
             'product_price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Product Price',
@@ -2751,7 +2751,7 @@ class InstallSchema implements InstallSchemaInterface
             'product_price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Product Price',
             ]
@@ -2764,7 +2764,7 @@ class InstallSchema implements InstallSchemaInterface
             'product_price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Product Price',
             ]
@@ -2777,7 +2777,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Price',
             ]
         );
@@ -2786,7 +2786,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Tax Amount',
             ]
         );
@@ -2795,7 +2795,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_row_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Row Total',
             ]
         );
@@ -2804,7 +2804,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Amount',
             ]
         );
@@ -2813,7 +2813,7 @@ class InstallSchema implements InstallSchemaInterface
             'row_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Row Total',
             ]
         );
@@ -2822,7 +2822,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Amount',
             ]
         );
@@ -2831,7 +2831,7 @@ class InstallSchema implements InstallSchemaInterface
             'price_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Price Incl Tax',
             ]
         );
@@ -2840,7 +2840,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Tax Amount',
             ]
         );
@@ -2849,7 +2849,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_price_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Price Incl Tax',
             ]
         );
@@ -2858,7 +2858,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_cost',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Cost',
             ]
         );
@@ -2867,7 +2867,7 @@ class InstallSchema implements InstallSchemaInterface
             'price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Price',
             ]
         );
@@ -2876,7 +2876,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_row_total_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Row Total Incl Tax',
             ]
         );
@@ -2885,7 +2885,7 @@ class InstallSchema implements InstallSchemaInterface
             'row_total_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Row Total Incl Tax',
             ]
         );
@@ -2894,7 +2894,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Tax Compensation Amount',
             ]
         );
@@ -2903,7 +2903,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Tax Compensation Amount',
             ]
         );
@@ -2915,7 +2915,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Price',
             ]
         );
@@ -2924,7 +2924,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Tax Amount',
             ]
         );
@@ -2933,7 +2933,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_row_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Row Total',
             ]
         );
@@ -2942,7 +2942,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Amount',
             ]
         );
@@ -2951,7 +2951,7 @@ class InstallSchema implements InstallSchemaInterface
             'row_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Row Total',
             ]
         );
@@ -2960,7 +2960,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Amount',
             ]
         );
@@ -2969,7 +2969,7 @@ class InstallSchema implements InstallSchemaInterface
             'price_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Price Incl Tax',
             ]
         );
@@ -2978,7 +2978,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Tax Amount',
             ]
         );
@@ -2987,7 +2987,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_price_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Price Incl Tax',
             ]
         );
@@ -2996,7 +2996,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_cost',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Cost',
             ]
         );
@@ -3005,7 +3005,7 @@ class InstallSchema implements InstallSchemaInterface
             'price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Price',
             ]
         );
@@ -3014,7 +3014,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_row_total_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Row Total Incl Tax',
             ]
         );
@@ -3023,7 +3023,7 @@ class InstallSchema implements InstallSchemaInterface
             'row_total_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Row Total Incl Tax',
             ]
         );
@@ -3032,7 +3032,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Tax Compensation Amount',
             ]
         );
@@ -3041,7 +3041,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Tax Compensation Amount',
             ]
         );
@@ -3053,7 +3053,7 @@ class InstallSchema implements InstallSchemaInterface
             'orders_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Orders Invoiced',
             ]
         );
@@ -3062,7 +3062,7 @@ class InstallSchema implements InstallSchemaInterface
             'invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Invoiced',
             ]
         );
@@ -3071,7 +3071,7 @@ class InstallSchema implements InstallSchemaInterface
             'invoiced_captured',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Invoiced Captured',
             ]
         );
@@ -3080,7 +3080,7 @@ class InstallSchema implements InstallSchemaInterface
             'invoiced_not_captured',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Invoiced Not Captured',
             ]
         );
@@ -3092,7 +3092,7 @@ class InstallSchema implements InstallSchemaInterface
             'orders_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Orders Invoiced',
             ]
         );
@@ -3101,7 +3101,7 @@ class InstallSchema implements InstallSchemaInterface
             'invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Invoiced',
             ]
         );
@@ -3110,7 +3110,7 @@ class InstallSchema implements InstallSchemaInterface
             'invoiced_captured',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Invoiced Captured',
             ]
         );
@@ -3119,7 +3119,7 @@ class InstallSchema implements InstallSchemaInterface
             'invoiced_not_captured',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Invoiced Not Captured',
             ]
         );
@@ -3131,7 +3131,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_income_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Income Amount',
@@ -3142,7 +3142,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_revenue_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Revenue Amount',
@@ -3153,7 +3153,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_profit_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Profit Amount',
@@ -3164,7 +3164,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_invoiced_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Invoiced Amount',
@@ -3175,7 +3175,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_canceled_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Canceled Amount',
@@ -3186,7 +3186,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_paid_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Paid Amount',
@@ -3197,7 +3197,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_refunded_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Refunded Amount',
@@ -3208,7 +3208,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Tax Amount',
@@ -3219,7 +3219,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_tax_amount_actual',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Tax Amount Actual',
@@ -3230,7 +3230,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_shipping_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Shipping Amount',
@@ -3241,7 +3241,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_shipping_amount_actual',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Shipping Amount Actual',
@@ -3252,7 +3252,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Discount Amount',
@@ -3263,7 +3263,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_discount_amount_actual',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Discount Amount Actual',
@@ -3277,7 +3277,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_income_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Income Amount',
@@ -3288,7 +3288,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_revenue_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Revenue Amount',
@@ -3299,7 +3299,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_profit_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Profit Amount',
@@ -3310,7 +3310,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_invoiced_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Invoiced Amount',
@@ -3321,7 +3321,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_canceled_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Canceled Amount',
@@ -3332,7 +3332,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_paid_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Paid Amount',
@@ -3343,7 +3343,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_refunded_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Refunded Amount',
@@ -3354,7 +3354,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Tax Amount',
@@ -3365,7 +3365,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_tax_amount_actual',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Tax Amount Actual',
@@ -3376,7 +3376,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_shipping_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Shipping Amount',
@@ -3387,7 +3387,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_shipping_amount_actual',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Shipping Amount Actual',
@@ -3398,7 +3398,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Discount Amount',
@@ -3409,7 +3409,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_discount_amount_actual',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Total Discount Amount Actual',
@@ -3423,7 +3423,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_cost',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' =>  'Base Cost',
             ]
@@ -3433,7 +3433,7 @@ class InstallSchema implements InstallSchemaInterface
             'price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' =>  'Price',
@@ -3444,7 +3444,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Base Price',
@@ -3455,7 +3455,7 @@ class InstallSchema implements InstallSchemaInterface
             'original_price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Original Price',
             ]
         );
@@ -3464,7 +3464,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_original_price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Original Price',
             ]
         );
@@ -3473,7 +3473,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_percent',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Tax Percent',
             ]
@@ -3483,7 +3483,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Tax Amount',
             ]
@@ -3493,7 +3493,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_tax_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Base Tax Amount',
             ]
@@ -3503,7 +3503,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Tax Invoiced',
             ]
@@ -3513,7 +3513,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_tax_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Base Tax Invoiced',
             ]
@@ -3523,7 +3523,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_percent',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Discount Percent',
             ]
@@ -3533,7 +3533,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Discount Amount',
             ]
@@ -3543,7 +3543,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Base Discount Amount',
             ]
@@ -3553,7 +3553,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Discount Invoiced',
             ]
@@ -3563,7 +3563,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Base Discount Invoiced',
             ]
@@ -3573,7 +3573,7 @@ class InstallSchema implements InstallSchemaInterface
             'amount_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Amount Refunded',
             ]
@@ -3583,7 +3583,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_amount_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'default' => '0',
                 'comment' => 'Base Amount Refunded',
             ]
@@ -3593,7 +3593,7 @@ class InstallSchema implements InstallSchemaInterface
             'row_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Row Total',
@@ -3604,7 +3604,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_row_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Base Row Total',
@@ -3615,7 +3615,7 @@ class InstallSchema implements InstallSchemaInterface
             'row_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Row Invoiced',
@@ -3626,7 +3626,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_row_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'nullable' => false,
                 'default' => '0',
                 'comment' => 'Base Row Invoiced',
@@ -3637,7 +3637,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_tax_before_discount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Tax Before Discount',
             ]
         );
@@ -3646,7 +3646,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_before_discount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Tax Before Discount',
             ]
         );
@@ -3655,7 +3655,7 @@ class InstallSchema implements InstallSchemaInterface
             'price_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Price Incl Tax',
             ]
         );
@@ -3664,7 +3664,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_price_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Price Incl Tax',
             ]
         );
@@ -3673,7 +3673,7 @@ class InstallSchema implements InstallSchemaInterface
             'row_total_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Row Total Incl Tax',
             ]
         );
@@ -3682,7 +3682,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_row_total_incl_tax',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Row Total Incl Tax',
             ]
         );
@@ -3691,7 +3691,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Tax Compensation Amount',
             ]
         );
@@ -3700,7 +3700,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_tax_compensation_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Tax Compensation Amount',
             ]
         );
@@ -3709,7 +3709,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_tax_compensation_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Tax Compensation Invoiced',
             ]
         );
@@ -3718,7 +3718,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_tax_compensation_invoiced',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Tax Compensation Invoiced',
             ]
         );
@@ -3727,7 +3727,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_tax_compensation_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Tax Compensation Refunded',
             ]
         );
@@ -3736,7 +3736,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_tax_compensation_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Tax Compensation Refunded',
             ]
         );
@@ -3745,7 +3745,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_canceled',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Tax Canceled',
             ]
         );
@@ -3754,7 +3754,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_tax_compensation_canceled',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Tax Compensation Canceled',
             ]
         );
@@ -3763,7 +3763,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Tax Refunded',
             ]
         );
@@ -3772,7 +3772,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_tax_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Tax Refunded',
             ]
         );
@@ -3781,7 +3781,7 @@ class InstallSchema implements InstallSchemaInterface
             'discount_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Discount Refunded',
             ]
         );
@@ -3790,7 +3790,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_discount_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Discount Refunded',
             ]
         );
@@ -3802,7 +3802,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_captured',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Captured',
             ]
         );
@@ -3811,7 +3811,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_captured',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Captured',
             ]
         );
@@ -3820,7 +3820,7 @@ class InstallSchema implements InstallSchemaInterface
             'amount_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Amount Refunded',
             ]
         );
@@ -3829,7 +3829,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_amount_paid',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Amount Paid',
             ]
         );
@@ -3838,7 +3838,7 @@ class InstallSchema implements InstallSchemaInterface
             'amount_canceled',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Amount Canceled',
             ]
         );
@@ -3847,7 +3847,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_amount_authorized',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Amount Authorized',
             ]
         );
@@ -3856,7 +3856,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_amount_paid_online',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Amount Paid Online',
             ]
         );
@@ -3865,7 +3865,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_amount_refunded_online',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Amount Refunded Online',
             ]
         );
@@ -3874,7 +3874,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Amount',
             ]
         );
@@ -3883,7 +3883,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Amount',
             ]
         );
@@ -3892,7 +3892,7 @@ class InstallSchema implements InstallSchemaInterface
             'amount_paid',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Amount Paid',
             ]
         );
@@ -3901,7 +3901,7 @@ class InstallSchema implements InstallSchemaInterface
             'amount_authorized',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Amount Authorized',
             ]
         );
@@ -3910,7 +3910,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_amount_ordered',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Amount Ordered',
             ]
         );
@@ -3919,7 +3919,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_shipping_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Shipping Refunded',
             ]
         );
@@ -3928,7 +3928,7 @@ class InstallSchema implements InstallSchemaInterface
             'shipping_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Shipping Refunded',
             ]
         );
@@ -3937,7 +3937,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_amount_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Amount Refunded',
             ]
         );
@@ -3946,7 +3946,7 @@ class InstallSchema implements InstallSchemaInterface
             'amount_ordered',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Amount Ordered',
             ]
         );
@@ -3955,7 +3955,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_amount_canceled',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base Amount Canceled',
             ]
         );
@@ -3967,7 +3967,7 @@ class InstallSchema implements InstallSchemaInterface
             'tax_percent',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Real Tax Percent For Item',
             ]
         );
@@ -3976,7 +3976,7 @@ class InstallSchema implements InstallSchemaInterface
             'amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Tax amount for the item and tax rate',
             ]
         );
@@ -3985,7 +3985,7 @@ class InstallSchema implements InstallSchemaInterface
             'base_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Base tax amount for the item and tax rate',
             ]
         );
@@ -3994,7 +3994,7 @@ class InstallSchema implements InstallSchemaInterface
             'real_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Real tax amount for the item and tax rate',
             ]
         );
@@ -4003,7 +4003,7 @@ class InstallSchema implements InstallSchemaInterface
             'real_base_amount',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Real base tax amount for the item and tax rate',
             ]
         );
@@ -4015,7 +4015,7 @@ class InstallSchema implements InstallSchemaInterface
             'refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Refunded',
             ]
         );
@@ -4024,7 +4024,7 @@ class InstallSchema implements InstallSchemaInterface
             'online_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Online Refunded',
             ]
         );
@@ -4033,7 +4033,7 @@ class InstallSchema implements InstallSchemaInterface
             'offline_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Offline Refunded',
             ]
         );
@@ -4045,7 +4045,7 @@ class InstallSchema implements InstallSchemaInterface
             'refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Refunded',
             ]
         );
@@ -4054,7 +4054,7 @@ class InstallSchema implements InstallSchemaInterface
             'online_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Online Refunded',
             ]
         );
@@ -4063,7 +4063,7 @@ class InstallSchema implements InstallSchemaInterface
             'offline_refunded',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Offline Refunded',
             ]
         );
@@ -4075,7 +4075,7 @@ class InstallSchema implements InstallSchemaInterface
             'row_total',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Row Total',
             ]
         );
@@ -4084,7 +4084,7 @@ class InstallSchema implements InstallSchemaInterface
             'price',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Price',
             ]
         );
@@ -4096,7 +4096,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_shipping',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Total Shipping',
             ]
         );
@@ -4105,7 +4105,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_shipping_actual',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Total Shipping Actual',
             ]
         );
@@ -4117,7 +4117,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_shipping',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Total Shipping',
             ]
         );
@@ -4126,7 +4126,7 @@ class InstallSchema implements InstallSchemaInterface
             'total_shipping_actual',
             [
                 'type' => Table::TYPE_DECIMAL,
-                'length' => '18,10',
+                'length' => '26,10',
                 'comment' => 'Total Shipping Actual',
             ]
         );
