@@ -107,8 +107,8 @@ class ListCoin extends Template
                     'is_active',
                     Coin::STATUS_ENABLED
                 )
-                //->addFieldToFilter(\Kozeta\Currency\Api\Data\CoinInterface::STORE_ID,['eq' => $this->_storeManager->getStore()->getId()])
-                ->addStoreFilter($this->_storeManager->getStore()->getId())
+                //->addFieldToFilter(\Kozeta\Currency\Api\Data\CoinInterface::STORE_ID,['eq' => $this->storeManager->getStore()->getId()])
+                ->addStoreFilter($this->storeManager->getStore()->getId())
                 ->setOrder('sort_order', 'ASC')
                 ->setOrder('is_fiat', 'ASC')
                 ->setOrder('name', 'ASC');
@@ -128,10 +128,11 @@ class ListCoin extends Template
         }
 
         $rates = $this->currencyFactory->create()->getCurrencyRates(
-            $this->_storeManager->getStore()->getBaseCurrency(),
+            $this->storeManager->getStore()->getBaseCurrency(),
             $codes,
             true
         );
+
         return $rates;
     }
 

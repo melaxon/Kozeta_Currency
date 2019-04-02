@@ -4,7 +4,6 @@
  * @copyright Copyright (c) 2019 Kozeta (https://www.kozeta.lt)
  * @package Kozeta_Curency
  */
-
 namespace Kozeta\Currency\Plugin\Precision\Framework\Pricing;
 
 class PriceCurrency

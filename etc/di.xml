@@ -11,6 +11,9 @@
     <preference for="Magento\Directory\Model\ResourceModel\Currency" type="Kozeta\Currency\Model\ResourceModel\Currency" />
     <preference for="Kozeta\Currency\Api\CoinRepositoryInterface" type="Kozeta\Currency\Model\CoinRepository" />
     <preference for="Kozeta\Currency\Api\Data\CoinInterface" type="Kozeta\Currency\Model\Coin" />
+<!-- added for 2.3.1 compatibility -->
+    <preference for="Magento\Quote\Model\Quote\Address\Total" type="Kozeta\Currency\Model\Quote\Address\Total" />
+
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">

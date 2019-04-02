@@ -28,11 +28,11 @@
         	<table class="currency-coins-list-table">
         	<tr>
         		<th>&nbsp;</th>
-        		<th><?== /* @noEscape */ __('Name') ?> / <?php echo __('Code') ?></th>
+        		<th><?= /* @noEscape */ __('Name') ?> / <?php echo __('Code') ?></th>
         		
-        		<th><?== /* @escapeNotVerified */ __('Rate %1', $block->getBaseCurrencyCode()) ?></th> 
-        		<th><?== /* @escapeNotVerified */ __('Rate to %1', $block->getBaseCurrencyCode()) ?></th>
-        		<th><?== /* @noEscape */ __('Updated at') ?><br>(<a href="https://www.timeanddate.com/worldclock/timezone/utc" rel="nofollow" target="_blank">UTC</a>)</th> 
+        		<th><?= /* @escapeNotVerified */ __('Rate %1', $block->getBaseCurrencyCode()) ?></th> 
+        		<th><?= /* @escapeNotVerified */ __('Rate to %1', $block->getBaseCurrencyCode()) ?></th>
+        		<th><?= /* @noEscape */ __('Updated at') ?><br>(<a href="https://www.timeanddate.com/worldclock/timezone/utc" rel="nofollow" target="_blank">UTC</a>)</th> 
         		</tr>
             <?php foreach ($_coins as $_coin) : 
             		$a_tag 	= '';
