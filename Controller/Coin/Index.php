@@ -63,8 +63,6 @@ class Index extends Action
         ForwardFactory $resultForwardFactory,
         ScopeConfigInterface $scopeConfig
     ) {
-
-//        parent::__construct($context);
         $this->resultForwardFactory = $resultForwardFactory;
         $this->resultPageFactory = $resultPageFactory;
         $this->scopeConfig = $scopeConfig;

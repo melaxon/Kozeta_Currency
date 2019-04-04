@@ -13,11 +13,11 @@ class OrderPlugin
     /**
      * @var \Kozeta\Currency\Model\Precision
      */
-    protected $precisionObject;
+    private $precisionObject;
     
     /**
      * @param Precision $precisionObject
-     */    
+     */
     public function __construct(
         \Kozeta\Currency\Model\Precision $precisionObject
     ) {
@@ -29,10 +29,8 @@ class OrderPlugin
      * @param array ...$args
      * @return array
      */
-    public function beforeFormatPricePrecision(
-        \Magento\Sales\Model\Order $subject,
-        ...$args
-    ) {
+    public function beforeFormatPricePrecision(\Magento\Sales\Model\Order $subject, ...$args)
+    {
         $orderCurrency = $subject->getOrderCurrencyCode();
         $baseCurrency = $subject->getBaseCurrencyCode();
         $store = $subject->getStoreId();
@@ -46,10 +44,8 @@ class OrderPlugin
      * @param array ...$args
      * @return array
      */
-    public function beforeFormatBasePricePrecision(
-        \Magento\Sales\Model\Order $subject,
-        ...$args
-    ) {
+    public function beforeFormatBasePricePrecision(\Magento\Sales\Model\Order $subject, ...$args)
+    {
         $orderCurrency = $subject->getOrderCurrencyCode();
         $baseCurrency = $subject->getBaseCurrencyCode();
         $store = $subject->getStoreId();

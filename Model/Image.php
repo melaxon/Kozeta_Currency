@@ -234,7 +234,8 @@ class Image extends AbstractModel
         $this->mediaDirectoryManager = $filesystem;
     }
 
-    private function mediaDirectory() {
+    private function mediaDirectory()
+    {
         if ($this->mediaDirectory === null) {
             $this->mediaDirectory = $this->mediaDirectoryManager->getDirectoryWrite(DirectoryList::MEDIA);
             $this->mediaDirectory->create($this->uploader->getBasePath());

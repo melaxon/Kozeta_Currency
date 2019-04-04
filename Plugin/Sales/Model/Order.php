@@ -13,27 +13,16 @@ class Order
     /**
      * @var \Kozeta\Currency\Model\Precision
      */
-    protected $precisionObject;
+    private $precisionObject;
 
-    /**
-     * @var
-     */
-//  protected $_precision;
-    
-    
-    
     public function __construct(
         \Kozeta\Currency\Model\Precision $precisionObject
     ) {
         $this->precisionObject = $precisionObject;
     }
     
-    public function aroundGetTotalDue(
-        \Magento\Sales\Model\Order $subject,
-        callable $proceed,
-        ...$args
-    ) {
-
+    public function aroundGetTotalDue(\Magento\Sales\Model\Order $subject, callable $proceed, ...$args)
+    {
         $code = $subject->getOrderCurrencyCode();
         $defaultStoreId = $subject->getDefaultStoreId();
         $precision = $this->precisionObject->getPrecisionByCode($code, $defaultStoreId);

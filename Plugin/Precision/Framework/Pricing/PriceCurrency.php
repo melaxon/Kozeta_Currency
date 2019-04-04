@@ -34,10 +34,8 @@ class PriceCurrency
     /**
      * {@inheritdoc}
      */
-    public function beforeFormat(
-        \Magento\Directory\Model\PriceCurrency $subject,
-        ...$args
-    ) {
+    public function beforeFormat(\Magento\Directory\Model\PriceCurrency $subject, ...$args)
+    {
         if (!empty($arg[4])) {
             $store = $this->_storeManager->getStore()->getId();
             $args[2] = $this->precisionObject->getPrecisionByCode($arg[4], $store);
@@ -46,7 +44,6 @@ class PriceCurrency
         }
         return $args;
     }
-
 
     /**
      * @param \Magento\Directory\Model\PriceCurrency $subject
@@ -59,12 +56,8 @@ class PriceCurrency
      * - Locate the bug where Magento rounds the price before convertion and then rounds it again (affected: cart and minicart item price)
      * - Replace hardcoded precisions wherever it is possible
      */
-    public function aroundRound(
-        \Magento\Directory\Model\PriceCurrency $subject,
-        callable $proceed,
-        $price,
-        ...$args
-    ) {
+    public function aroundRound(\Magento\Directory\Model\PriceCurrency $subject, callable $proceed, $price, ...$args)
+    {
         $precision = $this->precisionObject->getPrecision();
         if ($precision < $subject::DEFAULT_PRECISION) {
             return $proceed($price);
@@ -78,10 +71,8 @@ class PriceCurrency
      * @param array ...$args
      * @return array
      */
-    public function beforeConvertAndFormat(
-        \Magento\Directory\Model\PriceCurrency $subject,
-        ...$args
-    ) {
+    public function beforeConvertAndFormat(\Magento\Directory\Model\PriceCurrency $subject, ...$args)
+    {
         $args[1] = isset($args[1])? $args[1] : null;
         $args[2] = $this->precisionObject->getPrecision();
         return $args;
@@ -92,10 +83,8 @@ class PriceCurrency
      * @param array ...$args
      * @return array
      */
-    public function beforeConvertAndRound(
-        \Magento\Directory\Model\PriceCurrency $subject,
-        ...$args
-    ) {
+    public function beforeConvertAndRound(\Magento\Directory\Model\PriceCurrency $subject, ...$args)
+    {
         $args[1] = isset($args[1])? $args[1] : null;
         $args[2] = isset($args[2])? $args[2] : null;
         $args[3] = $this->precisionObject->getPrecision();

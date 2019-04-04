@@ -129,7 +129,8 @@ class Uploader
         $this->allowedExtensions        = $allowedExtensions;
     }
 
-    private function mediaDirectory() {
+    private function mediaDirectory()
+    {
         if ($this->mediaDirectory === null) {
             $this->mediaDirectory = $this->mediaDirectoryManager->getDirectoryWrite(DirectoryList::MEDIA);
         }

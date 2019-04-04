@@ -33,14 +33,14 @@ class AddCurrencies
      *
      * @var array
      */
-    protected $_coins;
+    protected $coins;
     
     /**
      * HTTP request
      *
      * @var \Magento\Framework\App\Request\Http
      */
-    protected $_request;
+    protected $request;
     
     /**
      * @param \Magento\Framework\Locale\ConfigInterface $config
@@ -56,17 +56,16 @@ class AddCurrencies
     ) {
         $this->collectionFactory = $collectionFactory;
         $this->scopeConfig = $scopeConfig;
-        $this->_request = $request;
+        $this->request = $request;
     }
 
-    
     public function getNewCurrencies()
     {
         
-        if ($this->_coins) {
-            return $this->_coins;
+        if ($this->coins) {
+            return $this->coins;
         }
-        $store_id = (int) $this->_request->getParam('store', 0);
+        $store_id = (int) $this->request->getParam('store', 0);
         $currencies = [];
         $collection = $this->collectionFactory->create();
         $collection->addFieldToSelect('*');
@@ -79,9 +78,9 @@ class AddCurrencies
                 'label' => __($_coin->getName())
             ];
         }
-        $this->_coins = $this->_sortOptionArray($currencies);
+        $this->coins = $this->_sortOptionArray($currencies);
         
-        return $this->_coins;
+        return $this->coins;
     }
 
     protected function _sortOptionArray($option)
@@ -101,11 +100,8 @@ class AddCurrencies
     /**
      * @inheritdoc
      */
-    public function aroundGetOptionCurrencies(
-        $subject,
-        \Closure $proceed,
-        ...$args
-    ) {
+    public function aroundGetOptionCurrencies($subject, \Closure $proceed, ...$args)
+    {
         $installedCurrencies = $this->getNewCurrencies();
         
         $selectedCurrencies = explode(
@@ -126,11 +122,8 @@ class AddCurrencies
     /**
      * @inheritdoc
      */
-    public function aroundGetOptionAllCurrencies(
-        $subject,
-        \Closure $proceed,
-        ...$args
-    ) {
+    public function aroundGetOptionAllCurrencies($subject, \Closure $proceed, ...$args)
+    {
         return $this->getNewCurrencies();
     }
 }

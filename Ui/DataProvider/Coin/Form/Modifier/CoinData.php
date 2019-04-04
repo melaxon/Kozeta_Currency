@@ -47,7 +47,8 @@ class CoinData implements ModifierInterface
     /**
      * @return $collectionManager
      */
-    private function getCollection() {
+    private function getCollection()
+    {
         if ($this->collectionManager === null) {
             $this->collectionManager = $this->collection->create();
         }

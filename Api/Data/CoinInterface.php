@@ -174,13 +174,6 @@ interface CoinInterface
     public function getAvatar();
 
     /**
-     * Get rate
-     *
-     * @return string
-     */
-//    public function getRate();
-
-    /**
      * Get symbol
      *
      * @return string
@@ -268,14 +261,6 @@ interface CoinInterface
     public function setAvatar($avatar);
 
     /**
-     * set rate
-     *
-     * @param $rate
-     * @return CoinInterface
-     */
-//    public function setRate($rate);
-
-    /**
      * Set symbol
      *
      * @param $symbol
@@ -297,21 +282,6 @@ interface CoinInterface
      * @return CoinInterface
      */
     public function setTxfee($txfee);
-
-    /**
-     * Get updated at
-     *
-     * @return string
-     */
-//    public function getUpdatedAt();
-
-    /**
-     * set updated at
-     *
-     * @param $updatedAt
-     * @return CoinInterface
-     */
-//    public function setUpdatedAt($updatedAt);
 
     /**
      * @param $storeId

@@ -48,6 +48,7 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
      * @param string $code
      * @param array $toCurrencies
      * @return array
+     * @SuppressWarnings(PHPMD.Ecg.Sql.SlowQuery)
      */
     protected function _getRatesByCode($code, $toCurrencies = null, $updated = null)
     {
@@ -66,7 +67,9 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
             'currency_to IN(?)',
             $toCurrencies
         );
+        // @codingStandardsIgnoreStart
         $rowSet = $connection->fetchAll($select, $bind);
+        // @codingStandardsIgnoreEnd
         $result = [];
         
         if ($updated !== null) {
@@ -88,11 +91,11 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
      *
      * @param string|array $currency
      * @return array
+     * @SuppressWarnings(PHPMD.Ecg.Sql.SlowQuery)
      */
     public function getCurrencyNames($code)
     {
         $connection = $this->getConnection();
-        //$bind = [':code' => $code];
         $select = $connection->select()->from(
             $this->getTable('kozeta_currency_coin'),
             ['code','name']
@@ -100,7 +103,9 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
             'code IN(?)',
             $code
         );
+        // @codingStandardsIgnoreStart
         $rowSet = $connection->fetchAll($select);
+        // @codingStandardsIgnoreEnd
         $result = [];
         
         foreach ($rowSet as $row) {
