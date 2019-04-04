@@ -33,48 +33,31 @@ class Toplink extends \Magento\Framework\View\Element\Html\Link
     protected $scopeConfig;
     
     /**
-     * @var Top link label
-     */
-    protected $title;
-
-    /**
-     * @var Top link url
-     */
-    protected $url;
-
-    /**
      * @param scopeConfig $scopeConfig
      * @param Context $context
+     * @param array $data
      */
     public function __construct(
-
         ScopeConfigInterface $scopeConfig,
-		Context $context,
-		array $data = []
+        Context $context,
+        array $data = []
     ) {
 
         $this->scopeConfig = $scopeConfig;
-        $this->title = $this->scopeConfig->getValue(
-            self::TOP_LINKS_TITLE_CONFIG_PATH,
-            ScopeInterface::SCOPE_STORE
-        );
-        $this->url = $this->scopeConfig->getValue(
-            self::COINS_LIST_URL_CONFIG_PATH,
-            ScopeInterface::SCOPE_STORE
-        );
-        
-		parent::__construct($context, $data);
+        parent::__construct($context, $data);
     }
 
-	/**
-	* Render block HTML.
-	*
-	* @return string
-	*/
-	protected function _toHtml()
+    /**
+     * Render block HTML.
+     *
+     * @return string
+     */
+    protected function _toHtml()
     {
-    	if (empty(trim($this->title)) || empty(trim($this->url))) return '';
-    	return parent::_toHtml();
+        if (empty(trim($this->getLabel())) || empty(trim($this->getHref()))) {
+            return '';
+        }
+        return parent::_toHtml();
     }
     
     /**
@@ -82,7 +65,10 @@ class Toplink extends \Magento\Framework\View\Element\Html\Link
      */
     public function getHref()
     {
-        return $this->url;
+        return '../../../../../'. $this->scopeConfig->getValue(
+            self::COINS_LIST_URL_CONFIG_PATH,
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     /**
@@ -90,6 +76,9 @@ class Toplink extends \Magento\Framework\View\Element\Html\Link
      */
     public function getLabel()
     {
-        return $this->title;
+        return $this->scopeConfig->getValue(
+            self::TOP_LINKS_TITLE_CONFIG_PATH,
+            ScopeInterface::SCOPE_STORE
+        );
     }
 }

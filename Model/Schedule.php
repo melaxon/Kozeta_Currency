@@ -38,8 +38,6 @@ class Schedule
         $this->_scopeConfig = $scopeConfig;
     }
 
-
-
     /**
      * @param mixed $schedule
      * @return void

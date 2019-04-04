@@ -96,10 +96,7 @@ class Collection extends AbstractCollection
         $this->performAfterLoad('kozeta_currency_coin_store', 'coin_id');
         foreach ($this->getItems() as $item) {
             /** @var \Kozeta\Currency\Model\Coin $item */
-            //$award_ = $item->getAward_();
-            //if ($award_ && !is_array($award_)) {
-            //    $item->setAward_(explode(',', $award_));
-            //}
+            // do something
         }
         return parent::_afterLoad();
     }
@@ -186,7 +183,7 @@ class Collection extends AbstractCollection
     protected function performAfterLoad($tableName, $linkField)
     {
         $linkedIds = $this->getColumnValues($linkField);
-        if (count($linkedIds)) {
+        if (!empty($linkedIds)) {
             $connection = $this->getConnection();
             $select = $connection->select()->from(['kozeta_currency_coin_store' => $this->getTable($tableName)])
                 ->where('kozeta_currency_coin_store.' . $linkField . ' IN (?)', $linkedIds);

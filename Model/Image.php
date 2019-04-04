@@ -138,6 +138,11 @@ class Image extends AbstractModel
     protected $mediaDirectory;
 
     /**
+     * @var \Magento\Framework\Filesystem
+     */
+    protected $mediaDirectoryManager;
+
+    /**
      * @var \Magento\Framework\Image\Factory
      */
     protected $imageFactory;
@@ -226,9 +231,17 @@ class Image extends AbstractModel
 
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 
-        $this->mediaDirectory = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
-        $this->mediaDirectory->create($this->uploader->getBasePath());
+        $this->mediaDirectoryManager = $filesystem;
     }
+
+    private function mediaDirectory() {
+        if ($this->mediaDirectory === null) {
+            $this->mediaDirectory = $this->mediaDirectoryManager->getDirectoryWrite(DirectoryList::MEDIA);
+            $this->mediaDirectory->create($this->uploader->getBasePath());
+        }
+        return $this->mediaDirectory;
+    }
+
 
     /**
      * @param int $width
@@ -417,11 +430,11 @@ class Image extends AbstractModel
             return 0;
         }
 
-        if (!$this->mediaDirectory->isExist($file)) {
+        if (!$this->mediaDirectory()->isExist($file)) {
             return 0;
         }
 
-        $imageInfo = getimagesize($this->mediaDirectory->getAbsolutePath($file));
+        $imageInfo = getimagesize($this->mediaDirectory()->getAbsolutePath($file));
 
         if (!isset($imageInfo[0]) || !isset($imageInfo[1])) {
             return 0;
@@ -489,7 +502,7 @@ class Image extends AbstractModel
 
         $baseFile = $baseDir . $file;
 
-        if (!$file || !$this->mediaDirectory->isFile($baseFile)) {
+        if (!$file || !$this->mediaDirectory()->isFile($baseFile)) {
             throw new \Exception(__('We can\'t find the image file.'));
         }
 
@@ -577,7 +590,7 @@ class Image extends AbstractModel
     public function getImageProcessor()
     {
         if (!$this->processor) {
-            $filename = $this->getBaseFile() ? $this->mediaDirectory->getAbsolutePath($this->getBaseFile()) : null;
+            $filename = $this->getBaseFile() ? $this->mediaDirectory()->getAbsolutePath($this->getBaseFile()) : null;
             $this->processor = $this->imageFactory->create($filename);
         }
         $this->processor->keepAspectRatio($this->keepAspectRatio);
@@ -695,7 +708,7 @@ class Image extends AbstractModel
         if ($this->isBaseFilePlaceholder && $this->newFile === true) {
             return $this;
         }
-        $filename = $this->mediaDirectory->getAbsolutePath($this->getNewFile());
+        $filename = $this->mediaDirectory()->getAbsolutePath($this->getNewFile());
         $this->getImageProcessor()->save($filename);
         $this->coreFileStorageDatabase->saveFile($filename);
         return $this;
@@ -792,8 +805,8 @@ class Image extends AbstractModel
             $baseDir . '/watermark/' . $file,
         ];
         foreach ($candidates as $candidate) {
-            if ($this->mediaDirectory->isExist($candidate)) {
-                $filePath = $this->mediaDirectory->getAbsolutePath($candidate);
+            if ($this->mediaDirectory()->isExist($candidate)) {
+                $filePath = $this->mediaDirectory()->getAbsolutePath($candidate);
                 break;
             }
         }
@@ -912,9 +925,9 @@ class Image extends AbstractModel
     public function clearCache()
     {
         $directory = $this->uploader->getBasePath() . '/cache';
-        $this->mediaDirectory->delete($directory);
+        $this->mediaDirectory()->delete($directory);
 
-        $this->coreFileStorageDatabase->deleteFolder($this->mediaDirectory->getAbsolutePath($directory));
+        $this->coreFileStorageDatabase->deleteFolder($this->mediaDirectory()->getAbsolutePath($directory));
     }
 
     /**
@@ -926,11 +939,11 @@ class Image extends AbstractModel
      */
     protected function fileExists($filename)
     {
-        if ($this->mediaDirectory->isFile($filename)) {
+        if ($this->mediaDirectory()->isFile($filename)) {
             return true;
         } else {
             return $this->coreFileStorageDatabase->saveFileToFilesystem(
-                $this->mediaDirectory->getAbsolutePath($filename)
+                $this->mediaDirectory()->getAbsolutePath($filename)
             );
         }
     }
@@ -950,8 +963,8 @@ class Image extends AbstractModel
             $img = $asset->getSourceFile();
             $fileInfo = getimagesize($img);
         } else {
-            if ($this->mediaDirectory->isFile($this->mediaDirectory->getAbsolutePath($this->newFile))) {
-                $fileInfo = getimagesize($this->mediaDirectory->getAbsolutePath($this->newFile));
+            if ($this->mediaDirectory()->isFile($this->mediaDirectory()->getAbsolutePath($this->newFile))) {
+                $fileInfo = getimagesize($this->mediaDirectory()->getAbsolutePath($this->newFile));
             }
         }
         return $fileInfo;

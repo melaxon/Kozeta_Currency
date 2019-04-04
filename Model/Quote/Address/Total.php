@@ -33,22 +33,23 @@ class Total extends \Magento\Quote\Model\Quote\Address\Total
     /**
      * @var \Kozeta\Currency\Model\Precision
      */
-    protected $precisionObject;    
+    protected $precisionObject;
 
     /**
      * Constructor
      *
      * @param \Kozeta\Currency\Model\Precision $precisionObject
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
-     public function __construct(
+    public function __construct(
         Precision $precisionObject,
         StoreManagerInterface $storeManager,
         array $data = []
-     ) {
+    ) {
         $this->precisionObject = $precisionObject;
         $this->storeManager = $storeManager;
         parent::__construct($data);
-     }
+    }
 
     /**
      * Set total amount value
@@ -101,7 +102,7 @@ class Total extends \Magento\Quote\Model\Quote\Address\Total
     public function getBaseCurrencyCode()
     {
         if (is_string($this->baseCurrencyCode)) {
-        	return $this->baseCurrencyCode;
+            return $this->baseCurrencyCode;
         }
         $this->baseCurrencyCode = $this->storeManager->getStore()->getBaseCurrencyCode();
         return $this->baseCurrencyCode;

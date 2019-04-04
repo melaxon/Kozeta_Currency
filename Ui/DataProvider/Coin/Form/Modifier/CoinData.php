@@ -19,7 +19,12 @@ class CoinData implements ModifierInterface
     /**
      * @var \Kozeta\Currency\Model\ResourceModel\Coin\Collection
      */
-    protected $_collection;
+    private $collection;
+
+    /**
+     * @var collectionManager
+     */
+    private $collectionManager;
 
     /**
      * @param CollectionFactory $coinFactory
@@ -27,7 +32,7 @@ class CoinData implements ModifierInterface
     public function __construct(
         CollectionFactory $coinFactory
     ) {
-        $this->_collection = $coinFactory->create();
+        $this->collection = $coinFactory;
     }
 
     /**
@@ -40,13 +45,23 @@ class CoinData implements ModifierInterface
     }
 
     /**
+     * @return $collectionManager
+     */
+    private function getCollection() {
+        if ($this->collectionManager === null) {
+            $this->collectionManager = $this->collection->create();
+        }
+        return $this->collectionManager;
+    }
+
+    /**
      * @param array $data
      * @return array|mixed
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function modifyData(array $data)
     {
-        $items = $this->_collection->getItems();
+        $items = $this->getCollection()->getItems();
         /** @var \Kozeta\Currency\Model\Coin $coin */
         foreach ($items as $coin) {
             $_data = $coin->getData();

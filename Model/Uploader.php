@@ -55,6 +55,11 @@ class Uploader
     protected $mediaDirectory;
 
     /**
+     * @var \Magento\Framework\Filesystem
+     */
+    protected $mediaDirectoryManager;
+
+    /**
      * Uploader factory
      *
      * @var \Magento\MediaStorage\Model\File\UploaderFactory
@@ -115,13 +120,20 @@ class Uploader
         $basePath
     ) {
         $this->_fileStorageDatabase     = $fileStorageDatabase;
-        $this->mediaDirectory           = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
+        $this->mediaDirectoryManager    = $filesystem;
         $this->uploaderFactory          = $uploaderFactory;
         $this->storeManager             = $storeManager;
         $this->logger                   = $logger;
         $this->baseTmpPath              = $baseTmpPath;
         $this->basePath                 = $basePath;
         $this->allowedExtensions        = $allowedExtensions;
+    }
+
+    private function mediaDirectory() {
+        if ($this->mediaDirectory === null) {
+            $this->mediaDirectory = $this->mediaDirectoryManager->getDirectoryWrite(DirectoryList::MEDIA);
+        }
+        return $this->mediaDirectory;
     }
 
     /**
@@ -225,7 +237,7 @@ class Uploader
                 $baseTmpFilePath,
                 $baseFilePath
             );
-            $this->mediaDirectory->renameFile(
+            $this->mediaDirectory()->renameFile(
                 $baseTmpFilePath,
                 $baseFilePath
             );
@@ -264,7 +276,7 @@ class Uploader
         $uploader->setAllowRenameFiles(true);
         $uploader->setFilesDispersion(true);
 
-        $result = $uploader->save($this->mediaDirectory->getAbsolutePath($baseTmpPath));
+        $result = $uploader->save($this->mediaDirectory()->getAbsolutePath($baseTmpPath));
 
         if (!$result) {
             throw new LocalizedException(

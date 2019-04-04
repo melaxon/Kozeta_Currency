@@ -82,6 +82,7 @@ class Url
                 (($suffix) ? '.'. $suffix : '');
             return $this->urlBuilder->getUrl('', ['_direct'=>$path]);
         }
+        
         return $this->urlBuilder->getUrl('currency/coin/view', ['id' => $coin->getId()]);
     }
 }

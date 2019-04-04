@@ -15,15 +15,14 @@ class OrderPlugin
      */
     protected $precisionObject;
     
-    
-    
+    /**
+     * @param Precision $precisionObject
+     */    
     public function __construct(
         \Kozeta\Currency\Model\Precision $precisionObject
     ) {
         $this->precisionObject = $precisionObject;
     }
-
-
 
     /**
      * @param \Magento\Sales\Model\Order $subject
@@ -41,6 +40,7 @@ class OrderPlugin
         $args[1] = $precision;
         return $args;
     }
+    
     /**
      * @param \Magento\Sales\Model\Order $subject
      * @param array ...$args

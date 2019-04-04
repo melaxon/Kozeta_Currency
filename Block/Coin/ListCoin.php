@@ -70,6 +70,10 @@ class ListCoin extends Template
      * @param Context $context
      * @param CoinCollectionFactory $coinCollectionFactory
      * @param UrlFactory $urlFactory
+     * @param CurrencyFactory $currencyFactory,
+     * @param ScopeConfigInterface $scopeConfig,
+     * @param ImageBuilder $imageBuilder,
+     * @param StoreManagerInterface $storeManager,
      * @param array $data
      */
     public function __construct(
@@ -86,13 +90,20 @@ class ListCoin extends Template
         $this->urlFactory = $urlFactory;
         $this->currencyFactory = $currencyFactory;
         $this->scopeConfig = $scopeConfig;
-        $this->enableCoinPages = $this->scopeConfig->getValue(
-            self::COIN_PAGES_CONFIG_PATH,
-            ScopeInterface::SCOPE_STORE
-        );
         $this->imageBuilder = $imageBuilder;
         $this->storeManager = $storeManager;
         parent::__construct($context, $data);
+    }
+
+    public function getEnableCoinPages()
+    {
+        if (is_null($this->enableCoinPages)) {
+            $this->enableCoinPages = $this->scopeConfig->getValue(
+                self::COIN_PAGES_CONFIG_PATH,
+                ScopeInterface::SCOPE_STORE
+            );
+        }
+        return $this->enableCoinPages;
     }
 
     /**
@@ -135,7 +146,6 @@ class ListCoin extends Template
 
         return $rates;
     }
-
 
     /**
      * @return $this

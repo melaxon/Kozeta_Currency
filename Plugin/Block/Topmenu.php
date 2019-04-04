@@ -38,6 +38,7 @@ class Topmenu
     /**
      * @param Url $url
      * @param Http $request
+     * @param ScopeConfigInterface $scopeConfig
      */
     public function __construct(
         Url $url,
