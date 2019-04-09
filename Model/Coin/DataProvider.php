@@ -19,7 +19,7 @@ class DataProvider extends AbstractDataProvider
      * @var array
      */
     protected $loadedData;
-
+//new branch diff
     /**
      * @var PoolInterface
      */
