@@ -7,7 +7,7 @@
 ?>
 <?php /** @var \Kozeta\Currency\Block\Coin\ListCoin\Rss\Link $block */?>
 <?php if ($block->isRssEnabled()) : ?>
-    <a href="<?php /* @escapeNotVerified */ echo $block->getLink() ?>" class="coins action link rss">
-        <span><?php /* @escapeNotVerified */ echo __('Subscribe to RSS Feed') ?></span>
+    <a href="<?= /* @escapeNotVerified */ $block->getLink() ?>" class="coins action link rss">
+        <span><?= /* @escapeNotVerified */ __('Subscribe to RSS Feed') ?></span>
     </a>
 <?php endif; ?>
