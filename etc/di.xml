@@ -163,27 +163,24 @@
             </argument>
         </arguments>
     </type>
-	<type name="Magento\Directory\Block\Currency">
-		<plugin name="kozeta_currency_directory_block_currency" type="Kozeta\Currency\Plugin\Block\Currency" disabled="false" sortOrder="2000" />
-  	</type>
-	<type name="Magento\Framework\Locale\ListsInterface">
-		<plugin name="kozeta_currency_translated_lists" type="Kozeta\Currency\Plugin\Config\AddCurrencies" disabled="false" sortOrder="2000" />
-  	</type>
+    <type name="Magento\Directory\Block\Currency">
+        <plugin name="kozeta_currency_directory_block_currency" type="Kozeta\Currency\Plugin\Block\Currency" disabled="false" sortOrder="2000" />
+      </type>
+    <type name="Magento\Framework\Locale\ListsInterface">
+        <plugin name="kozeta_currency_translated_lists" type="Kozeta\Currency\Plugin\Config\AddCurrencies" disabled="false" sortOrder="2000" />
+      </type>
     <type name="Magento\Framework\Pricing\PriceCurrencyInterface">
         <plugin name="kozeta_currency_precision_price_currency" type="Kozeta\Currency\Plugin\Precision\Framework\Pricing\PriceCurrency" sortOrder="2000" disabled="false"/>
     </type>
 
-	<type name="Magento\Framework\Locale\Format">
-		<plugin name="kozeta_currency_precision_framework_locale_format" type="Kozeta\Currency\Plugin\Precision\Framework\Locale\Format" disabled="false" sortOrder="2000" />
-	</type>
+    <type name="Magento\Framework\Locale\Format">
+        <plugin name="kozeta_currency_precision_framework_locale_format" type="Kozeta\Currency\Plugin\Precision\Framework\Locale\Format" disabled="false" sortOrder="2000" />
+    </type>
     <type name="Magento\Sales\Api\Data\OrderInterface">
         <plugin name="kozeta_currency_precision_sales_api_data_order_plugin" type="Kozeta\Currency\Plugin\Precision\Sales\Api\Data\OrderPlugin" sortOrder="2000" disabled="false"/>
     </type>
 <!-- remove magento currency symbols from ACL -->    
     <type name="Magento\Integration\Helper\Data">
         <plugin name="acl-intergration-data" type="Kozeta\Currency\Plugin\Integration\Data" sortOrder="100" />
-    </type>	
+    </type>
 </config>
-
-
-

@@ -92,8 +92,7 @@
 
             <group id="import" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Scheduled Import Settings</label>
-           		
-           		<field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
                 </field>
                      
                 
@@ -109,7 +108,7 @@
                         <field id="enabled">1</field>
                     </depends>
                 </field>
-           		<field id="time" showInDefault="1" showInWebsite="0" showInStore="0" >
+                <field id="time" showInDefault="1" showInWebsite="0" showInStore="0" >
                     <depends>
                         <field id="enabled_minutewice_schedule">0</field>
                         <field id="enabled">1</field>
@@ -159,7 +158,7 @@ Example: */5 * * * * Every 5 minutes
                         <field id="enabled">1</field>
                     </depends>
                 </field>
-			</group>
+            </group>
         </section>
         <section id="catalog_price_precision" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
             <tab>catalog</tab>
@@ -177,7 +176,7 @@ Example: */5 * * * * Every 5 minutes
                     </comment>
                     <source_model>Kozeta\Currency\Block\Precision\Config\Precision</source_model>
                 </field>
-       		</group>
+            </group>
         </section>
     </system>
 </config>
