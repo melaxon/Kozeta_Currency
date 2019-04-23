@@ -37,9 +37,6 @@ interface CoinInterface
     const MINCONF           = 'minconf';
     const PRECISION         = 'precision';
     const CURRENCY_CONVERTER_ID = 'currency_converter_id';
-//    const UPDATED_AT        = 'updated_at';
-//    const RATE                = 'rate';
-
 
     /**
      * Get sort order

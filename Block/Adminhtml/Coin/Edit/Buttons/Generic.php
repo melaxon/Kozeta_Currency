@@ -16,12 +16,12 @@ class Generic
     /**
      * @var Context
      */
-    protected $context;
+    private $context;
 
     /**
      * @var CoinRepositoryInterface
      */
-    protected $coinRepository;
+    private $coinRepository;
 
     /**
      * @param Context $context
