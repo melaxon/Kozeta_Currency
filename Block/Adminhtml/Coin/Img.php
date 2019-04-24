@@ -9,8 +9,6 @@ namespace Kozeta\Currency\Block\Adminhtml\Coin;
 
 class Img extends \Magento\Framework\View\Element\Template
 {
-
-
     /**
      * @param array $data
      */

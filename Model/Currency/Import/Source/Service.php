@@ -7,7 +7,14 @@
 
 namespace Kozeta\Currency\Model\Currency\Import\Source;
 
-class Service extends \Magento\Directory\Model\Currency\Import\Source\Service
+use \Magento\Directory\Model\Currency\Import\Source\Service as Options;
+
+/**
+ * Currency rates import Service
+ *
+ * @method array toOptionArray()
+ */
+class Service extends Options
 {
     /**
      * @var array
@@ -18,7 +25,7 @@ class Service extends \Magento\Directory\Model\Currency\Import\Source\Service
      * @param \Magento\Directory\Model\Currency\Import\Source\Service $options
      */
     public function __construct(
-        \Magento\Directory\Model\Currency\Import\Source\Service $options
+        Options $options
     ) {
         $this->_options = $options->toOptionArray();
     }
