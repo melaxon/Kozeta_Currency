@@ -160,6 +160,14 @@
                     <item name="label" xsi:type="string">Coinapi.io (Crypto and Fiat)</item>
                     <item name="class" xsi:type="string">Kozeta\Currency\Model\Currency\Import\Coinapi</item>
                 </item>
+                <item name="coinpayments" xsi:type="array">
+                    <item name="label" xsi:type="string">Coinpayments.net (Crypto)</item>
+                    <item name="class" xsi:type="string">Kozeta\Currency\Model\Currency\Import\Coinpayments</item>
+                </item>
+                <item name="coinpayments" xsi:type="array">
+                    <item name="label" xsi:type="string">CoinGate (Crypto)</item>
+                    <item name="class" xsi:type="string">Kozeta\Currency\Model\Currency\Import\Coingate</item>
+                </item>
             </argument>
         </arguments>
     </type>
