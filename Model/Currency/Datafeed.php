@@ -8,7 +8,7 @@
 namespace Kozeta\Currency\Model\Currency;
 
 /**
- * Currency rate import model (From https://frankfurter.app/)
+ * Currency rate import model
  */
 class Datafeed
 {
