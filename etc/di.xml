@@ -168,6 +168,10 @@
                     <item name="label" xsi:type="string">CoinGate</item>
                     <item name="class" xsi:type="string">Kozeta\Currency\Model\Currency\Import\Coingate</item>
                 </item>
+                <item name="bitpay" xsi:type="array">
+                    <item name="label" xsi:type="string">Bitpay</item>
+                    <item name="class" xsi:type="string">Kozeta\Currency\Model\Currency\Import\Bitpay</item>
+                </item>
             </argument>
         </arguments>
     </type>

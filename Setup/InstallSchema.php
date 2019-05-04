@@ -194,7 +194,7 @@ class InstallSchema implements InstallSchemaInterface
                 'currency_converter_id',
                 Table::TYPE_TEXT,
                 255,
-                [],
+                ['nullable' => false, 'default' => ''],
                 'Currency Convert Service'
             )->addColumn(
                 'precision',
