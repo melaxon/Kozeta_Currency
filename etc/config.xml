@@ -32,12 +32,28 @@
                 <!-- Every day at midnight -->
                 <schedule>0 0 * * *</schedule>
             </import>
+            <import_alt_1>
+                <enabled>0</enabled>
+                <!-- Every day at midnight -->
+                <schedule>0 0 * * *</schedule>
+            </import_alt_1>
+            <import_alt_2>
+                <enabled>0</enabled>
+                <!-- Every day at midnight -->
+                <schedule>0 0 * * *</schedule>
+            </import_alt_2>
             <frankfurter>
                 <timeout>100</timeout>
             </frankfurter>
             <coinapi>
                 <timeout>100</timeout>
             </coinapi>
+            <coinpayments>
+                <timeout>100</timeout>
+            </coinpayments>
+            <coingate>
+                <timeout>100</timeout>
+            </coingate>
         </currency>
         <catalog_price_precision>
             <general>

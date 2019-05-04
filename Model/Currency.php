@@ -20,7 +20,7 @@ class Currency extends \Magento\Directory\Model\Currency
     /**
      * @var \Kozeta\Currency\Model\Precision
      */
-    protected $precisionObject;
+    private $precisionObject;
 
     /**
      * Retrieve currency rates to other currencies
@@ -101,8 +101,12 @@ class Currency extends \Magento\Directory\Model\Currency
             $options['precision'] = $precision;
         }
         if (empty($options['precision']) && $options['precision'] !== 0) {
-            $options['precision'] = 2;
+            $options['precision'] = \Magento\Framework\Pricing\PriceCurrencyInterface::DEFAULT_PRECISION;
         }
+
+        $data = $this->_getResource()->getCurrencySymbol($this->getCode());
+        $options['symbol'] = $data[$this->getCode()] ?: $this->getCode();
+        //$options['position'] = 16;
 
         return $this->_localeCurrency->getCurrency($this->getCode())->toCurrency($price, $options);
     }
