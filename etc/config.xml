@@ -48,6 +48,9 @@
             <coinapi>
                 <timeout>100</timeout>
             </coinapi>
+            <bitpay>
+                <timeout>100</timeout>
+            </bitpay>
             <coinpayments>
                 <timeout>100</timeout>
             </coinpayments>
