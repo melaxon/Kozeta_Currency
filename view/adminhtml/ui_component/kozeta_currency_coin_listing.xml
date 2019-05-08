@@ -310,6 +310,34 @@
                 </item>
             </argument>
         </column>
+        <column name="currency_converter_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">\Kozeta\Currency\Model\Currency\Import\Source\Service</item>
+                <item name="config" xsi:type="array">
+                    <item name="editor" xsi:type="string">select</item>
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="align" xsi:type="string">left</item>
+                    <item name="label" xsi:type="string" translate="true">Rates Service</item>
+                    <item name="sortOrder" xsi:type="number">55</item>
+                </item>
+            </argument>
+        </column>
+        <column name="import_scheduler">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">\Kozeta\Currency\Model\Currency\Import\Source\Schedule</item>
+                <item name="config" xsi:type="array">
+                    <item name="editor" xsi:type="string">select</item>
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="align" xsi:type="string">left</item>
+                    <item name="label" xsi:type="string" translate="true">Import schedule</item>
+                    <item name="sortOrder" xsi:type="number">56</item>
+                </item>
+            </argument>
+        </column>
         <column name="precision">
             <argument name="data" xsi:type="array">
                 <item name="js_config" xsi:type="array">

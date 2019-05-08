@@ -1,14 +1,14 @@
 {
   "name": "kozeta/currency",
   "description": "Currency management",
-  "version": "1.0.1",
+  "require": {
+    "php": "~5.5.0|~5.6.0|~7.0.0|~7.1|~7.2"
+  },
+  "type": "magento2-module",
+  "version": "1.0.2",
   "license": [
     "Commercial"
-],
-  "require": {
-  },
-
-  "type": "magento2-module",
+  ],
   "autoload": {
     "files": [
       "registration.php"

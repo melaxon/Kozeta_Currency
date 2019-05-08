@@ -17,26 +17,27 @@ interface CoinInterface
     /**
      * Constants for keys of data array. Identical to the name of the getter in snake case
      */
-    const COIN_ID           = 'coin_id';
-    const NAME              = 'name';
-    const URL_KEY           = 'url_key';
-    const IS_ACTIVE         = 'is_active';
-    const TYPE              = 'type';
-    const SORT_ORDER        = 'sort_order';
-    const AVATAR            = 'avatar';
-    const META_TITLE        = 'meta_title';
-    const META_DESCRIPTION  = 'meta_description';
-    const META_KEYWORDS     = 'meta_keywords';
-    const STORE_ID          = 'store_id';
-    const IN_RSS            = 'in_rss';
-    const DESCRIPTION       = 'description';
-    const CODE              = 'code';
-    const IS_FIAT           = 'is_fiat';
-    const SYMBOL            = 'symbol';
-    const TXFEE             = 'txfee';
-    const MINCONF           = 'minconf';
-    const PRECISION         = 'precision';
+    const COIN_ID               = 'coin_id';
+    const NAME                  = 'name';
+    const URL_KEY               = 'url_key';
+    const IS_ACTIVE             = 'is_active';
+    const TYPE                  = 'type';
+    const SORT_ORDER            = 'sort_order';
+    const AVATAR                = 'avatar';
+    const META_TITLE            = 'meta_title';
+    const META_DESCRIPTION      = 'meta_description';
+    const META_KEYWORDS         = 'meta_keywords';
+    const STORE_ID              = 'store_id';
+    const IN_RSS                = 'in_rss';
+    const DESCRIPTION           = 'description';
+    const CODE                  = 'code';
+    const IS_FIAT               = 'is_fiat';
+    const SYMBOL                = 'symbol';
+    const TXFEE                 = 'txfee';
+    const MINCONF               = 'minconf';
+    const PRECISION             = 'precision';
     const CURRENCY_CONVERTER_ID = 'currency_converter_id';
+    const IMPORT_SCHEDULER      = 'import_scheduler';
 
     /**
      * Get sort order
@@ -103,11 +104,25 @@ interface CoinInterface
     public function getCurrencyConverterId();
 
     /**
-     * Set CurrencyConverterId
+     * Set currency_converter_id
      * @param $currencyConverterId
      * @return CoinInterface
      */
     public function setCurrencyConverterId($currencyConverterId);
+
+    /**
+     * Get import_scheduler
+     *
+     * @return string
+     */
+    public function getImportScheduler();
+
+    /**
+     * Set import_scheduler
+     * @param $importScheduler
+     * @return CoinInterface
+     */
+    public function setImportScheduler($importScheduler);
 
     /**
      * Get url key
