@@ -50,6 +50,28 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
     }
 
     /**
+     * Return currency rates and time
+     *
+     * @param string|array $currency
+     * @param array $toCurrencies
+     * @return array
+     */
+    public function getCurrencyRatesUpdated($currency, $toCurrencies = null)
+    {
+        $rates = [];
+        if (is_array($currency)) {
+            foreach ($currency as $code) {
+                $rates[$code] = $this->_getRatesByCode($code, $toCurrencies, 1);
+            }
+        } else {
+            $rates = $this->_getRatesByCode($currency, $toCurrencies, 1);
+        }
+
+        return $rates;
+    }
+
+
+    /**
      * Protected method used by getCurrencyRates() method
      *
      * @param string $code
@@ -115,6 +137,18 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
     public function getCurrencySymbol($code) 
     {
         return $this->getCurrencyParamByCode($code, 'symbol');
+    }
+    
+    /**
+     * Return currency precision
+     *
+     * @param string|array $code
+     * @return array
+     * @SuppressWarnings(PHPMD.Ecg.Sql.SlowQuery)
+     */
+    public function getCurrencyPrecision($code) 
+    {
+        return $this->getCurrencyParamByCode($code, 'precision');
     }
     
     /**

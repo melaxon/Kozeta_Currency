@@ -34,8 +34,13 @@ class Currency extends \Magento\Directory\Model\Currency
         if ($currency instanceof \Magento\Directory\Model\Currency) {
             $currency = $currency->getCode();
         }
-        $data = $this->_getResource()->getCurrencyRates($currency, $toCurrencies, $getUpdated_at);
-        return $data;
+        
+        if ($getUpdated_at) {
+            return $this->_getResource()->getCurrencyRatesUpdated($currency, $toCurrencies);
+        }
+        
+        return $this->_getResource()->getCurrencyRates($currency, $toCurrencies);
+
     }
    
     /**

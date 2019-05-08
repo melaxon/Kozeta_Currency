@@ -10,10 +10,12 @@
  * @var $block \Kozeta\Currency\Block\Adminhtml\System\Currency\Rate\Matrix
  */
 ?>
+
 <?php
-    $_oldRates = $block->getOldRates();
     $_rates = $block->_getDisplayRates();
+    $_newRates = $this->getNewRates();
 ?>
+
 <?php if (empty($_rates)) : ?>
     <div class="message message-warning warning"><p><?= /* @escapeNotVerified */ __('You must first configure currency options before being able to see currency rates.') ?></p></div>
 <?php else : ?>
@@ -47,32 +49,25 @@
                 <?php $_j = 0; foreach ($dc as $_currencyCode) : ?>
                 <tr>
                     <?php if (isset($_rates[$_currencyCode]) && is_array($_rates[$_currencyCode])) : ?>
-                        <?php foreach ($_rates[$_currencyCode] as $_rate => $_value) : ?>
+                        <?php foreach ($_rates[$_currencyCode] as $_code => $_value) : ?>
                             <?php if (++$_j == 1) : ?>
                                 <td><span class="admin__control-support-text"><?= /* @escapeNotVerified */ $_currencyCode ?></span></td>
+                            <?php endif; //print_r($_value)?>
                                 <td>
                                     <input type="text"
-                                           name="rate[<?= /* @escapeNotVerified */ $_currencyCode ?>][<?= /* @escapeNotVerified */ $_rate ?>]"
-                                           value="<?= ($_currencyCode == $_rate) ? '1.0000' : ($_value>0 ? $_value : (isset($_oldRates[$_currencyCode][$_rate]) ?: '')) ?>"
+                                           name="rate[<?= /* @escapeNotVerified */ $_currencyCode ?>][<?= /* @escapeNotVerified */ $_code ?>]"
+                                           value="<?= ($_currencyCode == $_code) ? '1.0000' : (isset($_newRates[$_currencyCode][$_code]) ? (float) $_newRates[$_currencyCode][$_code] : (float) $_value['rate'] ?: '') ?>"
                                            class="admin__control-text"
-                                            <?= ($_currencyCode == $_rate) ? ' disabled' : '' ?> />
-                                    <?php if (!empty($block->getNewRates()) && $_currencyCode != $_rate && isset($_oldRates[$_currencyCode][$_rate])) : ?>
-                                    <div class="admin__field-note"><?= /* @escapeNotVerified */ __('Old rate:') ?> <b><?= /* @escapeNotVerified */ $_oldRates[$_currencyCode][$_rate] ?></b></div>
+                                            <?= ($_currencyCode == $_code) ? ' disabled' : '' ?> />
+                                    <?php if (!empty($_newRates) && $_currencyCode != $_code && isset($_value['rate'])) : ?>
+                                    <div class="admin__field-note"><?= /* @escapeNotVerified */ __('Old rate:') ?> <b><?= /* @escapeNotVerified */ (float) $_value['rate'] ?></b></div>
+                                    <?php endif; ?>
+                                    <?php if ($_code != $_currencyCode):?>
+                                    <div class="admin__field-note"><?= /* @escapeNotVerified */ __('Updated at:') ?> <b><?= /* @escapeNotVerified */ $_value['updated_at'] ?></b></div>
                                     <?php endif; ?>
                                 </td>
-                            <?php else : ?>
-                                <td>
-                                    <input type="text"
-                                           name="rate[<?= /* @escapeNotVerified */ $_currencyCode ?>][<?= /* @escapeNotVerified */ $_rate ?>]"
-                                           value="<?= ($_currencyCode == $_rate) ? '1.0000' : ($_value>0 ? $_value : (isset($_oldRates[$_currencyCode][$_rate]) ?: '')) ?>"
-                                           class="admin__control-text"
-                                            <?= ($_currencyCode == $_rate) ? ' disabled' : '' ?> />
-                                    <?php if (!empty($block->getNewRates()) && $_currencyCode != $_rate && isset($_oldRates[$_currencyCode][$_rate])) : ?>
-                                    <div class="admin__field-note"><?= /* @escapeNotVerified */ __('Old rate:') ?> <b><?= /* @escapeNotVerified */ $_oldRates[$_currencyCode][$_rate] ?></b></div>
-                                    <?php endif; ?>
-                                </td>
-                            <?php endif;
-unset($_rates[$_currencyCode][$_rate]);
+<?php
+unset($_rates[$_currencyCode][$_code]);
 if ($_j == $coins) {
     $_j = 0;
     break;

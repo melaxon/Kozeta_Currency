@@ -47,6 +47,9 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
         parent::__construct($context, $dirCurrencyFactory, $data);
     }
     
+    /**
+     * @return int
+     */
     public function getCoinsInRow()
     {
     
@@ -60,13 +63,24 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
         return $this->_coinsInRow;
     }
     
+    /**
+     * @return int
+     */
     public function getRows()
     {
         return ceil(count($this->getAllowedCurrencies()) / $this->getCoinsInRow());
     }
     
+    /**
+     * @return array
+     */
     public function _getDisplayRates()
     {
-        return $this->getNewRates() ?: $this->getOldRates();
+        $currencyModel = $this->_dirCurrencyFactory->create();
+        $currencies = $currencyModel->getConfigAllowCurrencies();
+        $defaultCurrencies = $currencyModel->getConfigBaseCurrencies();
+
+        return $currencyModel->getCurrencyRates($defaultCurrencies, $currencies, true);
     }
+    
 }
