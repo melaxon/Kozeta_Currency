@@ -8,6 +8,9 @@
 namespace Kozeta\Currency\Block\Adminhtml\System\Currency\Rate;
 
 use Magento\Store\Model\ScopeInterface;
+use Magento\Backend\Block\Template\Context;
+use Magento\Directory\Model\CurrencyFactory;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 
 class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rate\Matrix
 {
@@ -19,13 +22,13 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
-    protected $scopeConfig;
+    private $scopeConfig;
 
     /**
      * @var integer
      */
-    protected $_coinsInRow;
-
+    private $coinsInRow;
+private $schedule;
     /**
      * @var string
      */
@@ -37,13 +40,16 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
      * @param array $data
      */
     public function __construct(
-        \Magento\Backend\Block\Template\Context $context,
-        \Magento\Directory\Model\CurrencyFactory $dirCurrencyFactory,
+        Context $context,
+        CurrencyFactory $dirCurrencyFactory,
         array $data = [],
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+        ScopeConfigInterface $scopeConfig,
+        \Kozeta\Currency\Model\Schedule $schedule
+        
     ) {
         $this->_dirCurrencyFactory = $dirCurrencyFactory;
         $this->scopeConfig = $scopeConfig;
+        $this->schedule = $schedule;
         parent::__construct($context, $dirCurrencyFactory, $data);
     }
     
@@ -52,15 +58,18 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
      */
     public function getCoinsInRow()
     {
+        if ($this->coinsInRow !== null) {
+            return $this->coinsInRow;
+        }
+
+$this->schedule->scheduledUpdateCurrencyRatesAlt(1,0);
     
-        if ($this->_coinsInRow !== null) {
-            return $this->_coinsInRow;
+
+        $this->coinsInRow = (int) trim($this->scopeConfig->getValue(self::COINS_IN_ROW_MENU_CONFIG_PATH, ScopeInterface::SCOPE_STORES));
+        if (!$this->coinsInRow) {
+            $this->coinsInRow = 6;
         }
-        $this->_coinsInRow = (int) trim($this->scopeConfig->getValue(self::COINS_IN_ROW_MENU_CONFIG_PATH, ScopeInterface::SCOPE_STORES));
-        if (!$this->_coinsInRow) {
-            $this->_coinsInRow = 6;
-        }
-        return $this->_coinsInRow;
+        return $this->coinsInRow;
     }
     
     /**

@@ -44,9 +44,9 @@
         </arguments>
     </type>
 <!-- fix total due -->
-	<type name="Magento\Sales\Model\Order">
-		<plugin name="kozeta_currency_order_total_due" type="Kozeta\Currency\Plugin\Sales\Model\Order" disabled="false" sortOrder="2000" />
-	</type>
+    <type name="Magento\Sales\Model\Order">
+        <plugin name="kozeta_currency_order_total_due" type="Kozeta\Currency\Plugin\Sales\Model\Order" disabled="false" sortOrder="2000" />
+    </type>
 
 
 </config>

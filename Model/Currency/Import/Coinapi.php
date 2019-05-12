@@ -78,11 +78,13 @@ class Coinapi extends \Magento\Directory\Model\Currency\Import\AbstractImport
       
         //get saved datafeed
         $feed = $this->dataFeed->getDatafeed();
-        if (!empty($feed) && isset($feed[$currencyTo])) {
-            return (float) $feed[$currencyTo]['rate'];
+        if (!empty($feed)) {
+            if (isset($feed[$currencyTo])) {
+                return (float) $feed[$currencyTo]['rate'];
+            }
+                return 1;
         }
 
-        
         $result = null;
         $timeout = (int)$this->scopeConfig->getValue(
             'currency/coinapi/timeout',

@@ -54,6 +54,25 @@ class UpgradeSchema implements UpgradeSchemaInterface
      * @param SchemaSetupInterface $installer
      * @return void
      */
+    protected function addColumnImportEnabled(SchemaSetupInterface $installer)
+    {
+        $installer->getConnection()->addColumn(
+            $installer->getTable('kozeta_currency_coin'),
+            'import_enabled',
+            [
+                'type' => Table::TYPE_SMALLINT,
+                'length' => 1,
+                'nullable' => false,
+                'default' => '1',
+                'comment' => 'Import Enabled'
+            ]
+        );
+    }
+
+    /**
+     * @param SchemaSetupInterface $installer
+     * @return void
+     */
     private function addIndexImportScheduler(SchemaSetupInterface $installer)
     {
         $installer->getConnection()->addIndex(

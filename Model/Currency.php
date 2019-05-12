@@ -23,6 +23,11 @@ class Currency extends \Magento\Directory\Model\Currency
     private $precisionObject;
 
     /**
+     * @var \Kozeta\Currency\Model\Currency
+     */
+    private $runtimeCurrencies;
+
+    /**
      * Retrieve currency rates to other currencies
      *
      * @param string $currency
@@ -54,10 +59,24 @@ class Currency extends \Magento\Directory\Model\Currency
             $currency = $currency->getCode();
         }
         
-        $data = $this->_getResource()->getCurrencyNames($currency);
-        return $data;
+        return $this->_getResource()->getCurrencyNames($currency);
     }
     
+    /**
+     * Return currency parameters
+     * Return all parameters if no $param given
+     * @param string|array $currency
+     * @param string|array $param
+     * @return array
+     */
+    public function getCurrencyParamByCode($currency, $param = null)
+    {
+        if ($currency instanceof \Magento\Directory\Model\Currency) {
+            $currency = $currency->getCode();
+        }
+        return $this->_getResource()->getCurrencyParamByCode($currency, $param);
+    }
+
     /**
      * Price precision
      * @param   float $price
@@ -114,5 +133,25 @@ class Currency extends \Magento\Directory\Model\Currency
         //$options['position'] = 16;
 
         return $this->_localeCurrency->getCurrency($this->getCode())->toCurrency($price, $options);
+    }
+
+    /**
+     * Retrieve current currency set if exists
+     *
+     * @return array
+     */
+    public function getConfigAllowCurrencies()
+    {
+        if (is_array($this->runtimeCurrencies)) {
+               return $this->runtimeCurrencies;
+        }
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->currencyObject = $objectManager->get('Kozeta\Currency\Model\Schedule');
+        $currencies = $this->currencyObject->getCurrencies();
+        if (is_array($currencies)) {
+           $this->runtimeCurrencies = $currencies;
+            return $currencies;
+        }
+        return parent::getConfigAllowCurrencies();
     }
 }

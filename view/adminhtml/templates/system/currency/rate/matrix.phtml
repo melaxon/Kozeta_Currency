@@ -52,7 +52,7 @@
                         <?php foreach ($_rates[$_currencyCode] as $_code => $_value) : ?>
                             <?php if (++$_j == 1) : ?>
                                 <td><span class="admin__control-support-text"><?= /* @escapeNotVerified */ $_currencyCode ?></span></td>
-                            <?php endif; //print_r($_value)?>
+                            <?php endif; ?>
                                 <td>
                                     <input type="text"
                                            name="rate[<?= /* @escapeNotVerified */ $_currencyCode ?>][<?= /* @escapeNotVerified */ $_code ?>]"

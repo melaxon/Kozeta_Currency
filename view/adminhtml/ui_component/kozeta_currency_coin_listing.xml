@@ -319,7 +319,7 @@
                     <item name="dataType" xsi:type="string">select</item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
                     <item name="align" xsi:type="string">left</item>
-                    <item name="label" xsi:type="string" translate="true">Rates Service</item>
+                    <item name="label" xsi:type="string" translate="true">Import Service</item>
                     <item name="sortOrder" xsi:type="number">55</item>
                 </item>
             </argument>

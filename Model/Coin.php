@@ -280,6 +280,27 @@ class Coin extends AbstractModel implements CoinInterface, RoutableInterface
     }
 
     /**
+     * Get import_enabled
+     *
+     * @return string
+     */
+    public function getImportEnabled()
+    {
+        return $this->getData(CoinInterface::IMPORT_ENABLED);
+    }
+
+    /**
+     * Set import_enabled
+     *
+     * @param $importEnabled
+     * @return CoinInterface
+     */
+    public function setImportEnabled($importEnabled)
+    {
+        return $this->setData(CoinInterface::IMPORT_ENABLED, $importEnabled);
+    }
+
+    /**
      * Set in rss
      *
      * @param $inRss

@@ -55,6 +55,39 @@ class Frankfurter extends \Magento\Directory\Model\Currency\Import\AbstractImpor
     }
 
     /**
+     * @return array
+     */
+    public function fetchRates()
+    {
+        $data = [];
+        $currencies = $this->_getCurrencyCodes();
+echo "<pre>FRANKFURTER:\n". print_r($currencies); echo "\n</pre>";
+
+        $defaultCurrencies = $this->_getDefaultCurrencyCodes();
+        set_time_limit(0);
+        foreach ($defaultCurrencies as $currencyFrom) {
+            if (!isset($data[$currencyFrom])) {
+                $data[$currencyFrom] = [];
+            }
+
+            foreach ($currencies as $currencyTo) {
+                if ($currencyFrom == $currencyTo) {
+                    $data[$currencyFrom][$currencyTo] = $this->_numberFormat(1);
+                } else {
+                    $data[$currencyFrom][$currencyTo] = $this->_numberFormat(
+                        $this->_convert($currencyFrom, $currencyTo)
+                    );
+                }
+            }
+            ksort($data[$currencyFrom]);
+        }
+        ini_restore('max_execution_time');
+
+        return $data;
+    }
+
+
+    /**
      * @param string $currencyFrom
      * @param string $currencyTo
      * @param int $retry
@@ -72,6 +105,8 @@ class Frankfurter extends \Magento\Directory\Model\Currency\Import\AbstractImpor
 
         /** @var \Magento\Framework\HTTP\ZendClient $httpClient */
         $httpClient = $this->httpClientFactory->create();
+//$currencies = $this->_getCurrencyCodes();
+//$this->_messages[] = "FRANKFURTER: ". print_r($currencies, true);
 
         try {
             $response = $httpClient->setUri($url)
@@ -93,6 +128,7 @@ class Frankfurter extends \Magento\Directory\Model\Currency\Import\AbstractImpor
                 $this->_messages[] = __('We can\'t retrieve the rates from url %1.', $url);
             }
         }
+
         return $result;
     }
 }

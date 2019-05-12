@@ -35,10 +35,10 @@ class Service extends Options
      */
     public function toOptionArray()
     {
-        $this->_options[] = [
+        array_unshift($this->_options, [
             'label' => __('Use default settings'),
             'value' => 'default',
-        ];
+        ]);
 
         return $this->_options;
     }

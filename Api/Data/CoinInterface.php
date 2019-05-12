@@ -38,7 +38,7 @@ interface CoinInterface
     const PRECISION             = 'precision';
     const CURRENCY_CONVERTER_ID = 'currency_converter_id';
     const IMPORT_SCHEDULER      = 'import_scheduler';
-
+    const IMPORT_ENABLED        = 'import_enabled';
     /**
      * Get sort order
      *
@@ -123,6 +123,20 @@ interface CoinInterface
      * @return CoinInterface
      */
     public function setImportScheduler($importScheduler);
+
+    /**
+     * Get import_enabled
+     *
+     * @return string
+     */
+    public function getImportEnabled();
+
+    /**
+     * Set import_enabled
+     * @param $importEnabled
+     * @return CoinInterface
+     */
+    public function setImportEnabled($importEnabled);
 
     /**
      * Get url key

@@ -159,11 +159,14 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
      * @return array
      * @SuppressWarnings(PHPMD.Ecg.Sql.SlowQuery)
      */
-    private function getCurrencyParamByCode($code, $param = null)
+    public function getCurrencyParamByCode($code, $param = null)
     {
+        $result = [];
+        $_code = [];
         if (!is_array($code)) {
             $code = [$code];
         }
+        $_code = $code;
         foreach ($code as $k => $c) {
             if (isset($this->_currencyData[$c])) {
                 unset($code[$k]);
@@ -186,7 +189,6 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
                 'code IN(?)',
                 $code
             );
-
             // @codingStandardsIgnoreStart
             $rowSet = $connection->fetchAll($select);
             // @codingStandardsIgnoreEnd
@@ -196,6 +198,14 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
                 $this->_currencyData[$row['code']] = $row;
             }
         }
-        return $result;
+
+        $_result = [];
+        foreach ($_code as $k => $c) {
+            if (isset($result[$c])) {
+                $_result[$c] = $result[$c];
+            }
+        }
+
+        return $_result;
     }
 }
