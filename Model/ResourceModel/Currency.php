@@ -84,6 +84,7 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
         $fieldsList = ['currency_to', 'rate'];
         if ($updated !== null) {
             $fieldsList[] = 'updated_at';
+            $fieldsList[] = 'currency_converter_id';
         }
         $connection = $this->getConnection();
         $bind = [':currency_from' => $code];
@@ -105,6 +106,7 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
             foreach ($rowSet as $row) {
                 $result[$row['currency_to']]['rate'] = $row['rate'];
                 $result[$row['currency_to']]['updated_at'] = $row['updated_at'];
+                $result[$row['currency_to']]['currency_converter_id'] = $row['currency_converter_id'];
             }
         } else {
             foreach ($rowSet as $row) {
@@ -207,5 +209,42 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
         }
 
         return $_result;
+    }
+
+    /**
+     * Saving currency rates
+     *
+     * @param array $rates
+     * @param array $service optional
+     * @return void
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function saveRates($rates, $service = null)
+    {
+        if (is_array($rates) && sizeof($rates) > 0) {
+            $connection = $this->getConnection();
+            $data = [];
+            foreach ($rates as $currencyCode => $rate) {
+                $_fields = [];
+                foreach ($rate as $currencyTo => $value) {
+                    $value = abs($value);
+                    if ($value == 0) {
+                        continue;
+                    }
+                    $_fields['currency_from'] = $currencyCode;
+                    $_fields['currency_to'] = $currencyTo;
+                    $_fields['rate'] = $value;
+                    if ($service) {
+                        $_fields['currency_converter_id'] = $service;
+                    }
+                    $data[] = $_fields;
+                }
+            }
+            if ($data) {
+                $connection->insertOnDuplicate($this->_currencyRateTable, $data, ['rate']);
+            }
+        } else {
+            throw new \Magento\Framework\Exception\LocalizedException(__('Please correct the rates received'));
+        }
     }
 }

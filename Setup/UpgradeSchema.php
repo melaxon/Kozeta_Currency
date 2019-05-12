@@ -26,6 +26,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         if ($context->getVersion() && version_compare($context->getVersion(), '1.0.2', '<')) {
             $this->addColumnImportScheduler($installer);
             $this->addIndexImportScheduler($installer);
+            $this->addColumnConverterId($installer);
         }
 
         $installer->endSetup();
@@ -79,6 +80,25 @@ class UpgradeSchema implements UpgradeSchemaInterface
             $installer->getTable('kozeta_currency_coin'),
             $installer->getIdxName('kozeta_currency_coin', ['import_scheduler']),
             ['import_scheduler']
+        );
+    }
+    
+    /**
+     * @param SchemaSetupInterface $installer
+     * @return void
+     */
+    private function addColumnConverterId(SchemaSetupInterface $installer)
+    {
+        $installer->getConnection()->addColumn(
+            $installer->getTable('kozeta_currency_currency_rate'),
+            'currency_converter_id',
+            [
+                'type' => Table::TYPE_TEXT,
+                'length' => 255,
+                'nullable' => false,
+                'default' => '',
+                'comment' => 'Currency Converter ID'
+            ]
         );
     }
 }

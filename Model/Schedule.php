@@ -255,7 +255,7 @@ echo "\n</pre>";
 
                 $rates = $importModel->fetchRates();
 echo "<pre>RATES:\n";
-print_r($_rates);
+print_r($rates);
 echo "\n</pre>";
                 $errors = $importModel->getMessages();
 
@@ -276,7 +276,7 @@ echo "\n</pre>";
                 continue;
             }
             $this->currencies = false;
-            $this->_currencyFactory->create()->saveRates($rates);
+            $this->_currencyFactory->create()->saveRates($rates, $service);
 
         }
     }

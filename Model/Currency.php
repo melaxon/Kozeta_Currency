@@ -142,16 +142,37 @@ class Currency extends \Magento\Directory\Model\Currency
      */
     public function getConfigAllowCurrencies()
     {
-        if (is_array($this->runtimeCurrencies)) {
-               return $this->runtimeCurrencies;
-        }
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $this->currencyObject = $objectManager->get('Kozeta\Currency\Model\Schedule');
-        $currencies = $this->currencyObject->getCurrencies();
-        if (is_array($currencies)) {
-           $this->runtimeCurrencies = $currencies;
-            return $currencies;
+        $allowedCurrencies = $this->currencyObject->getCurrencies();
+        if (is_array($allowedCurrencies)) {
+           
+            $appBaseCurrencyCode = $this->_directoryHelper->getBaseCurrencyCode();
+            if (!in_array($appBaseCurrencyCode, $allowedCurrencies)) {
+                $allowedCurrencies[] = $appBaseCurrencyCode;
+            }
+            foreach ($this->_storeManager->getStores() as $store) {
+                $code = $store->getBaseCurrencyCode();
+                if (!in_array($code, $allowedCurrencies)) {
+                    $allowedCurrencies[] = $code;
+                }
+            }
+            return $allowedCurrencies;
         }
+
         return parent::getConfigAllowCurrencies();
+    }
+    
+    /**
+     * Save currency rates
+     *
+     * @param array $rates
+     * @param array $service optional
+     * @return $this
+     */
+    public function saveRates($rates, $service = null)
+    {
+        $this->_getResource()->saveRates($rates, $service);
+        return $this;
     }
 }

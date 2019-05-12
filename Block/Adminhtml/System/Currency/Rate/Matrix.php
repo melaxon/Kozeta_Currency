@@ -62,7 +62,7 @@ private $schedule;
             return $this->coinsInRow;
         }
 
-$this->schedule->scheduledUpdateCurrencyRatesAlt(1,0);
+//$this->schedule->scheduledUpdateCurrencyRatesAlt(1,0);
     
 
         $this->coinsInRow = (int) trim($this->scopeConfig->getValue(self::COINS_IN_ROW_MENU_CONFIG_PATH, ScopeInterface::SCOPE_STORES));
