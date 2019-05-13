@@ -28,17 +28,7 @@
     $dc = $block->getDefaultCurrencies();
     $coins = $block->getCoinsInRow();
     $rows = $block->getRows();
-?>  
-
-<pre>
-RATES
-<?php print_r($_rates); ?>
-+++++
-NEW RATES
-<?php print_r($_newRates); ?>
------
-<?php //exit; ?>
-</pre>
+?>
 <?php $j = 1; for ($i = 1; $i <= $rows; $i++) : ?>
         <div class="admin__control-table-wrapper"><br />
             <table class="admin__control-table">
@@ -60,14 +50,13 @@ NEW RATES
                 <?php $_j = 0; foreach ($dc as $_currencyCode) : ?>
                 <tr>
                     <?php if (isset($_rates[$_currencyCode]) && is_array($_rates[$_currencyCode])) : ?>
-                    
                         <?php foreach ($_ac as $k => $_code) : ?>
                             <?php if (++$_j == 1) : ?>
                                 <td><span class="admin__control-support-text"><?= /* @escapeNotVerified */ $_currencyCode ?></span></td>
                             <?php endif; ?>
                                 <td>
                                     <input type="text"
-                                           name="rate[<?php /* @escapeNotVerified */ $_currencyCode ?>][<?= /* @escapeNotVerified */ $_code ?>]"
+                                           name="rate[<?= /* @escapeNotVerified */ $_currencyCode ?>][<?= /* @escapeNotVerified */ $_code ?>]"
                                            value="<?php if ($_currencyCode == $_code){
                                                             echo 1;
                                                         }

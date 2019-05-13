@@ -221,6 +221,15 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
      */
     public function saveRates($rates, $service = null)
     {
+        $manual = false;
+        if (!$service) {
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $this->appState = $objectManager->get('Magento\Framework\App\State');
+            if ($this->appState->getAreaCode() == \Magento\Framework\App\Area::AREA_ADMINHTML) {
+                $manual = true;
+            }
+        }
+
         if (is_array($rates) && sizeof($rates) > 0) {
             $connection = $this->getConnection();
             $data = [];
@@ -234,14 +243,17 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
                     $_fields['currency_from'] = $currencyCode;
                     $_fields['currency_to'] = $currencyTo;
                     $_fields['rate'] = $value;
-                    if ($service) {
-                        $_fields['currency_converter_id'] = $service;
+                    if ($manual) {
+                        $_fields['currency_converter_id'] = __('Manual');
+                    }
+                    if (is_array($service)) {
+                        $_fields['currency_converter_id'] = $service[$currencyCode][$currencyTo] ?: '_';
                     }
                     $data[] = $_fields;
                 }
             }
             if ($data) {
-                $connection->insertOnDuplicate($this->_currencyRateTable, $data, ['rate']);
+                $connection->insertOnDuplicate($this->_currencyRateTable, $data, ['rate','currency_converter_id']);
             }
         } else {
             throw new \Magento\Framework\Exception\LocalizedException(__('Please correct the rates received'));
