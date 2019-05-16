@@ -23,11 +23,6 @@ class Currency extends \Magento\Directory\Model\Currency
     private $precisionObject;
 
     /**
-     * @var \Kozeta\Currency\Model\Currency
-     */
-    private $runtimeCurrencies;
-
-    /**
      * Retrieve currency rates to other currencies
      *
      * @param string $currency
@@ -142,11 +137,16 @@ class Currency extends \Magento\Directory\Model\Currency
      */
     public function getConfigAllowCurrencies()
     {
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $this->currencyObject = $objectManager->get('Kozeta\Currency\Model\Schedule');
-        $allowedCurrencies = $this->currencyObject->getCurrencies();
+        $allowedCurrencies = null;
+        try {
+            $runtimeCurrencies = \Kozeta\Currency\Model\Schedule::getInstance();
+            $allowedCurrencies = $runtimeCurrencies->getImportCurrencies();
+        }
+        catch (\Exception $e) {
+            return parent::getConfigAllowCurrencies();
+        }
+
         if (is_array($allowedCurrencies)) {
-           
             $appBaseCurrencyCode = $this->_directoryHelper->getBaseCurrencyCode();
             if (!in_array($appBaseCurrencyCode, $allowedCurrencies)) {
                 $allowedCurrencies[] = $appBaseCurrencyCode;
@@ -159,7 +159,6 @@ class Currency extends \Magento\Directory\Model\Currency
             }
             return $allowedCurrencies;
         }
-
         return parent::getConfigAllowCurrencies();
     }
     

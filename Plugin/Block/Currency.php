@@ -8,7 +8,7 @@
 namespace Kozeta\Currency\Plugin\Block;
 
 /**
- * Get currency names for switcher
+ * around plugin for getCurrency names for switcher
  */
 class Currency extends \Magento\Directory\Block\Currency
 {

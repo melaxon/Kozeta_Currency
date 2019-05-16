@@ -61,8 +61,6 @@ class Frankfurter extends \Magento\Directory\Model\Currency\Import\AbstractImpor
     {
         $data = [];
         $currencies = $this->_getCurrencyCodes();
-echo "<pre>FRANKFURTER:\n". print_r($currencies); echo "\n</pre>";
-
         $defaultCurrencies = $this->_getDefaultCurrencyCodes();
         set_time_limit(0);
         foreach ($defaultCurrencies as $currencyFrom) {

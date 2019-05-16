@@ -11,6 +11,8 @@ use Magento\Store\Model\ScopeInterface;
 use Magento\Backend\Block\Template\Context;
 use Magento\Directory\Model\CurrencyFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Kozeta\Currency\Model\Schedule;
+use Magento\Directory\Model\Currency\Import\Config as ImportConfig;
 
 class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rate\Matrix
 {
@@ -28,7 +30,12 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
      * @var integer
      */
     private $coinsInRow;
-private $schedule;
+
+    /**
+     * @var ImportConfig
+     */
+    private $importConfig;
+
     /**
      * @var string
      */
@@ -44,12 +51,12 @@ private $schedule;
         CurrencyFactory $dirCurrencyFactory,
         array $data = [],
         ScopeConfigInterface $scopeConfig,
-        \Kozeta\Currency\Model\Schedule $schedule
+        ImportConfig $importConfig
         
     ) {
         $this->_dirCurrencyFactory = $dirCurrencyFactory;
         $this->scopeConfig = $scopeConfig;
-        $this->schedule = $schedule;
+        $this->importConfig = $importConfig;
         parent::__construct($context, $dirCurrencyFactory, $data);
     }
     
@@ -61,9 +68,6 @@ private $schedule;
         if ($this->coinsInRow !== null) {
             return $this->coinsInRow;
         }
-
-//$this->schedule->scheduledUpdateCurrencyRatesAlt(1,0);
-    
 
         $this->coinsInRow = (int) trim($this->scopeConfig->getValue(self::COINS_IN_ROW_MENU_CONFIG_PATH, ScopeInterface::SCOPE_STORES));
         if (!$this->coinsInRow) {
@@ -83,13 +87,25 @@ private $schedule;
     /**
      * @return array
      */
-    public function _getDisplayRates()
+    public function getDisplayRates()
     {
         $currencyModel = $this->_dirCurrencyFactory->create();
         $currencies = $currencyModel->getConfigAllowCurrencies();
         $defaultCurrencies = $currencyModel->getConfigBaseCurrencies();
-
         return $currencyModel->getCurrencyRates($defaultCurrencies, $currencies, true);
     }
-    
+
+    /**
+     * @return array
+     */
+    public function getServiceNames()
+    {
+        $serviceOptions = [];
+        foreach ($this->importConfig->getAvailableServices() as $serviceName) {
+            $serviceOptions[$serviceName] = $this->importConfig->getServiceLabel($serviceName);
+        }
+        $serviceOptions['manually'] = __('Manually');
+        $serviceOptions['_'] = __('_');
+        return $serviceOptions;
+    }
 }

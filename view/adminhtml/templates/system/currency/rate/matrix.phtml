@@ -12,7 +12,7 @@
 ?>
 
 <?php
-    $_rates = $block->_getDisplayRates();
+    $_rates = $block->getDisplayRates();
     $_newRates = $this->getNewRates();
 ?>
 
@@ -73,7 +73,17 @@
                                     <?php endif; ?>
                                     <?php if ($_code != $_currencyCode && isset($_rates[$_currencyCode][$_code]['updated_at'])):?>
                                     <div class="admin__field-note"><?= /* @escapeNotVerified */ __('Updated at:') ?> <b><?= /* @escapeNotVerified */ isset($_rates[$_currencyCode][$_code]['updated_at']) ? $_rates[$_currencyCode][$_code]['updated_at'] : '&nbsp;' ?></b></div>
-                                    <div class="admin__field-note"><?= /* @escapeNotVerified */ __('Service:') ?> <b><?= /* @escapeNotVerified */ isset($_rates[$_currencyCode][$_code]['currency_converter_id']) ? $_rates[$_currencyCode][$_code]['currency_converter_id'] : '&nbsp;' ?></b></div>
+                                    <div class="admin__field-note"><?= /* @escapeNotVerified */ __('Service:') ?> <b>
+
+                                        <?php /* @escapeNotVerified */ 
+                                            $serviceName = $this->getServiceNames();
+                                            if (isset($serviceName[$_rates[$_currencyCode][$_code]['currency_converter_id']])) {
+                                                echo $serviceName[$_rates[$_currencyCode][$_code]['currency_converter_id']];
+                                            } else {
+                                                echo '&nbsp;';
+                                            }
+                                        ?></b></div>
+                                    
                                     <?php else: ?>
                                     <div class="admin__field-note">&nbsp;</div>
                                     <div class="admin__field-note">&nbsp;</div>

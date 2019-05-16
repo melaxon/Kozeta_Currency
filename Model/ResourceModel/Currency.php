@@ -243,11 +243,10 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
                     $_fields['currency_from'] = $currencyCode;
                     $_fields['currency_to'] = $currencyTo;
                     $_fields['rate'] = $value;
-                    if ($manual) {
-                        $_fields['currency_converter_id'] = __('Manual');
-                    }
                     if (is_array($service)) {
                         $_fields['currency_converter_id'] = $service[$currencyCode][$currencyTo] ?: '_';
+                    } elseif ($manual) {
+                        $_fields['currency_converter_id'] = 'manually';
                     }
                     $data[] = $_fields;
                 }

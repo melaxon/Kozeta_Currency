@@ -8,7 +8,6 @@
 namespace Kozeta\Currency\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Directory\Model\Observer as ModelObserver;
 use Psr\Log\LoggerInterface;
 use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Framework\Translate\Inline\StateInterface as inlineTranslation;
@@ -28,9 +27,24 @@ class Schedule
     private $logger;
 
     /**
-     * @var \Magento\Directory\Model\Observer
+     * @var Schedule
      */
-    private $_observer;
+    protected static $_instance;
+
+    /**
+     * Retrieve Schedule object
+     *
+     * @return Schedule
+     * @throws \RuntimeException
+     */
+    public static function getInstance()
+    {
+        if (!self::$_instance instanceof \Kozeta\Currency\Model\Schedule) {
+//            $this-> sendErrorMessage(['Schedule object isn\'t initialized']);
+            throw new \RuntimeException('Schedule object isn\'t initialized');
+        }
+        return self::$_instance;
+    }
 
     /**
      * Core store config
@@ -66,7 +80,6 @@ class Schedule
 
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        ModelObserver $_observer,
         LoggerInterface $logger,
         TransportBuilder $transportBuilder,
         inlineTranslation $inlineTranslation,
@@ -74,12 +87,12 @@ class Schedule
         ImportFactory $importFactory
     ) {
         $this->logger = $logger;
-        $this->_observer = $_observer;
         $this->_scopeConfig = $scopeConfig;
         $this->_transportBuilder = $transportBuilder;
         $this->inlineTranslation = $inlineTranslation;
         $this->_currencyFactory = $currencyFactory;
         $this->_importFactory = $importFactory;
+        self::$_instance = $this;
     }
 
 
@@ -115,7 +128,6 @@ class Schedule
     }
 
     /**
-     * @param mixed $schedule
      * @return void
      * @throws \Exception
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
@@ -128,13 +140,13 @@ class Schedule
                 !$this->getPathEnable(self::MINUTEWISCE_MPORT_ENABLE)
             )
         ) {
-        } 
-return;
+            return;
+        }
+//        return;
         $this->scheduledUpdateCurrencyRatesAlt($schedule, self::IMPORT_SCHEDULER_DEFAULT);
     }
     
     /**
-     * @param mixed $schedule
      * @return void
      * @throws \Exception
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
@@ -144,12 +156,11 @@ return;
         if (!$this->getPathEnable('currency/import_alt_1/enabled') || !$this->getPathValue('currency/import_alt_1/schedule')) {
             return;
         }
-return;
+//        return;
         $this->scheduledUpdateCurrencyRatesAlt($schedule, self::IMPORT_SCHEDULER_1);
     }
     
     /**
-     * @param mixed $schedule
      * @return void
      * @throws \Exception
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
@@ -159,12 +170,10 @@ return;
         if (!$this->getPathEnable('currency/import_alt_2/enabled') || !$this->getPathValue('currency/import_alt_2/schedule')) {
             return;
         }
-return;
         $this->scheduledUpdateCurrencyRatesAlt($schedule, self::IMPORT_SCHEDULER_2);
     }
     
     /**
-     * @param mixed $schedule
      * @return void
      * @throws \Exception
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
@@ -188,28 +197,18 @@ return;
         $currencies = $currencyModel->getConfigAllowCurrencies();
 
         foreach ($currencies as $k => $code) {
-
-//echo "<pre>for $code (SCHEDULER = $scheduler)\n";
             $import_enabled = (int) $currencyModel->getCurrencyParamByCode($code, 'import_enabled')[$code];
-//echo "import_enabled = $import_enabled \n";
-
             if (!$import_enabled) {
-//echo "UNSET $code  \n";                
                 unset($currencies[$k]);
                 continue;
             }
 
-
-            
             $import_scheduler = (int) $currencyModel->getCurrencyParamByCode($code, 'import_scheduler')[$code];
-//echo "import_scheduler = $import_scheduler \n";
-
             if ($import_scheduler != $scheduler) {
-//echo "UNSET $code  \n"; 
                 unset($currencies[$k]);
                 continue;
             }
-//echo "\n</pre>";
+            
             $coinService = $currencyModel->getCurrencyParamByCode($code, 'currency_converter_id')[$code];
             if ($coinService == 'default') {
                 $coinService = $defaultService;
@@ -231,37 +230,23 @@ return;
         if (empty($currencies)) {
             return;
         }
-echo "<pre>CURRENCIES \n";
-print_r($currencies);
-echo "\n</pre>";
-        
-echo "<pre>SERVICES \n";
-print_r($services);
-echo "\n</pre>";
 
         list($baseCurrency) = $currencyModel->getConfigBaseCurrencies();
 
-        foreach ($services as $service => $_currencies) {
+        foreach ($services as $_service => $_currencies) {
 
             if (empty($_currencies)) {
                 continue;
             }
-            $this->currencies = $_currencies;
-echo "<pre>service = $service \nCURRENCIES:\n";
-print_r($_currencies);
-echo "\n</pre>";
+            $this->setImportCurrencies($_currencies);
+
             try {
-                $importModel = $this->_importFactory->create($service);
-
+                $importModel = $this->_importFactory->create($_service);
                 $rates = $importModel->fetchRates();
-echo "<pre>RATES:\n";
-print_r($rates);
-echo "\n</pre>";
                 $errors = $importModel->getMessages();
-
             } catch (\Exception $e) {
-                $this->currencies = false;
-                $importWarnings[] = __('FATAL ERROR:') . " ($service): " . __("The import model can't be initialized. Verify the model and try again.");
+                $this->setImportCurrencies(false);
+                $importWarnings[] = __('FATAL ERROR:') . " ($_service): " . __("The import model can't be initialized. Verify the model and try again.");
                 //$this->sendErrorMessage($importWarnings);
                 //throw $e;
             }
@@ -275,9 +260,15 @@ echo "\n</pre>";
                 $this->sendErrorMessage($importWarnings);
                 continue;
             }
-            $this->currencies = false;
-            $this->_currencyFactory->create()->saveRates($rates, $service);
+            $service = [];
+            foreach ($rates as $currencyCode => $rate) {
+                foreach ($rate as $currencyTo => $value) {
+                    $service[$currencyCode][$currencyTo] = $_service;
+                }
+            }
 
+            $this->setImportCurrencies($_currencies);
+            $this->_currencyFactory->create()->saveRates($rates, $service);
         }
     }
 
@@ -315,8 +306,18 @@ echo "\n</pre>";
      *
      * @return array
      */
-    public function getCurrencies()
+    public function getImportCurrencies()
     {
         return $this->currencies;
+    }
+    
+    /**
+     * Current set of currencies
+     *
+     * @return array
+     */
+    public function setImportCurrencies($_currencies)
+    {
+        $this->currencies = $_currencies;
     }
 }
