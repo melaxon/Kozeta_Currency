@@ -252,7 +252,7 @@ class Schedule
             }
             if (sizeof($errors) > 0) {
                 foreach ($errors as $error) {
-                    $importWarnings[] = __('WARNING:') . ' ' . $error;
+                    $importWarnings[] = __('WARNING:') . " ($_service) " . $error;
                 }
             }
 
