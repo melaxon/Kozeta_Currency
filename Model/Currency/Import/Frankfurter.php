@@ -103,8 +103,6 @@ class Frankfurter extends \Magento\Directory\Model\Currency\Import\AbstractImpor
 
         /** @var \Magento\Framework\HTTP\ZendClient $httpClient */
         $httpClient = $this->httpClientFactory->create();
-//$currencies = $this->_getCurrencyCodes();
-//$this->_messages[] = "FRANKFURTER: ". print_r($currencies, true);
 
         try {
             $response = $httpClient->setUri($url)

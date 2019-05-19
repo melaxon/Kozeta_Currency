@@ -13,6 +13,7 @@ use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Framework\Translate\Inline\StateInterface as inlineTranslation;
 use Magento\Directory\Model\CurrencyFactory;
 use Magento\Directory\Model\Currency\Import\Factory as ImportFactory;
+use Kozeta\Currency\Model\Currency\RuntimeCurrencies;
 
 class Schedule
 {
@@ -21,6 +22,11 @@ class Schedule
     const IMPORT_SCHEDULER_1 = 1;
     const IMPORT_SCHEDULER_2 = 2;
 
+    /**
+     * @var \Kozeta\Currency\Model\Currency\RuntimeCurrencies
+     */
+    private $runtimeCurrencies;
+    
     /**
      * @var \Psr\Log\LoggerInterface
      */
@@ -84,7 +90,8 @@ class Schedule
         TransportBuilder $transportBuilder,
         inlineTranslation $inlineTranslation,
         CurrencyFactory $currencyFactory,
-        ImportFactory $importFactory
+        ImportFactory $importFactory,
+        RuntimeCurrencies $runtimeCurrencies
     ) {
         $this->logger = $logger;
         $this->_scopeConfig = $scopeConfig;
@@ -92,7 +99,7 @@ class Schedule
         $this->inlineTranslation = $inlineTranslation;
         $this->_currencyFactory = $currencyFactory;
         $this->_importFactory = $importFactory;
-        self::$_instance = $this;
+        $this->runtimeCurrencies = $runtimeCurrencies;
     }
 
 
@@ -142,7 +149,6 @@ class Schedule
         ) {
             return;
         }
-//        return;
         $this->scheduledUpdateCurrencyRatesAlt($schedule, self::IMPORT_SCHEDULER_DEFAULT);
     }
     
@@ -156,7 +162,6 @@ class Schedule
         if (!$this->getPathEnable('currency/import_alt_1/enabled') || !$this->getPathValue('currency/import_alt_1/schedule')) {
             return;
         }
-//        return;
         $this->scheduledUpdateCurrencyRatesAlt($schedule, self::IMPORT_SCHEDULER_1);
     }
     
@@ -181,18 +186,9 @@ class Schedule
     public function scheduledUpdateCurrencyRatesAlt($schedule, $scheduler = self::IMPORT_SCHEDULER_DEFAULT)
     {
         $scheduler = (int) $scheduler;
-        $importWarnings = [];
-        $errors = [];
         $rates = [];
         $services = [];
         $defaultService = $this->getPathValue('currency/import/service');
-
-        if (!$defaultService) {
-            $importWarnings[] = __('FATAL ERROR:') . ' ' . __('Please specify the correct Default Import Service.');
-            $this->sendErrorMessage($importWarnings);
-            return;
-        }
-
         $currencyModel = $this->_currencyFactory->create();
         $currencies = $currencyModel->getConfigAllowCurrencies();
 
@@ -219,13 +215,13 @@ class Schedule
                 if (!$defaultService) {
                     unset($currencies[$k]);
                     $errMsg[] = __('FATAL ERROR:') . ' ' . __('Please specify either or both Default Import Service and the correct Import Service for %1', $code);
-                    $this->sendErrorMessage($err);
+                    $this->sendErrorMessage($errMsg);
+                    continue;
                 }
                 $coinService = $defaultService;
             }
             $services[$coinService][] = $code;
         }
-//        $services = array_unique($services);
         
         if (empty($currencies)) {
             return;
@@ -233,22 +229,22 @@ class Schedule
 
         list($baseCurrency) = $currencyModel->getConfigBaseCurrencies();
 
+        $importWarnings = [];
+        $errors = [];
         foreach ($services as $_service => $_currencies) {
 
             if (empty($_currencies)) {
                 continue;
             }
-            $this->setImportCurrencies($_currencies);
+            $this->runtimeCurrencies->setImportCurrencies($_currencies);
 
             try {
                 $importModel = $this->_importFactory->create($_service);
                 $rates = $importModel->fetchRates();
                 $errors = $importModel->getMessages();
             } catch (\Exception $e) {
-                $this->setImportCurrencies(false);
+                $this->runtimeCurrencies->setImportCurrencies(false);
                 $importWarnings[] = __('FATAL ERROR:') . " ($_service): " . __("The import model can't be initialized. Verify the model and try again.");
-                //$this->sendErrorMessage($importWarnings);
-                //throw $e;
             }
             if (sizeof($errors) > 0) {
                 foreach ($errors as $error) {
@@ -258,7 +254,7 @@ class Schedule
 
             if (sizeof($importWarnings) > 0) {
                 $this->sendErrorMessage($importWarnings);
-                continue;
+//                continue;
             }
             $service = [];
             foreach ($rates as $currencyCode => $rate) {
@@ -267,7 +263,7 @@ class Schedule
                 }
             }
 
-            $this->setImportCurrencies($_currencies);
+            $this->runtimeCurrencies->setImportCurrencies($_currencies);
             $this->_currencyFactory->create()->saveRates($rates, $service);
         }
     }
@@ -299,25 +295,5 @@ class Schedule
 
             $this->inlineTranslation->resume();
         }
-    }
-
-    /**
-     * Current set of currencies
-     *
-     * @return array
-     */
-    public function getImportCurrencies()
-    {
-        return $this->currencies;
-    }
-    
-    /**
-     * Current set of currencies
-     *
-     * @return array
-     */
-    public function setImportCurrencies($_currencies)
-    {
-        $this->currencies = $_currencies;
     }
 }

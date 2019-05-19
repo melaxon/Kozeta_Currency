@@ -139,7 +139,7 @@ class Currency extends \Magento\Directory\Model\Currency
     {
         $allowedCurrencies = null;
         try {
-            $runtimeCurrencies = \Kozeta\Currency\Model\Schedule::getInstance();
+            $runtimeCurrencies = \Kozeta\Currency\Model\Currency\RuntimeCurrencies::getInstance();
             $allowedCurrencies = $runtimeCurrencies->getImportCurrencies();
         }
         catch (\Exception $e) {
