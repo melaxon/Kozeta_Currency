@@ -8,7 +8,7 @@
 namespace Kozeta\Currency\Plugin\Block;
 
 /**
- * Currency dropdown block. Override Magento function to get currency names for switcher
+ * around plugin for getCurrency names for switcher
  */
 class Currency extends \Magento\Directory\Block\Currency
 {
@@ -27,15 +27,14 @@ class Currency extends \Magento\Directory\Block\Currency
         $currencies = $subject->getData('currencies');
         if ($currencies === null) {
             $currencies = [];
-            $codes = $this->_storeManager
-                ->getStore()
-                ->getAvailableCurrencyCodes(true);
+            $codes = $this->_storeManager->getStore()->getAvailableCurrencyCodes(true);
             if (is_array($codes) && count($codes) > 1) {
                 $rates = $this->_currencyFactory->create()->getCurrencyRates(
                     $this->_storeManager->getStore()->getBaseCurrency(),
                     $codes
                 );
                 $names = $this->_currencyFactory->create()->getCurrencyNames($codes);
+
                 foreach ($codes as $code) {
                     if (isset($rates[$code])) {
                         if (!empty($names[$code])) {
@@ -72,12 +71,11 @@ class Currency extends \Magento\Directory\Block\Currency
 //              );
 //              $names = $this->_currencyFactory->create()->getCurrencyNames($codes);
 //
-//                 foreach ($codes as $code) {
-//                     if (isset($rates[$code])) {
+//              foreach ($codes as $code) {
+//                  if (isset($rates[$code])) {
 //                         $allCurrencies = (new \Magento\Framework\Locale\Bundle\CurrencyBundle())->get(
 //                             $this->localeResolver->getLocale()
 //                         )['Currencies'];
-//
 //                         $currencies[$code] = $allCurrencies[$code][1] ?: __($names[$code]) ?: $code;
 //                     }
 //                 }

@@ -8,10 +8,15 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
     <group id="kozeta_currency">
-        <!-- <job name="kozeta_currency_sync" instance="Magento\Directory\Model\Observer" method="scheduledUpdateCurrencyRates"> -->
         <job name="kozeta_currency_sync" instance="\Kozeta\Currency\Model\Schedule" method="updateCurrencyRates">
             <config_path>currency/import/schedule</config_path>
-            <!--<schedule>*/2 * * * *</schedule>-->
         </job>
+        <job name="kozeta_currency_sync_alt_1" instance="\Kozeta\Currency\Model\Schedule" method="updateCurrencyRatesAlt1">
+            <config_path>currency/import_alt_1/schedule</config_path>
+        </job>
+        <job name="kozeta_currency_sync_alt_2" instance="\Kozeta\Currency\Model\Schedule" method="updateCurrencyRatesAlt2">
+            <config_path>currency/import_alt_2/schedule</config_path>
+        </job>
+
     </group>
 </config>

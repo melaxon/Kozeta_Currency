@@ -34,8 +34,13 @@ class Currency extends \Magento\Directory\Model\Currency
         if ($currency instanceof \Magento\Directory\Model\Currency) {
             $currency = $currency->getCode();
         }
-        $data = $this->_getResource()->getCurrencyRates($currency, $toCurrencies, $getUpdated_at);
-        return $data;
+        
+        if ($getUpdated_at) {
+            return $this->_getResource()->getCurrencyRatesUpdated($currency, $toCurrencies);
+        }
+        
+        return $this->_getResource()->getCurrencyRates($currency, $toCurrencies);
+
     }
    
     /**
@@ -49,10 +54,24 @@ class Currency extends \Magento\Directory\Model\Currency
             $currency = $currency->getCode();
         }
         
-        $data = $this->_getResource()->getCurrencyNames($currency);
-        return $data;
+        return $this->_getResource()->getCurrencyNames($currency);
     }
     
+    /**
+     * Return currency parameters
+     * Return all parameters if no $param given
+     * @param string|array $currency
+     * @param string|array $param
+     * @return array
+     */
+    public function getCurrencyParamByCode($currency, $param = null)
+    {
+        if ($currency instanceof \Magento\Directory\Model\Currency) {
+            $currency = $currency->getCode();
+        }
+        return $this->_getResource()->getCurrencyParamByCode($currency, $param);
+    }
+
     /**
      * Price precision
      * @param   float $price
@@ -109,5 +128,50 @@ class Currency extends \Magento\Directory\Model\Currency
         //$options['position'] = 16;
 
         return $this->_localeCurrency->getCurrency($this->getCode())->toCurrency($price, $options);
+    }
+
+    /**
+     * Retrieve current currency set if exists
+     *
+     * @return array
+     */
+    public function getConfigAllowCurrencies()
+    {
+        $allowedCurrencies = null;
+        try {
+            $runtimeCurrencies = \Kozeta\Currency\Model\Currency\RuntimeCurrencies::getInstance();
+            $allowedCurrencies = $runtimeCurrencies->getImportCurrencies();
+        }
+        catch (\Exception $e) {
+            return parent::getConfigAllowCurrencies();
+        }
+
+        if (is_array($allowedCurrencies)) {
+            $appBaseCurrencyCode = $this->_directoryHelper->getBaseCurrencyCode();
+            if (!in_array($appBaseCurrencyCode, $allowedCurrencies)) {
+                $allowedCurrencies[] = $appBaseCurrencyCode;
+            }
+            foreach ($this->_storeManager->getStores() as $store) {
+                $code = $store->getBaseCurrencyCode();
+                if (!in_array($code, $allowedCurrencies)) {
+                    $allowedCurrencies[] = $code;
+                }
+            }
+            return $allowedCurrencies;
+        }
+        return parent::getConfigAllowCurrencies();
+    }
+    
+    /**
+     * Save currency rates
+     *
+     * @param array $rates
+     * @param array $service optional
+     * @return $this
+     */
+    public function saveRates($rates, $service = null)
+    {
+        $this->_getResource()->saveRates($rates, $service);
+        return $this;
     }
 }

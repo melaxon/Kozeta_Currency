@@ -50,6 +50,28 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
     }
 
     /**
+     * Return currency rates and time
+     *
+     * @param string|array $currency
+     * @param array $toCurrencies
+     * @return array
+     */
+    public function getCurrencyRatesUpdated($currency, $toCurrencies = null)
+    {
+        $rates = [];
+        if (is_array($currency)) {
+            foreach ($currency as $code) {
+                $rates[$code] = $this->_getRatesByCode($code, $toCurrencies, 1);
+            }
+        } else {
+            $rates = $this->_getRatesByCode($currency, $toCurrencies, 1);
+        }
+
+        return $rates;
+    }
+
+
+    /**
      * Protected method used by getCurrencyRates() method
      *
      * @param string $code
@@ -62,6 +84,7 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
         $fieldsList = ['currency_to', 'rate'];
         if ($updated !== null) {
             $fieldsList[] = 'updated_at';
+            $fieldsList[] = 'currency_converter_id';
         }
         $connection = $this->getConnection();
         $bind = [':currency_from' => $code];
@@ -83,6 +106,7 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
             foreach ($rowSet as $row) {
                 $result[$row['currency_to']]['rate'] = $row['rate'];
                 $result[$row['currency_to']]['updated_at'] = $row['updated_at'];
+                $result[$row['currency_to']]['currency_converter_id'] = $row['currency_converter_id'];
             }
         } else {
             foreach ($rowSet as $row) {
@@ -118,6 +142,18 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
     }
     
     /**
+     * Return currency precision
+     *
+     * @param string|array $code
+     * @return array
+     * @SuppressWarnings(PHPMD.Ecg.Sql.SlowQuery)
+     */
+    public function getCurrencyPrecision($code) 
+    {
+        return $this->getCurrencyParamByCode($code, 'precision');
+    }
+    
+    /**
      * Return currency parameters
      *
      * @param string|array $code
@@ -125,11 +161,14 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
      * @return array
      * @SuppressWarnings(PHPMD.Ecg.Sql.SlowQuery)
      */
-    private function getCurrencyParamByCode($code, $param = null)
+    public function getCurrencyParamByCode($code, $param = null)
     {
+        $result = [];
+        $_code = [];
         if (!is_array($code)) {
             $code = [$code];
         }
+        $_code = $code;
         foreach ($code as $k => $c) {
             if (isset($this->_currencyData[$c])) {
                 unset($code[$k]);
@@ -152,7 +191,6 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
                 'code IN(?)',
                 $code
             );
-
             // @codingStandardsIgnoreStart
             $rowSet = $connection->fetchAll($select);
             // @codingStandardsIgnoreEnd
@@ -162,6 +200,62 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
                 $this->_currencyData[$row['code']] = $row;
             }
         }
-        return $result;
+
+        $_result = [];
+        foreach ($_code as $k => $c) {
+            if (isset($result[$c])) {
+                $_result[$c] = $result[$c];
+            }
+        }
+
+        return $_result;
+    }
+
+    /**
+     * Saving currency rates
+     *
+     * @param array $rates
+     * @param array $service optional
+     * @return void
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function saveRates($rates, $service = null)
+    {
+        $manual = false;
+        if (!$service) {
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $this->appState = $objectManager->get('Magento\Framework\App\State');
+            if ($this->appState->getAreaCode() == \Magento\Framework\App\Area::AREA_ADMINHTML) {
+                $manual = true;
+            }
+        }
+
+        if (is_array($rates) && sizeof($rates) > 0) {
+            $connection = $this->getConnection();
+            $data = [];
+            foreach ($rates as $currencyCode => $rate) {
+                $_fields = [];
+                foreach ($rate as $currencyTo => $value) {
+                    $value = abs($value);
+                    if ($value == 0) {
+                        continue;
+                    }
+                    $_fields['currency_from'] = $currencyCode;
+                    $_fields['currency_to'] = $currencyTo;
+                    $_fields['rate'] = $value;
+                    if (is_array($service)) {
+                        $_fields['currency_converter_id'] = $service[$currencyCode][$currencyTo] ?: '_';
+                    } elseif ($manual) {
+                        $_fields['currency_converter_id'] = 'manually';
+                    }
+                    $data[] = $_fields;
+                }
+            }
+            if ($data) {
+                $connection->insertOnDuplicate($this->_currencyRateTable, $data, ['rate','currency_converter_id']);
+            }
+        } else {
+            throw new \Magento\Framework\Exception\LocalizedException(__('Please correct the rates received'));
+        }
     }
 }

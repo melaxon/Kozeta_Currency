@@ -116,22 +116,22 @@
         <field name="sort_order">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                	<item name="dataType" xsi:type="string">text</item>
+                    <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Sort Order</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">coin</item>
                     <item name="sortOrder" xsi:type="number">11</item>
                     <item name="dataScope" xsi:type="string">sort_order</item>
-					<item name="validation" xsi:type="array">
-						<item name="validate-digits" xsi:type="boolean">true</item>
-					</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-digits" xsi:type="boolean">true</item>
+                    </item>
                 </item>
             </argument>
         </field>
         <field name="precision">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                	<item name="dataType" xsi:type="string">text</item>
+                    <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Precision</item>
                     <item name="notice" xsi:type="string" translate="true">Enter the number of decimal places. Default: 2</item>
                     <item name="formElement" xsi:type="string">input</item>
@@ -139,32 +139,76 @@
                     <item name="sortOrder" xsi:type="number">12</item>
                     <item name="dataScope" xsi:type="string">precision</item>
                     <item name="default" xsi:type="number">2</item>
-					<item name="validation" xsi:type="array">
-						<item name="validate-digits" xsi:type="boolean">true</item>
-					</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-digits" xsi:type="boolean">true</item>
+                    </item>
                 </item>
             </argument>
         </field>
-<!--
-        <field name="currency_converter_id" sortOrder="15" formElement="select">
-        	<argument name="data" xsi:type="array">
-        		<item name="options" xsi:type="object">\Kozeta\Currency\Model\Currency\Import\Source\Service</item>
-        		<item name="config" xsi:type="array">
-        			<item name="default" xsi:type="string">default</item>
-        			<item name="notice" xsi:type="string" translate="true"></item>
-        			<item name="submit_url" xsi:type="url" path="catalog/category/save"/>
-            <item name="tooltip" xsi:type="array">
-                <item name="description" xsi:type="string" translate="true">Default settings is defined in Stores->Configuration->General->Currency Setup in "Scheduled Import Settings" section</item>
-            </item>
-
-        		</item>
-        	</argument>
-            <settings>
-                <dataType>string</dataType>
-                <label translate="true">Currency Convert Service</label>
-            </settings>
+        <field name="import_enabled">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="label" xsi:type="string" translate="true">Import Enabled</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="source" xsi:type="string">page</item>
+                    <item name="sortOrder" xsi:type="number">14</item>
+                    <item name="dataScope" xsi:type="string">import_enabled</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="false" xsi:type="number">0</item>
+                        <item name="true" xsi:type="number">1</item>
+                    </item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
         </field>
--->
+        <field name="currency_converter_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">\Magento\Directory\Model\Currency\Import\Source\Service</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">15</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Currency Rate Import Service</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="dataScope" xsi:type="string">currency_converter_id</item>
+                    <item name="default" xsi:type="string"></item>
+                    <item name="notice" xsi:type="string" translate="true">If not selected the default settings will be used</item>
+                    <item name="submit_url" xsi:type="url" path="catalog/category/save"/>
+                    <item name="tooltip" xsi:type="array">
+                        <item name="description" xsi:type="string" translate="true">Default settings is defined in Stores->Configuration->General->Currency Setup in "Scheduled Import Settings" section</item>
+                    </item>
+                    <item name="imports" xsi:type="array">
+                        <item name="visible" xsi:type="string">${ $.parentName }.import_enabled:checked</item>
+                        <!-- <item name="disabled" xsi:type="string">${ $.parentName }.import_enabled:checked</item> -->
+                        <!-- <item name="toggleDisable" xsi:type="string">${ $.parentName }.import_enabled:checked</item> -->
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="import_scheduler">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">\Kozeta\Currency\Model\Currency\Import\Source\Schedule</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">16</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Scheduled Import Settings</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="dataScope" xsi:type="string">import_scheduler</item>
+                    <item name="default" xsi:type="string"></item>
+                    <item name="notice" xsi:type="string" translate="true">If not selected the default settings will be used</item>
+                    <item name="submit_url" xsi:type="url" path="catalog/category/save"/>
+                    <item name="imports" xsi:type="array">
+                        <item name="visible" xsi:type="string">${ $.parentName }.import_enabled:checked</item>
+                        <!-- <item name="disabled" xsi:type="string">${ $.parentName }.import_enabled:checked</item> -->
+                        <!-- <item name="toggleDisable" xsi:type="string">${ $.parentName }.import_enabled:checked</item> -->
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+
+
         <field name="in_rss">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -275,7 +319,7 @@
                     <item name="template" xsi:type="string">ui/form/field</item>
                     <item name="wysiwyg" xsi:type="boolean">true</item>
                     <item name="dataScope" xsi:type="string">description</item>
-                    <item name="rows" xsi:type="number">2</item>
+                    <item name="rows" xsi:type="number">10</item>
                 </item>
             </argument>
         </field>
@@ -356,29 +400,29 @@
             </argument>
         </field>
         <field name="type">
-        	<argument name="data" xsi:type="array">
-        		<item name="options" xsi:type="object">KozetaCurrencyModelCoinSourceType</item>
-        		<item name="config" xsi:type="array">
-        			<item name="formElement" xsi:type="string">select</item>
-        			<item name="dataType" xsi:type="string">text</item>
-        			<item name="label" xsi:type="string" translate="true">Type</item>
-        			<item name="sortOrder" xsi:type="number">10</item>
-        			<item name="dataScope" xsi:type="string">type</item>
-        			<!-- <item name="caption" xsi:type="string" translate="true"> Please Select </item> -->
-					<item name="imports" xsi:type="array">
-						<!-- <item name="visible" xsi:type="string">${ $.parentName }.is_fiat:checked</item> -->
-						<item name="disabled" xsi:type="string">${ $.parentName }.is_fiat:checked</item>
-						<!-- <item name="toggleDisable" xsi:type="string">${ $.parentName }.is_fiat:checked</item> -->
-					</item>
-        		</item>
-        	</argument>
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">KozetaCurrencyModelCoinSourceType</item>
+                <item name="config" xsi:type="array">
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Type</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="dataScope" xsi:type="string">type</item>
+                    <!-- <item name="caption" xsi:type="string" translate="true"> Please Select </item> -->
+                    <item name="imports" xsi:type="array">
+                        <!-- <item name="visible" xsi:type="string">${ $.parentName }.is_fiat:checked</item> -->
+                        <item name="disabled" xsi:type="string">${ $.parentName }.is_fiat:checked</item>
+                        <!-- <item name="toggleDisable" xsi:type="string">${ $.parentName }.is_fiat:checked</item> -->
+                    </item>
+                </item>
+            </argument>
         </field>
 
         <field name="minconf">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                	<item name="sortOrder" xsi:type="number">20</item>
-                	<item name="formElement" xsi:type="string">input</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="formElement" xsi:type="string">input</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Min. number of confirmations</item>
                     <item name="notice" xsi:type="string" translate="true">Enter minimum number of required network confirmations. Default: 2</item>
@@ -386,13 +430,13 @@
                     <item name="dataScope" xsi:type="string">minconf</item>
                     <item name="default" xsi:type="number">2</item>
                     <item name="validation" xsi:type="array">
-                    	<item name="validate-digits" xsi:type="boolean">true</item>
-                	</item>
-					<item name="imports" xsi:type="array">
-						<!-- <item name="visible" xsi:type="string">${ $.parentName }.is_fiat:checked</item> -->
-						<item name="disabled" xsi:type="string">${ $.parentName }.is_fiat:checked</item>
-						<!-- <item name="toggleDisable" xsi:type="string">${ $.parentName }.is_fiat:checked</item> -->
-					</item>
+                        <item name="validate-digits" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="imports" xsi:type="array">
+                        <!-- <item name="visible" xsi:type="string">${ $.parentName }.is_fiat:checked</item> -->
+                        <item name="disabled" xsi:type="string">${ $.parentName }.is_fiat:checked</item>
+                        <!-- <item name="toggleDisable" xsi:type="string">${ $.parentName }.is_fiat:checked</item> -->
+                    </item>
 
                 </item>
             </argument>
@@ -400,8 +444,8 @@
         <field name="txfee">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                	<item name="sortOrder" xsi:type="number">30</item>
-                	<item name="formElement" xsi:type="string">input</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="formElement" xsi:type="string">input</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Recommended transaction fee</item>
                     <item name="notice" xsi:type="string" translate="true">Transaction fee expressed in this currency</item>
@@ -409,13 +453,13 @@
                     <item name="dataScope" xsi:type="string">txfee</item>
                     <item name="default" xsi:type="number">0</item>
                     <item name="validation" xsi:type="array">
-                    	<item name="validate-zero-or-greater" xsi:type="boolean">true</item>
-                	</item>
-					<item name="imports" xsi:type="array">
-						<!-- <item name="visible" xsi:type="string">${ $.parentName }.is_fiat:checked</item> -->
-						<item name="disabled" xsi:type="string">${ $.parentName }.is_fiat:checked</item>
-						<!-- <item name="toggleDisable" xsi:type="string">${ $.parentName }.is_fiat:checked</item> -->
-					</item>
+                        <item name="validate-zero-or-greater" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="imports" xsi:type="array">
+                        <!-- <item name="visible" xsi:type="string">${ $.parentName }.is_fiat:checked</item> -->
+                        <item name="disabled" xsi:type="string">${ $.parentName }.is_fiat:checked</item>
+                        <!-- <item name="toggleDisable" xsi:type="string">${ $.parentName }.is_fiat:checked</item> -->
+                    </item>
 
                 </item>
             </argument>

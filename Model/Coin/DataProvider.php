@@ -95,11 +95,11 @@ class DataProvider extends AbstractDataProvider
                     unset($data[$id]);
                     continue;
                 }
-                if ($coin['is_fiat']) {
-                    $data[$id]['checked'] = true;
-                } else {
-                    $data[$id]['checked'] = false;
-                }
+                 if ($coin['is_fiat']) {
+                     $data[$id]['checked'] = true;
+                 } else {
+                     $data[$id]['checked'] = false;
+                 }
             }
             $this->data = $data;
         }

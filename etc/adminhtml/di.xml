@@ -43,10 +43,18 @@
             <argument name="errorMessage" xsi:type="string" translate="true">An error occurred while enabling coins.</argument>
         </arguments>
     </type>
+
+<!-- adminhtml fetchRates -->
+    <type name="Magento\CurrencySymbol\Controller\Adminhtml\System\Currency\FetchRates">
+        <plugin name="kozeta_currency_adminhtml_controller_fetchrates" type="Kozeta\Currency\Plugin\Controller\Adminhtml\System\Currency\FetchRates" disabled="false" sortOrder="2000" />
+    </type>
 <!-- fix total due -->
-	<type name="Magento\Sales\Model\Order">
-		<plugin name="kozeta_currency_order_total_due" type="Kozeta\Currency\Plugin\Sales\Model\Order" disabled="false" sortOrder="2000" />
-	</type>
+    <type name="Magento\Sales\Model\Order">
+        <plugin name="kozeta_currency_order_total_due" type="Kozeta\Currency\Plugin\Sales\Model\Order" disabled="false" sortOrder="2000" />
+    </type>
+    <type name="Magento\Directory\Model\Currency\Import\Source\Service">
+        <plugin name="kozeta_currency_model_currency_import_source_service" type="Kozeta\Currency\Plugin\Model\Currency\Import\Source\Service" disabled="false" sortOrder="2000" />
+    </type>
 
 
 </config>

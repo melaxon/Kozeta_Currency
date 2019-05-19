@@ -248,7 +248,7 @@ class Coin extends AbstractModel implements CoinInterface, RoutableInterface
     }
 
     /**
-     * set currency_converter_id
+     * Set currency_converter_id
      *
      * @param $currencyConverterId
      * @return CoinInterface
@@ -256,6 +256,48 @@ class Coin extends AbstractModel implements CoinInterface, RoutableInterface
     public function setCurrencyConverterId($currencyConverterId)
     {
         return $this->setData(CoinInterface::CURRENCY_CONVERTER_ID, $currencyConverterId);
+    }
+
+    /**
+     * Get import_scheduler
+     *
+     * @return string
+     */
+    public function getImportScheduler()
+    {
+        return $this->getData(CoinInterface::IMPORT_SCHEDULER);
+    }
+
+    /**
+     * Set import_scheduler
+     *
+     * @param $importScheduler
+     * @return CoinInterface
+     */
+    public function setImportScheduler($importScheduler)
+    {
+        return $this->setData(CoinInterface::IMPORT_SCHEDULER, $importScheduler);
+    }
+
+    /**
+     * Get import_enabled
+     *
+     * @return string
+     */
+    public function getImportEnabled()
+    {
+        return $this->getData(CoinInterface::IMPORT_ENABLED);
+    }
+
+    /**
+     * Set import_enabled
+     *
+     * @param $importEnabled
+     * @return CoinInterface
+     */
+    public function setImportEnabled($importEnabled)
+    {
+        return $this->setData(CoinInterface::IMPORT_ENABLED, $importEnabled);
     }
 
     /**

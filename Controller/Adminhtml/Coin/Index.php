@@ -21,9 +21,9 @@ class Index extends CoinController
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Kozeta_Currency::coin');
-        $resultPage->getConfig()->getTitle()->prepend(__('Coins'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Manage Currencies'));
         $resultPage->addBreadcrumb(__('Currency'), __('Currency'));
-        $resultPage->addBreadcrumb(__('Coins'), __('Coins'));
+        $resultPage->addBreadcrumb(__('Manage Currencies'), __('Manage Currencies'));
         return $resultPage;
     }
 }

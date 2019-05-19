@@ -37,9 +37,9 @@ class Edit extends Coin
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Kozeta_Currency::coin');
-        $resultPage->getConfig()->getTitle()->prepend(__('Coins'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Manage Currencies'));
         $resultPage->addBreadcrumb(__('Currency'), __('Currency'));
-        $resultPage->addBreadcrumb(__('Coins'), __('Coins'), $this->getUrl('kozeta_currency/coin'));
+        $resultPage->addBreadcrumb(__('Manage Currencies'), __('Manage Currencies'), $this->getUrl('kozeta_currency/coin'));
 
         if ($coinId === null) {
             $resultPage->addBreadcrumb(__('New Coin'), __('New Coin'));
