@@ -33,8 +33,6 @@ class InstallSchema implements InstallSchemaInterface
         
         if (!$installer->tableExists('kozeta_currency_currency_rate')) {
 
-
-
             /**
              * Create table 'directory_currency_rate'
              */
@@ -42,28 +40,34 @@ class InstallSchema implements InstallSchemaInterface
                 $installer->getTable('kozeta_currency_currency_rate')
             )->addColumn(
                 'currency_from',
-                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                Table::TYPE_TEXT,
                 32,
-                ['nullable' => false, 'primary' => true, 'default' => false],
+                ['nullable' => false, 'primary' => true, 'default' => ''],
                 'Currency Code Convert From'
             )->addColumn(
                 'currency_to',
-                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                Table::TYPE_TEXT,
                 32,
-                ['nullable' => false, 'primary' => true, 'default' => false],
+                ['nullable' => false, 'primary' => true, 'default' => ''],
                 'Currency Code Convert To'
             )->addColumn(
                 'rate',
-                \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                Table::TYPE_DECIMAL,
                 '36,24',
-                ['nullable' => false, 'default' => '0.000000000000'],
+                ['nullable' => false, 'default' => '0'],
                 'Currency Conversion Rate'
             )->addColumn(
                 'updated_at',
-                \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
+                Table::TYPE_TIMESTAMP,
                 null,
-                ['nullable' => false, 'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT_UPDATE],
+                ['nullable' => false, 'default' => Table::TIMESTAMP_INIT_UPDATE],
                 'Last Updated'
+            )->addColumn(
+                'currency_converter_id',
+                Table::TYPE_TEXT,
+                255,
+                ['nullable' => false, 'default' => ''],
+                'Currency Convert Service'
             )->addIndex(
                 $installer->getIdxName('kozeta_currency_currency_rate', ['currency_to']),
                 ['currency_to']
@@ -73,7 +77,6 @@ class InstallSchema implements InstallSchemaInterface
             $installer->getConnection()->createTable($table);
         }
 
-
         if (!$installer->tableExists('kozeta_currency_coin')) {
             $table = $installer->getConnection()->newTable($installer->getTable('kozeta_currency_coin'));
             
@@ -81,24 +84,19 @@ class InstallSchema implements InstallSchemaInterface
                 'coin_id',
                 Table::TYPE_INTEGER,
                 null,
-                [
-                        'identity' => true,
-                        'unsigned' => true,
-                        'nullable' => false,
-                        'primary' => true
-                    ],
+                ['identity' => true,'unsigned' => true, 'nullable' => false, 'primary' => true],
                 'Coin ID'
             )->addColumn(
                 'name',
                 Table::TYPE_TEXT,
                 255,
-                ['nullable'  => false,],
+                ['nullable' => false,],
                 'Coin Name'
             )->addColumn(
                 'url_key',
                 Table::TYPE_TEXT,
                 255,
-                ['nullable'  => false,],
+                ['nullable' => false,],
                 'Coin Url Key'
             )->addColumn(
                 'description',
@@ -110,19 +108,19 @@ class InstallSchema implements InstallSchemaInterface
                 'code',
                 Table::TYPE_TEXT,
                 64,
-                ['nullable'  => false,],
+                ['nullable' => false,],
                 'Currency code'
             )->addColumn(
                 'is_fiat',
                 Table::TYPE_BOOLEAN,
                 1,
-                ['nullable' => false, 'default' => '0'],
+                ['nullable' => false, 'default' => '1'],
                 'Fiat or crypto'
             )->addColumn(
                 'type',
                 Table::TYPE_INTEGER,
                 null,
-                [],
+                ['nullable' => false, 'default' => '1'],
                 'Coin Type'
             )->addColumn(
                 'avatar',
@@ -158,19 +156,13 @@ class InstallSchema implements InstallSchemaInterface
                 'is_active',
                 Table::TYPE_INTEGER,
                 null,
-                [
-                        'nullable'  => false,
-                        'default'   => '1',
-                    ],
+                ['nullable' => false, 'default' => '1'],
                 'Is Coin Active'
             )->addColumn(
                 'in_rss',
                 Table::TYPE_INTEGER,
                 null,
-                [
-                        'nullable'  => false,
-                        'default'   => '1',
-                    ],
+                ['nullable' => false, 'default' => '1'],
                 'Show in rss'
             )->addColumn(
                 'sort_order',
@@ -182,13 +174,13 @@ class InstallSchema implements InstallSchemaInterface
                 'txfee',
                 Table::TYPE_DECIMAL,
                 [12,8],
-                ['nullable' => false, 'default' => '0.00000000'],
+                ['nullable' => false, 'default' => '0'],
                 'Recommended transaction fee'
             )->addColumn(
                 'minconf',
                 Table::TYPE_SMALLINT,
                 null,
-                ['nullable' => false, 'default' => '2','unsigned' => true],
+                ['nullable' => false, 'default' => '2', 'unsigned' => true],
                 'Minimum number of confirmations'
             )->addColumn(
                 'currency_converter_id',
@@ -202,12 +194,27 @@ class InstallSchema implements InstallSchemaInterface
                 null,
                 ['nullable' => false, 'default' => '2','unsigned' => true],
                 'Number of decimals'
+            )->addColumn(
+                'import_scheduler',
+                Table::TYPE_TEXT,
+                255,
+                ['nullable' => false, 'default' => ''],
+                'Import Scheduler'
+            )->addColumn(
+                'import_enabled',
+                Table::TYPE_BOOLEAN,
+                1,
+                ['nullable' => false, 'default' => '1'],
+                'Import Enabled'
             )->addIndex(
                 $installer->getIdxName('kozeta_currency_coin', ['is_active']),
                 ['is_active']
             )->addIndex(
                 $installer->getIdxName('kozeta_currency_coin', ['currency_converter_id']),
                 ['currency_converter_id']
+            )->addIndex(
+                $installer->getIdxName('kozeta_currency_coin', ['import_scheduler']),
+                ['import_scheduler']
             )->addIndex(
                 $installer->getIdxName('kozeta_currency_coin', ['code', 'coin_id'], AdapterInterface::INDEX_TYPE_UNIQUE),
                 ['code', 'coin_id'],
@@ -241,21 +248,13 @@ class InstallSchema implements InstallSchemaInterface
                 'coin_id',
                 Table::TYPE_INTEGER,
                 null,
-                [
-                        'unsigned' => true,
-                        'nullable' => false,
-                        'primary'   => true,
-                    ],
+                ['unsigned' => true, 'nullable' => false, 'primary' => true],
                 'Coin ID'
             )->addColumn(
                 'store_id',
                 Table::TYPE_SMALLINT,
                 null,
-                [
-                        'unsigned'  => true,
-                        'nullable'  => false,
-                        'primary'   => true,
-                    ],
+                ['unsigned' => true, 'nullable'  => false, 'primary'   => true],
                 'Store ID'
             )->addIndex(
                 $installer->getIdxName('kozeta_currency_coin_store', ['store_id']),

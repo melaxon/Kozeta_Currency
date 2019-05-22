@@ -31,24 +31,28 @@ use Kozeta\Currency\Model\UploaderPool;
 class Save extends Coin
 {
     /**
+    * @var CoinInterfaceFactory
+    */
+    private $coinFactory;
+    /**
      * @var Currencysymbol
      */
-    protected $_currencySymbol;
+    private $_currencySymbol;
 
     /**
      * @var DataObjectProcessor
      */
-    protected $dataObjectProcessor;
+    private $dataObjectProcessor;
 
     /**
      * @var DataObjectHelper
      */
-    protected $dataObjectHelper;
+    private $dataObjectHelper;
 
     /**
      * @var UploaderPool
      */
-    protected $uploaderPool;
+    private $uploaderPool;
 
     /**
      * @param Registry $registry
@@ -99,10 +103,8 @@ class Save extends Coin
         $id = !empty($data['coin_id']) ? $data['coin_id'] : null;
         $resultRedirect = $this->resultRedirectFactory->create();
         try {
-// Update existing coin;
             if ($id) {
                 $coin = $this->coinRepository->getById((int)$id);
-//Create new coin;
             } else {
                 unset($data['coin_id']);
                 $coin = $this->coinFactory->create();

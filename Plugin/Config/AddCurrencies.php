@@ -7,16 +7,19 @@
 
 namespace Kozeta\Currency\Plugin\Config;
 
-use Magento\Framework\Locale\Bundle\CurrencyBundle;
-use Magento\Framework\App\Config\Value;
+//use Magento\Framework\App\Config\Value;
 use Kozeta\Currency\Model\Coin;
+use Magento\Framework\Locale\ConfigInterface;
+use Kozeta\Currency\Model\ResourceModel\Coin\CollectionFactory;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\Request\Http;
 
 class AddCurrencies
 {
     /**
      * @var \Kozeta\Currency\Model\ResourceModel\Coin\CollectionFactory
      */
-    protected $collectionFactory;
+    private $collectionFactory;
     
     /**
      * Installed currencies
@@ -26,33 +29,33 @@ class AddCurrencies
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
-    protected $scopeConfig;
+    private $scopeConfig;
     
     /**
      * New currencies list
      *
      * @var array
      */
-    protected $coins;
+    private $coins;
     
     /**
      * HTTP request
      *
      * @var \Magento\Framework\App\Request\Http
      */
-    protected $request;
-    
+    private $request;
+
     /**
-     * @param \Magento\Framework\Locale\ConfigInterface $config
-     * @param \Kozeta\Currency\Model\ResourceModel\Coin\CollectionFactory $collectionFactory
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     * @param \Magento\Framework\App\Request\Http $request
+     * @param ConfigInterface $config
+     * @param CollectionFactory $collectionFactory
+     * @param ScopeConfigInterface $scopeConfig
+     * @param Http $request
      */
     public function __construct(
-        \Magento\Framework\Locale\ConfigInterface $config,
-        \Kozeta\Currency\Model\ResourceModel\Coin\CollectionFactory $collectionFactory,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \Magento\Framework\App\Request\Http $request
+//        ConfigInterface $config,
+        CollectionFactory $collectionFactory,
+        ScopeConfigInterface $scopeConfig,
+        Http $request
     ) {
         $this->collectionFactory = $collectionFactory;
         $this->scopeConfig = $scopeConfig;
@@ -124,6 +127,6 @@ class AddCurrencies
      */
     public function aroundGetOptionAllCurrencies($subject, \Closure $proceed, ...$args)
     {
-        return $this->getNewCurrencies();
+        return $this->getNewCurrencies() ?: [];
     }
 }

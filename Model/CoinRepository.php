@@ -87,8 +87,10 @@ class CoinRepository implements CoinRepositoryInterface
     {
         /** @var CoinInterface|\Magento\Framework\Model\AbstractModel $coin */
         if (empty($coin->getStoreId())) {
-            $storeId = $this->storeManager->getStore()->getId();
-            $coin->setStoreId($storeId);
+            if ($coin->getStoreId() !== 0 && $coin->getStoreId() !== '0') {
+                $storeId = $this->storeManager->getStore()->getId();
+                $coin->setStoreId($storeId);
+            }
         }
         try {
             $this->resource->save($coin);

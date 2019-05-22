@@ -111,7 +111,7 @@ class Schedule
     private function getPathEnable($path)
     {
         if (!$this->_scopeConfig->getValue(
-            'currency/import/enabled_minutewice_schedule',
+            $path,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         )
         ) {

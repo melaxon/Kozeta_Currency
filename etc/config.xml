@@ -30,17 +30,17 @@
             <import>
                 <enabled_minutewice_schedule>0</enabled_minutewice_schedule>
                 <!-- Every day at midnight -->
-                <schedule>0 0 * * *</schedule>
+                <schedule>* 0 * * *</schedule>
             </import>
             <import_alt_1>
                 <enabled>0</enabled>
                 <!-- Every day at midnight -->
-                <schedule>0 0 * * *</schedule>
+                <schedule>* 0 * * *</schedule>
             </import_alt_1>
             <import_alt_2>
                 <enabled>0</enabled>
                 <!-- Every day at midnight -->
-                <schedule>0 0 * * *</schedule>
+                <schedule>* 0 * * *</schedule>
             </import_alt_2>
             <frankfurter>
                 <timeout>100</timeout>

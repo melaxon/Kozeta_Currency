@@ -124,7 +124,7 @@ class Currency extends \Magento\Directory\Model\Currency
         }
 
         $data = $this->_getResource()->getCurrencySymbol($this->getCode());
-        $options['symbol'] = $data[$this->getCode()] ?: $this->getCode();
+        $options['symbol'] = isset($data[$this->getCode()]) ? $data[$this->getCode()] : $this->getCode();
         //$options['position'] = 16;
 
         return $this->_localeCurrency->getCurrency($this->getCode())->toCurrency($price, $options);
@@ -137,7 +137,7 @@ class Currency extends \Magento\Directory\Model\Currency
      */
     public function getConfigAllowCurrencies()
     {
-        $allowedCurrencies = null;
+        $allowedCurrencies = [];
         try {
             $runtimeCurrencies = \Kozeta\Currency\Model\Currency\RuntimeCurrencies::getInstance();
             $allowedCurrencies = $runtimeCurrencies->getImportCurrencies();

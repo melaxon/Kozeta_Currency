@@ -333,8 +333,7 @@
                     <item name="sortOrder" xsi:type="number">50</item>
                     <item name="dataScope" xsi:type="string">meta_title</item>
                     <item name="validation" xsi:type="array">
-                        <item name="letters-with-basic-punc" xsi:type="boolean">true</item>
-                        <item name="max_text_length" xsi:type="string">70</item>
+                        <item name="max_text_length" xsi:type="string">120</item>
                     </item>
                 </item>
             </argument>
@@ -349,7 +348,6 @@
                     <item name="sortOrder" xsi:type="number">60</item>
                     <item name="dataScope" xsi:type="string">meta_description</item>
                     <item name="validation" xsi:type="array">
-                        <item name="letters-with-basic-punc" xsi:type="boolean">true</item>
                         <item name="max_text_length" xsi:type="string">320</item>
                     </item>
                 </item>

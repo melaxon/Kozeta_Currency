@@ -53,10 +53,18 @@ class FetchRates extends CurrencyAction
         );
 
             $services = [];
-
             foreach ($currencies as $k => $code) {
-                $import_enabled = (int) $currencyModel->getCurrencyParamByCode($code, 'import_enabled')[$code];
-                if (!$import_enabled) {
+                $import_enabled = $currencyModel->getCurrencyParamByCode($code, 'import_enabled');
+                if (empty($import_enabled)) {
+                    unset($currencies[$k]);
+                    $this->messageManager->addWarning(
+                            __('FATAL ERROR:') . ' ' . __('Settings for currency %1 is incorrect. Please re-save General -> Currency settings and Advanced -> Systen -> Installed currencies', $code)
+                    );
+                    continue;
+                }
+
+                $import_enabled[$code] = (int) $import_enabled[$code];
+                if (!$import_enabled[$code]) {
                     unset($currencies[$k]);
                     continue;
                 }
@@ -80,7 +88,6 @@ class FetchRates extends CurrencyAction
             }
 
             $runtimeCurrencies = $this->_objectManager->get(\Kozeta\Currency\Model\Currency\RuntimeCurrencies::class);
-
             $rates = [];
             $_errors = [];
             foreach ($services as $service => $_currencies) {
