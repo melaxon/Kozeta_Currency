@@ -191,8 +191,10 @@
     <type name="Magento\Sales\Api\Data\OrderInterface">
         <plugin name="kozeta_currency_precision_sales_api_data_order_plugin" type="Kozeta\Currency\Plugin\Precision\Sales\Api\Data\OrderPlugin" sortOrder="2000" disabled="false"/>
     </type>
-<!-- remove magento currency symbols from ACL -->    
     <type name="Magento\Integration\Helper\Data">
         <plugin name="acl-intergration-data" type="Kozeta\Currency\Plugin\Integration\Data" sortOrder="100" />
+    </type>
+    <type name="Magento\Directory\Model\Observer">
+        <plugin name="kozeta_currency_cron_model_observer" type="Kozeta\Currency\Plugin\Model\Observer" sortOrder="100" />
     </type>
 </config>

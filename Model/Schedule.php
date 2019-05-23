@@ -17,7 +17,7 @@ use Kozeta\Currency\Model\Currency\RuntimeCurrencies;
 
 class Schedule
 {
-    const MINUTEWISCE_MPORT_ENABLE = 'currency/import/enabled_minutewice_schedule';
+    const MINUTEWICE_IMPORT_ENABLE = 'currency/import/enabled_minutewice_schedule';
     const IMPORT_SCHEDULER_DEFAULT = 0;
     const IMPORT_SCHEDULER_1 = 1;
     const IMPORT_SCHEDULER_2 = 2;
@@ -46,7 +46,6 @@ class Schedule
     public static function getInstance()
     {
         if (!self::$_instance instanceof \Kozeta\Currency\Model\Schedule) {
-//            $this-> sendErrorMessage(['Schedule object isn\'t initialized']);
             throw new \RuntimeException('Schedule object isn\'t initialized');
         }
         return self::$_instance;
@@ -115,7 +114,6 @@ class Schedule
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         )
         ) {
-            $this->logger->info('CURRENCY RATES MINUTE-WICE IMPORT DISABLED');
             return false;
         }
         return true;
@@ -139,12 +137,26 @@ class Schedule
      * @throws \Exception
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
+    public function updateCurrencyRatesNativeSchedule($schedule)
+    {
+        if (
+            !$this->getPathEnable(\Magento\Directory\Model\Observer::IMPORT_ENABLE) || ($this->getPathEnable(self::MINUTEWICE_IMPORT_ENABLE)
+            )
+        ) {
+            return;
+        }
+        $this->scheduledUpdateCurrencyRatesAlt($schedule, self::IMPORT_SCHEDULER_DEFAULT);
+    }
+    
+    /**
+     * @return void
+     * @throws \Exception
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     public function updateCurrencyRates($schedule)
     {
         if (
-            !$this->getPathEnable('currency/import/enabled') || (
-                !$this->getPathValue('crontab/default/jobs/currency_rates_update/schedule/cron_expr') &&
-                !$this->getPathEnable(self::MINUTEWISCE_MPORT_ENABLE)
+            !$this->getPathEnable(\Magento\Directory\Model\Observer::IMPORT_ENABLE) || (!$this->getPathEnable(self::MINUTEWICE_IMPORT_ENABLE)
             )
         ) {
             return;

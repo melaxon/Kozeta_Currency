@@ -17,6 +17,8 @@
         <job name="kozeta_currency_sync_alt_2" instance="\Kozeta\Currency\Model\Schedule" method="updateCurrencyRatesAlt2">
             <config_path>currency/import_alt_2/schedule</config_path>
         </job>
-
+    </group>
+    <group id="default">
+        <job name="currency_rates_update" instance="\Kozeta\Currency\Model\Schedule" method="updateCurrencyRatesNativeSchedule" />
     </group>
 </config>

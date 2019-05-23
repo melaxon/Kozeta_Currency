@@ -64,7 +64,6 @@ class InstallData implements InstallDataInterface
      * @param ScopeConfigInterface $scopeConfig
      * @param CurrencyFactory $currencyFactory
      * @param ResolverInterface $localeResolver
-     * @param Json|null $serializer
      * @param State $state
      */
     public function __construct(
@@ -74,7 +73,6 @@ class InstallData implements InstallDataInterface
         ScopeConfigInterface $scopeConfig,
         CurrencyFactory $currencyFactory,
         ResolverInterface $localeResolver,
-        Json $serializer = null,
         State $state
     ) {
         $this->coinRepository = $coinRepository;
@@ -83,7 +81,6 @@ class InstallData implements InstallDataInterface
         $this->scopeConfig = $scopeConfig;
         $this->currencyFactory = $currencyFactory;
         $this->localeResolver = $localeResolver;
-        $this->serializer = $serializer ?: ObjectManager::getInstance()->get(Json::class);
         $this->state = $state;
     }
 
@@ -95,7 +92,7 @@ class InstallData implements InstallDataInterface
      */
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
-        $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_FRONTEND); // or \Magento\Framework\App\Area::AREA_ADMINHTML, depending on your needs
+        $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_GLOBAL);
 
         /** @var \Kozeta\Currency\Api\Data\CoinInterface $coin */
         $currencyModel = $this->currencyFactory->create();
@@ -168,16 +165,28 @@ class InstallData implements InstallDataInterface
      */
     private function _unserializeStoreConfig($configPath, $storeId = null)
     {
+        $result = [];
         $configData = (string) $this->scopeConfig->getValue(
             $configPath,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
             $storeId
         );
-        $result = [];
         if ($configData) {
-            $result = $this->serializer->unserialize($configData);
+            if (class_exists(Json::class)){
+                $this->serializer = ObjectManager::getInstance()->get(Json::class);
+                $result = $this->serializer->unserialize($configData);
+            }
+            else {
+                try {
+                    $result = unserialize($configData);
+                } catch (\Exception $e) {
+                    $result = json_decode($configData, true);
+                    if (json_last_error() !== JSON_ERROR_NONE) {
+                        throw new \InvalidArgumentException('Unable to unserialize value.' . " $configPath : $configData; ");
+                    }
+                }
+            }
         }
-
         return is_array($result) ? $result : [];
     }
 
