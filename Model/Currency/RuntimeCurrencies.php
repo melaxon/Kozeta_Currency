@@ -61,6 +61,4 @@ class RuntimeCurrencies
     {
         $this->currencies = $_currencies;
     }
-
-
 }

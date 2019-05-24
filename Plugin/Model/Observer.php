@@ -5,11 +5,11 @@
  * @package Kozeta_Curency
  */
 
-/**
- * Plugin for Directory module observer
- */
 namespace Kozeta\Currency\Plugin\Model;
 
+    /**
+     * Plugin for Directory module observer
+     */
 class Observer
 {
     /**
@@ -20,10 +20,8 @@ class Observer
     public function aroundScheduledUpdateCurrencyRates(
         \Magento\Directory\Model\Observer $subject,
         \Closure $proceed,
-        ...$args
-    )
-    {
+        $args
+    ) {
         return false;
     }
 }
-

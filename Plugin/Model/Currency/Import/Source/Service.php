@@ -25,7 +25,7 @@ class Service
      */
     public function __construct(
         \Magento\Framework\App\Request\Http $request
-    ){
+    ) {
         $this->request = $request;
     }
 
@@ -38,8 +38,7 @@ class Service
     public function afterToOptionArray(
         \Magento\Directory\Model\Currency\Import\Source\Service $subject,
         $result
-    )
-    {
+    ) {
         $controller = $this->request->getControllerName();
         $action     = $this->request->getActionName();
         switch ($controller) {

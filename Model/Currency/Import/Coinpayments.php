@@ -69,7 +69,8 @@ class Coinpayments extends \Magento\Directory\Model\Currency\Import\AbstractImpo
      * @param $currencyTo
      * return (float) $rate or false
      */
-    private function calculateRate($feed, $currencyFrom, $currencyTo) {
+    private function calculateRate($feed, $currencyFrom, $currencyTo)
+    {
         if ($currencyTo == 'BTC') {
             if (isset($feed[$currencyFrom])) {
                 return $feed[$currencyFrom]['rate'];
@@ -136,7 +137,6 @@ class Coinpayments extends \Magento\Directory\Model\Currency\Import\AbstractImpo
         ];
 
         try {
-            
             $this->_curl->addHeader('HMAC', hash_hmac('sha512', http_build_query($data), $privateKey));
             $this->_curl->addHeader('Content-Type', 'application/x-www-form-urlencoded');
             $this->_curl->post($url, $data);
@@ -147,7 +147,7 @@ class Coinpayments extends \Magento\Directory\Model\Currency\Import\AbstractImpo
                 $this->_messages[] = $response->error;
                 return false;
             }
-            
+
             $feed = [];
             foreach ($response->result as $key => $item) {
                 $feed[$key] = [
@@ -170,7 +170,6 @@ class Coinpayments extends \Magento\Directory\Model\Currency\Import\AbstractImpo
             $this->dataFeed->setDatafeed($feed);
 
             return $this->calculateRate($feed, $currencyFrom, $currencyTo);
-
         } catch (\Exception $e) {
             if ($retry == 0) {
                 $this->_convert($currencyFrom, $currencyTo, 1);

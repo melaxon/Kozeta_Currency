@@ -7,6 +7,8 @@
 
 namespace Kozeta\Currency\Plugin\Sales\Model;
 
+use Kozeta\Currency\Model\Precision;
+
 class Order
 {
 
@@ -16,7 +18,7 @@ class Order
     private $precisionObject;
 
     public function __construct(
-        \Kozeta\Currency\Model\Precision $precisionObject
+        Precision $precisionObject
     ) {
         $this->precisionObject = $precisionObject;
     }

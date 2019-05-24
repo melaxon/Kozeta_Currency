@@ -24,16 +24,17 @@ class Topmenu
     /**
      * @var ScopeConfigInterface
      */
-    protected $scopeConfig;
+    private $scopeConfig;
 
     /**
      * @var Url
      */
-    protected $url;
+    private $url;
+    
     /**
      * @var Http
      */
-    protected $request;
+    private $request;
 
     /**
      * @param Url $url
@@ -64,16 +65,16 @@ class Topmenu
         $childrenWrapClass = '',
         $limit = 0
     ) {
-        
+
         $title = $this->scopeConfig->getValue(
             self::TOP_MENU_TITLE_CONFIG_PATH,
             ScopeInterface::SCOPE_STORE
         );
-		if (empty(trim($title)))
-		{
-			return;
-		}
-        
+        if (empty(trim($title)))
+        {
+            return;
+        }
+
         // @codingStandardsIgnoreEnd
         $node = new Node(
             $this->getNodeAsArray(),
@@ -81,8 +82,6 @@ class Topmenu
             $subject->getMenu()->getTree(),
             $subject->getMenu()
         );
-        
-        
 
         $subject->getMenu()->addChild($node);
     }
@@ -90,7 +89,7 @@ class Topmenu
     /**
      * @return array
      */
-    protected function getNodeAsArray()
+    private function getNodeAsArray()
     {
 
         $title = $this->scopeConfig->getValue(
@@ -111,7 +110,7 @@ class Topmenu
     /**
      * @return array
      */
-    protected function getActiveHandles()
+    private function getActiveHandles()
     {
         return [
             'currency_coin_index',

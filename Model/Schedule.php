@@ -14,6 +14,7 @@ use Magento\Framework\Translate\Inline\StateInterface as inlineTranslation;
 use Magento\Directory\Model\CurrencyFactory;
 use Magento\Directory\Model\Currency\Import\Factory as ImportFactory;
 use Kozeta\Currency\Model\Currency\RuntimeCurrencies;
+use Magento\Directory\Model\Observer;
 
 class Schedule
 {
@@ -21,6 +22,10 @@ class Schedule
     const IMPORT_SCHEDULER_DEFAULT = 0;
     const IMPORT_SCHEDULER_1 = 1;
     const IMPORT_SCHEDULER_2 = 2;
+    const SCHEDULE1_ENABLED = 'currency/import_alt_1/enabled';
+    const SCHEDULE2_ENABLED = 'currency/import_alt_2/enabled';
+    const SCHEDULE1_VALUE = 'currency/import_alt_1/schedule';
+    const SCHEDULE2_VALUE = 'currency/import_alt_2/schedule';
 
     /**
      * @var \Kozeta\Currency\Model\Currency\RuntimeCurrencies
@@ -35,7 +40,7 @@ class Schedule
     /**
      * @var Schedule
      */
-    protected static $_instance;
+    protected static $instance;
 
     /**
      * Retrieve Schedule object
@@ -45,10 +50,10 @@ class Schedule
      */
     public static function getInstance()
     {
-        if (!self::$_instance instanceof \Kozeta\Currency\Model\Schedule) {
+        if (!self::$instance instanceof \Kozeta\Currency\Model\Schedule) {
             throw new \RuntimeException('Schedule object isn\'t initialized');
         }
-        return self::$_instance;
+        return self::$instance;
     }
 
     /**
@@ -56,12 +61,12 @@ class Schedule
      *
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
-    private $_scopeConfig;
+    private $scopeConfig;
 
     /**
      * @var \Magento\Framework\Mail\Template\TransportBuilder
      */
-    private $_transportBuilder;
+    private $transportBuilder;
 
     /**
      * @var \Magento\Framework\Translate\Inline\StateInterface
@@ -71,12 +76,12 @@ class Schedule
     /**
      * @var \Magento\Directory\Model\CurrencyFactory
      */
-    private $_currencyFactory;
+    private $currencyFactory;
 
     /**
      * @var \Magento\Directory\Model\Currency\Import\Factory
      */
-    private $_importFactory;
+    private $importFactory;
 
     /**
      * @var array
@@ -93,11 +98,11 @@ class Schedule
         RuntimeCurrencies $runtimeCurrencies
     ) {
         $this->logger = $logger;
-        $this->_scopeConfig = $scopeConfig;
-        $this->_transportBuilder = $transportBuilder;
+        $this->scopeConfig = $scopeConfig;
+        $this->transportBuilder = $transportBuilder;
         $this->inlineTranslation = $inlineTranslation;
-        $this->_currencyFactory = $currencyFactory;
-        $this->_importFactory = $importFactory;
+        $this->currencyFactory = $currencyFactory;
+        $this->importFactory = $importFactory;
         $this->runtimeCurrencies = $runtimeCurrencies;
     }
 
@@ -109,7 +114,7 @@ class Schedule
      */
     private function getPathEnable($path)
     {
-        if (!$this->_scopeConfig->getValue(
+        if (!$this->scopeConfig->getValue(
             $path,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         )
@@ -126,7 +131,7 @@ class Schedule
      */
     private function getPathValue($path)
     {
-        return $this->_scopeConfig->getValue(
+        return $this->scopeConfig->getValue(
             $path,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
@@ -139,10 +144,7 @@ class Schedule
      */
     public function updateCurrencyRatesNativeSchedule($schedule)
     {
-        if (
-            !$this->getPathEnable(\Magento\Directory\Model\Observer::IMPORT_ENABLE) || ($this->getPathEnable(self::MINUTEWICE_IMPORT_ENABLE)
-            )
-        ) {
+        if (!$this->getPathEnable(Observer::IMPORT_ENABLE) || ($this->getPathEnable(self::MINUTEWICE_IMPORT_ENABLE))) {
             return;
         }
         $this->scheduledUpdateCurrencyRatesAlt($schedule, self::IMPORT_SCHEDULER_DEFAULT);
@@ -155,10 +157,7 @@ class Schedule
      */
     public function updateCurrencyRates($schedule)
     {
-        if (
-            !$this->getPathEnable(\Magento\Directory\Model\Observer::IMPORT_ENABLE) || (!$this->getPathEnable(self::MINUTEWICE_IMPORT_ENABLE)
-            )
-        ) {
+        if (!$this->getPathEnable(Observer::IMPORT_ENABLE) || (!$this->getPathEnable(self::MINUTEWICE_IMPORT_ENABLE))) {
             return;
         }
         $this->scheduledUpdateCurrencyRatesAlt($schedule, self::IMPORT_SCHEDULER_DEFAULT);
@@ -171,7 +170,7 @@ class Schedule
      */
     public function updateCurrencyRatesAlt1($schedule)
     {
-        if (!$this->getPathEnable('currency/import_alt_1/enabled') || !$this->getPathValue('currency/import_alt_1/schedule')) {
+        if (!$this->getPathEnable(self::SCHEDULE1_ENABLED) || !$this->getPathValue(self::SCHEDULE1_VALUE)) {
             return;
         }
         $this->scheduledUpdateCurrencyRatesAlt($schedule, self::IMPORT_SCHEDULER_1);
@@ -184,7 +183,7 @@ class Schedule
      */
     public function updateCurrencyRatesAlt2($schedule)
     {
-        if (!$this->getPathEnable('currency/import_alt_2/enabled') || !$this->getPathValue('currency/import_alt_2/schedule')) {
+        if (!$this->getPathEnable(self::SCHEDULE2_ENABLED) || !$this->getPathValue(self::SCHEDULE2_VALUE)) {
             return;
         }
         $this->scheduledUpdateCurrencyRatesAlt($schedule, self::IMPORT_SCHEDULER_2);
@@ -200,8 +199,8 @@ class Schedule
         $scheduler = (int) $scheduler;
         $rates = [];
         $services = [];
-        $defaultService = $this->getPathValue('currency/import/service');
-        $currencyModel = $this->_currencyFactory->create();
+        $defaultService = $this->getPathValue(Observer::IMPORT_SERVICE);
+        $currencyModel = $this->currencyFactory->create();
         $currencies = $currencyModel->getConfigAllowCurrencies();
 
         foreach ($currencies as $k => $code) {
@@ -244,29 +243,27 @@ class Schedule
         $importWarnings = [];
         $errors = [];
         foreach ($services as $_service => $_currencies) {
-
             if (empty($_currencies)) {
                 continue;
             }
             $this->runtimeCurrencies->setImportCurrencies($_currencies);
 
             try {
-                $importModel = $this->_importFactory->create($_service);
+                $importModel = $this->importFactory->create($_service);
                 $rates = $importModel->fetchRates();
                 $errors = $importModel->getMessages();
             } catch (\Exception $e) {
                 $this->runtimeCurrencies->setImportCurrencies(false);
                 $importWarnings[] = __('FATAL ERROR:') . " ($_service): " . __("The import model can't be initialized. Verify the model and try again.");
             }
-            if (sizeof($errors) > 0) {
+            if (!empty($errors)) {
                 foreach ($errors as $error) {
                     $importWarnings[] = __('WARNING:') . " ($_service) " . $error;
                 }
             }
 
-            if (sizeof($importWarnings) > 0) {
+            if (!empty($importWarnings)) {
                 $this->sendErrorMessage($importWarnings);
-//                continue;
             }
             $service = [];
             foreach ($rates as $currencyCode => $rate) {
@@ -276,10 +273,9 @@ class Schedule
             }
 
             $this->runtimeCurrencies->setImportCurrencies($_currencies);
-            $this->_currencyFactory->create()->saveRates($rates, $service);
+            $this->currencyFactory->create()->saveRates($rates, $service);
         }
     }
-
 
     /**
      * @param array $errorMessage
@@ -290,7 +286,7 @@ class Schedule
         $errorRecipient = $this->getPathValue('currency/import/error_email');
         if ($errorRecipient) {
             $this->inlineTranslation->suspend();
-            $this->_transportBuilder->setTemplateIdentifier(
+            $this->transportBuilder->setTemplateIdentifier(
                 $this->getPathValue('currency/import/error_email_template')
             )->setTemplateOptions(
                 [
@@ -302,7 +298,7 @@ class Schedule
             )->setFrom(
                 $this->getPathValue('currency/import/error_email_identity')
             )->addTo($errorRecipient);
-            $transport = $this->_transportBuilder->getTransport();
+            $transport = $this->transportBuilder->getTransport();
             $transport->sendMessage();
 
             $this->inlineTranslation->resume();

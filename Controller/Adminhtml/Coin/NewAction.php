@@ -36,7 +36,6 @@ class NewAction extends Action
         parent::__construct($context);
     }
 
-
     /**
      * forward to edit
      *

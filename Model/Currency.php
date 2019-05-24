@@ -34,15 +34,14 @@ class Currency extends \Magento\Directory\Model\Currency
         if ($currency instanceof \Magento\Directory\Model\Currency) {
             $currency = $currency->getCode();
         }
-        
+
         if ($getUpdated_at) {
             return $this->_getResource()->getCurrencyRatesUpdated($currency, $toCurrencies);
         }
-        
-        return $this->_getResource()->getCurrencyRates($currency, $toCurrencies);
 
+        return $this->_getResource()->getCurrencyRates($currency, $toCurrencies);
     }
-   
+
     /**
      * Retrieve currency name
      * @param string $currency or object $currency
@@ -53,10 +52,10 @@ class Currency extends \Magento\Directory\Model\Currency
         if ($currency instanceof \Magento\Directory\Model\Currency) {
             $currency = $currency->getCode();
         }
-        
+
         return $this->_getResource()->getCurrencyNames($currency);
     }
-    
+
     /**
      * Return currency parameters
      * Return all parameters if no $param given
@@ -81,7 +80,7 @@ class Currency extends \Magento\Directory\Model\Currency
      */
     public function convert($price, $toCurrency = null)
     {
-        
+
         if ($toCurrency === null) {
             return $price;
         } elseif ($this->getCode() == $this->getCurrencyCodeFromToCurrency($toCurrency)) {
@@ -141,8 +140,7 @@ class Currency extends \Magento\Directory\Model\Currency
         try {
             $runtimeCurrencies = \Kozeta\Currency\Model\Currency\RuntimeCurrencies::getInstance();
             $allowedCurrencies = $runtimeCurrencies->getImportCurrencies();
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return parent::getConfigAllowCurrencies();
         }
 
@@ -161,7 +159,7 @@ class Currency extends \Magento\Directory\Model\Currency
         }
         return parent::getConfigAllowCurrencies();
     }
-    
+
     /**
      * Save currency rates
      *

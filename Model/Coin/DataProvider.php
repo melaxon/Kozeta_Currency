@@ -19,9 +19,7 @@ class DataProvider extends AbstractDataProvider
      * @var array
      */
     protected $loadedData;
-//new branch diff
-// fix 1
-// fix 2
+
     /**
      * @var PoolInterface
      */
@@ -49,12 +47,11 @@ class DataProvider extends AbstractDataProvider
         array $meta = [],
         array $data = []
     ) {
-        $this->collection   = $coinCollectionFactory->create();
-        $this->pool         = $pool;
-        
+        $this->collection = $coinCollectionFactory->create();
+        $this->pool = $pool;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
         $this->meta = $this->prepareMeta($this->meta);
-        $this->request      = $request;
+        $this->request = $request;
     }
 
     /**
@@ -86,7 +83,7 @@ class DataProvider extends AbstractDataProvider
             $this->data = $modifier->modifyData($this->data);
             $coin_id = $this->request->getParam('coin_id');
             $data = $this->data;
-            
+
             foreach ($data as $id => $coin) {
                 if (!isset($coin['is_fiat'])) {
                     continue;
@@ -95,11 +92,11 @@ class DataProvider extends AbstractDataProvider
                     unset($data[$id]);
                     continue;
                 }
-                 if ($coin['is_fiat']) {
-                     $data[$id]['checked'] = true;
-                 } else {
-                     $data[$id]['checked'] = false;
-                 }
+                if ($coin['is_fiat']) {
+                    $data[$id]['checked'] = true;
+                } else {
+                    $data[$id]['checked'] = false;
+                }
             }
             $this->data = $data;
         }

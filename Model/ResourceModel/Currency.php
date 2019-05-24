@@ -15,7 +15,7 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
      *
      * @var array
      */
-    private $_currencyData;
+    private $currencyData;
     
     /**
      * Substitute core table directory_currency_rate
@@ -40,10 +40,10 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
         $rates = [];
         if (is_array($currency)) {
             foreach ($currency as $code) {
-                $rates[$code] = $this->_getRatesByCode($code, $toCurrencies);
+                $rates[$code] = $this->getRatesByCode($code, $toCurrencies);
             }
         } else {
-            $rates = $this->_getRatesByCode($currency, $toCurrencies, $updated);
+            $rates = $this->getRatesByCode($currency, $toCurrencies, $updated);
         }
 
         return $rates;
@@ -61,15 +61,14 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
         $rates = [];
         if (is_array($currency)) {
             foreach ($currency as $code) {
-                $rates[$code] = $this->_getRatesByCode($code, $toCurrencies, 1);
+                $rates[$code] = $this->getRatesByCode($code, $toCurrencies, 1);
             }
         } else {
-            $rates = $this->_getRatesByCode($currency, $toCurrencies, 1);
+            $rates = $this->getRatesByCode($currency, $toCurrencies, 1);
         }
 
         return $rates;
     }
-
 
     /**
      * Protected method used by getCurrencyRates() method
@@ -79,7 +78,7 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
      * @return array
      * @SuppressWarnings(PHPMD.Ecg.Sql.SlowQuery)
      */
-    protected function _getRatesByCode($code, $toCurrencies = null, $updated = null)
+    private function getRatesByCode($code, $toCurrencies = null, $updated = null)
     {
         $fieldsList = ['currency_to', 'rate'];
         if ($updated !== null) {
@@ -136,7 +135,7 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
      * @return array
      * @SuppressWarnings(PHPMD.Ecg.Sql.SlowQuery)
      */
-    public function getCurrencySymbol($code) 
+    public function getCurrencySymbol($code)
     {
         return $this->getCurrencyParamByCode($code, 'symbol');
     }
@@ -148,7 +147,7 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
      * @return array
      * @SuppressWarnings(PHPMD.Ecg.Sql.SlowQuery)
      */
-    public function getCurrencyPrecision($code) 
+    public function getCurrencyPrecision($code)
     {
         return $this->getCurrencyParamByCode($code, 'precision');
     }
@@ -170,19 +169,19 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
         }
         $_code = $code;
         foreach ($code as $k => $c) {
-            if (isset($this->_currencyData[$c])) {
+            if (isset($this->currencyData[$c])) {
                 unset($code[$k]);
                 continue;
             }
         }
 
-        if (isset($this->_currencyData)) {
-            foreach ($this->_currencyData as $row) {
+        if (isset($this->currencyData)) {
+            foreach ($this->currencyData as $row) {
                 $result[$row['code']] = $param ? $row[$param] : $row;
             }
         }
 
-        if ($code){
+        if ($code) {
             $connection = $this->getConnection();
             $select = $connection->select()->from(
                 $this->getTable('kozeta_currency_coin'),
@@ -197,7 +196,7 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
 
             foreach ($rowSet as $row) {
                 $result[$row['code']] = $param ? $row[$param] : $row;
-                $this->_currencyData[$row['code']] = $row;
+                $this->currencyData[$row['code']] = $row;
             }
         }
 
@@ -230,7 +229,7 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
             }
         }
 
-        if (is_array($rates) && sizeof($rates) > 0) {
+        if (is_array($rates) && !empty($rates)) {
             $connection = $this->getConnection();
             $data = [];
             foreach ($rates as $currencyCode => $rate) {

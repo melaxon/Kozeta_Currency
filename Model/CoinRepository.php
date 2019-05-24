@@ -35,31 +35,37 @@ class CoinRepository implements CoinRepositoryInterface
     /**
      * @var array
      */
-    protected $instances = [];
+    private $instances = [];
+    
     /**
      * @var ResourceCoin
      */
-    protected $resource;
+    private $resource;
+    
     /**
      * @var StoreManagerInterface
      */
-    protected $storeManager;
+    private $storeManager;
+    
     /**
      * @var CoinCollectionFactory
      */
-    protected $coinCollectionFactory;
+    private $coinCollectionFactory;
+    
     /**
      * @var CoinSearchResultsInterfaceFactory
      */
-    protected $searchResultsFactory;
+    private $searchResultsFactory;
+    
     /**
      * @var CoinInterfaceFactory
      */
-    protected $coinInterfaceFactory;
+    private $coinInterfaceFactory;
+    
     /**
      * @var DataObjectHelper
      */
-    protected $dataObjectHelper;
+    private $dataObjectHelper;
 
     public function __construct(
         ResourceCoin $resource,
@@ -69,12 +75,12 @@ class CoinRepository implements CoinRepositoryInterface
         CoinInterfaceFactory $coinInterfaceFactory,
         DataObjectHelper $dataObjectHelper
     ) {
-        $this->resource                 = $resource;
-        $this->storeManager             = $storeManager;
-        $this->coinCollectionFactory  = $coinCollectionFactory;
-        $this->searchResultsFactory     = $coinSearchResultsInterfaceFactory;
-        $this->coinInterfaceFactory   = $coinInterfaceFactory;
-        $this->dataObjectHelper         = $dataObjectHelper;
+        $this->resource = $resource;
+        $this->storeManager = $storeManager;
+        $this->coinCollectionFactory = $coinCollectionFactory;
+        $this->searchResultsFactory = $coinSearchResultsInterfaceFactory;
+        $this->coinInterfaceFactory = $coinInterfaceFactory;
+        $this->dataObjectHelper = $dataObjectHelper;
     }
     /**
      * Save page.
@@ -156,10 +162,7 @@ class CoinRepository implements CoinRepositoryInterface
                 );
             }
         } else {
-            // set a default sorting order since this method is used constantly in many
-            // different blocks
-            $field = 'coin_id';
-            $collection->addOrder($field, 'ASC');
+            $collection->addOrder('coin_id', 'ASC');
         }
         $collection->setCurPage($searchCriteria->getCurrentPage());
         $collection->setPageSize($searchCriteria->getPageSize());
@@ -224,7 +227,7 @@ class CoinRepository implements CoinRepositoryInterface
      * @return $this
      * @throws \Magento\Framework\Exception\InputException
      */
-    protected function addFilterGroupToCollection(FilterGroup $filterGroup, Collection $collection)
+    private function addFilterGroupToCollection(FilterGroup $filterGroup, Collection $collection)
     {
         $fields = [];
         $conditions = [];

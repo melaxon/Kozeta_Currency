@@ -70,7 +70,8 @@ class Coingate extends \Magento\Directory\Model\Currency\Import\AbstractImport
      * @param $currencyTo
      * return (float) $rate or false
      */
-    private function calculateRate($feed, $currencyFrom, $currencyTo) {
+    private function calculateRate($feed, $currencyFrom, $currencyTo)
+    {
         $pattern = '/^[-+]?(((\d+)\.?(\d+)?)|\.\d+)([eE]?[+-]?\d+)?$/';
         $rate = $feed['coingate'][$currencyTo][$currencyFrom];
         if (!is_bool($rate) && (is_float($rate) || preg_match($pattern, trim($rate)))) {
@@ -89,8 +90,6 @@ class Coingate extends \Magento\Directory\Model\Currency\Import\AbstractImport
      */
     protected function _convert($currencyFrom, $currencyTo, $retry = 0, $short = 1)
     {
-      
-        //get saved datafeed
         $feed = $this->dataFeed->getDatafeed();
         if (!empty($feed && isset($feed['coingate'][$currencyTo][$currencyFrom]))) {
             return $this->calculateRate($feed, $currencyFrom, $currencyTo);
@@ -103,18 +102,13 @@ class Coingate extends \Magento\Directory\Model\Currency\Import\AbstractImport
         $url = str_replace('{{CURRENCY_TO}}', $currencyTo, $url);
 
         try {
-            
-            //$this->_curl->addHeader('HMAC', hash_hmac('sha512', http_build_query($data), $privateKey));
             $this->_curl->addHeader('Content-Type', 'text/plain');
             $this->_curl->get($url, []);
             $feed['coingate'][$currencyTo][$currencyFrom] = $this->_curl->getBody();
-            //$response = json_decode($this->_curl->getBody());
-            
 
             $this->dataFeed->setDatafeed($feed);
 
             return $this->calculateRate($feed, $currencyFrom, $currencyTo);
-
         } catch (\Exception $e) {
             if ($retry == 0) {
                 $this->_convert($currencyFrom, $currencyTo, 1);

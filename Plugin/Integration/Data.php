@@ -21,7 +21,7 @@ class Data
         }
         return [$resources];
     }
-    protected function getRestrictedIds()
+    private function getRestrictedIds()
     {
         return [
             'Magento_CurrencySymbol::symbols',

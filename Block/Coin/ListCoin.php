@@ -97,7 +97,7 @@ class ListCoin extends Template
 
     public function getEnableCoinPages()
     {
-        if (is_null($this->enableCoinPages)) {
+        if ($this->enableCoinPages === null) {
             $this->enableCoinPages = $this->scopeConfig->getValue(
                 self::COIN_PAGES_CONFIG_PATH,
                 ScopeInterface::SCOPE_STORE
@@ -111,7 +111,7 @@ class ListCoin extends Template
      */
     public function getCoins()
     {
-        if (is_null($this->coins)) {
+        if ($this->coins === null) {
             $this->coins = $this->coinCollectionFactory->create()
                 ->addFieldToSelect('*')
                 ->addFieldToFilter(

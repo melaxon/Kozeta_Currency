@@ -22,7 +22,7 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
     protected $_template = 'Kozeta_Currency::system/currency/rate/matrix.phtml';
 
     /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     * @var ScopeConfigInterface
      */
     private $scopeConfig;
 
@@ -42,17 +42,18 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
     const COINS_IN_ROW_MENU_CONFIG_PATH = 'currency/currency_rate_settings/coins_in_row';
 
     /**
-     * @param \Magento\Backend\Block\Template\Context $context
-     * @param \Magento\Directory\Model\CurrencyFactory $dirCurrencyFactory
+     * @param Context $context
+     * @param CurrencyFactory $dirCurrencyFactory
+     * @param ScopeConfigInterface $scopeConfig,
+     * @param ImportConfig $importConfig
      * @param array $data
      */
     public function __construct(
         Context $context,
         CurrencyFactory $dirCurrencyFactory,
-        array $data = [],
         ScopeConfigInterface $scopeConfig,
-        ImportConfig $importConfig
-        
+        ImportConfig $importConfig,
+        array $data = []
     ) {
         $this->_dirCurrencyFactory = $dirCurrencyFactory;
         $this->scopeConfig = $scopeConfig;
@@ -73,7 +74,7 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
         if (!$this->coinsInRow) {
             $this->coinsInRow = 6;
         }
-        return $this->coinsInRow;
+        return $this->coinsInRow ?: 6;
     }
     
     /**

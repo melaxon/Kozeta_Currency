@@ -102,7 +102,7 @@ class Coin extends AbstractDb
      */
     protected function _beforeSave(AbstractModel $object)
     {
-//        $object->setUpdatedAt($this->date->gmtDate());
+//        $object->setUpdatedAt($this->date->gmtDate())
         $urlKey = $object->getData('url_key');
         if ($urlKey == '') {
             $urlKey = $object->getName();
@@ -234,7 +234,7 @@ class Coin extends AbstractDb
                 'coin_store.store_id IN (?)',
                 $store
             );
-        if (!is_null($isActive)) {
+        if ($isActive !== null) {
             $select->where('coin.is_active = ?', $isActive);
         }
         return $select;
@@ -252,10 +252,6 @@ class Coin extends AbstractDb
      */
     protected function getLoadByCodeSelect($code, $store)
     {
-//         $storeCondition = '1';
-//         if ($store[0] != Store::DEFAULT_STORE_ID) {
-//          $storeCondition = 'coin_store.store_id IN (?) OR coin_store.store_id = ' . Store::DEFAULT_STORE_ID;
-//         }
         $storeCondition = 'coin_store.store_id IN (?)';
         $select = $this->getConnection()
             ->select()

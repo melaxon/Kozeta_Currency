@@ -16,18 +16,26 @@ class Precision extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      *
      * @var array
      */
-    protected static $_precisionCache;
+    private static $precisionCache;
     
-    protected $_coinStoreTable;
+    /**
+     * @var string
+     */
+    private $coinStoreTable;
+
     protected function _construct()
     {
         $this->_init('kozeta_currency_coin', 'code');
-        $this->_coinStoreTable = $this->getTable('kozeta_currency_coin_store');
+        $this->coinStoreTable = $this->getTable('kozeta_currency_coin_store');
     }
 
-    public function getPrecisionByCode($code, $store)
+    public function getPrecisionByCode($code, $store = \Magento\Store\Model\Store::DEFAULT_STORE_ID)
     {
-        if (!isset(self::$_precisionCache[$code][$store])) {
+        if (!isset(self::$precisionCache[$code][$store])) {
+            $stores = [$store];
+            if ($store != \Magento\Store\Model\Store::DEFAULT_STORE_ID) {
+                $stores[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
+            }
             $connection = $this->getConnection();
             $storeCondition = 'coin_store.store_id IN (?)';
             $select = $connection
@@ -37,7 +45,7 @@ class Precision extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                     'precision'
                 )
                 ->join(
-                    ['coin_store' => $this->_coinStoreTable],
+                    ['coin_store' => $this->coinStoreTable],
                     'coin.coin_id = coin_store.coin_id',
                     []
                 )
@@ -47,11 +55,10 @@ class Precision extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 )
                 ->where(
                     $storeCondition,
-                    [$store]
+                    $stores
                 );
-            
-            self::$_precisionCache[$code][$store] = $connection->fetchOne($select);
+            self::$precisionCache[$code][$store] = $connection->fetchOne($select);
         }
-        return self::$_precisionCache[$code][$store];
+        return self::$precisionCache[$code][$store];
     }
 }

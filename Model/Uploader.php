@@ -45,7 +45,7 @@ class Uploader
      *
      * @var \Magento\MediaStorage\Helper\File\Storage\Database
      */
-    protected $_fileStorageDatabase;
+    protected $fileStorageDatabase;
 
     /**
      * Media directory object (writable).
@@ -119,7 +119,7 @@ class Uploader
         $baseTmpPath,
         $basePath
     ) {
-        $this->_fileStorageDatabase     = $fileStorageDatabase;
+        $this->fileStorageDatabase      = $fileStorageDatabase;
         $this->mediaDirectoryManager    = $filesystem;
         $this->uploaderFactory          = $uploaderFactory;
         $this->storeManager             = $storeManager;
@@ -234,7 +234,7 @@ class Uploader
         $baseTmpFilePath = $this->getFilePath($baseTmpPath, $name);
 
         try {
-            $this->_fileStorageDatabase->copyFile(
+            $this->fileStorageDatabase->copyFile(
                 $baseTmpFilePath,
                 $baseFilePath
             );
@@ -294,7 +294,7 @@ class Uploader
         if (isset($result['file'])) {
             try {
                 $relativePath = rtrim($baseTmpPath, '/') . '/' . ltrim($result['file'], '/');
-                $this->_fileStorageDatabase->saveFile($relativePath);
+                $this->fileStorageDatabase->saveFile($relativePath);
             } catch (\Exception $e) {
                 $this->logger->critical($e);
                 throw new LocalizedException(

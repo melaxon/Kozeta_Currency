@@ -172,11 +172,10 @@ class InstallData implements InstallDataInterface
             $storeId
         );
         if ($configData) {
-            if (class_exists(Json::class)){
+            if (class_exists(Json::class)) {
                 $this->serializer = ObjectManager::getInstance()->get(Json::class);
                 $result = $this->serializer->unserialize($configData);
-            }
-            else {
+            } else {
                 try {
                     $result = unserialize($configData);
                 } catch (\Exception $e) {
@@ -189,5 +188,4 @@ class InstallData implements InstallDataInterface
         }
         return is_array($result) ? $result : [];
     }
-
 }

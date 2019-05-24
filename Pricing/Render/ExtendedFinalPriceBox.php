@@ -11,7 +11,7 @@ class ExtendedFinalPriceBox extends \Magento\Catalog\Pricing\Render\FinalPriceBo
 {
 
     /*
-     * Magento\Framework\View\Element\AbstractBlock
+     * AbstractBlock
      */
     public function getCacheLifetime()
     {

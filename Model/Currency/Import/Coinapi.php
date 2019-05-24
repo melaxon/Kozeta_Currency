@@ -19,16 +19,15 @@ class Coinapi extends \Magento\Directory\Model\Currency\Import\AbstractImport
      */
     const CURRENCY_CONVERTER_URL = 'https://rest.coinapi.io/v1/exchangerate/{{CURRENCY_FROM}}?apikey={{APIKEY}}';
 
-    
     /** @var \Magento\Framework\Json\Helper\Data */
-    protected $jsonHelper;
+    private $jsonHelper;
 
     /**
      * Http Client Factory
      *
      * @var \Magento\Framework\HTTP\ZendClientFactory
      */
-    protected $httpClientFactory;
+    private $httpClientFactory;
 
     /**
      * Core scope config
@@ -75,8 +74,6 @@ class Coinapi extends \Magento\Directory\Model\Currency\Import\AbstractImport
      */
     protected function _convert($currencyFrom, $currencyTo, $retry = 0)
     {
-      
-        //get saved datafeed
         $feed = $this->dataFeed->getDatafeed();
         if (!empty($feed)) {
             if (isset($feed[$currencyTo])) {

@@ -7,7 +7,6 @@
 
 namespace Kozeta\Currency\Plugin\Config;
 
-//use Magento\Framework\App\Config\Value;
 use Kozeta\Currency\Model\Coin;
 use Magento\Framework\Locale\ConfigInterface;
 use Kozeta\Currency\Model\ResourceModel\Coin\CollectionFactory;
@@ -52,7 +51,6 @@ class AddCurrencies
      * @param Http $request
      */
     public function __construct(
-//        ConfigInterface $config,
         CollectionFactory $collectionFactory,
         ScopeConfigInterface $scopeConfig,
         Http $request
@@ -64,7 +62,6 @@ class AddCurrencies
 
     public function getNewCurrencies()
     {
-        
         if ($this->coins) {
             return $this->coins;
         }

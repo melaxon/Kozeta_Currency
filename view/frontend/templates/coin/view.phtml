@@ -8,7 +8,7 @@
 <?php /** @var \Kozeta\Currency\Block\Coin\ViewCoin $block */ ?>
 <?php
     $_coin = $block->getCurrentCoin();
-    $rate = $this->_getRate($_coin->getCode());
+    $rate = $block->_getRate($_coin->getCode());
 if (empty($rate)) {
     $rate = [
             'rate' => __('N/A'),
@@ -42,10 +42,9 @@ if (empty($rate)) {
     <?php
         $isFiat = $_coin->getIsFiat();
         $iconNameFiat = $isFiat === true ? 'yes16x16.png' : 'no16x16.png';
-        $iconPath = $this->getViewFileUrl('Kozeta_Currency::icons/'. $iconNameFiat);
+        $iconPath = $block->getViewFileUrl('Kozeta_Currency::icons/'. $iconNameFiat);
         
     ?>
-    <?php //$YesNo = ''; $isFiat = $_coin->getIsFiat(); if ($isFiat == true) {$YesNo = 'Yes';} else {$YesNo = 'No';}?>
     <div class="coin-isFiat coin-details">
         <strong><?php echo __('Is Fiat') ?></strong>: <img src="<?php echo $iconPath; ?>" />
     </div>
@@ -87,7 +86,7 @@ if (empty($rate)) {
     
     <?php
         $iconNameRss = $_coin->getInRss() ? 'yes16x16.png' : 'no16x16.png';
-        $iconPath = $this->getViewFileUrl('Kozeta_Currency::icons/'. $iconNameRss);
+        $iconPath = $block->getViewFileUrl('Kozeta_Currency::icons/'. $iconNameRss);
     ?>
     <div class="coin-inRss coin-details">
         <strong><?php echo __('Included into RSS feed') ?></strong>: <img src="<?php echo $iconPath; ?>" />

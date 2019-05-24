@@ -7,13 +7,16 @@
 
 namespace Kozeta\Currency\Block\Adminhtml\Coin;
 
+use Magento\Framework\View\Element\Template\Context;
+
 class Img extends \Magento\Framework\View\Element\Template
 {
     /**
+     * @param Context $context
      * @param array $data
      */
     public function __construct(
-        \Magento\Framework\View\Element\Template\Context $context,
+        Context $context,
         array $data = []
     ) {
         parent::__construct($context, $data);

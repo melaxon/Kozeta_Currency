@@ -36,7 +36,7 @@ class CoinActions extends Column
      *
      * @var \Magento\Framework\UrlInterface
      */
-    protected $_urlBuilder;
+    private $urlBuilder;
 
     /**
      * @param ContextInterface $context
@@ -52,10 +52,9 @@ class CoinActions extends Column
         array $components = [],
         array $data = []
     ) {
-        $this->_urlBuilder = $urlBuilder;
+        $this->urlBuilder = $urlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
-
 
     /**
      * Prepare Data Source
@@ -70,7 +69,7 @@ class CoinActions extends Column
                 if (isset($item['coin_id'])) {
                     $item[$this->getData('name')] = [
                         'edit' => [
-                            'href' => $this->_urlBuilder->getUrl(
+                            'href' => $this->urlBuilder->getUrl(
                                 static::URL_PATH_EDIT,
                                 [
                                     'coin_id' => $item['coin_id']
@@ -79,7 +78,7 @@ class CoinActions extends Column
                             'label' => __('Edit')
                         ],
                         'delete' => [
-                            'href' => $this->_urlBuilder->getUrl(
+                            'href' => $this->urlBuilder->getUrl(
                                 static::URL_PATH_DELETE,
                                 [
                                     'coin_id' => $item['coin_id']

@@ -10,7 +10,6 @@ namespace Kozeta\Currency\Ui\Component\Listing\Column;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
-use Magento\Store\Model\StoreManagerInterface;
 use Magento\Ui\Component\Listing\Columns\Column;
 use Kozeta\Currency\Model\Uploader;
 use Kozeta\Currency\Block\Adminhtml\Coin\Img;
@@ -23,19 +22,14 @@ class Avatar extends Column
     const ALT_FIELD = 'name';
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $storeManager;
-
-    /**
      * @var \Kozeta\Currency\Model\Uploader
      */
-    protected $imageModel;
+    private $imageModel;
 
     /**
      * @var Kozeta\Currency\Block\Adminhtml\Coin\Img
      */
-    protected $img;
+    private $img;
     /**
      * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
@@ -50,9 +44,9 @@ class Avatar extends Column
         UiComponentFactory $uiComponentFactory,
         UrlInterface $urlBuilder,
         Uploader $imageModel,
+        Img $img,
         array $components = [],
-        array $data = [],
-        Img $img
+        array $data = []
     ) {
         $this->imageModel = $imageModel;
         $this->urlBuilder = $urlBuilder;
@@ -95,7 +89,7 @@ class Avatar extends Column
      *
      * @return null|string
      */
-    protected function getAlt($row)
+    private function getAlt($row)
     {
         $altField = $this->getData('config/altField') ?: self::ALT_FIELD;
         return isset($row[$altField]) ? $row[$altField] : null;

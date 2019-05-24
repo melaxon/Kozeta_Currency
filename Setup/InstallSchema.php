@@ -22,8 +22,6 @@ class InstallSchema implements InstallSchemaInterface
         $this->changeCurrencyColumnLength($setup);
     }
 
-
-
     private function addNewTables($setup)
     {
 
@@ -216,8 +214,8 @@ class InstallSchema implements InstallSchemaInterface
                 $installer->getIdxName('kozeta_currency_coin', ['import_scheduler']),
                 ['import_scheduler']
             )->addIndex(
-                $installer->getIdxName('kozeta_currency_coin', ['code', 'coin_id'], AdapterInterface::INDEX_TYPE_UNIQUE),
-                ['code', 'coin_id'],
+                $installer->getIdxName('kozeta_currency_coin', ['code','coin_id'], AdapterInterface::INDEX_TYPE_UNIQUE),
+                ['code','coin_id'],
                 ['type' => AdapterInterface::INDEX_TYPE_UNIQUE]
             )->setComment('Currency coins');
             $installer->getConnection()->createTable($table);
@@ -698,7 +696,6 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
 
-        
 /** TABLE quote_address_item **/
         $tableName = $setup->getTable('quote_address_item');
         $setup->getConnection()->modifyColumn(
@@ -879,7 +876,6 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
 
-        
 /** TABLE quote_item **/
         $tableName = $setup->getTable('quote_item');
         $setup->getConnection()->modifyColumn(
@@ -1107,7 +1103,6 @@ class InstallSchema implements InstallSchemaInterface
                 'comment' => 'Price',
             ]
         );
-
 
 /* Table sales_creditmemo */
         $tableName = $setup->getTable('sales_creditmemo');
@@ -2542,7 +2537,6 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
 
-
 /* Table sales_order_grid */
         
         $tableName = $setup->getTable('sales_order_grid');
@@ -2632,8 +2626,8 @@ class InstallSchema implements InstallSchemaInterface
                 'comment' => 'Total Refunded',
             ]
         );
- /* Table `sales_order_tax`; */
-
+        
+ /* Table sales_order_tax */
         $tableName = $setup->getTable('sales_order_tax');
         $setup->getConnection()->modifyColumn(
             $tableName,
@@ -2672,7 +2666,7 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
         
- /* Table `sales_creditmemo_grid`; */
+ /* Table sales_creditmemo_grid */
         $tableName = $setup->getTable('sales_creditmemo_grid');
         $setup->getConnection()->modifyColumn(
             $tableName,
@@ -2729,7 +2723,7 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
         
- /* Table `sales_bestsellers_aggregated_daily`; */
+ /* Table sales_bestsellers_aggregated_daily */
         $tableName = $setup->getTable('sales_bestsellers_aggregated_daily');
         $setup->getConnection()->modifyColumn(
             $tableName,
@@ -2743,7 +2737,7 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
         
- /* Table `sales_bestsellers_aggregated_monthly`; */
+ /* Table sales_bestsellers_aggregated_monthly */
         $tableName = $setup->getTable('sales_bestsellers_aggregated_monthly');
         $setup->getConnection()->modifyColumn(
             $tableName,
@@ -2756,7 +2750,7 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
         
- /* Table `sales_bestsellers_aggregated_yearly` */
+ /* Table sales_bestsellers_aggregated_yearly */
         $tableName = $setup->getTable('sales_bestsellers_aggregated_yearly');
         $setup->getConnection()->modifyColumn(
             $tableName,
@@ -2769,7 +2763,7 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
         
-  /* Table `sales_creditmemo_item` */
+  /* Table sales_creditmemo_item */
         $tableName = $setup->getTable('sales_creditmemo_item');
         $setup->getConnection()->modifyColumn(
             $tableName,
@@ -2907,7 +2901,7 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
         
- /* Table `sales_invoice_item` */
+ /* Table sales_invoice_item */
         $tableName = $setup->getTable('sales_invoice_item');
         $setup->getConnection()->modifyColumn(
             $tableName,
@@ -3045,7 +3039,7 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
 
- /* Table `sales_invoiced_aggregated` */
+ /* Table sales_invoiced_aggregated */
         $tableName = $setup->getTable('sales_invoiced_aggregated');
         $setup->getConnection()->modifyColumn(
             $tableName,
@@ -3123,7 +3117,7 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
 
- /* Table `sales_order_aggregated_created` */
+ /* Table sales_order_aggregated_created */
         $tableName = $setup->getTable('sales_order_aggregated_created');
         $setup->getConnection()->modifyColumn(
             $tableName,
@@ -3269,7 +3263,7 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
 
- /* Table `sales_order_aggregated_updated` */
+ /* Table sales_order_aggregated_updated */
         $tableName = $setup->getTable('sales_order_aggregated_updated');
         $setup->getConnection()->modifyColumn(
             $tableName,
@@ -3415,7 +3409,7 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
 
- /* Table `sales_order_item` */
+ /* Table sales_order_item */
         $tableName = $setup->getTable('sales_order_item');
         $setup->getConnection()->modifyColumn(
             $tableName,
@@ -3794,7 +3788,7 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
 
- /* Table `sales_order_payment` */
+ /* Table sales_order_payment */
         $tableName = $setup->getTable('sales_order_payment');
         $setup->getConnection()->modifyColumn(
             $tableName,
@@ -3959,7 +3953,7 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
 
- /* Table `sales_order_tax_item` */
+ /* Table sales_order_tax_item */
         $tableName = $setup->getTable('sales_order_tax_item');
         $setup->getConnection()->modifyColumn(
             $tableName,
@@ -4007,7 +4001,7 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
 
- /* Table `sales_refunded_aggregated` */
+ /* Table sales_refunded_aggregated */
         $tableName = $setup->getTable('sales_refunded_aggregated');
         $setup->getConnection()->modifyColumn(
             $tableName,
@@ -4037,7 +4031,7 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
 
- /* Table `sales_refunded_aggregated_order` */
+ /* Table sales_refunded_aggregated_order */
         $tableName = $setup->getTable('sales_refunded_aggregated_order');
         $setup->getConnection()->modifyColumn(
             $tableName,
@@ -4067,7 +4061,7 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
 
- /* Table `sales_shipment_item` */
+ /* Table sales_shipment_item */
         $tableName = $setup->getTable('sales_shipment_item');
         $setup->getConnection()->modifyColumn(
             $tableName,
@@ -4088,7 +4082,7 @@ class InstallSchema implements InstallSchemaInterface
             ]
         );
 
- /* Table `sales_shipping_aggregated` */
+ /* Table sales_shipping_aggregated */
         $tableName = $setup->getTable('sales_shipping_aggregated');
         $setup->getConnection()->modifyColumn(
             $tableName,
@@ -4108,8 +4102,8 @@ class InstallSchema implements InstallSchemaInterface
                 'comment' => 'Total Shipping Actual',
             ]
         );
-        
- /* Table `sales_shipping_aggregated_order` */
+
+ /* Table sales_shipping_aggregated_order */
         $tableName = $setup->getTable('sales_shipping_aggregated_order');
         $setup->getConnection()->modifyColumn(
             $tableName,

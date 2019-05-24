@@ -12,6 +12,9 @@ use Magento\Framework\App\Action\HttpPostActionInterface as HttpPostActionInterf
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\CurrencySymbol\Controller\Adminhtml\System\Currency as CurrencyAction;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Directory\Model\CurrencyFactory;
+use Magento\Backend\Model\Session;
 
 class FetchRates extends CurrencyAction
 {
@@ -39,18 +42,18 @@ class FetchRates extends CurrencyAction
         }
 
         /** @var \Magento\Backend\Model\Session $backendSession */
-        $backendSession = $this->_objectManager->get(\Magento\Backend\Model\Session::class);
+        $backendSession = $this->_objectManager->get(Session::class);
         try {
             $this->_getSession()->setCurrencyRateService($service);
 
-            $currencyModel = $this->_objectManager->get(\Magento\Directory\Model\CurrencyFactory::class)->create();
+            $currencyModel = $this->_objectManager->get(CurrencyFactory::class)->create();
 
             $currencies = $currencyModel->getConfigAllowCurrencies();
             
-            $defaultService = $this->_objectManager->get(\Magento\Framework\App\Config\ScopeConfigInterface::class)->getValue(
-            'currency/import/service',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
+            $defaultService = $this->_objectManager->get(ScopeConfigInterface::class)->getValue(
+                'currency/import/service',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            );
 
             $services = [];
             foreach ($currencies as $k => $code) {
@@ -58,7 +61,7 @@ class FetchRates extends CurrencyAction
                 if (empty($import_enabled)) {
                     unset($currencies[$k]);
                     $this->messageManager->addWarning(
-                            __('FATAL ERROR:') . ' ' . __('Settings for currency %1 is incorrect. Please re-save General -> Currency settings and Advanced -> Systen -> Installed currencies', $code)
+                        __('FATAL ERROR:') . ' ' . __('Settings for currency %1 is incorrect. Please re-save General -> Currency settings and Advanced -> Systen -> Installed currencies', $code)
                     );
                     continue;
                 }
@@ -117,7 +120,7 @@ class FetchRates extends CurrencyAction
                 $_errors[] = $importModel->getMessages();
             }
             foreach ($_errors as $errors) {
-                if (sizeof($errors) > 0) {
+                if (!empty($errors)) {
                     foreach ($errors as $error) {
                         $this->messageManager->addWarning($error);
                     }
@@ -136,5 +139,6 @@ class FetchRates extends CurrencyAction
 
     public function execute()
     {
+        return;
     }
 }

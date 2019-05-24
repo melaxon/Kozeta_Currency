@@ -13,26 +13,24 @@ class Format
     /**
      * @var \Kozeta\Currency\Model\Precision
      */
-    protected $precisionObject;
+    private $precisionObject;
 
     /**
-     * @var
+     * @var integer
      */
-    protected $_precision;
-    
-    
-    
+    private $precision;
+
     public function __construct(
         \Kozeta\Currency\Model\Precision $precisionObject
     ) {
         $this->precisionObject = $precisionObject;
-        $this->_precision = $this->precisionObject->getPrecision();
+        $this->precision = $this->precisionObject->getPrecision();
     }
     
     public function afterGetPriceFormat($subject, $result)
     {
-        $result['precision'] = $this->_precision;
-        $result['requiredPrecision'] = $this->_precision;
+        $result['precision'] = $this->precision;
+        $result['requiredPrecision'] = $this->precision;
         return $result;
     }
 }

@@ -14,35 +14,35 @@ class Entity
     /**
      * @var string
      */
-    protected $prefixConfigPath;
+    private $prefixConfigPath;
     /**
      * @var string
      */
-    protected $suffixConfigPath;
+    private $suffixConfigPath;
     /**
      * @var string
      */
-    protected $listKeyConfigPath;
+    private $listKeyConfigPath;
     /**
      * @var string
      */
-    protected $listAction;
+    private $listAction;
     /**
      * @var FactoryInterface
      */
-    protected $factory;
+    private $factory;
     /**
      * @var string
      */
-    protected $controller;
+    private $controller;
     /**
      * @var string
      */
-    protected $viewAction;
+    private $viewAction;
     /**
      * @var string
      */
-    protected $param;
+    private $param;
 
     /**
      * @param $prefixConfigPath

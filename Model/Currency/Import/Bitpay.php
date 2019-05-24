@@ -69,7 +69,8 @@ class Bitpay extends \Magento\Directory\Model\Currency\Import\AbstractImport
      * @param $currencyTo
      * return (float) $rate or false
      */
-    private function calculateRate($feed, $currencyFrom, $currencyTo) {
+    private function calculateRate($feed, $currencyFrom, $currencyTo)
+    {
     
         list($currencyFrom, $currencyTo) = [$currencyTo, $currencyFrom];
         
@@ -146,7 +147,6 @@ class Bitpay extends \Magento\Directory\Model\Currency\Import\AbstractImport
             $this->dataFeed->setDatafeed($feed);
 
             return $this->calculateRate($feed, $currencyFrom, $currencyTo);
-
         } catch (\Exception $e) {
             if ($retry == 0) {
                 $this->_convert($currencyFrom, $currencyTo, 1);

@@ -31,13 +31,13 @@ use Kozeta\Currency\Model\UploaderPool;
 class Save extends Coin
 {
     /**
-    * @var CoinInterfaceFactory
-    */
+     * @var CoinInterfaceFactory
+     */
     private $coinFactory;
     /**
      * @var Currencysymbol
      */
-    private $_currencySymbol;
+    private $currencySymbol;
 
     /**
      * @var DataObjectProcessor
@@ -82,7 +82,7 @@ class Save extends Coin
         $this->dataObjectProcessor = $dataObjectProcessor;
         $this->dataObjectHelper = $dataObjectHelper;
         $this->uploaderPool = $uploaderPool;
-        $this->_currencySymbol = $currencySymbol;
+        $this->currencySymbol = $currencySymbol;
         parent::__construct($registry, $coinRepository, $resultPageFactory, $dateFilter, $context);
     }
 
@@ -144,15 +144,12 @@ class Save extends Coin
         
         $symbolsDataArray = [$data['code'] => $data['symbol']];
         try {
-            $this->_currencySymbol->setCurrencySymbolsData($symbolsDataArray);
-            //$this->messageManager->addSuccess(__('Congratulations!'));
+            $this->currencySymbol->setCurrencySymbolsData($symbolsDataArray);
         } catch (\Exception $e) {
             //$this->log->logError($e);
             $this->messageManager->addError($e->getMessage());
         }
-        
-        
-        
+
         return $resultRedirect;
     }
 

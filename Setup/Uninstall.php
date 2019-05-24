@@ -19,11 +19,11 @@ class Uninstall implements UninstallInterface
     /**
      * @var CollectionFactory
      */
-    protected $collectionFactory;
+    private $collectionFactory;
     /**
      * @var Data
      */
-    protected $configResource;
+    private $configResource;
 
     /**
      * @param CollectionFactory $collectionFactory
