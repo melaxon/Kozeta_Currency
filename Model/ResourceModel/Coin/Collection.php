@@ -84,6 +84,7 @@ class Collection extends AbstractCollection
         $this->_init(Coin::class, CoinResourceModel::class);
         $this->_map['fields']['coin_id'] = 'main_table.coin_id';
         $this->_map['fields']['store_id'] = 'store_table.store_id';
+        $this->_map['fields']['precision'] = 'main_table.`precision`';
     }
 
     /**

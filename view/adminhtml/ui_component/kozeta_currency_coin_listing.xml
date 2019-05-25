@@ -344,7 +344,7 @@
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
                 </item>
                 <item name="config" xsi:type="array">
-                    <item name="sortable" xsi:type="boolean">false</item>
+                    <!-- <item name="sortable" xsi:type="boolean">false</item> -->
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">text</item>
                         <item name="validation" xsi:type="array">

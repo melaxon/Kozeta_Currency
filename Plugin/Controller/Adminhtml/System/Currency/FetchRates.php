@@ -139,6 +139,5 @@ class FetchRates extends CurrencyAction
 
     public function execute()
     {
-        return;
     }
 }
