@@ -17,6 +17,7 @@ use Kozeta\Currency\Model\ImageFactory as HelperImageFactory;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyFields)
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class Image extends AbstractHelper
 {

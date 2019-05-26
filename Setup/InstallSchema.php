@@ -13,15 +13,29 @@ use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.ExcessiveClassLength)
+ */
 class InstallSchema implements InstallSchemaInterface
 {
 
+    /*
+     * @param SchemaSetupInterface $setup
+     * @param ModuleContextInterface $context
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
         $this->addNewTables($setup);
         $this->changeCurrencyColumnLength($setup);
     }
 
+    /*
+     * @param SchemaSetupInterface $setup
+     * @return void
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     */
     private function addNewTables($setup)
     {
 
@@ -278,6 +292,7 @@ class InstallSchema implements InstallSchemaInterface
 
     /**
      * @param SchemaSetupInterface $setup
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     private function changeCurrencyColumnLength(SchemaSetupInterface $setup)
     {

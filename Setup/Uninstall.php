@@ -37,6 +37,14 @@ class Uninstall implements UninstallInterface
         $this->configResource    = $configResource;
     }
 
+    /**
+     * Drop tables of the module
+     *
+     * @param SchemaSetupInterface $setup
+     * @param ModuleContextInterface $context
+     * @return void
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     public function uninstall(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
         //remove tables

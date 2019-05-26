@@ -68,6 +68,7 @@ class Bitpay extends \Magento\Directory\Model\Currency\Import\AbstractImport
      * @param $currencyFrom
      * @param $currencyTo
      * return (float) $rate or false
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     private function calculateRate($feed, $currencyFrom, $currencyTo)
     {
@@ -115,6 +116,7 @@ class Bitpay extends \Magento\Directory\Model\Currency\Import\AbstractImport
      * @param string $currencyTo
      * @param int $retry
      * @return float|null
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     protected function _convert($currencyFrom, $currencyTo, $retry = 0)
     {

@@ -115,6 +115,7 @@ class Router implements RouterInterface
      *
      * @param \Magento\Framework\App\RequestInterface|\Magento\Framework\HTTP\PhpEnvironment\Request $request
      * @return bool
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     public function match(RequestInterface $request)
     {

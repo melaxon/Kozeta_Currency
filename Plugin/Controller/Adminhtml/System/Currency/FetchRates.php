@@ -18,25 +18,19 @@ use Magento\Backend\Model\Session;
 
 class FetchRates extends CurrencyAction
 {
-
-    /**
-     * @var array
-     */
-    private $currencies;
-    /**
-     * @var Schedule
-     */
-
     /**
      * Fetch rates action
      *
      * @return \Magento\Backend\Model\View\Result\Redirect
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function aroundExecute(
         \Magento\CurrencySymbol\Controller\Adminhtml\System\Currency\FetchRates $subject,
         \Closure $proceed
     ) {
-        $service = $this->getRequest()->getParam('rate_services');
+        $service = $subject->getRequest()->getParam('rate_services');
         if ($service != 'default') {
             return $proceed();
         }

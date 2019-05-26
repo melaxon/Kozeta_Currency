@@ -11,6 +11,12 @@ namespace Kozeta\Currency\Plugin\Integration;
 
 class Data
 {
+    /**
+     * @param \Magento\Integration\Helper\Data $helper
+     * @param array $resources
+     * @return array
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     public function beforeMapResources(\Magento\Integration\Helper\Data $helper, array $resources)
     {
         $restricted = $this->getRestrictedIds();
@@ -21,6 +27,10 @@ class Data
         }
         return [$resources];
     }
+
+    /**
+     * @return string
+     */
     private function getRestrictedIds()
     {
         return [

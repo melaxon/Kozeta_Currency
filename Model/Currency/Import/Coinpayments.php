@@ -47,6 +47,7 @@ class Coinpayments extends \Magento\Directory\Model\Currency\Import\AbstractImpo
      * @param CurrencyFactory $currencyFactory
      * @param ScopeConfigInterface $scopeConfig
      * @param Curl $curl
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function __construct(
         CurrencyFactory $currencyFactory,
@@ -68,6 +69,8 @@ class Coinpayments extends \Magento\Directory\Model\Currency\Import\AbstractImpo
      * @param $currencyFrom
      * @param $currencyTo
      * return (float) $rate or false
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     private function calculateRate($feed, $currencyFrom, $currencyTo)
     {
@@ -112,6 +115,7 @@ class Coinpayments extends \Magento\Directory\Model\Currency\Import\AbstractImpo
      * @param string $currencyTo
      * @param int $retry
      * @return float|null
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     protected function _convert($currencyFrom, $currencyTo, $retry = 0, $short = 1)
     {

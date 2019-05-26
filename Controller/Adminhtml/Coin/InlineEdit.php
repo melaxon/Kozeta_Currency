@@ -60,6 +60,8 @@ class InlineEdit extends CoinController
      * @param JsonFactory $jsonFactory
      * @param CoinResourceModel $coinResourceModel
      * @param Currencysymbol $currencySymbol
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         Registry $registry,

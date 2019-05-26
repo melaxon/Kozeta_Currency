@@ -56,6 +56,7 @@ class PriceCurrency
      * - Fix the bug where Magento rounds the price before convertion and then rounds it again
      *   (affected: cart and minicart item price)
      * - Replace hardcoded precisions wherever it is possible
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function aroundRound(\Magento\Directory\Model\PriceCurrency $subject, callable $proceed, $price, ...$args)
     {
@@ -71,6 +72,7 @@ class PriceCurrency
      * @param \Magento\Directory\Model\PriceCurrency $subject
      * @param array ...$args
      * @return array
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function beforeConvertAndFormat(\Magento\Directory\Model\PriceCurrency $subject, ...$args)
     {
@@ -83,6 +85,7 @@ class PriceCurrency
      * @param \Magento\Directory\Model\PriceCurrency $subject
      * @param array ...$args
      * @return array
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function beforeConvertAndRound(\Magento\Directory\Model\PriceCurrency $subject, ...$args)
     {

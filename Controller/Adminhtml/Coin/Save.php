@@ -65,6 +65,8 @@ class Save extends Coin
      * @param DataObjectHelper $dataObjectHelper
      * @param UploaderPool $uploaderPool
      * @param Currencysymbol $currencySymbol
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         Registry $registry,
@@ -90,6 +92,7 @@ class Save extends Coin
      * run the action
      *
      * @return \Magento\Backend\Model\View\Result\Redirect
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function execute()
     {

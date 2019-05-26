@@ -87,6 +87,8 @@ class Coingate extends \Magento\Directory\Model\Currency\Import\AbstractImport
      * @param string $currencyTo
      * @param int $retry
      * @return float|null
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     protected function _convert($currencyFrom, $currencyTo, $retry = 0, $short = 1)
     {

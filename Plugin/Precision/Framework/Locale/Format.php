@@ -27,6 +27,9 @@ class Format
         $this->precision = $this->precisionObject->getPrecision();
     }
     
+    /*
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     public function afterGetPriceFormat($subject, $result)
     {
         $result['precision'] = $this->precision;

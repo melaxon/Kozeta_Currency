@@ -23,6 +23,13 @@ class Order
         $this->precisionObject = $precisionObject;
     }
     
+    /**
+     * @param Order $subject
+     * mixed $proceed
+     * array $args
+     * @return void
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     public function aroundGetTotalDue(\Magento\Sales\Model\Order $subject, callable $proceed, ...$args)
     {
         $code = $subject->getOrderCurrencyCode();

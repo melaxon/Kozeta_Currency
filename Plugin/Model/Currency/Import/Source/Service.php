@@ -34,6 +34,7 @@ class Service
      * @param array $result
      * @return array
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     public function afterToOptionArray(
         \Magento\Directory\Model\Currency\Import\Source\Service $subject,

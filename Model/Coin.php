@@ -24,7 +24,8 @@ use Kozeta\Currency\Model\Source\AbstractSource;
 /**
  * @method CoinResourceModel _getResource()
  * @method CoinResourceModel getResource()
- */
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+*/
 class Coin extends AbstractModel implements CoinInterface, RoutableInterface
 {
     /**
@@ -93,6 +94,8 @@ class Coin extends AbstractModel implements CoinInterface, RoutableInterface
      * @param array $data
      * @param AbstractResource|null $resource
      * @param AbstractDb|null $resourceCollection
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         Context $context,

@@ -91,6 +91,7 @@ class Collection extends AbstractCollection
      * after collection load
      *
      * @return $this
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     protected function _afterLoad()
     {

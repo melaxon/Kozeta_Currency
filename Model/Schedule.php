@@ -83,11 +83,6 @@ class Schedule
      */
     private $importFactory;
 
-    /**
-     * @var array
-     */
-    private $currencies;
-
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         LoggerInterface $logger,
@@ -192,7 +187,10 @@ class Schedule
     /**
      * @return void
      * @throws \Exception
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     public function scheduledUpdateCurrencyRatesAlt($schedule, $scheduler = self::IMPORT_SCHEDULER_DEFAULT)
     {

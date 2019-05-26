@@ -71,6 +71,7 @@ class Index extends Action
 
     /**
      * @return \Magento\Framework\View\Result\Page
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     public function execute()
     {

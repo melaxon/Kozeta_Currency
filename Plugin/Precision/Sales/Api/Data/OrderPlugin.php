@@ -28,6 +28,7 @@ class OrderPlugin
      * @param \Magento\Sales\Model\Order $subject
      * @param array ...$args
      * @return array
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     public function beforeFormatPricePrecision(\Magento\Sales\Model\Order $subject, ...$args)
     {
@@ -43,6 +44,7 @@ class OrderPlugin
      * @param \Magento\Sales\Model\Order $subject
      * @param array ...$args
      * @return array
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     public function beforeFormatBasePricePrecision(\Magento\Sales\Model\Order $subject, ...$args)
     {

@@ -159,6 +159,8 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
      * @param string|array $param
      * @return array
      * @SuppressWarnings(PHPMD.Ecg.Sql.SlowQuery)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function getCurrencyParamByCode($code, $param = null)
     {
@@ -217,6 +219,7 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
      * @param array $service optional
      * @return void
      * @throws \Magento\Framework\Exception\LocalizedException
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function saveRates($rates, $service = null)
     {

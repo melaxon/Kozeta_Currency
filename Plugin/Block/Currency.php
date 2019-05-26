@@ -19,6 +19,7 @@ class Currency extends \Magento\Directory\Block\Currency
      *
      * @return array
      * Uncomment this and comment the below function to use created currency names in switcher
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function aroundGetCurrencies(
         \Magento\Directory\Block\Currency $subject,
