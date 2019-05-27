@@ -23,20 +23,27 @@
         <?= $block->getBlockHtml('formkey') ?>
         
 <?php
-    $ac = $block->getAllowedCurrencies();
-    $_ac = $ac;
-    $dc = $block->getDefaultCurrencies();
+//    $ac = $block->getCurrencies();
+//    $_ac = $ac;
+    $dc = $block->getBaseCurrencies();
     $coins = $block->getCoinsInRow();
-    $rows = $block->getRows();
+    
 ?>
-<?php $j = 1; for ($i = 1; $i <= $rows; $i++) : ?>
-        <div class="admin__control-table-wrapper"><br />
+<?php $_j = 0; foreach ($dc as $_baseCode => $ac) : ?>
+    <?php 
+        $ac = $block->getCurrencies($_baseCode);
+        $_ac = $ac;
+        $rows = $block->getRows($_baseCode);
+    ?>
+    <div><h3><?= __('Base currency') . ':' . $_baseCode ?></h3></div>
+    <?php $j = 1; for ($i = 1; $i <= $rows; $i++) : ?>
+        <div class="admin__control-table-wrapper"><b />
             <table class="admin__control-table">
                 <thead>
                     <tr>
                         <th>&nbsp;</th>
-                        <?php $_i = 0; foreach ($ac as $k => $_currencyCode) : ?>
-                            <th><span><?= /* @escapeNotVerified */ $_currencyCode ?></span></th>
+                        <?php $_i = 0; foreach ($ac as $k => $_code) : ?>
+                            <th><span><?= /* @escapeNotVerified */ $_code ?></span></th>
                             <?php
                                 $_i++;
                                 unset($ac[$k]);
@@ -47,38 +54,36 @@
                         <?php endforeach; ?>
                     </tr>
                 </thead>
-                <?php $_j = 0; foreach ($dc as $_currencyCode) : ?>
+                <?php //$_j = 0; foreach ($dc as $_baseCode) : ?>
                 <tr>
-                    <?php if (isset($_rates[$_currencyCode]) && is_array($_rates[$_currencyCode])) : ?>
+                    <?php if (isset($_rates[$_baseCode]) && is_array($_rates[$_baseCode])) : ?>
                         <?php foreach ($_ac as $k => $_code) : ?>
                             <?php if (++$_j == 1) : ?>
-                                <td><span class="admin__control-support-text"><?= /* @escapeNotVerified */ $_currencyCode ?></span></td>
+                                <td><span class="admin__control-support-text"><?= /* @escapeNotVerified */ $_baseCode ?></span></td>
                             <?php endif; ?>
                                 <td>
                                     <input type="text"
-                                           name="rate[<?= /* @escapeNotVerified */ $_currencyCode ?>][<?= /* @escapeNotVerified */ $_code ?>]"
+                                           name="rate[<?= /* @escapeNotVerified */ $_baseCode ?>][<?= /* @escapeNotVerified */ $_code ?>]"
                                            value="<?php
-                                            if ($_currencyCode == $_code) {
-                                                echo 1;
-                                            } elseif (isset($_newRates[$_currencyCode][$_code])) {
-                                                echo $_newRates[$_currencyCode][$_code];
-                                            } elseif (isset($_rates[$_currencyCode][$_code]['rate'])) {
-                                                echo (float) $_rates[$_currencyCode][$_code]['rate'];
+                                            if (isset($_newRates[$_baseCode][$_code])) {
+                                                echo $block->formatDecimal($_newRates[$_baseCode][$_code]);
+                                            } elseif (isset($_rates[$_baseCode][$_code]['rate'])) {
+                                                echo $block->formatDecimal($_rates[$_baseCode][$_code]['rate']);
                                             }
                                             ?>"
                                            class="admin__control-text"
-                                            <?= ($_currencyCode == $_code) ? ' disabled' : '' ?> />
-<?php if (!empty($_newRates) && $_currencyCode != $_code && isset($_rates[$_currencyCode][$_code]['rate'])) : ?>
-                                    <div class="admin__field-note"><?= /* @escapeNotVerified */ __('Old rate:') ?> <b><?= /* @escapeNotVerified */ (float) $_rates[$_currencyCode][$_code]['rate'] ?></b></div>
+                                            <?= ($_baseCode == $_code) ? ' disabled' : '' ?> />
+<?php if (!empty($_newRates) && $_baseCode != $_code && isset($_rates[$_baseCode][$_code]['rate'])) : ?>
+                                    <div class="admin__field-note"><?= /* @escapeNotVerified */ __('Old rate:') ?> <b><?= /* @escapeNotVerified */ $block->formatDecimal($_rates[$_baseCode][$_code]['rate']) ?></b></div>
 <?php endif; ?>
-<?php if ($_code != $_currencyCode && isset($_rates[$_currencyCode][$_code]['updated_at'])) :?>
-                                    <div class="admin__field-note"><?= /* @escapeNotVerified */ __('Updated at:') ?> <b><?= /* @escapeNotVerified */ isset($_rates[$_currencyCode][$_code]['updated_at']) ? $_rates[$_currencyCode][$_code]['updated_at'] : '&nbsp;' ?></b></div>
+<?php if ($_code != $_baseCode && isset($_rates[$_baseCode][$_code]['updated_at'])) :?>
+                                    <div class="admin__field-note"><?= /* @escapeNotVerified */ __('Updated at:') ?> <b><?= /* @escapeNotVerified */ isset($_rates[$_baseCode][$_code]['updated_at']) ? $_rates[$_baseCode][$_code]['updated_at'] : '&nbsp;' ?></b></div>
                                     <div class="admin__field-note"><?= /* @escapeNotVerified */ __('Service:') ?> <b>
 
 <?php /* @escapeNotVerified */
 $serviceName = $block->getServiceNames();
-if (isset($serviceName[$_rates[$_currencyCode][$_code]['currency_converter_id']])) {
-    echo $serviceName[$_rates[$_currencyCode][$_code]['currency_converter_id']];
+if (isset($serviceName[$_rates[$_baseCode][$_code]['currency_converter_id']])) {
+    echo $serviceName[$_rates[$_baseCode][$_code]['currency_converter_id']];
 } else {
     echo '&nbsp;';
 }
@@ -90,20 +95,21 @@ if (isset($serviceName[$_rates[$_currencyCode][$_code]['currency_converter_id']]
 <?php endif; ?>
                                 </td>
 <?php
-unset($_rates[$_currencyCode][$_code]);
+unset($_rates[$_baseCode][$_code]);
 unset($_ac[$k]);
 if ($_j == $coins) {
     $_j = 0;
     break;
 } ?>
-                        <?php endforeach; ?>
+                        <?php endforeach; // Allowed currency ?>
                         <?php $_j = 0; ?>
                     <?php endif; ?>
                 </tr>
-                <?php endforeach; ?>
+                
             </table>
         </div>
-<?php endfor; ?>
+    <?php endfor; ?>
+<?php endforeach; // Base currency ?>
     </form>
 <?php endif; ?>
 <script>
