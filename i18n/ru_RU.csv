@@ -8,13 +8,30 @@
 "Ripple","Риппл"
 "Zcash","Зет Кэш"
 "Euro","Евро"
-"A total of %1 coins have been disabled.","A total of %1 coins have been disabled."
-"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
-"A total of %1 coins have been enabled.","A total of %1 coins have been enabled."
 "Pound Sterling","Британский Фунт Стерлингов"
 "British Pound","Британский Фунт Стерлингов"
 "Russian Ruble","Российский Рубль"
 "US Dollar","Доллар США"
+Code,Код
+"Sort order","Сортировка"
+"Sort Order","Сортировка"
+"Precision","Точность"
+"Import Enabled","Импорт разрешен"
+"Currency Rate Import Service","Сервис импорта курсов валют"
+"Scheduled Import Settings","Выбор расписания импорта"
+"If not selected the default settings will be used","Если не выбрано, будут применены установки по умолчанию"
+General,Общее
+Frontend,Витрина
+"Page Title","Заголовок страницы"
+"Currency Symbol","Символ валюты"
+Developer,Для разработчиков
+"Import Service","Сервис импорта"
+"Import schedule","Расписание"
+"Recommended transaction fee","Рекомендуемая стоимость транзакции"
+"Transaction fee expressed in this currency","Стоимость трпанзакции выражена в текущей валюте"
+"A total of %1 coins have been disabled.","Всего валют деактивировано: %1."
+"A total of %1 record(s) have been deleted.","Всего записей удалено: %1."
+"A total of %1 coins have been enabled.","Всего валют активировано: %1."
 "Add New Currency","Добавить новую валюту"
 "All Store Views","All Store Views"
 "An error occurred while deleting record(s).","An error occurred while deleting record(s)."
@@ -26,13 +43,13 @@
 "Coin in Store views","Coin in Store views"
 "Currency Information","Информация о валюте"
 Coins,"Валюта"
-Avatar,Avatar
+Avatar,Аватар
 Back,"Назад"
 Description,"Описание"
-"Could not save the coin: %1","Could not save the coin: %1"
+"Could not save the coin: %1","Невозможно сохранить валюту: %1"
 Delete,"Удалить"
-"Delete Coin","Delete Coin"
-"Delete items","Delete items"
+"Delete currency","Удалить валюту"
+"Delete items","Удалить элемент"
 "Delete ""${ $.$data.name }""","Удалить ""${ $.$data.name }"""
 Disable,Disable
 Edit,"Редактировать"
@@ -40,20 +57,20 @@ Edit,"Редактировать"
 Enable,Enable
 "Enter currency name here","Введите название валюты"
 "Enter currency code","Введите код валюты"
-"File can not be saved to the destination folder.","File can not be saved to the destination folder."
-Home,Home
+"File can not be saved to the destination folder.","Файл не может быть сохранен в выбранную папку."
+Home,Домой
 ID,ID
 "In RSS","В RSS"
 "Is Active","Активно"
-label,label
-"Meta Description","Meta Description"
+label,метка
+"Meta Description","Мета описание"
 "Meta Keywords","Meta Keywords"
 "Meta Title","Meta Title"
 "Name","Название"
 "New Coin","Новая валюта"
 Currency,Валюта
 No,"Нет"
-"Please correct the data sent.","Please correct the data sent."
+"Please correct the data sent.","Пожалуйста, исправьте отправленные данные."
 "Requested coin doesn\'t exist","Запрашиваемая валюта не найдена"
 Reset,Сбросить
 "Save Currency","Сохранить"
@@ -115,4 +132,11 @@ Reset,Сбросить
 "Enter the number of decimal places. Default: 2","Введите количество десятичных знаков. По умолчанию: 2"
 "Decimal Length","Количество десятичных знаков"
 "Price Precision,"Разрядность цены"
+"Base currency","Базовая валюта"
+"Currency Rates","Курсы валют"
+"Updated at","время обновления"
+Service,Сервис
+"Use currency settings","Использовать установки валюты"
+Action,Действие
+
 

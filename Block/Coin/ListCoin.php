@@ -17,7 +17,6 @@ use Magento\Directory\Model\CurrencyFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 use Kozeta\Currency\Block\ImageBuilder;
-use Magento\Store\Model\StoreManagerInterface;
 
 class ListCoin extends Template
 {
@@ -29,13 +28,8 @@ class ListCoin extends Template
     /**
      * @var ImageBuilder
      */
-    protected $imageBuilder;
+    private $imageBuilder;
 
-    /**
-     * @var ScopeConfigInterface
-     */
-    protected $scopeConfig;
-    
     /**
      * @var ListCoin
      */
@@ -44,22 +38,18 @@ class ListCoin extends Template
     /**
      * @var CoinCollectionFactory
      */
-    protected $coinCollectionFactory;
+    private $coinCollectionFactory;
     
     /**
      * @var UrlFactory
      */
-    protected $urlFactory;
+    private $urlFactory;
 
     /**
      * @var \Kozeta\Currency\Model\ResourceModel\Coin\Collection
      */
-    protected $coins;
+    private $coins;
 
-    /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    public $storeManager;
     
     /**
      * @var \Magento\Directory\Model\CurrencyFactory
@@ -71,9 +61,7 @@ class ListCoin extends Template
      * @param CoinCollectionFactory $coinCollectionFactory
      * @param UrlFactory $urlFactory
      * @param CurrencyFactory $currencyFactory,
-     * @param ScopeConfigInterface $scopeConfig,
      * @param ImageBuilder $imageBuilder,
-     * @param StoreManagerInterface $storeManager,
      * @param array $data
      */
     public function __construct(
@@ -81,24 +69,20 @@ class ListCoin extends Template
         CoinCollectionFactory $coinCollectionFactory,
         UrlFactory $urlFactory,
         CurrencyFactory $currencyFactory,
-        ScopeConfigInterface $scopeConfig,
         ImageBuilder $imageBuilder,
-        StoreManagerInterface $storeManager,
         array $data = []
     ) {
         $this->coinCollectionFactory = $coinCollectionFactory;
         $this->urlFactory = $urlFactory;
         $this->currencyFactory = $currencyFactory;
-        $this->scopeConfig = $scopeConfig;
         $this->imageBuilder = $imageBuilder;
-        $this->storeManager = $storeManager;
         parent::__construct($context, $data);
     }
 
     public function getEnableCoinPages()
     {
         if ($this->enableCoinPages === null) {
-            $this->enableCoinPages = $this->scopeConfig->getValue(
+            $this->enableCoinPages = $this->_scopeConfig->getValue(
                 self::COIN_PAGES_CONFIG_PATH,
                 ScopeInterface::SCOPE_STORE
             );
@@ -119,7 +103,7 @@ class ListCoin extends Template
                     Coin::STATUS_ENABLED
                 )
                 //->addFieldToFilter(\Kozeta\Currency\Api\Data\CoinInterface::STORE_ID,['eq' => $this->storeManager->getStore()->getId()])
-                ->addStoreFilter($this->storeManager->getStore()->getId())
+                ->addStoreFilter($this->_storeManager->getStore()->getId())
                 ->setOrder('sort_order', 'ASC')
                 ->setOrder('is_fiat', 'ASC')
                 ->setOrder('name', 'ASC');
@@ -139,7 +123,7 @@ class ListCoin extends Template
         }
 
         $rates = $this->currencyFactory->create()->getCurrencyRates(
-            $this->storeManager->getStore()->getBaseCurrency(),
+            $this->_storeManager->getStore()->getBaseCurrency(),
             $codes,
             true
         );
@@ -187,6 +171,6 @@ class ListCoin extends Template
      */
     public function getBaseCurrencyCode()
     {
-        return $this->storeManager->getStore()->getBaseCurrencyCode();
+        return $this->_storeManager->getStore()->getBaseCurrencyCode();
     }
 }

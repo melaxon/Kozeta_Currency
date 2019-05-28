@@ -48,7 +48,7 @@
     <fieldset name="general">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
-                <item name="label" xsi:type="string">General</item>
+                <item name="label" xsi:type="string" translate="true">General</item>
                 <item name="collapsible" xsi:type="boolean">true</item>
             </item>
         </argument>
@@ -250,7 +250,7 @@
 <!-- END GENERAL -->
 
 <!-- FRONTEND -->
-    <fieldset name="websites" class="Magento\Store\Ui\Component\Form\Fieldset\Websites">
+    <fieldset name="websites">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="collapsible" xsi:type="boolean">true</item>
@@ -259,7 +259,7 @@
             </item>
         </argument>
 <!--
-        <field name="storeviews">
+        <field name="storeviews" class="Magento\Store\Ui\Component\Form\Fieldset\Websites">
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Kozeta\Currency\Ui\Component\Listing\Column\Store\Options</item>
                 <item name="config" xsi:type="array">
@@ -375,7 +375,7 @@
     <fieldset name="coin">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
-                <item name="label" xsi:type="string">Developer</item>
+                <item name="label" xsi:type="string" translate="true">Developer</item>
                 <item name="collapsible" xsi:type="boolean">true</item>
             </item>
         </argument>

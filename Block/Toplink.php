@@ -8,7 +8,6 @@
 namespace Kozeta\Currency\Block;
 
 use Magento\Store\Model\ScopeInterface;
-use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Element\Template\Context;
 
 /**
@@ -28,22 +27,13 @@ class Toplink extends \Magento\Framework\View\Element\Html\Link
     const COINS_LIST_URL_CONFIG_PATH = 'currency/coin/list_url';
 
     /**
-     * @var ScopeConfigInterface
-     */
-    protected $scopeConfig;
-    
-    /**
-     * @param scopeConfig $scopeConfig
      * @param Context $context
      * @param array $data
      */
     public function __construct(
-        ScopeConfigInterface $scopeConfig,
         Context $context,
         array $data = []
     ) {
-
-        $this->scopeConfig = $scopeConfig;
         parent::__construct($context, $data);
     }
 
@@ -65,7 +55,7 @@ class Toplink extends \Magento\Framework\View\Element\Html\Link
      */
     public function getHref()
     {
-        return '../../../../../'. $this->scopeConfig->getValue(
+        return '../../../../../'. $this->_scopeConfig->getValue(
             self::COINS_LIST_URL_CONFIG_PATH,
             ScopeInterface::SCOPE_STORE
         );
@@ -76,7 +66,7 @@ class Toplink extends \Magento\Framework\View\Element\Html\Link
      */
     public function getLabel()
     {
-        return $this->scopeConfig->getValue(
+        return $this->_scopeConfig->getValue(
             self::TOP_LINKS_TITLE_CONFIG_PATH,
             ScopeInterface::SCOPE_STORE
         );

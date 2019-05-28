@@ -43,7 +43,7 @@ interface CoinRepositoryInterface
     public function getList(SearchCriteriaInterface $searchCriteria);
 
     /**
-     * Delete coin.
+     * Delete currency.
      *
      * @param CoinInterface $coin
      * @return bool true on success
@@ -52,7 +52,7 @@ interface CoinRepositoryInterface
     public function delete(CoinInterface $coin);
 
     /**
-     * Delete coin by ID.
+     * Delete currency by ID.
      *
      * @param int $coinId
      * @return bool true on success

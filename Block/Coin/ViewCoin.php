@@ -19,12 +19,12 @@ class ViewCoin extends Template
     /**
      * @var Registry
      */
-    protected $coreRegistry;
+    private $coreRegistry;
 
     /**
      * @var ImageBuilder
      */
-    protected $imageBuilder;
+    private $imageBuilder;
 
     /**
      * @var \Magento\Framework\Pricing\PriceCurrencyInterface
@@ -34,7 +34,7 @@ class ViewCoin extends Template
     /**
      * @var store
      */
-    protected $store;
+    private $store;
     
     public $currencyFactory;
 

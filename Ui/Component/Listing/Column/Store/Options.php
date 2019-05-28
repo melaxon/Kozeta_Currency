@@ -12,10 +12,10 @@ use Magento\Cms\Ui\Component\Listing\Column\Cms\Options as CmsOptions;
 
 class Options extends StoreOptions
 {
-//     /**
-//      * All Store Views value
-//      */
-//     const ALL_STORE_VIEWS = '0';
+     /**
+      * All Store Views value
+      */
+     const ALL_STORE_VIEWS = '0';
 
     /**
      * Get options
@@ -29,7 +29,7 @@ class Options extends StoreOptions
         }
 
         $this->currentOptions['All Store Views']['label'] = __('All Store Views');
-        $this->currentOptions['All Store Views']['value'] = CmsOptions::ALL_STORE_VIEWS;
+        $this->currentOptions['All Store Views']['value'] = self::ALL_STORE_VIEWS;
 
         $this->generateCurrentOptions();
 

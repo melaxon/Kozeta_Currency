@@ -8,13 +8,30 @@
 "Ripple","Ripple"
 "Zcash","Zcash"
 "Euro","Euro"
-"A total of %1 coins have been disabled.","A total of %1 coins have been disabled."
-"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
-"A total of %1 coins have been enabled.","A total of %1 coins have been enabled."
 "Pound Sterling","Pound Sterling"
 "British Pound","British Pound"
 "Russian Ruble","Russian Ruble"
 "US Dollar","US Dollar"
+Code,Code
+"Sort order","Sort order"
+"Sort Order","Sort Order"
+"Precision","Precision"
+"Import Enabled","Import Enabled"
+"Currency Rate Import Service","Currency Rate Import Service"
+"Scheduled Import Settings","Scheduled Import Settings"
+"If not selected the default settings will be used","If not selected the default settings will be used"
+General,General
+Frontend,Frontend
+"Page Title","Page Title"
+"Currency Symbol","Currency Symbol"
+Developer,Developer
+"Import Service","Import Service"
+"Import schedule","Import schedule"
+"Recommended transaction fee","Recommended transaction fee"
+"Transaction fee expressed in this currency","Transaction fee expressed in this currency"
+"A total of %1 coins have been disabled.","A total of %1 coins have been disabled."
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"A total of %1 coins have been enabled.","A total of %1 coins have been enabled."
 "Add New Currency","Add New Currency"
 "All Store Views","All Store Views"
 "An error occurred while deleting record(s).","An error occurred while deleting record(s)."
@@ -31,7 +48,7 @@ Back,Back
 Description,Description
 "Could not save the coin: %1","Could not save the coin: %1"
 Delete,Delete
-"Delete Coin","Delete Coin"
+"Delete currency","Delete Coin"
 "Delete items","Delete items"
 "Delete ""${ $.$data.name }""","Delete ""${ $.$data.name }"""
 Disable,Disable
@@ -115,9 +132,11 @@ Yes,Yes
 "Enter the number of decimal places. Default: 2","Enter the number of decimal places. Default: 2"
 "Decimal Length","Decimal Length"
 "Price Precision,"Price Precision"
-
-
-
-
+"Base currency","Base currency"
+"Currency Rates","Currency Rates"
+"Updated at","Updated at"
+Service,Service
+"Use currency settings","Use currency settings"
+Action,Action
 
 

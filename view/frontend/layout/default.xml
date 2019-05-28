@@ -8,11 +8,11 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-    	<css src="Kozeta_Currency::css/style.css" />
+        <css src="Kozeta_Currency::css/style.css" />
     </head>
-	<body>
-		 <referenceBlock name="header.links">
-			 <block class="Kozeta\Currency\Block\Toplink" name="add-new-header-link" />
-		 </referenceBlock>
-	</body>
+    <body>
+         <referenceBlock name="header.links">
+             <block class="Kozeta\Currency\Block\Toplink" name="add-new-header-link" />
+         </referenceBlock>
+    </body>
 </page>

@@ -21,7 +21,7 @@ class Delete extends Generic implements ButtonProviderInterface
         $data = [];
         if ($this->getCoinId()) {
             $data = [
-                'label' => __('Delete Coin'),
+                'label' => __('Delete currency'),
                 'class' => 'delete',
                 'on_click' => 'deleteConfirm(\'' . __(
                     'Are you sure you want to do this?'

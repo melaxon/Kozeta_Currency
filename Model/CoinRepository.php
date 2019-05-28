@@ -181,7 +181,7 @@ class CoinRepository implements CoinRepositoryInterface
     }
 
     /**
-     * Delete coin.
+     * Delete currency.
      *
      * @param \Kozeta\Currency\Api\Data\CoinInterface $coin
      * @return bool true on success
@@ -206,7 +206,7 @@ class CoinRepository implements CoinRepositoryInterface
     }
 
     /**
-     * Delete coin by ID.
+     * Delete currency by ID.
      *
      * @param int $coinId
      * @return bool true on success

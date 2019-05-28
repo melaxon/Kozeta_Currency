@@ -10,7 +10,6 @@ namespace Kozeta\Currency\Block\Adminhtml\System\Currency\Rate;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Backend\Block\Template\Context;
 use Magento\Directory\Model\CurrencyFactory;
-use Magento\Framework\App\Config\ScopeConfigInterface;
 use Kozeta\Currency\Model\Schedule;
 use Magento\Directory\Model\Currency\Import\Config as ImportConfig;
 
@@ -20,11 +19,6 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
      * @var string
      */
     protected $_template = 'Kozeta_Currency::system/currency/rate/matrix.phtml';
-
-    /**
-     * @var ScopeConfigInterface
-     */
-    private $scopeConfig;
 
     /**
      * @var integer
@@ -54,19 +48,16 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
     /**
      * @param Context $context
      * @param CurrencyFactory $dirCurrencyFactory
-     * @param ScopeConfigInterface $scopeConfig,
      * @param ImportConfig $importConfig
      * @param array $data
      */
     public function __construct(
         Context $context,
         CurrencyFactory $dirCurrencyFactory,
-        ScopeConfigInterface $scopeConfig,
         ImportConfig $importConfig,
         array $data = []
     ) {
         $this->_dirCurrencyFactory = $dirCurrencyFactory;
-        $this->scopeConfig = $scopeConfig;
         $this->importConfig = $importConfig;
         parent::__construct($context, $dirCurrencyFactory, $data);
     }
@@ -80,7 +71,7 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
             return $this->coinsInRow;
         }
 
-        $this->coinsInRow = (int) trim($this->scopeConfig->getValue(self::COINS_IN_ROW_MENU_CONFIG_PATH, ScopeInterface::SCOPE_STORES));
+        $this->coinsInRow = (int) trim($this->_scopeConfig->getValue(self::COINS_IN_ROW_MENU_CONFIG_PATH, ScopeInterface::SCOPE_STORES));
         if (!$this->coinsInRow) {
             $this->coinsInRow = self::DEFAULT_COINS_IN_ROW;
         }

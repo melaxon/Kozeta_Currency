@@ -18,7 +18,11 @@ Objectives
 -----
 The main objective of the module is to give the ability to manage any currency regardless of whether it is available in Magento or not.
 
-It will be especially useful for those who accept cryptocurrencies in their Magento 2 shops
+It will be especially useful for those who accept cryptocurrencies in their Magento 2 shops.
+
+Another objective is to give the ability to display prices in alternative currencies equal to the amounts the customer will be billed.
+For that purpose we added some new rate import services provided by payment processors: coinpayments.net, BitPay, CoinGate. 
+So if these processors are installed it will be possible to display exactly same prices as will be billed during checkout.
 
  
 Install
@@ -39,7 +43,7 @@ Uninstall
 --------
 
  - remove the folder `app/code/Kozeta/Currency`
- - drop the tables `kozeta_currency_coin_store` and `kozeta_currency_coin` (in this order)
+ - drop the tables `kozeta_currency_coin_store`, `kozeta_currency_currency_rate` and `kozeta_currency_coin` (in this order)
  - remove the config settings.  `DELETE FROM core_config_data WHERE path LIKE '%kozeta_currency%'`
  - remove the module `Kozeta_Currency` from `app/etc/config.php`
  - remove the module `Kozeta_Currency` from table `setup_module`: `DELETE FROM setup_module WHERE module='Kozeta_Currency'`

@@ -35,9 +35,9 @@
         $_ac = $ac;
         $rows = $block->getRows($_baseCode);
     ?>
-    <div><h3><?= __('Base currency') . ':' . $_baseCode ?></h3></div>
+    <?php if ($ac) : ?><div><br /><h3><?= __('Base currency') . ': ' . $_baseCode ?></h3></div><?php endif; ?>
     <?php $j = 1; for ($i = 1; $i <= $rows; $i++) : ?>
-        <div class="admin__control-table-wrapper"><b />
+        <div class="admin__control-table-wrapper"><br />
             <table class="admin__control-table">
                 <thead>
                     <tr>
