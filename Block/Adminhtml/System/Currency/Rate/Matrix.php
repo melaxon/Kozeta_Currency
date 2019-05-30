@@ -98,7 +98,6 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
         $baseCurrencies = $this->getBaseCurrencies();
         $currencies = $baseCurrencies[$base];
         $_currencies = array_flip($currencies);
-        
 
         if (isset($_currencies[$base])) {
             $k = $_currencies[$base];
@@ -120,7 +119,7 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
         }
 
         $baseCurrencies = [];
-        foreach ($this->_storeManager->getWebsites() as $w){
+        foreach ($this->_storeManager->getWebsites() as $w) {
             $bc = $w->getBaseCurrency()->getCode();
             $allowedCurrencies = [];
             $_stores = $w->getStores();
@@ -148,7 +147,7 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
     public function getDisplayRates()
     {
         $currencyModel = $this->_dirCurrencyFactory->create();
-        $currencies = $currencyModel->getConfigAllowCurrencies(); 
+        $currencies = $currencyModel->getConfigAllowCurrencies();
         $defaultCurrencies = $currencyModel->getConfigBaseCurrencies();
         $rates = $currencyModel->getCurrencyRates($defaultCurrencies, $currencies, true);
         return $rates;
@@ -178,7 +177,7 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
     public function formatDecimal($c)
     {
         $c = (float) $c;
-        $c = strpos($c,'E') ? number_format($c,explode("-",$c)[1] + 14) : $c;
+        $c = strpos($c, 'E') ? number_format($c, explode("-", $c)[1] + 14) : $c;
         return rtrim($c, "0");
     }
 }

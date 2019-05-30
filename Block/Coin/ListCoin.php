@@ -50,7 +50,6 @@ class ListCoin extends Template
      */
     private $coins;
 
-    
     /**
      * @var \Magento\Directory\Model\CurrencyFactory
      */
