@@ -29,6 +29,11 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
     }
 
     /**
+     * @var \Magento\Framework\App\State
+     */
+    private $areaCode;
+
+    /**
      * Return currency rates
      *
      * @param string|array $currency
@@ -213,6 +218,21 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
     }
 
     /**
+     * Get area code
+     *
+     * @return string
+     */
+    public function getAreaCode()
+    {
+        if ($this->areaCode) {
+            return $this->areaCode;
+        }
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->appState = $objectManager->get('Magento\Framework\App\State');
+        return $this->appState->getAreaCode();
+    }
+
+    /**
      * Saving currency rates
      *
      * @param array $rates
@@ -225,9 +245,7 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
     {
         $manual = false;
         if (!$service) {
-            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-            $this->appState = $objectManager->get('Magento\Framework\App\State');
-            if ($this->appState->getAreaCode() == \Magento\Framework\App\Area::AREA_ADMINHTML) {
+            if ($this->getAreaCode() == \Magento\Framework\App\Area::AREA_ADMINHTML) {
                 $manual = true;
             }
         }

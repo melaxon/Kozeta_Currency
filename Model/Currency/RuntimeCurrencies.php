@@ -32,7 +32,7 @@ class RuntimeCurrencies
     public static function getInstance()
     {
         if (!self::$_instance instanceof \Kozeta\Currency\Model\Currency\RuntimeCurrencies) {
-            throw new \RuntimeException('RuntimeCurrencies object isn\'t initialized');
+            throw new \RuntimeException(__('RuntimeCurrencies object isn\'t initialized'));
         }
         return self::$_instance;
     }

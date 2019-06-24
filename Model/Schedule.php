@@ -252,7 +252,7 @@ class Schedule
                 $errors = $importModel->getMessages();
             } catch (\Exception $e) {
                 $this->runtimeCurrencies->setImportCurrencies(false);
-                $importWarnings[] = __('FATAL ERROR:') . " ($_service): " . __("The import model can't be initialized. Verify the model and try again.");
+                $importWarnings[] = __('FATAL ERROR:') . " ($_service, $scheduler): " . __("The import model can't be initialized. Verify the model and try again.");
             }
             if (!empty($errors)) {
                 foreach ($errors as $error) {

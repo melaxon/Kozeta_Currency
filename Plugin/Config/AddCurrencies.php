@@ -7,16 +7,50 @@
 
 namespace Kozeta\Currency\Plugin\Config;
 
+use Magento\Framework\Locale\ResolverInterface;
+use Magento\Framework\Locale\CurrencyInterface;
 use Kozeta\Currency\Model\Coin;
-use Magento\Framework\Locale\ConfigInterface;
 use Kozeta\Currency\Model\ResourceModel\Coin\CollectionFactory;
+use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Locale\ConfigInterface;
 use Magento\Framework\App\Request\Http;
+use Magento\Directory\Model\CurrencyFactory;
 
 class AddCurrencies
 {
     /**
-     * @var \Kozeta\Currency\Model\ResourceModel\Coin\CollectionFactory
+     * @var AddCurrencies
+     */
+     private $codes;
+     
+    /**
+     * @var CurrencyFactory
+     */
+     private $currencyFactory;
+
+    /**
+     * @var CurrencyInterface
+     */
+    private $localeCurrency;
+
+    /**
+     * @var StoreManagerInterface
+     */
+    private $storeManager;
+    
+    /**
+     * @var ConfigInterface
+     */
+    private $config;
+
+    /**
+     * @var ResolverInterface
+     */
+    private $localeResolver;
+
+    /**
+     * @var CollectionFactory
      */
     private $collectionFactory;
     
@@ -26,7 +60,7 @@ class AddCurrencies
     const XML_PATH_CURRENCY_INSTALLED = 'system/currency/installed';
     
     /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     * @var ScopeConfigInterface
      */
     private $scopeConfig;
     
@@ -38,29 +72,52 @@ class AddCurrencies
     private $coins;
     
     /**
-     * HTTP request
      *
-     * @var \Magento\Framework\App\Request\Http
+     * @var Http
      */
     private $request;
 
     /**
+     * @param CurrencyFactory $currencyFactory
+     * @param CurrencyInterface $localeCurrency
+     * @param StoreManagerInterface $storeManager
      * @param ConfigInterface $config
+     * @param ResolverInterface $localeResolver
      * @param CollectionFactory $collectionFactory
      * @param ScopeConfigInterface $scopeConfig
      * @param Http $request
+     * @param $locale
      */
     public function __construct(
+        CurrencyFactory $currencyFactory,
+        CurrencyInterface $localeCurrency,
+        StoreManagerInterface $storeManager,
+        ConfigInterface $config,
+        ResolverInterface $localeResolver,
         CollectionFactory $collectionFactory,
         ScopeConfigInterface $scopeConfig,
-        Http $request
+        Http $request,
+        $locale = null
     ) {
+        $this->currencyFactory = $currencyFactory;
+        $this->localeCurrency = $localeCurrency;
+        $this->storeManager = $storeManager;
+        $this->config = $config;
+        $this->localeResolver = $localeResolver;
+        if ($locale !== null) {
+            $this->localeResolver->setLocale($locale);
+        }
         $this->collectionFactory = $collectionFactory;
         $this->scopeConfig = $scopeConfig;
         $this->request = $request;
     }
 
-    public function getNewCurrencies()
+    /**
+     * Retrieve installed currency list
+     *
+     * @return array
+     */
+    private function getNewCurrencies()
     {
         if ($this->coins) {
             return $this->coins;
@@ -78,12 +135,17 @@ class AddCurrencies
                 'label' => __($_coin->getName())
             ];
         }
-        $this->coins = $this->_sortOptionArray($currencies);
-        
+        $this->coins = $this->sortOptionArray($currencies);
         return $this->coins;
     }
 
-    protected function _sortOptionArray($option)
+    /**
+     * Sort and restruct array
+     *
+     * @param array $option
+     * @return array
+     */
+    private function sortOptionArray($option)
     {
         $data = [];
         foreach ($option as $item) {
@@ -98,12 +160,51 @@ class AddCurrencies
     }
 
     /**
+     * Get currency name
+     *
+     * @param string $code
+     * @return string
+     */
+    private function getCurrencyNameByCode($code)
+    {
+        $currencyManager = $this->currencyFactory->create();
+        
+        $name = $this->localeCurrency->getCurrency($code)->getName();
+        if ($name == 'US Dollar' && $code != 'USD') {
+            $name = null;
+        }
+        if ($name) {
+            return $name;
+        }
+        $name = $currencyManager->getCurrencyNames($code);
+        if (is_array($name)) {
+            return isset($name[$code]) ? $name[$code] : $code;
+        }
+        return $name;
+    }
+
+    /**
      * @inheritdoc
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function aroundGetOptionCurrencies($subject, \Closure $proceed, ...$args)
     {
         $installedCurrencies = $this->getNewCurrencies();
-        
+        $availableCurrencies = $this->storeManager->getStore()->getAvailableCurrencyCodes();
+
+        if (empty($installedCurrencies)) {
+            $locale = $this->localeResolver->getLocale();
+            $currencies = (new \Magento\Framework\Locale\Bundle\CurrencyBundle())->get($this->localeResolver->getLocale())['Currencies'] ?: [];
+            $options = [];
+
+            foreach ($currencies as $code => $data) {
+                if (!in_array($code, $availableCurrencies)) {
+                    continue;
+                }
+                $options[] = ['label' => $data[1], 'value' => $code];
+            }
+            return $this->sortOptionArray($options);
+        }
         $selectedCurrencies = explode(
             ',',
             $this->scopeConfig->getValue(
@@ -116,7 +217,29 @@ class AddCurrencies
                 unset($installedCurrencies[$k]);
             }
         }
-        return $installedCurrencies;
+        
+        $currencies = [];
+        foreach ($availableCurrencies as $code) {
+            if (isset($this->codes[$code])) {
+                continue;
+            }
+            $label = $this->getCurrencyNameByCode($code);
+            $currencies[] = [
+                'value' => $code,
+                'label' => $label,
+            ];
+            $this->codes[$code] = $label;
+        }
+        
+        foreach ($installedCurrencies as $v) {
+            if (isset($this->codes[$v['value']])) {
+                continue;
+            }
+            $this->codes[$v['value']] = $v['label'];
+            $currencies[] = $v;
+        }
+
+        return $currencies;
     }
 
     /**
@@ -124,6 +247,6 @@ class AddCurrencies
      */
     public function aroundGetOptionAllCurrencies($subject, \Closure $proceed, ...$args)
     {
-        return $this->getNewCurrencies() ?: [];
+        return $this->getNewCurrencies() ?: $proceed();
     }
 }

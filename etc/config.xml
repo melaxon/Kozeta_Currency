@@ -29,18 +29,18 @@
             </currency_rate_settings>
             <import>
                 <enabled_minutewice_schedule>0</enabled_minutewice_schedule>
-                <!-- Every day at midnight -->
-                <schedule>* 0 * * *</schedule>
+                <!-- At 00:00 on day-of-month 1 in December. -->
+                <schedule>0 0 1 12 *</schedule>
             </import>
             <import_alt_1>
                 <enabled>0</enabled>
-                <!-- Every day at midnight -->
-                <schedule>* 0 * * *</schedule>
+                <!-- At 00:00 on day-of-month 1 in December. -->
+                <schedule>0 0 1 12 *</schedule>
             </import_alt_1>
             <import_alt_2>
                 <enabled>0</enabled>
-                <!-- Every day at midnight -->
-                <schedule>* 0 * * *</schedule>
+                <!-- At 00:00 on day-of-month 1 in December. -->
+                <schedule>0 0 1 12 *</schedule>
             </import_alt_2>
             <frankfurter>
                 <timeout>100</timeout>

@@ -8,6 +8,10 @@
 namespace Kozeta\Currency\Model;
 
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\App\Area;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Store\Model\ScopeInterface;
+use Magento\Framework\App\ObjectManager;
 
 /*
  * Model Currency
@@ -22,6 +26,16 @@ class Currency extends \Magento\Directory\Model\Currency
      */
     private $precisionObject;
 
+    /**
+     * @var ScopeConfigInterface
+     */
+    private $config;
+
+    /**
+     * @var \Magento\Framework\App\State
+     */
+    private $appState;
+    
     /**
      * Retrieve currency rates to other currencies
      *
@@ -130,6 +144,15 @@ class Currency extends \Magento\Directory\Model\Currency
     }
 
     /**
+     * Get ScopeConfigInterface instance
+     * @return mixed
+     */
+    private function getConfig()
+    {
+        $this->config = $this->config ?: ObjectManager::getInstance()->get(ScopeConfigInterface::class);
+        return $this->config;
+    }
+    /**
      * Retrieve current currency set if exists
      *
      * @return array
@@ -141,7 +164,7 @@ class Currency extends \Magento\Directory\Model\Currency
             $runtimeCurrencies = \Kozeta\Currency\Model\Currency\RuntimeCurrencies::getInstance();
             $allowedCurrencies = $runtimeCurrencies->getImportCurrencies();
         } catch (\Exception $e) {
-            return parent::getConfigAllowCurrencies();
+            return $this->getConfigCurrencies(parent::XML_PATH_CURRENCY_ALLOW);
         }
 
         if (is_array($allowedCurrencies)) {
@@ -157,7 +180,73 @@ class Currency extends \Magento\Directory\Model\Currency
             }
             return $allowedCurrencies;
         }
-        return parent::getConfigAllowCurrencies();
+        return $this->getConfigCurrencies(parent::XML_PATH_CURRENCY_ALLOW);
+    }
+
+    /**
+     * Retrieve default currencies according to config
+     *
+     * @return array
+     */
+    public function getConfigDefaultCurrencies()
+    {
+        return $this->getConfigCurrencies(parent::XML_PATH_CURRENCY_DEFAULT);
+    }
+
+    /**
+     * @return array
+     */
+    public function getConfigBaseCurrencies()
+    {
+        return $this->getConfigCurrencies(parent::XML_PATH_CURRENCY_BASE);
+    }
+
+    /**
+     * Retrieve allowed, base or default currency data.
+     *
+     * @param string $path
+     * @return array
+     */
+    public function getConfigCurrencies($path)
+    {
+        $result = in_array($this->_getResource()->getAreaCode(), [Area::AREA_ADMINHTML, Area::AREA_CRONTAB])
+            ? $this->getConfigForAllStores($path)
+            : $this->getConfigForCurrentStore($path);
+        sort($result);
+
+        return array_unique($result);
+    }
+
+    /**
+     * Get allowed, base and default currency codes for all stores.
+     *
+     * @param string $path
+     * @return array
+     */
+    private function getConfigForAllStores($path)
+    {
+        $storesResult = [[]];
+        foreach ($this->_storeManager->getStores() as $store) {
+            $storesResult[] = explode(
+                ',',
+                $this->getConfig()->getValue($path, ScopeInterface::SCOPE_STORE, $store->getCode())
+            );
+        }
+
+        return array_merge(...$storesResult);
+    }
+
+    /**
+     * Get allowed, base and default currency codes for current store.
+     *
+     * @param string $path
+     * @return mixed
+     */
+    private function getConfigForCurrentStore($path)
+    {
+        $store = $this->_storeManager->getStore();
+
+        return explode(',', $this->getConfig()->getValue($path, ScopeInterface::SCOPE_STORE, $store->getCode()));
     }
 
     /**
