@@ -200,10 +200,24 @@ class Schedule
         $defaultService = $this->getPathValue(Observer::IMPORT_SERVICE);
         $currencyModel = $this->currencyFactory->create();
         $currencies = $currencyModel->getConfigAllowCurrencies();
+        $baseCurrency = $currencyModel->getConfigBaseCurrencies();
 
         foreach ($currencies as $k => $code) {
-            $import_enabled = (int) $currencyModel->getCurrencyParamByCode($code, 'import_enabled')[$code];
-            if (!$import_enabled) {
+            $import_enabled = $currencyModel->getCurrencyParamByCode($code, 'import_enabled');
+
+            if (in_array($code, $baseCurrency)) {
+                $import_enabled[$code] = 1;
+            }
+
+            if (empty($import_enabled)) {
+                $errMsg = [];
+                unset($currencies[$k]);
+                $errMsg[] = __('ERROR:') . ' ' . __('Settings for currency %1 is incorrect. Please make sure %1 is installed and check currency settings.', $code);
+                $this->sendErrorMessage($errMsg);
+                continue;
+            }
+
+            if (!isset($import_enabled[$code]) || !$import_enabled[$code]) {
                 unset($currencies[$k]);
                 continue;
             }
@@ -213,17 +227,17 @@ class Schedule
                 unset($currencies[$k]);
                 continue;
             }
-            
+
             $coinService = $currencyModel->getCurrencyParamByCode($code, 'currency_converter_id')[$code];
             if ($coinService == 'default') {
                 $coinService = $defaultService;
             }
 
-            $errMsg = [];
             if (!$coinService) {
                 if (!$defaultService) {
+                    $errMsg = [];
                     unset($currencies[$k]);
-                    $errMsg[] = __('FATAL ERROR:') . ' ' . __('Please specify either or both Default Import Service and the correct Import Service for %1', $code);
+                    $errMsg[] = __('ERROR:') . ' ' . __('Please specify either or both Default Import Service and the correct Import Service for %1', $code);
                     $this->sendErrorMessage($errMsg);
                     continue;
                 }
@@ -231,12 +245,10 @@ class Schedule
             }
             $services[$coinService][] = $code;
         }
-        
+
         if (empty($currencies)) {
             return;
         }
-
-        list($baseCurrency) = $currencyModel->getConfigBaseCurrencies();
 
         $importWarnings = [];
         $errors = [];

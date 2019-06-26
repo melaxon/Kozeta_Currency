@@ -48,14 +48,18 @@ class FetchRates extends CurrencyAction
                 'currency/import/service',
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             );
-
+            $baseCurrency = $currencyModel->getConfigBaseCurrencies();
             $services = [];
             foreach ($currencies as $k => $code) {
                 $import_enabled = $currencyModel->getCurrencyParamByCode($code, 'import_enabled');
+                if (in_array($code, $baseCurrency)) {
+                    $import_enabled[$code] = 1;
+                }
+
                 if (empty($import_enabled)) {
                     unset($currencies[$k]);
                     $this->messageManager->addWarning(
-                        __('FATAL ERROR:') . ' ' . __('Settings for currency %1 is incorrect. Please re-save General -> Currency settings and Advanced -> Systen -> Installed currencies', $code)
+                        __('ERROR:') . ' ' . __('Settings for currency %1 is incorrect. Please make sure %1 is installed and check currency settings.', $code)
                     );
                     continue;
                 }
@@ -75,7 +79,7 @@ class FetchRates extends CurrencyAction
                     if (!$defaultService) {
                         unset($currencies[$k]);
                         $this->messageManager->addWarning(
-                            __('FATAL ERROR:') . ' ' . __('Please specify either or both Default Import Service and the correct Import Service for %1', $code)
+                            __('ERROR:') . ' ' . __('Please specify either or both Default Import Service and the correct Import Service for %1', $code)
                         );
                         continue;
                     }
