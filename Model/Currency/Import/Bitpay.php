@@ -58,6 +58,7 @@ class Bitpay extends \Magento\Directory\Model\Currency\Import\AbstractImport
         parent::__construct($currencyFactory);
         $this->scopeConfig = $scopeConfig;
         $this->dataFeed = $dataFeed;
+        $this->dataFeed->setDatafeed([]);
         $this->_curl = $curl;
     }
 

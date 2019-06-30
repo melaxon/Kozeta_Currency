@@ -59,6 +59,7 @@ class Coinpayments extends \Magento\Directory\Model\Currency\Import\AbstractImpo
         parent::__construct($currencyFactory);
         $this->scopeConfig = $scopeConfig;
         $this->dataFeed = $dataFeed;
+        $this->dataFeed->setDatafeed([]);
         $this->_curl = $curl;
     }
 
@@ -103,10 +104,10 @@ class Coinpayments extends \Magento\Directory\Model\Currency\Import\AbstractImpo
                 $feed[$currencyTo]['rate'] = (float) $feed[$currencyTo]['rate'];
                 return $feed[$currencyFrom]['rate'] / $feed[$currencyTo]['rate'];
             }
-            $this->_messages[] = __('Currency %1 is not present in Coinpayments datafeed.', $currencyTo);
+            $this->_messages[] = __('Currency (To) %1 is not present in Coinpayments datafeed.', $currencyTo);
             return false;
         }
-        $this->_messages[] = __('Currency %1 is not present in Coinpayments datafeed.', $currencyFrom);
+        $this->_messages[] = __('Currency (From) %1 is not present in Coinpayments datafeed.', $currencyFrom);
         return false;
     }
 

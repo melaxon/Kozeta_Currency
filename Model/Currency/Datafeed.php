@@ -13,7 +13,7 @@ namespace Kozeta\Currency\Model\Currency;
 class Datafeed
 {
 
-    public $feed;
+    private $feed;
 
     public function getDatafeed()
     {

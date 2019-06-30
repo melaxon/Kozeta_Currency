@@ -64,6 +64,7 @@ class Coinapi extends \Magento\Directory\Model\Currency\Import\AbstractImport
         $this->httpClientFactory = $httpClientFactory;
         $this->jsonHelper = $jsonHelper;
         $this->dataFeed = $dataFeed;
+        $this->dataFeed->setDatafeed([]);
     }
 
     /**
