@@ -1,8 +1,9 @@
 Magento 2.0 Module "Any Currency"
 ====================
 
+Current version: 1.0.3 - bugfix: if USD is not base currency some services fail to import rates - fixed
 
-Current version: 1.0.1 - initial release
+1.0.2 - initial release
 
 
 Full description is available here: https://shop.kozeta.lt/m2-any-currency.html
