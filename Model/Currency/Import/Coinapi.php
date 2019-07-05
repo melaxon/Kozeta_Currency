@@ -8,6 +8,7 @@
 namespace Kozeta\Currency\Model\Currency\Import;
 
 use Kozeta\Currency\Model\Currency\Datafeed;
+use Magento\Store\Model\ScopeInterface;
 
 /**
  * Currency rate import from https://coinapi.io/
@@ -84,14 +85,8 @@ class Coinapi extends \Magento\Directory\Model\Currency\Import\AbstractImport
         }
 
         $result = null;
-        $timeout = (int)$this->scopeConfig->getValue(
-            'currency/coinapi/timeout',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
-        $apiKey = $this->scopeConfig->getValue(
-            'currency/coinapi/apikey',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
+        $timeout = (int)$this->scopeConfig->getValue('currency/coinapi/timeout', ScopeInterface::SCOPE_STORE);
+        $apiKey = $this->scopeConfig->getValue('currency/coinapi/api_key', ScopeInterface::SCOPE_STORE);
         $url = str_replace('{{CURRENCY_FROM}}', $currencyFrom, self::CURRENCY_CONVERTER_URL);
         $url = str_replace('{{APIKEY}}', $apiKey, $url);
 

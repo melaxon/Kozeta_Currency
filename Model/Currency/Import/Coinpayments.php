@@ -160,8 +160,8 @@ class Coinpayments extends \Magento\Directory\Model\Currency\Import\AbstractImpo
                     'is_fiat' => $item->is_fiat,
                     'rate' => $item->rate_btc,
                     'last_update' => $item->last_update,
-                    'tx_fee' => $item->tx_fee, //0.00000000
-                    'status' => $item->status, //online
+                    'tx_fee' => $item->tx_fee,
+                    'status' => $item->status,
                     'accepted' => $item->accepted,
                 ];
                 if (!isset($data['short']) || $data['short'] == 0) {
