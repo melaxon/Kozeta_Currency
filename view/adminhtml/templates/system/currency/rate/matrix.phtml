@@ -17,33 +17,32 @@
 ?>
 
 <?php if (empty($_rates)) : ?>
-    <div class="message message-warning warning"><p><?= /* @escapeNotVerified */ __('You must first configure currency options before being able to see currency rates.') ?></p></div>
+    <div class="message message-warning warning"><p><?= /* @noEscape */ __('You must first configure currency options before being able to see currency rates.') ?></p></div>
 <?php else : ?>
     <form name="rateForm" id="rate-form" method="post" action="<?= /* @escapeNotVerified */ $block->getRatesFormAction() ?>">
         <?= $block->getBlockHtml('formkey') ?>
         
-<?php
-//    $ac = $block->getCurrencies();
-//    $_ac = $ac;
-    $dc = $block->getBaseCurrencies();
-    $coins = $block->getCoinsInRow();
-    
-?>
-<?php $_j = 0; foreach ($dc as $_baseCode => $ac) : ?>
-    <?php 
+    <?php
+        $dc = $block->getBaseCurrencies();
+        $coins = $block->getCoinsInRow();
+    ?>
+    <?php $_j = 0; foreach ($dc as $_baseCode => $ac) : ?>
+    <?php
         $ac = $block->getCurrencies($_baseCode);
         $_ac = $ac;
         $rows = $block->getRows($_baseCode);
     ?>
-    <?php if ($ac) : ?><div><br /><h3><?= __('Base currency') . ': ' . $_baseCode ?></h3></div><?php endif; ?>
-    <?php $j = 1; for ($i = 1; $i <= $rows; $i++) : ?>
+    <?php if ($ac) : ?>
+        <div><br /><h3><?= /* @noEscape */ __('Base currency') . ': ' . $_baseCode ?></h3></div>
+    <?php endif; ?>
+        <?php $j = 1; for ($i = 1; $i <= $rows; $i++) : ?>
         <div class="admin__control-table-wrapper"><br />
             <table class="admin__control-table">
                 <thead>
                     <tr>
                         <th>&nbsp;</th>
                         <?php $_i = 0; foreach ($ac as $k => $_code) : ?>
-                            <th><span><?= /* @escapeNotVerified */ $_code ?></span></th>
+                            <th><span><?= /* @noEscape */ $_code ?></span></th>
                             <?php
                                 $_i++;
                                 unset($ac[$k]);
@@ -73,43 +72,42 @@
                                             ?>"
                                            class="admin__control-text"
                                             <?= ($_baseCode == $_code) ? ' disabled' : '' ?> />
-<?php if (!empty($_newRates) && $_baseCode != $_code && isset($_rates[$_baseCode][$_code]['rate'])) : ?>
-                                    <div class="admin__field-note"><?= /* @escapeNotVerified */ __('Old rate:') ?> <b><?= /* @escapeNotVerified */ $block->formatDecimal($_rates[$_baseCode][$_code]['rate']) ?></b></div>
-<?php endif; ?>
-<?php if ($_code != $_baseCode && isset($_rates[$_baseCode][$_code]['updated_at'])) :?>
-                                    <div class="admin__field-note"><?= /* @escapeNotVerified */ __('Updated at:') ?> <b><?= /* @escapeNotVerified */ isset($_rates[$_baseCode][$_code]['updated_at']) ? $_rates[$_baseCode][$_code]['updated_at'] : '&nbsp;' ?></b></div>
-                                    <div class="admin__field-note"><?= /* @escapeNotVerified */ __('Service:') ?> <b>
+                            <?php if (!empty($_newRates) && $_baseCode != $_code && isset($_rates[$_baseCode][$_code]['rate'])) : ?>
+                                <div class="admin__field-note"><?= /* @noEscape */ __('Old rate:') ?> <b><?= /* @escapeNotVerified */ $block->formatDecimal($_rates[$_baseCode][$_code]['rate']) ?></b></div>
+                            <?php endif; ?>
+                            <?php if ($_code != $_baseCode && isset($_rates[$_baseCode][$_code]['updated_at'])) :?>
+                                <div class="admin__field-note"><?= /* @noEscape */ __('Updated at:') ?> <b><?= /* @escapeNotVerified */ isset($_rates[$_baseCode][$_code]['updated_at']) ? $_rates[$_baseCode][$_code]['updated_at'] : '&nbsp;' ?></b></div>
+                                <div class="admin__field-note"><?= /* @noEscape */ __('Service:') ?> <b>
 
-<?php /* @escapeNotVerified */
-$serviceName = $block->getServiceNames();
-if (isset($serviceName[$_rates[$_baseCode][$_code]['currency_converter_id']])) {
-    echo $serviceName[$_rates[$_baseCode][$_code]['currency_converter_id']];
-} else {
-    echo '&nbsp;';
-}
-?></b></div>
+                                <?php /* @escapeNotVerified */
+                                $serviceName = $block->getServiceNames();
+                                if (isset($serviceName[$_rates[$_baseCode][$_code]['currency_converter_id']])) {
+                                    echo $serviceName[$_rates[$_baseCode][$_code]['currency_converter_id']];
+                                } else {
+                                    echo '&nbsp;';
+                                } ?></b></div>
 
-<?php else : ?>
-                                    <div class="admin__field-note">&nbsp;</div>
-                                    <div class="admin__field-note">&nbsp;</div>
-<?php endif; ?>
-                                </td>
-<?php
-unset($_rates[$_baseCode][$_code]);
-unset($_ac[$k]);
-if ($_j == $coins) {
-    $_j = 0;
-    break;
-} ?>
-                        <?php endforeach; // Allowed currency ?>
+                            <?php else : ?>
+                                <div class="admin__field-note">&nbsp;</div>
+                                <div class="admin__field-note">&nbsp;</div>
+                            <?php endif; ?>
+                            </td>
+                            <?php
+                            unset($_rates[$_baseCode][$_code]);
+                            unset($_ac[$k]);
+                            if ($_j == $coins) {
+                                $_j = 0;
+                                break;
+                            } ?>
+                            <?php endforeach; // Allowed currency ?>
                         <?php $_j = 0; ?>
                     <?php endif; ?>
                 </tr>
                 
             </table>
         </div>
-    <?php endfor; ?>
-<?php endforeach; // Base currency ?>
+        <?php endfor; ?>
+    <?php endforeach; // Base currency ?>
     </form>
 <?php endif; ?>
 <script>

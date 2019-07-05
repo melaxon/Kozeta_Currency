@@ -75,6 +75,16 @@
             <group id="fixerio" translate="label" sortOrder="35" showInDefault="1" showInWebsite="0" showInStore="0">
             </group>
             <group id="currencyconverterapi" translate="label" sortOrder="36" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Currency Converter API</label>
+                <field id="api_key" translate="label" type="obscure" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Api Key</label>
+                    <config_path>currency/currencyconverterapi/api_key</config_path>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <comment>Get free api key at https://free.currencyconverterapi.com/free-api-key</comment>
+                </field>
+                <field id="timeout" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Connection Timeout in Seconds</label>
+                </field>
             </group>
             <group id="frankfurter" translate="label" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Frankfurter</label>
@@ -85,25 +95,31 @@
             </group>
             <group id="coinapi" translate="label" sortOrder="41" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Coinapi</label>
+                <field id="api_key" translate="label" type="obscure" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Api Key</label>
+                    <config_path>currency/coinapi/api_key</config_path>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <comment>Sign up to get free api key https://www.coinapi.io</comment>
+                </field>
                 <field id="timeout" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Connection Timeout (sec)</label>
-                </field>
-                <field id="apikey" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Api Key</label>
-                    <comment>Sign up to get free api key https://www.coinapi.io</comment>
                 </field>
             </group>
             <group id="coinpayments" translate="label" sortOrder="42" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Coinpayments.net</label>
-                <field id="timeout" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Connection Timeout (sec)</label>
-                </field>
-                <field id="public_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="public_key" translate="label" type="obscure" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Public key</label>
+                    <config_path>currency/coinpayments/public_key</config_path>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                 </field>
-                <field id="private_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="private_key" translate="label" type="obscure" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Private key</label>
-                    <comment>Sign up to get free api key https://www.coinpayments.net</comment>
+                    <config_path>currency/coinpayments/private_key</config_path>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <comment>Get free account and api key https://www.coinpayments.net</comment>
+                </field>
+                <field id="timeout" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Connection Timeout (sec)</label>
                 </field>
             </group>
             <group id="coingate" translate="label" sortOrder="43" showInDefault="1" showInWebsite="0" showInStore="0">

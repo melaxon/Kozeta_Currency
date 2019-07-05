@@ -42,17 +42,24 @@
                 <!-- At 00:00 on day-of-month 1 in December. -->
                 <schedule>0 0 1 12 *</schedule>
             </import_alt_2>
+            <currencyconverterapi>
+                <timeout>100</timeout>
+                <api_key backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+            </currencyconverterapi>
             <frankfurter>
                 <timeout>100</timeout>
             </frankfurter>
             <coinapi>
                 <timeout>100</timeout>
+                <api_key backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
             </coinapi>
             <bitpay>
                 <timeout>100</timeout>
             </bitpay>
             <coinpayments>
                 <timeout>100</timeout>
+                <public_key backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <private_key backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
             </coinpayments>
             <coingate>
                 <timeout>100</timeout>

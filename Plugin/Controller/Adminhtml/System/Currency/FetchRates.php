@@ -104,7 +104,7 @@ class FetchRates extends CurrencyAction
                 } catch (\Exception $e) {
                     $runtimeCurrencies->setImportCurrencies(false);
                     throw new LocalizedException(
-                        __("The import model can't be initialized. Verify the model and try again.")
+                        __("The import model can't be initialized. Verify the model and try again. ($service)")
                     );
                 }
                 $_rates = $importModel->fetchRates();
