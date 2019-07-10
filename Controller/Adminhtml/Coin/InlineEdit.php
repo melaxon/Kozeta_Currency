@@ -104,6 +104,8 @@ class InlineEdit extends CoinController
         foreach (array_keys($postItems) as $coinId) {
             /** @var \Kozeta\Currency\Model\Coin\CoinInterface $coin */
             $coin = $this->coinRepository->getById((int)$coinId);
+            $code = $coin->getCode();
+            
             try {
                 $coinData = $this->filterData($postItems[$coinId]);
                 $this->_dataObjectHelper->populateWithArray($coin, $coinData, CoinInterface::class);
@@ -118,11 +120,12 @@ class InlineEdit extends CoinController
                 $messages[] = $this->getErrorWithCoinId(
                     $coin,
                     __('Something went wrong while saving the coin.')
+                        . " ($code). "
+                        . $e->getMessage()
                 );
                 $error = true;
             }
-            
-            $code = $coin->getCode();
+
             $symbol = $postItems[$coinId]['symbol'];
             $symbolsDataArray = [$code => $symbol];
             try {
@@ -131,7 +134,9 @@ class InlineEdit extends CoinController
             } catch (\Exception $e) {
                 $messages[] = $this->getErrorWithCoinId(
                     $coin,
-                    __('Something went wrong while saving the SYMBOL.')
+                    __('Something went wrong while saving the symbol.')
+                        . " ($symbol). "
+                        . $e->getMessage()
                 );
                 $error = true;
             }

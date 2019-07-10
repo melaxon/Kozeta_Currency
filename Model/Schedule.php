@@ -47,6 +47,8 @@ class Schedule
      *
      * @return Schedule
      * @throws \RuntimeException
+     *
+     * @codingStandardsIgnoreStart
      */
     public static function getInstance()
     {
@@ -202,29 +204,29 @@ class Schedule
         $currencies = $currencyModel->getConfigAllowCurrencies();
         $baseCurrency = $currencyModel->getConfigBaseCurrencies();
 
-        foreach ($currencies as $k => $code) {
-            $import_enabled = $currencyModel->getCurrencyParamByCode($code, 'import_enabled');
+        foreach ($currencies as $key => $code) {
+            $importEnabled = $currencyModel->getCurrencyParamByCode($code, 'import_enabled');
 
             if (in_array($code, $baseCurrency)) {
-                $import_enabled[$code] = 1;
+                $importEnabled[$code] = 1;
             }
 
-            if (empty($import_enabled)) {
+            if (empty($importEnabled)) {
                 $errMsg = [];
-                unset($currencies[$k]);
+                unset($currencies[$key]);
                 $errMsg[] = __('ERROR:') . ' ' . __('Settings for currency %1 is incorrect. Please make sure %1 is installed and check currency settings.', $code);
                 $this->sendErrorMessage($errMsg);
                 continue;
             }
 
-            if (!isset($import_enabled[$code]) || !$import_enabled[$code]) {
-                unset($currencies[$k]);
+            if (!isset($importEnabled[$code]) || !$importEnabled[$code]) {
+                unset($currencies[$key]);
                 continue;
             }
 
-            $import_scheduler = (int) $currencyModel->getCurrencyParamByCode($code, 'import_scheduler')[$code];
-            if ($import_scheduler != $scheduler) {
-                unset($currencies[$k]);
+            $importScheduler = (int) $currencyModel->getCurrencyParamByCode($code, 'import_scheduler')[$code];
+            if ($importScheduler != $scheduler) {
+                unset($currencies[$key]);
                 continue;
             }
 
@@ -236,7 +238,7 @@ class Schedule
             if (!$coinService) {
                 if (!$defaultService) {
                     $errMsg = [];
-                    unset($currencies[$k]);
+                    unset($currencies[$key]);
                     $errMsg[] = __('ERROR:') . ' ' . __('Please specify either or both Default Import Service and the correct Import Service for %1', $code);
                     $this->sendErrorMessage($errMsg);
                     continue;

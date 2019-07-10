@@ -28,6 +28,8 @@ class RuntimeCurrencies
      *
      * @return Schedule
      * @throws \RuntimeException
+     *
+     * @codingStandardsIgnoreStart
      */
     public static function getInstance()
     {

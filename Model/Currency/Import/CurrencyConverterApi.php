@@ -86,7 +86,10 @@ class CurrencyConverterApi extends AbstractImport
         foreach ($currenciesTo as $to) {
             $pairs[] = $currencyFrom . '_' . $to;
         }
+        
+        // @codingStandardsIgnoreStart
         set_time_limit(0);
+        // @codingStandardsIgnoreEnd
         $apiKey = $this->scopeConfig->getValue('currency/currencyconverterapi/api_key', ScopeInterface::SCOPE_STORE);
         $currencyPairs = implode(",", $pairs);
         $url = str_replace('{{CURRENCY_PAIRS}}', $currencyPairs, self::CURRENCY_CONVERTER_URL);
@@ -99,7 +102,7 @@ class CurrencyConverterApi extends AbstractImport
                 $data[$currencyFrom] = [];
                 return $data;
             }
-            if (isset($response['error']) ) {
+            if (isset($response['error'])) {
                 $this->_messages[] = __('Error message from Service CurrencyConverterApi: %1', $response['error']);
                 $data[$currencyFrom] = [];
                 return $data;

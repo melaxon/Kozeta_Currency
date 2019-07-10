@@ -43,21 +43,20 @@ if (empty($rate)) {
         $isFiat = $_coin->getIsFiat();
         $iconNameFiat = $isFiat === true ? 'yes16x16.png' : 'no16x16.png';
         $iconPath = $block->getViewFileUrl('Kozeta_Currency::icons/'. $iconNameFiat);
-        
     ?>
     <div class="coin-isFiat coin-details">
-        <strong><?= /* @noEscape */ __('Is Fiat') ?></strong>: <img src="<?= /* @escapeNotVerified */ $iconPath; ?>" />
+        <strong><?= /* @noEscape */ __('Is Fiat') ?></strong>: <img src="<?= /* @noEscape */ $iconPath; ?>" />
     </div>
     
     <?php if ($isFiat !== true) : ?>
     <div class="coin-type coin-details">
-        <strong><?= /* @noEscape */ __('Type') ?></strong>: <?= /* @escapeNotVerified */ $_coin->getAttributeText('type');?>
+        <strong><?= /* @noEscape */ __('Type') ?></strong>: <?= /* @noEscape */ $_coin->getAttributeText('type');?>
     </div>
     <?php endif;?>
     
     <?php if ($_coin->getCode() != $block->_getBaseCurrencyCode()) : ?>
     <div class="coin-rate coin-details">
-        <strong><?= /* @noEscape */ $block->escapeHtml(__('Current exchange rate to %1', $block->_getBaseCurrencyCode())) ?></strong>: <?= /* @escapeNotVerified */ $rate['_rate']; ?>
+        <strong><?= /* @noEscape */ $block->escapeHtml(__('Current exchange rate to %1', $block->_getBaseCurrencyCode())) ?></strong>: <?= /* @noEscape */ $rate['_rate']; ?>
     </div>
     
     <div class="coin-rate coin-details">
@@ -66,20 +65,20 @@ if (empty($rate)) {
     <?php endif;?>
 
     <div class="coin-txfee coin-details">
-        <strong><?= /* @noEscape */ __('Precision') ?></strong>: <?= /* @escapeNotVerified */ $_coin->getPrecision();?>
+        <strong><?= /* @noEscape */ __('Precision') ?></strong>: <?= /* @noEscape */ $_coin->getPrecision();?>
     </div>
 
     <div class="coin-isActive coin-details">
-        <strong><?= /* @noEscape */ __('Status') ?></strong>: <?= /* @escapeNotVerified */ ($_coin->getIsActive())? __('Active'): __('Inactive');?>
+        <strong><?= /* @noEscape */ __('Status') ?></strong>: <?= /* @noEscape */ ($_coin->getIsActive())? __('Active'): __('Inactive');?>
     </div>
     
     <?php if ($isFiat !== true) : ?>
     <div class="coin-txfee coin-details">
-        <strong><?= /* @noEscape */ __('Transactioin fee') ?></strong>: <?= /* @escapeNotVerified */ $_coin->getTxfee();?>
+        <strong><?= /* @noEscape */ __('Transactioin fee') ?></strong>: <?= /* @noEscape */ $_coin->getTxfee();?>
     </div>
 
     <div class="coin-rate coin-details">
-        <strong><?= /* @noEscape */ __('Min. number of confirmations') ?></strong>: <?= /* @escapeNotVerified */ $_coin->getMinconf();?>
+        <strong><?= /* @noEscape */ __('Min. number of confirmations') ?></strong>: <?= /* @noEscape */ $_coin->getMinconf();?>
     </div>
     <?php endif;?>
     
@@ -89,12 +88,12 @@ if (empty($rate)) {
         $iconPath = $block->getViewFileUrl('Kozeta_Currency::icons/'. $iconNameRss);
     ?>
     <div class="coin-inRss coin-details">
-        <strong><?= /* @noEscape */ __('Included into RSS feed') ?></strong>: <img src="<?= /* @escapeNotVerified */ $iconPath; ?>" />
+        <strong><?= /* @noEscape */ __('Included into RSS feed') ?></strong>: <img src="<?= /* @noEscape */ $iconPath; ?>" />
     </div>
     <?php if ($_coin->getProcessedDescription()) : ?>
     <div class="coin-description coin-details">
         <strong><?= /* @noEscape */ __('Description') ?></strong>: 
-        <div class="coin__description-content"><?= /* @escapeNotVerified */ $_coin->getProcessedDescription();?></div>
+        <div class="coin__description-content"><?= /* @noEscape */ $_coin->getProcessedDescription();?></div>
     </div>
     <?php endif; ?>
 

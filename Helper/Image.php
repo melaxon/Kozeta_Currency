@@ -445,12 +445,14 @@ class Image extends AbstractHelper
     public function getPlaceholder($placeholder = null)
     {
         if ($placeholder) {
-            $placeholderFullPath = 'Kozeta_Currency::images/'.$this->entityCode.'/placeholder/' . $placeholder . '.jpg';
-        } else {
-            $placeholderFullPath = $this->placeholder
-                ?: 'Kozeta_Currency::images/'.$this->entityCode.'/placeholder/' . $this->getModel()->getDestinationSubdir() . '.jpg';
+            return 'Kozeta_Currency::images/'.$this->entityCode.'/placeholder/' . $placeholder . '.jpg';
         }
-        return $placeholderFullPath;
+        return $this->placeholder
+            ?: 'Kozeta_Currency::images/'
+            . $this->entityCode
+            . '/placeholder/'
+            . $this->getModel()->getDestinationSubdir()
+            . '.jpg';
     }
 
     /**
@@ -559,7 +561,17 @@ class Image extends AbstractHelper
             $url = $this->assetRepo->getUrl($this->getPlaceholder($placeholder));
         } catch (\Exception $e) {
             $this->_logger->critical($e);
-            $url = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAnFBMVEUAAAAAAAAAAAAAAAC0tLS4uLi0tLT6+vrx8fHo6Ojj4OC+mpq7UE2wXlqzOTGtHwza2dnGaWeiJxDV0dGNJhari4uqeHi/W1edTkevSkWWNCOLEQiXEgbExMXbiorTgH+NT0a4RD+XIxTPFwm7BQHYAwHJAwDLd3aWcXDKV03JODOjNyunLCS6JQ6nCQO/q6viqKjFREOYQTrQIiHNANNfAAAAB3RSTlMCPiYZ3uvFTohbPwAAAURJREFUOMuVk9dygzAQRW3jeGUhikQvDtUl7uX//y0b4bGMCDPJAV64Z+5Ko9HkLxizEYynMCW/A9OXsETI8xkRSPeNNpDnOyZo5dChCe8pAUJ04Qd65bzYXilIaSiYrPhEisoEiS5YvOCVbdt8G1kDATGjbWV5QC7HiDNzKFCb2/J3wqKIVcuBEDImi60vxo5JEvYEQCFmB0/mt5sdHhNLF+CQHGS+3+Ok2k8HQprVAPf944E51JkuAMRZdrk7m7WDuZfncV9Awiz3uxzlcx5qAgHq5067kXkgzj7VBCSoz63YYX/stCKAQQNAKdrmJITTbERJJErojMA/Net1c/IDPBxK6cJ424WE7so0LXcuoauV585nk5fQh5AVgDvvBqgGBRaA+yFztcheAfWoytUIJbhd/3iDykcWuZhpl3eqYUz+wTdj6SFVkjRnJQAAAABJRU5ErkJggg==';
+            $placeholderData  = 'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAnFBMVEUAAAAAAAAAAAAAAAC0tLS4uLi0tL';
+            $placeholderData .= 'T6+vrx8fHo6Ojj4OC+mpq7UE2wXlqzOTGtHwza2dnGaWeiJxDV0dGNJhari4uqeHi/W1edTkevSkWWNCOL';
+            $placeholderData .= 'EQiXEgbExMXbiorTgH+NT0a4RD+XIxTPFwm7BQHYAwHJAwDLd3aWcXDKV03JODOjNyunLCS6JQ6nCQO/q6';
+            $placeholderData .= 'viqKjFREOYQTrQIiHNANNfAAAAB3RSTlMCPiYZ3uvFTohbPwAAAURJREFUOMuVk9dygzAQRW3jeGUhikQv';
+            $placeholderData .= 'DtUl7uX//y0b4bGMCDPJAV64Z+5Ko9HkLxizEYynMCW/A9OXsETI8xkRSPeNNpDnOyZo5dChCe8pAUJ04Q';
+            $placeholderData .= 'd65bzYXilIaSiYrPhEisoEiS5YvOCVbdt8G1kDATGjbWV5QC7HiDNzKFCb2/J3wqKIVcuBEDImi60vxo5J';
+            $placeholderData .= 'EvYEQCFmB0/mt5sdHhNLF+CQHGS+3+Ok2k8HQprVAPf944E51JkuAMRZdrk7m7WDuZfncV9Awiz3uxzlcx';
+            $placeholderData .= '5qAgHq5067kXkgzj7VBCSoz63YYX/stCKAQQNAKdrmJITTbERJJErojMA/Net1c/IDPBxK6cJ424WE7so0';
+            $placeholderData .= 'LXcuoauV585nk5fQh5AVgDvvBqgGBRaA+yFztcheAfWoytUIJbhd/3iDykcWuZhpl3eqYUz+wTdj6SFVkj';
+            $placeholderData .= 'RnJQAAAABJRU5ErkJggg==';
+            $url = 'data:image/png;base64,' . $placeholderData;
         }
         return $url;
     }
@@ -749,7 +761,7 @@ class Image extends AbstractHelper
     protected function parseSize($string)
     {
         $size = explode('x', strtolower($string));
-        if (sizeof($size) == 2) {
+        if (count($size) == 2) {
             return [
                 'width' => $size[0] > 0 ? $size[0] : null,
                 'height' => $size[1] > 0 ? $size[1] : null

@@ -62,20 +62,18 @@ class Frankfurter extends \Magento\Directory\Model\Currency\Import\AbstractImpor
         $data = [];
         $currencies = $this->_getCurrencyCodes();
         $defaultCurrencies = $this->_getDefaultCurrencyCodes();
+        // @codingStandardsIgnoreStart
         set_time_limit(0);
+        // @codingStandardsIgnoreEnd
         foreach ($defaultCurrencies as $currencyFrom) {
             if (!isset($data[$currencyFrom])) {
                 $data[$currencyFrom] = [];
             }
 
             foreach ($currencies as $currencyTo) {
-                if ($currencyFrom == $currencyTo) {
-                    $data[$currencyFrom][$currencyTo] = $this->_numberFormat(1);
-                } else {
-                    $data[$currencyFrom][$currencyTo] = $this->_numberFormat(
-                        $this->_convert($currencyFrom, $currencyTo)
-                    );
-                }
+                $data[$currencyFrom][$currencyTo] = $currencyFrom != $currencyTo
+                    ? $this->_numberFormat($this->_convert($currencyFrom, $currencyTo))
+                    : $this->_numberFormat(1);
             }
             ksort($data[$currencyFrom]);
         }
@@ -83,7 +81,6 @@ class Frankfurter extends \Magento\Directory\Model\Currency\Import\AbstractImpor
 
         return $data;
     }
-
 
     /**
      * @param string $currencyFrom
@@ -113,16 +110,15 @@ class Frankfurter extends \Magento\Directory\Model\Currency\Import\AbstractImpor
             $data = $this->jsonHelper->jsonDecode($response);
             
             if (isset($data['rates'][$currencyTo])) {
-                $result = (float)$data['rates'][$currencyTo];
-            } else {
-                $this->_messages[] = __('We can\'t retrieve the rates from url %1.', $url);
+                return (float)$data['rates'][$currencyTo];
             }
+            $this->_messages[] = __('We can\'t retrieve the rates from url %1.', $url) . " (1)";
+
         } catch (\Exception $e) {
             if ($retry == 0) {
-                $this->_convert($currencyFrom, $currencyTo, 1);
-            } else {
-                $this->_messages[] = __('We can\'t retrieve the rates from url %1.', $url);
+                return $this->_convert($currencyFrom, $currencyTo, 1);
             }
+            $this->_messages[] = __('We can\'t retrieve the rates from url %1.', $url);
         }
 
         return $result;

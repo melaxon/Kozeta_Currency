@@ -8,8 +8,8 @@
 <?php /** @var $block \Kozeta\Currency\Block\Image */ ?>
 
 <img class="photo image"
-        <?= /* @escapeNotVerified */ $block->getCustomAttributes(); ?>
-     src="<?= /* @escapeNotVerified */ $block->getImageUrl(); ?>"
-     width="<?= /* @escapeNotVerified */ $block->getWidth(); ?>"
-     height="<?= /* @escapeNotVerified */ $block->getHeight(); ?>"
-     alt="<?= /* @escapeNotVerified */ $block->stripTags($block->getLabel(), null, true); ?>" />
+        <?= /* @noEscape */ $block->getCustomAttributes(); ?>
+     src="<?= /* @noEscape */ $block->getImageUrl(); ?>"
+     width="<?= /* @noEscape */ $block->getWidth(); ?>"
+     height="<?= /* @noEscape */ $block->getHeight(); ?>"
+     alt="<?= /* @noEscape */ $block->stripTags($block->getLabel(), null, true); ?>" />

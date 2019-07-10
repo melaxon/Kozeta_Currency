@@ -114,10 +114,10 @@ class Coin extends AbstractDb
         while (!$validKey) {
             if ($this->getIsUniqueUrlKeyToStores($object)) {
                 $validKey = true;
-            } else {
-                $urlKey = $this->generateNewUrlKey($urlKey);
-                $object->setData('url_key', $urlKey);
+                break;
             }
+            $urlKey = $this->generateNewUrlKey($urlKey);
+            $object->setData('url_key', $urlKey);
         }
 
         if (!$this->getIsUniqueCodeToStore($object)) {
@@ -138,13 +138,11 @@ class Coin extends AbstractDb
         $parts = explode('-', $urlKey);
         $last = $parts[count($parts) - 1];
         if (!is_numeric($last)) {
-            $urlKey = $urlKey.'-1';
-        } else {
-            $suffix = '-'.($last + 1);
-            unset($parts[count($parts) - 1]);
-            $urlKey = implode('-', $parts).$suffix;
+            return $urlKey.'-1';
         }
-        return $urlKey;
+        $suffix = '-'.($last + 1);
+        unset($parts[count($parts) - 1]);
+        return implode('-', $parts).$suffix;
     }
 
     /**
@@ -340,11 +338,10 @@ class Coin extends AbstractDb
      */
     public function getIsUniqueUrlKeyToStores(AbstractModel $object)
     {
-        if ($this->storeManager->hasSingleStore() || !$object->hasStores()) {
-            $stores = [Store::DEFAULT_STORE_ID];
-        } else {
-            $stores = (array)$object->getData('store_id');
-        }
+        $stores = $this->storeManager->hasSingleStore() || !$object->hasStores()
+            ? [Store::DEFAULT_STORE_ID]
+            : (array)$object->getData('store_id');
+
         $select = $this->getLoadByUrlKeySelect($object->getData('url_key'), $stores);
         if ($object->getId()) {
             $select->where('coin_store.coin_id <> ?', $object->getId());
@@ -421,11 +418,8 @@ class Coin extends AbstractDb
      */
     public function saveAttribute(AbstractModel $object, $attribute)
     {
-        if (is_string($attribute)) {
-            $attributes = [$attribute];
-        } else {
-            $attributes = $attribute;
-        }
+        $attributes = !is_string($attribute) ? $attribute : [$attribute];
+
         if (is_array($attributes) && !empty($attributes)) {
             $this->getConnection()->beginTransaction();
             $data = array_intersect_key($object->getData(), array_flip($attributes));

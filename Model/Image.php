@@ -245,7 +245,6 @@ class Image extends AbstractModel
         return $this->mediaDirectory;
     }
 
-
     /**
      * @param int $width
      * @return $this
@@ -467,9 +466,9 @@ class Image extends AbstractModel
         foreach ($rgbArray as $value) {
             if (null === $value) {
                 $result[] = 'null';
-            } else {
-                $result[] = sprintf('%02s', dechex($value));
+                continue;
             }
+            $result[] = sprintf('%02s', dechex($value));
         }
         return implode($result);
     }
@@ -506,6 +505,7 @@ class Image extends AbstractModel
         $baseFile = $baseDir . $file;
 
         if (!$file || !$this->mediaDirectory()->isFile($baseFile)) {
+            // phpcs:ignore Magento2.Exceptions.DirectThrow
             throw new \Exception(__('We can\'t find the image file.'));
         }
 
@@ -541,8 +541,9 @@ class Image extends AbstractModel
             $miscParams[] = $this->getWatermarkWidth();
             $miscParams[] = $this->getWatermarkHeight();
         }
-
+        // @codingStandardsIgnoreStart
         $path[] = md5(implode('_', $miscParams));
+        // @codingStandardsIgnoreEnd
 
         // append prepared filename
         $this->newFile = implode('/', $path) . $file;
@@ -624,7 +625,7 @@ class Image extends AbstractModel
      */
     public function rotate($angle)
     {
-        $angle = intval($angle);
+        $angle = (int) $angle;
         $this->getImageProcessor()->rotate($angle);
         return $this;
     }
@@ -668,12 +669,12 @@ class Image extends AbstractModel
             return $this;
         }
 
-        if ($file) {
-            $this->setWatermarkFile($file);
-        } else {
+        if (!$file) {
             return $this;
         }
-
+        
+        $this->setWatermarkFile($file);
+        
         if ($position) {
             $this->setWatermarkPosition($position);
         }
@@ -723,16 +724,13 @@ class Image extends AbstractModel
     public function getUrl()
     {
         if ($this->newFile === true) {
-            $url = $this->assetRepo->getUrl(
+            return $this->assetRepo->getUrl(
                 "Kozeta_Currency::images/".$this->entityCode."/placeholder/{$this->getDestinationSubdir()}.jpg"
             );
-        } else {
-            $url = $this->storeManager->getStore()->getBaseUrl(
-                UrlInterface::URL_TYPE_MEDIA
-            ) . $this->newFile;
         }
-
-        return $url;
+        return $this->storeManager->getStore()->getBaseUrl(
+            UrlInterface::URL_TYPE_MEDIA
+        ) . $this->newFile;
     }
 
     /**
@@ -929,7 +927,6 @@ class Image extends AbstractModel
     {
         $directory = $this->uploader->getBasePath() . '/cache';
         $this->mediaDirectory()->delete($directory);
-
         $this->coreFileStorageDatabase->deleteFolder($this->mediaDirectory()->getAbsolutePath($directory));
     }
 
@@ -944,11 +941,10 @@ class Image extends AbstractModel
     {
         if ($this->mediaDirectory()->isFile($filename)) {
             return true;
-        } else {
-            return $this->coreFileStorageDatabase->saveFileToFilesystem(
-                $this->mediaDirectory()->getAbsolutePath($filename)
-            );
         }
+        return $this->coreFileStorageDatabase->saveFileToFilesystem(
+            $this->mediaDirectory()->getAbsolutePath($filename)
+        );
     }
 
     /**
@@ -964,12 +960,10 @@ class Image extends AbstractModel
                 "Kozeta_Currency::images/".$this->entityCode."/placeholder/{$this->getDestinationSubdir()}.jpg"
             );
             $img = $asset->getSourceFile();
-            $fileInfo = getimagesize($img);
-        } else {
-            if ($this->mediaDirectory()->isFile($this->mediaDirectory()->getAbsolutePath($this->newFile))) {
-                $fileInfo = getimagesize($this->mediaDirectory()->getAbsolutePath($this->newFile));
-            }
+            return getimagesize($img);
         }
-        return $fileInfo;
+        if ($this->mediaDirectory()->isFile($this->mediaDirectory()->getAbsolutePath($this->newFile))) {
+            return getimagesize($this->mediaDirectory()->getAbsolutePath($this->newFile));
+        }
     }
 }

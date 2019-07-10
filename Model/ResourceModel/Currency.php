@@ -47,11 +47,9 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
             foreach ($currency as $code) {
                 $rates[$code] = $this->getRatesByCode($code, $toCurrencies);
             }
-        } else {
-            $rates = $this->getRatesByCode($currency, $toCurrencies, $updated);
+            return $rates;
         }
-
-        return $rates;
+        return $this->getRatesByCode($currency, $toCurrencies, $updated);
     }
 
     /**
@@ -68,11 +66,9 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
             foreach ($currency as $code) {
                 $rates[$code] = $this->getRatesByCode($code, $toCurrencies, 1);
             }
-        } else {
-            $rates = $this->getRatesByCode($currency, $toCurrencies, 1);
+            return $rates;
         }
-
-        return $rates;
+        return $this->getRatesByCode($currency, $toCurrencies, 1);
     }
 
     /**
@@ -112,12 +108,11 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
                 $result[$row['currency_to']]['updated_at'] = $row['updated_at'];
                 $result[$row['currency_to']]['currency_converter_id'] = $row['currency_converter_id'];
             }
-        } else {
-            foreach ($rowSet as $row) {
-                $result[$row['currency_to']] = $row['rate'];
-            }
+            return $result;
         }
-
+        foreach ($rowSet as $row) {
+            $result[$row['currency_to']] = $row['rate'];
+        }
         return $result;
     }
     
@@ -274,8 +269,8 @@ class Currency extends \Magento\Directory\Model\ResourceModel\Currency
             if ($data) {
                 $connection->insertOnDuplicate($this->_currencyRateTable, $data, ['rate','currency_converter_id']);
             }
-        } else {
-            throw new \Magento\Framework\Exception\LocalizedException(__('Please correct the rates received'));
+            return;
         }
+        throw new \Magento\Framework\Exception\LocalizedException(__('Please correct the rates received'));
     }
 }

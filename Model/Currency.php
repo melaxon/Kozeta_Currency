@@ -94,7 +94,6 @@ class Currency extends \Magento\Directory\Model\Currency
      */
     public function convert($price, $toCurrency = null)
     {
-
         if ($toCurrency === null) {
             return $price;
         } elseif ($this->getCode() == $this->getCurrencyCodeFromToCurrency($toCurrency)) {
@@ -102,12 +101,7 @@ class Currency extends \Magento\Directory\Model\Currency
         } elseif ($rate = $this->getRate($toCurrency)) {
             return (float)$price * (float)$rate;
         }
-
-        throw new \Exception(__(
-            'Undefined rate from "%1-%2".',
-            $this->getCode(),
-            $this->getCurrencyCodeFromToCurrency($toCurrency)
-        ));
+        parent::convert($price, $toCurrency);
     }
 
     /**

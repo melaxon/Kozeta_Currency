@@ -96,10 +96,10 @@ class Collection extends AbstractCollection
     protected function _afterLoad()
     {
         $this->performAfterLoad('kozeta_currency_coin_store', 'coin_id');
-        foreach ($this->getItems() as $item) {
+        //foreach ($this->getItems() as $item) {
             /** @var \Kozeta\Currency\Model\Coin $item */
             // do something
-        }
+        //}
         return parent::_afterLoad();
     }
 
@@ -137,7 +137,10 @@ class Collection extends AbstractCollection
 
             $this->addFilter('store_id', ['in' => $store], 'public');
             $store_id = max($store);
-            $q = "IF(main_table.code IN(SELECT c.code FROM kozeta_currency_coin c INNER JOIN kozeta_currency_coin_store s ON c.coin_id = s.coin_id WHERE s.store_id = $store_id), $store_id, $default_store)";
+            $q = "IF(main_table.code IN("
+            . "SELECT c.code FROM kozeta_currency_coin c "
+            . "INNER JOIN kozeta_currency_coin_store s ON c.coin_id = s.coin_id "
+            . "WHERE s.store_id = $store_id), $store_id, $default_store)";
 
             $this->addFilter('store_id = '. $q, 1);
         }

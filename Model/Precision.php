@@ -28,7 +28,6 @@ class Precision extends \Magento\Framework\Model\AbstractModel
 
     const XML_PATH_PRICE_PRECISION = 'catalog_price_precision/general/price_precision';
 
-
     public function __construct(
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
@@ -84,7 +83,6 @@ class Precision extends \Magento\Framework\Model\AbstractModel
         return $this->getValueByPath(self::XML_PATH_PRICE_PRECISION, 'website');
     }
 
-
     /**
      * Return precision: default, fixed or for given currency
      * @param $currencyType
@@ -104,11 +102,11 @@ class Precision extends \Magento\Framework\Model\AbstractModel
             return (int) $result;
         }
         $store = $this->_storeManager->getStore()->getId();
-        if ($currencyType == 'base') {
-            $code = $this->_storeManager->getStore()->getBaseCurrency()->getCode();
-        } else {
-            $code = $this->_storeManager->getStore()->getCurrentCurrency()->getCode();
-        }
+        
+        $code = $currencyType == 'base'
+            ? $this->_storeManager->getStore()->getBaseCurrency()->getCode()
+            : $this->_storeManager->getStore()->getCurrentCurrency()->getCode();
+        
         $result = $this->_getResource()->getPrecisionByCode($code, $store);
         if (empty($result) && $result !== '0') {
             $defaultStoreId = Store::DEFAULT_STORE_ID;

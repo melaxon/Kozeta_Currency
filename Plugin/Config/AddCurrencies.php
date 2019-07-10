@@ -22,12 +22,12 @@ class AddCurrencies
     /**
      * @var AddCurrencies
      */
-     private $codes;
+    private $codes;
      
     /**
      * @var CurrencyFactory
      */
-     private $currencyFactory;
+    private $currencyFactory;
 
     /**
      * @var CurrencyInterface
@@ -194,9 +194,13 @@ class AddCurrencies
 
         if (empty($installedCurrencies)) {
             $locale = $this->localeResolver->getLocale();
-            $currencies = (new \Magento\Framework\Locale\Bundle\CurrencyBundle())->get($this->localeResolver->getLocale())['Currencies'] ?: [];
+            $currencies = (
+                new \Magento\Framework\Locale\Bundle\CurrencyBundle()
+            )->get(
+                $this->localeResolver->getLocale()
+            )['Currencies'] ?: [];
+            
             $options = [];
-
             foreach ($currencies as $code => $data) {
                 if (!in_array($code, $availableCurrencies)) {
                     continue;

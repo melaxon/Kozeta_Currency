@@ -176,11 +176,15 @@ class InstallData implements InstallDataInterface
                 $result = $this->serializer->unserialize($configData);
             } else {
                 try {
+                    // @codingStandardsIgnoreStart
                     $result = unserialize($configData);
+                     // @codingStandardsIgnoreEnd
                 } catch (\Exception $e) {
                     $result = json_decode($configData, true);
                     if (json_last_error() !== JSON_ERROR_NONE) {
-                        throw new \InvalidArgumentException('Unable to unserialize value.' . " $configPath : $configData; ");
+                        throw new \InvalidArgumentException(
+                            'Unable to unserialize value.' . " $configPath : $configData; "
+                        );
                     }
                 }
             }

@@ -27,17 +27,6 @@ class Toplink extends \Magento\Framework\View\Element\Html\Link
     const COINS_LIST_URL_CONFIG_PATH = 'currency/coin/list_url';
 
     /**
-     * @param Context $context
-     * @param array $data
-     */
-    public function __construct(
-        Context $context,
-        array $data = []
-    ) {
-        parent::__construct($context, $data);
-    }
-
-    /**
      * Render block HTML.
      *
      * @return string

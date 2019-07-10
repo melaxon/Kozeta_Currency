@@ -81,25 +81,24 @@ class View extends Action
     }
 
     /**
+     * Displays coin details
+     *
      * @return \Magento\Framework\Controller\Result\Forward|\Magento\Framework\View\Result\Page
+     * @throws \Exception
      */
     public function execute()
     {
-        try {
-            $coinId = (int)$this->getRequest()->getParam('id');
-            $coin = $this->coinRepository->getById($coinId);
 
-            if (!$coin->getIsActive()) {
-                throw new \Exception();
-            }
-        } catch (\Exception $e) {
+        $coinId = (int)$this->getRequest()->getParam('id');
+        $coin = $this->coinRepository->getById($coinId);
+
+        if (!$coin->getIsActive()) {
             $resultForward = $this->resultForwardFactory->create();
             $resultForward->forward('noroute');
             return $resultForward;
         }
 
         $this->coreRegistry->register('current_coin', $coin);
-
         $resultPage = $this->resultPageFactory->create();
         $title = trim($coin->getMetaTitle()) != '' ? $coin->getMetaTitle() : $coin->getName();
         $resultPage->getConfig()->getTitle()->set($title);

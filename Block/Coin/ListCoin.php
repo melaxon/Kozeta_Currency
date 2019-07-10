@@ -101,7 +101,14 @@ class ListCoin extends Template
                     'is_active',
                     Coin::STATUS_ENABLED
                 )
-                //->addFieldToFilter(\Kozeta\Currency\Api\Data\CoinInterface::STORE_ID,['eq' => $this->storeManager->getStore()->getId()])
+                // ->addFieldToFilter(
+//                     \Kozeta\Currency\Api\Data\CoinInterface::STORE_ID,[
+//                         'eq' => $this
+//                             ->storeManager
+//                             ->getStore()
+//                             ->getId()
+//                     ]
+//                 )
                 ->addStoreFilter($this->_storeManager->getStore()->getId())
                 ->setOrder('sort_order', 'ASC')
                 ->setOrder('is_fiat', 'ASC')

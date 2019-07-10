@@ -50,23 +50,23 @@ class FetchRates extends CurrencyAction
             );
             $baseCurrency = $currencyModel->getConfigBaseCurrencies();
             $services = [];
-            foreach ($currencies as $k => $code) {
-                $import_enabled = $currencyModel->getCurrencyParamByCode($code, 'import_enabled');
+            foreach ($currencies as $key => $code) {
+                $importEnabled = $currencyModel->getCurrencyParamByCode($code, 'import_enabled');
                 if (in_array($code, $baseCurrency)) {
-                    $import_enabled[$code] = 1;
+                    $importEnabled[$code] = 1;
                 }
 
-                if (empty($import_enabled)) {
-                    unset($currencies[$k]);
+                if (empty($importEnabled)) {
+                    unset($currencies[$key]);
                     $this->messageManager->addWarning(
                         __('ERROR:') . ' ' . __('Settings for currency %1 is incorrect. Please make sure %1 is installed and check currency settings.', $code)
                     );
                     continue;
                 }
 
-                $import_enabled[$code] = (int) $import_enabled[$code];
-                if (!$import_enabled[$code]) {
-                    unset($currencies[$k]);
+                $importEnabled[$code] = (int) $importEnabled[$code];
+                if (!$importEnabled[$code]) {
+                    unset($currencies[$key]);
                     continue;
                 }
             
@@ -77,7 +77,7 @@ class FetchRates extends CurrencyAction
 
                 if (!$coinService) {
                     if (!$defaultService) {
-                        unset($currencies[$k]);
+                        unset($currencies[$key]);
                         $this->messageManager->addWarning(
                             __('ERROR:') . ' ' . __('Please specify either or both Default Import Service and the correct Import Service for %1', $code)
                         );

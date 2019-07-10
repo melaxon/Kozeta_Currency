@@ -71,7 +71,12 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
             return $this->coinsInRow;
         }
 
-        $this->coinsInRow = (int) trim($this->_scopeConfig->getValue(self::COINS_IN_ROW_MENU_CONFIG_PATH, ScopeInterface::SCOPE_STORES));
+        $this->coinsInRow = (int) trim(
+            $this->_scopeConfig->getValue(
+                self::COINS_IN_ROW_MENU_CONFIG_PATH,
+                ScopeInterface::SCOPE_STORES
+            )
+        );
         if (!$this->coinsInRow) {
             $this->coinsInRow = self::DEFAULT_COINS_IN_ROW;
         }
@@ -133,7 +138,9 @@ class Matrix extends \Magento\CurrencySymbol\Block\Adminhtml\System\Currency\Rat
                 }
             }
 
-            $baseCurrencies[$bc] = isset($baseCurrencies[$bc]) ? array_merge($baseCurrencies[$bc], $allowedCurrencies) : $allowedCurrencies;
+            $baseCurrencies[$bc] = isset($baseCurrencies[$bc]) ?
+                array_merge($baseCurrencies[$bc], $allowedCurrencies) :
+                $allowedCurrencies;
             $baseCurrencies[$bc] = array_unique($baseCurrencies[$bc]);
         }
 

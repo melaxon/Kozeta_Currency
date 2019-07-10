@@ -173,7 +173,7 @@
                     <item name="class" xsi:type="string">Kozeta\Currency\Model\Currency\Import\Bitpay</item>
                 </item>
                 <item name="currencyconverterapi" xsi:type="array">
-                    <item name="label" xsi:type="string" translatable="true">Currency Converter API</item>
+                    <item name="label" xsi:type="string">Currency Converter API</item>
                     <item name="class" xsi:type="string">Kozeta\Currency\Model\Currency\Import\CurrencyConverterApi</item>
                 </item>
             </argument>

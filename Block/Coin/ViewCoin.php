@@ -71,7 +71,6 @@ class ViewCoin extends Template
         );
     }
 
-
     /**
      * get current coin
      *

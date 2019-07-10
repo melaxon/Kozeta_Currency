@@ -11,6 +11,7 @@ use Kozeta\Currency\Model\Currency\Datafeed;
 use Magento\Framework\HTTP\Client\Curl;
 use Magento\Directory\Model\CurrencyFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Store\Model\ScopeInterface;
 
 /**
  * Currency rate import from https://www.coinpayments.net/
@@ -126,7 +127,7 @@ class Coinpayments extends \Magento\Directory\Model\Currency\Import\AbstractImpo
         if (!empty($feed)) {
             return $this->calculateRate($feed, $currencyFrom, $currencyTo);
         }
-        $scope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
+        $scope = ScopeInterface::SCOPE_STORE;
         
         $timeout = (int)$this->scopeConfig->getValue('currency/coinpayments/timeout', $scope);
         $publicKey = $this->scopeConfig->getValue('currency/coinpayments/public_key', $scope);
@@ -147,7 +148,7 @@ class Coinpayments extends \Magento\Directory\Model\Currency\Import\AbstractImpo
             $this->_curl->post($url, $data);
             $response = $this->_curl->getBody();
             $response = json_decode($this->_curl->getBody());
-            
+
             if ($response->error != 'ok') {
                 $this->_messages[] = $response->error;
                 return false;

@@ -53,7 +53,8 @@ class Currency extends \Magento\Directory\Block\Currency
     }
  /*
   * Initial  function utiizing CurrencyBundle
-  * Uncomment this and comment the above function to use existing bundled currency names in switcher (if not exist - use created names)
+  * Uncomment this and comment the above function to use existing bundled currency names in switcher
+  * (if not exist - use created names)
   */
 //     public function getCurrencies(
 //         \Magento\Directory\Model\PriceCurrency $subject,

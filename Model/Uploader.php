@@ -115,9 +115,9 @@ class Uploader
         UploaderFactory $uploaderFactory,
         StoreManagerInterface $storeManager,
         LoggerInterface $logger,
-        $allowedExtensions = [],
         $baseTmpPath,
-        $basePath
+        $basePath,
+        $allowedExtensions = []
     ) {
         $this->fileStorageDatabase      = $fileStorageDatabase;
         $this->mediaDirectoryManager    = $filesystem;
