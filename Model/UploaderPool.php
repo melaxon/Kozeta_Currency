@@ -40,7 +40,6 @@ class UploaderPool
     public function getUploader($type)
     {
         if (!isset($this->uploaders[$type])) {
-            // phpcs:ignore Magento2.Exceptions.DirectThrow
             throw new \Exception("Uploader not found for type: ".$type);
         }
         if (!is_object($this->uploaders[$type])) {
@@ -48,7 +47,6 @@ class UploaderPool
         }
         $uploader = $this->uploaders[$type];
         if (!($uploader instanceof Uploader)) {
-            // phpcs:ignore Magento2.Exceptions.DirectThrow
             throw new \Exception("Uploader for type {$type} not instance of ". Uploader::class);
         }
         return $uploader;

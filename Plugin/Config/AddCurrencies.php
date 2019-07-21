@@ -132,7 +132,7 @@ class AddCurrencies
         foreach ($collection as $_coin) {
             $_coin->getIsActive() == false ?: $currencies[] = [
                 'value' => $_coin->getCode(),
-                'label' => __($_coin->getName())
+                'label' => $_coin->getName()
             ];
         }
         $this->coins = $this->sortOptionArray($currencies);
@@ -160,30 +160,6 @@ class AddCurrencies
     }
 
     /**
-     * Get currency name
-     *
-     * @param string $code
-     * @return string
-     */
-    private function getCurrencyNameByCode($code)
-    {
-        $currencyManager = $this->currencyFactory->create();
-        
-        $name = $this->localeCurrency->getCurrency($code)->getName();
-        if ($name == 'US Dollar' && $code != 'USD') {
-            $name = null;
-        }
-        if ($name) {
-            return $name;
-        }
-        $name = $currencyManager->getCurrencyNames($code);
-        if (is_array($name)) {
-            return isset($name[$code]) ? $name[$code] : $code;
-        }
-        return $name;
-    }
-
-    /**
      * @inheritdoc
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
@@ -191,7 +167,7 @@ class AddCurrencies
     {
         $installedCurrencies = $this->getNewCurrencies();
         $availableCurrencies = $this->storeManager->getStore()->getAvailableCurrencyCodes();
-
+        // If no new currency installed yet
         if (empty($installedCurrencies)) {
             $locale = $this->localeResolver->getLocale();
             $currencies = (
@@ -199,7 +175,7 @@ class AddCurrencies
             )->get(
                 $this->localeResolver->getLocale()
             )['Currencies'] ?: [];
-            
+
             $options = [];
             foreach ($currencies as $code => $data) {
                 if (!in_array($code, $availableCurrencies)) {
@@ -207,8 +183,10 @@ class AddCurrencies
                 }
                 $options[] = ['label' => $data[1], 'value' => $code];
             }
+
             return $this->sortOptionArray($options);
         }
+
         $selectedCurrencies = explode(
             ',',
             $this->scopeConfig->getValue(
@@ -216,31 +194,12 @@ class AddCurrencies
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             )
         );
-        foreach ($installedCurrencies as $k => $c) {
-            if (!in_array($c['value'], $selectedCurrencies)) {
-                unset($installedCurrencies[$k]);
-            }
-        }
-        
+
         $currencies = [];
-        foreach ($availableCurrencies as $code) {
-            if (isset($this->codes[$code])) {
-                continue;
+        foreach ($installedCurrencies as $k => $c) {
+            if (in_array($c['value'], $selectedCurrencies)) {
+                $currencies[] = $installedCurrencies[$k];
             }
-            $label = $this->getCurrencyNameByCode($code);
-            $currencies[] = [
-                'value' => $code,
-                'label' => $label,
-            ];
-            $this->codes[$code] = $label;
-        }
-        
-        foreach ($installedCurrencies as $v) {
-            if (isset($this->codes[$v['value']])) {
-                continue;
-            }
-            $this->codes[$v['value']] = $v['label'];
-            $currencies[] = $v;
         }
 
         return $currencies;

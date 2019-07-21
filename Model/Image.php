@@ -23,6 +23,8 @@ use Magento\Framework\View\FileSystem as ViewFileSystem;
 use Magento\MediaStorage\Helper\File\Storage\Database;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
+use Magento\Framework\Encryption\EncryptorInterface;
+use Magento\Framework\Encryption\Encryptor;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyFields)
@@ -189,6 +191,11 @@ class Image extends AbstractModel
     protected $entityCode;
 
     /**
+     * @var EncryptorInterface
+     */
+    private $encryptor;
+
+    /**
      * @param Context $context
      * @param Registry $registry
      * @param StoreManagerInterface $storeManager
@@ -202,6 +209,7 @@ class Image extends AbstractModel
      * @param $entityCode
      * @param AbstractResource|null $resource
      * @param AbstractDb|null $resourceCollection
+     * @param EncryptorInterface $encryptor
      * @param array $data
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
@@ -220,6 +228,7 @@ class Image extends AbstractModel
         $entityCode,
         AbstractResource $resource = null,
         AbstractDb $resourceCollection = null,
+        EncryptorInterface $encryptor,
         array $data = []
     ) {
         $this->storeManager             = $storeManager;
@@ -230,6 +239,7 @@ class Image extends AbstractModel
         $this->viewFileSystem           = $viewFileSystem;
         $this->scopeConfig              = $scopeConfig;
         $this->entityCode               = $entityCode;
+        $this->encryptor                = $encryptor;
 
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 
@@ -504,11 +514,6 @@ class Image extends AbstractModel
 
         $baseFile = $baseDir . $file;
 
-        if (!$file || !$this->mediaDirectory()->isFile($baseFile)) {
-            // phpcs:ignore Magento2.Exceptions.DirectThrow
-            throw new \Exception(__('We can\'t find the image file.'));
-        }
-
         $this->baseFile = $baseFile;
 
         // build new filename (most important params)
@@ -541,9 +546,11 @@ class Image extends AbstractModel
             $miscParams[] = $this->getWatermarkWidth();
             $miscParams[] = $this->getWatermarkHeight();
         }
-        // @codingStandardsIgnoreStart
-        $path[] = md5(implode('_', $miscParams));
-        // @codingStandardsIgnoreEnd
+
+        $path[] = $this->encryptor->hash(
+            implode('_', $miscParams),
+            Encryptor::HASH_VERSION_MD5
+        );
 
         // append prepared filename
         $this->newFile = implode('/', $path) . $file;
@@ -551,6 +558,21 @@ class Image extends AbstractModel
 
         return $this;
     }
+
+    /**
+     * Retrieve part of path based on misc params
+     *
+     * @return string
+     */
+    private function getMiscPath($miscParams)
+    {
+        return $this->encryptor->hash(
+            implode('_', $miscParams),
+            Encryptor::HASH_VERSION_MD5
+        );
+    }
+
+
 
     /**
      * @return string

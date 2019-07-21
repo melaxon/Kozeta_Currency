@@ -1,7 +1,9 @@
 Magento 2.0 Module "Any Currency"
 ====================
 
-Current version: 1.0.3 - bugfix: if USD is not base currency some services fail to import rates - fixed
+Current version: 1.0.4 - bugfix: Incorrect currency names were listed in "Allowed currencies" (Backend - Configuration menu) - fixed. Minor improvements and code refactoring.
+
+1.0.3 - bugfix: if USD is not base currency some services fail to import rates - fixed. New services for exchange rate import added. Other minor improvements.
 
 1.0.2 - initial release
 
