@@ -23,8 +23,8 @@ use Magento\Framework\View\FileSystem as ViewFileSystem;
 use Magento\MediaStorage\Helper\File\Storage\Database;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
-use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\Framework\Encryption\Encryptor;
+use Magento\Framework\App\ObjectManager;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyFields)
@@ -209,7 +209,6 @@ class Image extends AbstractModel
      * @param $entityCode
      * @param AbstractResource|null $resource
      * @param AbstractDb|null $resourceCollection
-     * @param EncryptorInterface $encryptor
      * @param array $data
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
@@ -228,7 +227,6 @@ class Image extends AbstractModel
         $entityCode,
         AbstractResource $resource = null,
         AbstractDb $resourceCollection = null,
-        EncryptorInterface $encryptor,
         array $data = []
     ) {
         $this->storeManager             = $storeManager;
@@ -239,7 +237,6 @@ class Image extends AbstractModel
         $this->viewFileSystem           = $viewFileSystem;
         $this->scopeConfig              = $scopeConfig;
         $this->entityCode               = $entityCode;
-        $this->encryptor                = $encryptor;
 
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 
@@ -547,6 +544,9 @@ class Image extends AbstractModel
             $miscParams[] = $this->getWatermarkHeight();
         }
 
+        if ($this->encryptor === null) {
+            $this->encryptor = ObjectManager::getInstance()->get(Encryptor::class);
+        }
         $path[] = $this->encryptor->hash(
             implode('_', $miscParams),
             Encryptor::HASH_VERSION_MD5
@@ -558,21 +558,6 @@ class Image extends AbstractModel
 
         return $this;
     }
-
-    /**
-     * Retrieve part of path based on misc params
-     *
-     * @return string
-     */
-    private function getMiscPath($miscParams)
-    {
-        return $this->encryptor->hash(
-            implode('_', $miscParams),
-            Encryptor::HASH_VERSION_MD5
-        );
-    }
-
-
 
     /**
      * @return string
